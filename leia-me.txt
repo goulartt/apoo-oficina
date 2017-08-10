@@ -1,0 +1,17 @@
+crie uma pasta onde desejar 
+acesse pelo cmd ou git bash
+configure seu nome e email com:
+git config --global user.name "John Doe"
+git config --global user.email johndoe@example.com
+
+de o git init
+selecione o acesso remoto com 
+git remote add origin https://github.com/goulartt/apoo-oficina.git
+e baixe o que tem no repositorio com 
+git push -u origin master
+
+alterações veja com o: git status
+adicione alterações: gid add
+commit nas alterações: git commit -m "mensagem"
+atualizar o seu repositorio local: git pull
+enviar modificações para o git hub: git push -u origin master
