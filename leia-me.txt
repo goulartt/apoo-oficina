@@ -16,3 +16,10 @@ commit nas alterações: git commit -m "mensagem"
 atualizar o seu repositorio local: git pull
 enviar modificações para o git hub: git push -u origin master
 ver o log de alterações: git log
+
+vamos trabalhar sempre com branchs, para mais informações de uma estudada
+
+exemplo: trabalhar em uma funcionalidade nova ->
+	git checkout -b projeto/"funcionalidade" (checkout -b cria a branch e ja entra nela)
+	depois de fazer as alterações do projeto adiciona no repositorio local, commita as alterações, jogue as alterações da branch para o seu origin com git push origin projeto/"funcionalidade" e depois de pronto envie para o master para realizar o merge, qualquer problema no processo de uma pesquisada ou me chame
+	BOA PRATICA: exclua a branch utilizidada depois de usada com git branch -D nomedabrach
