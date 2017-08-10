@@ -15,3 +15,4 @@ adicione alterações: gid add
 commit nas alterações: git commit -m "mensagem"
 atualizar o seu repositorio local: git pull
 enviar modificações para o git hub: git push -u origin master
+ver o log de alterações: git log
