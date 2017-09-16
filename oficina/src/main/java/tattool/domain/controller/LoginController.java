@@ -26,7 +26,7 @@ public class LoginController implements Initializable{
 	@FXML TextField lblUsuario = new TextField();
 	@FXML Label lblErro = new Label();
 	@FXML PasswordField lblSenha = new PasswordField();
-	
+	public Usuario usuario = new Usuario();
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		
@@ -36,14 +36,21 @@ public class LoginController implements Initializable{
 	public void logar(ActionEvent event){
 		
 		UsuarioDao dao = new UsuarioDao();
-		Usuario usuario = dao.verificaLogin(lblUsuario.getText(), lblSenha.getText());
+		this.usuario = dao.verificaLogin(lblUsuario.getText(), lblSenha.getText());
 		if(usuario != null) {
 			try {
-				Parent dash = FXMLLoader.load(getClass().getResource("/telas/Dashboard.fxml"));
-				Scene cadastroCena = new Scene(dash);
-				Stage cadastroTela = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			    cadastroTela.setScene(cadastroCena);
-			    cadastroTela.show();
+				
+				FXMLLoader loader = new FXMLLoader(DashboardController.class.getResource("/telas/Dashboard.fxml"));
+		        Parent root = (Parent) loader.load();
+		        DashboardController control = (DashboardController)loader.getController();
+		        control.user(usuario);
+		        control.lblNome.setText(usuario.getNome());
+		        Scene scene = new Scene(root, 850, 600);
+		        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		        stage.setTitle("Dashboard");
+		        stage.setScene(scene);
+		        stage.show();
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -51,6 +58,7 @@ public class LoginController implements Initializable{
 			lblErro.setText("Login ou senha inválido");
 		}
 	}
+	
 	@FXML
 	public void sair(ActionEvent event){
 		

@@ -14,14 +14,15 @@ public class Usuario {
 	private String usuario;
 	private String senha;
 	private String nome;
-	
+	private Integer role;
 	
 	public Usuario() {
 	}
-	public Usuario(String usuario, String senha, String nome) {
+	public Usuario(String usuario, String senha, String nome, Integer role) {
 		this.usuario = usuario;
 		this.senha = senha;
 		this.nome = nome;
+		this.role = role;
 	}
 	public Integer getId() {
 		return id;
@@ -46,6 +47,12 @@ public class Usuario {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	public Integer getRole() {
+		return role;
+	}
+	public void setRole(Integer role) {
+		this.role = role;
 	}
 	
 	

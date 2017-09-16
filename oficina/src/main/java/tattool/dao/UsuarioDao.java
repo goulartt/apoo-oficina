@@ -27,6 +27,32 @@ public class UsuarioDao {
 		  }
 		  
 		 }
+		public void save(Usuario u){
+			EntityManager em = new HibernateUtil().getEntityManager();
+			try{
+				em.getTransaction().begin();
+				em.persist(u);
+				em.getTransaction().commit();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		public Usuario existeUsuario(String username){
+			EntityManager em = new HibernateUtil().getEntityManager();
+			try{
+				em.getTransaction().begin();
+				Session session = em.unwrap(Session.class);
+				Usuario query = session.createQuery("select u from Usuario u where u.usuario = :pUsuario", Usuario.class)
+						.setParameter("pUsuario", username).getSingleResult();
+				em.getTransaction().commit();
+				session.close();
+				return query;
+			}catch(Exception e) {
+				return null;
+			}
+			
+		}
 		public void verificaAdmin(){
 			EntityManager em = new HibernateUtil().getEntityManager();
 			Session session = em.unwrap(Session.class);
@@ -39,7 +65,7 @@ public class UsuarioDao {
 				em.getTransaction().commit();
 				 session.close();
 			}catch(NoResultException e) {
-				Usuario admin = new Usuario("admin", "1", "Administrador");
+				Usuario admin = new Usuario("admin", "1", "Administrador", 1);
 				em.persist(admin);
 				em.getTransaction().commit();
 				session.close();
