@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="1020.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.domain.controller.DashboardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="1020.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.domain.controller.DashboardController">
    <children>
       <Label layoutX="224.0" layoutY="99.0" text="Logou" textFill="WHITE" />
       <MenuBar prefHeight="29.0" prefWidth="1020.0">
@@ -19,7 +19,10 @@
               <MenuItem mnemonicParsing="false" onAction="#cadastrarUsuario" text="Delete" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" onAction="#logout" text="Logout" />
+          <Menu  mnemonicParsing="false" text="Logout">
+               <items>
+                  <MenuItem fx:id="menuLogout" mnemonicParsing="false" onAction="#logout" text="Unspecified Action" />
+               </items></Menu>
         </menus>
       </MenuBar>
       <Button layoutX="179.0" layoutY="212.0" mnemonicParsing="false" onAction="#cadastrarUsuario" text="Cadastrar" />

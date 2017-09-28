@@ -11,10 +11,12 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	private String usuario;
 	private String senha;
 	private String nome;
 	private Integer role;
+	
 	
 	public Usuario() {
 	}

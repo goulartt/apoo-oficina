@@ -22,4 +22,10 @@ public class HibernateUtil {
 		em.close();
 	}
 	
+public static void main(String[] args){
+        
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("oficina");
+        
+        factory.close();
+    }
 }

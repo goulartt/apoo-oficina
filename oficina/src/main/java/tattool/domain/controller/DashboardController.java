@@ -13,6 +13,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -24,6 +26,7 @@ public class DashboardController implements Initializable{
 	
 	
 	@FXML Label lblNome = new Label();
+	@FXML MenuItem menuLogout = new MenuItem();
 	public Usuario user = new Usuario();
 	
 	
@@ -62,11 +65,14 @@ public class DashboardController implements Initializable{
 	@FXML
 	public void logout(ActionEvent event){
 		try {
-			Parent dash = FXMLLoader.load(getClass().getResource("/telas/Login.fxml"));
-			Scene cadastroCena = new Scene(dash);
-			Stage cadastroTela = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		    cadastroTela.setScene(cadastroCena);
-		    cadastroTela.show();
+		    AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("/telas/Login.fxml"));
+			Scene scene = new Scene(root);
+			Stage primaryStage = new Stage();
+			/*scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());*/
+			primaryStage .setScene(scene);
+			primaryStage.setResizable(false);
+			primaryStage.setTitle("Login");
+			primaryStage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
