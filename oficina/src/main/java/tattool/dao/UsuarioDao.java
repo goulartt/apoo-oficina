@@ -1,5 +1,8 @@
 package tattool.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
@@ -35,6 +38,20 @@ public class UsuarioDao {
 				em.getTransaction().commit();
 			}catch(Exception e) {
 				e.printStackTrace();
+			}
+			
+		}
+		public List<Usuario> findAll(){
+			EntityManager em = new HibernateUtil().getEntityManager();
+			List<Usuario> usuarios = new ArrayList<>();
+			try{
+				em.getTransaction().begin();
+				usuarios = em.createQuery("select u from Usuario u", Usuario.class).getResultList();
+				em.getTransaction().commit();
+				return usuarios;
+			}catch(Exception e) {
+				e.printStackTrace();
+				return null;
 			}
 			
 		}
