@@ -16,7 +16,7 @@ public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private Long cpf;
+	private String cpf;
 	private String name;
 	
 	@Temporal(TemporalType.DATE)
@@ -27,7 +27,9 @@ public class Customer {
 	
 	@OneToOne
 	private Address address;
-
+	
+	private char archived;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -36,11 +38,11 @@ public class Customer {
 		this.id = id;
 	}
 
-	public Long getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(Long cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
@@ -74,6 +76,14 @@ public class Customer {
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+
+	public char getArchived() {
+		return archived;
+	}
+
+	public void setArchived(char archived) {
+		this.archived = archived;
 	}
 	
 	

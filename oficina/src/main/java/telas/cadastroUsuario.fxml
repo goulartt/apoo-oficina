@@ -31,6 +31,9 @@
       </Label>
       <Button layoutX="390.0" layoutY="364.0" mnemonicParsing="false" onAction="#deletar" text="Deletar" />
       <TableView id="tabela" fx:id="tabela" layoutX="-8.0" prefHeight="473.0" prefWidth="373.0">
+      <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+        </columnResizePolicy>
         <columns>
           <TableColumn id="colunaUsuario" fx:id="colunaUsuario" prefWidth="190.0" text="Usuario" />
           <TableColumn id="colunaNome" fx:id="colunaNome" minWidth="0.0" prefWidth="181.0" text="Nome" />

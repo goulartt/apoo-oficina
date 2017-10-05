@@ -24,7 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import tattool.dao.UsuarioDao;
-import tattool.domain.model.Usuario;
+import tattool.domain.model.User;
 
 public class UsuarioController implements Initializable{
 	
@@ -35,14 +35,14 @@ public class UsuarioController implements Initializable{
 	@FXML  Label lblErro = new Label();
 	@FXML  Label lblSucesso = new Label();
 	@FXML PasswordField txtSenha = new PasswordField();
-	@FXML TableView<Usuario> tabela;
-	@FXML TableColumn<Usuario, String> colunaUsuario;
-	@FXML TableColumn<Usuario, String> colunaNome;
-	private List<Usuario> usuarios = new ArrayList<>();
+	@FXML TableView<User> tabela;
+	@FXML TableColumn<User, String> colunaUsuario;
+	@FXML TableColumn<User, String> colunaNome;
+	private List<User> usuarios = new ArrayList<>();
 	
-	private Usuario user = new Usuario();
+	private User user = new User();
 	private UsuarioDao dao = new UsuarioDao();
-	public ObservableList<Usuario> observableUsuario;
+	public ObservableList<User> observableUsuario;
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		carregarTable();
@@ -50,8 +50,8 @@ public class UsuarioController implements Initializable{
 	
 	public void carregarTable() {
 
-		colunaUsuario.setCellValueFactory(new PropertyValueFactory<Usuario, String>("usuario"));
-		colunaNome.setCellValueFactory(new PropertyValueFactory<Usuario, String>("nome"));
+		colunaUsuario.setCellValueFactory(new PropertyValueFactory<User, String>("usuario"));
+		colunaNome.setCellValueFactory(new PropertyValueFactory<User, String>("nome"));
 		observableUsuario = FXCollections.observableArrayList(dao.findAll());
 		tabela.setItems(observableUsuario);
 		
@@ -62,11 +62,11 @@ public class UsuarioController implements Initializable{
 	public void cadastrar(ActionEvent event){
 		
 		
-		Usuario usuario = dao.existeUsuario(txtUsuario.getText());
+		User usuario = dao.existeUsuario(txtUsuario.getText());
 		if(user.getRole() == 1) {
 			if(usuario == null) {
 				if(!txtUsuario.getText().isEmpty() && !txtSenha.getText().isEmpty() && !txtNome.getText().isEmpty()) {
-					Usuario user = new Usuario(txtUsuario.getText(), txtSenha.getText(), txtNome.getText(), 0);
+					User user = new User(txtUsuario.getText(), txtSenha.getText(), txtNome.getText(), 0);
 					dao.save(user);
 					limpaCampo();
 					carregarTable();
@@ -115,7 +115,7 @@ public class UsuarioController implements Initializable{
 		lblErro.setText("");
 	}
 
-	public void user(Usuario user) {
+	public void user(User user) {
 		this.user = user;
 		
 	}

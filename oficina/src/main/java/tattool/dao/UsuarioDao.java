@@ -8,19 +8,19 @@ import javax.persistence.NoResultException;
 
 import org.hibernate.Session;
 
-import tattool.domain.model.Usuario;
+import tattool.domain.model.User;
 import tattool.entity.HibernateUtil;
 
 public class UsuarioDao {
 	
 		
 		 
-		public Usuario verificaLogin(String username, String senha){
+		public User verificaLogin(String username, String senha){
 			EntityManager em = new HibernateUtil().getEntityManager();
 		  try{
 			  em.getTransaction().begin();
 			  Session session = em.unwrap(Session.class);
-			  Usuario query = session.createQuery("select u from Usuario u where u.usuario = :pUsuario and u.senha = :pSenha", Usuario.class)
+			  User query = session.createQuery("select u from User u where u.usuario = :pUsuario and u.senha = :pSenha", User.class)
 					  .setParameter("pUsuario", username).setParameter("pSenha", senha).getSingleResult();
 			  em.getTransaction().commit();
 			  session.close();
@@ -30,7 +30,7 @@ public class UsuarioDao {
 		  }
 		  
 		 }
-		public void save(Usuario u){
+		public void save(User u){
 			EntityManager em = new HibernateUtil().getEntityManager();
 			try{
 				em.getTransaction().begin();
@@ -41,7 +41,7 @@ public class UsuarioDao {
 			}
 			
 		}
-		public void atualiza(Usuario u){
+		public void atualiza(User u){
 			EntityManager em = new HibernateUtil().getEntityManager();
 			try{
 				em.getTransaction().begin();
@@ -52,7 +52,7 @@ public class UsuarioDao {
 			}
 			
 		}
-		public void delete(Usuario u){
+		public void delete(User u){
 			EntityManager em = new HibernateUtil().getEntityManager();
 			try{
 				em.getTransaction().begin();
@@ -63,12 +63,12 @@ public class UsuarioDao {
 			}
 			
 		}
-		public List<Usuario> findAll(){
+		public List<User> findAll(){
 			EntityManager em = new HibernateUtil().getEntityManager();
-			List<Usuario> usuarios = new ArrayList<>();
+			List<User> usuarios = new ArrayList<>();
 			try{
 				em.getTransaction().begin();
-				usuarios = em.createQuery("select u from Usuario u", Usuario.class).getResultList();
+				usuarios = em.createQuery("select u from User u", User.class).getResultList();
 				em.getTransaction().commit();
 				return usuarios;
 			}catch(Exception e) {
@@ -77,12 +77,12 @@ public class UsuarioDao {
 			}
 			
 		}
-		public Usuario existeUsuario(String username){
+		public User existeUsuario(String username){
 			EntityManager em = new HibernateUtil().getEntityManager();
 			try{
 				em.getTransaction().begin();
 				Session session = em.unwrap(Session.class);
-				Usuario query = session.createQuery("select u from Usuario u where u.usuario = :pUsuario", Usuario.class)
+				User query = session.createQuery("select u from User u where u.usuario = :pUsuario", User.class)
 						.setParameter("pUsuario", username).getSingleResult();
 				em.getTransaction().commit();
 				session.close();
@@ -98,13 +98,13 @@ public class UsuarioDao {
 			try{
 				em.getTransaction().begin();
 				
-				Usuario query = session.createQuery("select u from Usuario u where u.usuario = :pUsuario and u.senha = :pSenha", Usuario.class)
+				User query = session.createQuery("select u from User u where u.usuario = :pUsuario and u.senha = :pSenha", User.class)
 						.setParameter("pUsuario", "admin").setParameter("pSenha", "1").getSingleResult();
 				
 				em.getTransaction().commit();
 				 session.close();
 			}catch(NoResultException e) {
-				Usuario admin = new Usuario("admin", "1", "Administrador", 1);
+				User admin = new User("admin", "1", "Administrador", 1);
 				em.persist(admin);
 				em.getTransaction().commit();
 				session.close();

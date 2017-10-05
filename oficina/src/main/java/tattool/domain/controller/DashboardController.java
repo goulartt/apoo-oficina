@@ -20,14 +20,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import tattool.dao.UsuarioDao;
-import tattool.domain.model.Usuario;
+import tattool.domain.model.User;
 
 public class DashboardController implements Initializable{
 	
 	
 	@FXML Label lblNome = new Label();
 	@FXML MenuItem menuLogout = new MenuItem();
-	public Usuario user = new Usuario();
+	public User user = new User();
 	
 	
 	public void initialize(URL location, ResourceBundle resources) {
@@ -78,7 +78,7 @@ public class DashboardController implements Initializable{
 		}
 	}
 
-	public void user(Usuario usuario) {
+	public void user(User usuario) {
 		this.user = usuario;
 		
 	}

@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Usuario {
+public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,11 +16,11 @@ public class Usuario {
 	private String senha;
 	private String nome;
 	private Integer role;
-
+	private char archived;
 	
-	public Usuario() {
+	public User() {
 	}
-	public Usuario(String usuario, String senha, String nome, Integer role) {
+	public User(String usuario, String senha, String nome, Integer role) {
 		this.usuario = usuario;
 		this.senha = senha;
 		this.nome = nome;
@@ -55,6 +55,12 @@ public class Usuario {
 	}
 	public void setRole(Integer role) {
 		this.role = role;
+	}
+	public char getArchived() {
+		return archived;
+	}
+	public void setArchived(char archived) {
+		this.archived = archived;
 	}
 	
 	

@@ -17,7 +17,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import tattool.dao.UsuarioDao;
-import tattool.domain.model.Usuario;
+import tattool.domain.model.User;
 
 public class LoginController implements Initializable{
 	
@@ -26,7 +26,7 @@ public class LoginController implements Initializable{
 	@FXML TextField lblUsuario = new TextField();
 	@FXML Label lblErro = new Label();
 	@FXML PasswordField lblSenha = new PasswordField();
-	public Usuario usuario = new Usuario();
+	public User usuario = new User();
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		
