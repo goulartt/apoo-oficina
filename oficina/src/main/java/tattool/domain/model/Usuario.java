@@ -16,7 +16,7 @@ public class Usuario {
 	private String senha;
 	private String nome;
 	private Integer role;
-	
+
 	
 	public Usuario() {
 	}

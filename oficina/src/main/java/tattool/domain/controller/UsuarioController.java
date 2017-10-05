@@ -24,9 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import tattool.dao.UsuarioDao;
-import tattool.domain.dto.UsuarioSimple;
 import tattool.domain.model.Usuario;
-import tattool.entity.Util;
 
 public class UsuarioController implements Initializable{
 	
@@ -37,26 +35,24 @@ public class UsuarioController implements Initializable{
 	@FXML  Label lblErro = new Label();
 	@FXML  Label lblSucesso = new Label();
 	@FXML PasswordField txtSenha = new PasswordField();
-	@FXML TableView<UsuarioSimple> tabela;
-	@FXML TableColumn<UsuarioSimple, String> colunaUsuario;
-	@FXML TableColumn<UsuarioSimple, String> colunaNome;
-	private List<UsuarioSimple> usuarios = new ArrayList<>();
+	@FXML TableView<Usuario> tabela;
+	@FXML TableColumn<Usuario, String> colunaUsuario;
+	@FXML TableColumn<Usuario, String> colunaNome;
+	private List<Usuario> usuarios = new ArrayList<>();
 	
 	private Usuario user = new Usuario();
 	private UsuarioDao dao = new UsuarioDao();
-	private Util u = new Util();
-	public ObservableList<UsuarioSimple> observableUsuario = FXCollections.observableArrayList(u.parseUsuario(dao.findAll()));
+	public ObservableList<Usuario> observableUsuario;
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-	
 		carregarTable();
 	}
 	
 	public void carregarTable() {
 
-		colunaUsuario.setCellValueFactory(new PropertyValueFactory<UsuarioSimple, String>("usuario"));
-		colunaNome.setCellValueFactory(new PropertyValueFactory<UsuarioSimple, String>("nome"));
-		 
+		colunaUsuario.setCellValueFactory(new PropertyValueFactory<Usuario, String>("usuario"));
+		colunaNome.setCellValueFactory(new PropertyValueFactory<Usuario, String>("nome"));
+		observableUsuario = FXCollections.observableArrayList(dao.findAll());
 		tabela.setItems(observableUsuario);
 		
 		

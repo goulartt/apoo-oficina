@@ -19,7 +19,7 @@
       <Label layoutX="369.0" layoutY="207.0" text="Senha" />
       <Label layoutX="369.0" layoutY="255.0" text="Nome" />
       <Button fx:id="btnVoltar" layoutX="553.0" layoutY="31.0" mnemonicParsing="false" onAction="#voltar" prefHeight="25.0" prefWidth="152.0" text="Voltar" />
-      <Label fx:id="lblErro" layoutX="330.0" layoutY="102.0" prefHeight="37.0" prefWidth="262.0" textFill="RED">
+      <Label fx:id="lblErro" layoutX="410.0" layoutY="109.0" prefHeight="37.0" prefWidth="262.0" textFill="RED">
          <font>
             <Font size="14.0" />
          </font>
@@ -30,10 +30,10 @@
          </font>
       </Label>
       <Button layoutX="390.0" layoutY="364.0" mnemonicParsing="false" onAction="#deletar" text="Deletar" />
-      <TableView id="tabela" layoutX="-8.0" prefHeight="473.0" prefWidth="373.0">
+      <TableView id="tabela" fx:id="tabela" layoutX="-8.0" prefHeight="473.0" prefWidth="373.0">
         <columns>
-          <TableColumn id="colunaUsuario" prefWidth="190.0" text="Usuario" />
-          <TableColumn id="colunaNome" minWidth="0.0" prefWidth="181.0" text="Nome" />
+          <TableColumn id="colunaUsuario" fx:id="colunaUsuario" prefWidth="190.0" text="Usuario" />
+          <TableColumn id="colunaNome" fx:id="colunaNome" minWidth="0.0" prefWidth="181.0" text="Nome" />
         </columns>
       </TableView>
       <Label layoutX="429.0" layoutY="74.0" text="Cadastro de Usuário">

@@ -12,7 +12,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("/telas/cadastroUsuario.fxml"));
+			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("/telas/Login.fxml"));
 			Scene scene = new Scene(root);
 			new UsuarioDao().verificaAdmin();
 			/*scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());*/

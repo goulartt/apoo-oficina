@@ -41,6 +41,28 @@ public class UsuarioDao {
 			}
 			
 		}
+		public void atualiza(Usuario u){
+			EntityManager em = new HibernateUtil().getEntityManager();
+			try{
+				em.getTransaction().begin();
+				em.merge(u);
+				em.getTransaction().commit();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		public void delete(Usuario u){
+			EntityManager em = new HibernateUtil().getEntityManager();
+			try{
+				em.getTransaction().begin();
+				em.remove(u);
+				em.getTransaction().commit();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
 		public List<Usuario> findAll(){
 			EntityManager em = new HibernateUtil().getEntityManager();
 			List<Usuario> usuarios = new ArrayList<>();
