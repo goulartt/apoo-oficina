@@ -19,11 +19,9 @@ public class UsuarioDao {
 			EntityManager em = new HibernateUtil().getEntityManager();
 		  try{
 			  em.getTransaction().begin();
-			  Session session = em.unwrap(Session.class);
-			  User query = session.createQuery("select u from User u where u.usuario = :pUsuario and u.senha = :pSenha", User.class)
+			  User query = em.createQuery("select u from User u where u.usuario = :pUsuario and u.senha = :pSenha", User.class)
 					  .setParameter("pUsuario", username).setParameter("pSenha", senha).getSingleResult();
 			  em.getTransaction().commit();
-			  session.close();
 			  return query;
 		  }catch(Exception e) {
 			  return null;
@@ -81,11 +79,9 @@ public class UsuarioDao {
 			EntityManager em = new HibernateUtil().getEntityManager();
 			try{
 				em.getTransaction().begin();
-				Session session = em.unwrap(Session.class);
-				User query = session.createQuery("select u from User u where u.usuario = :pUsuario", User.class)
+				User query = em.createQuery("select u from User u where u.usuario = :pUsuario", User.class)
 						.setParameter("pUsuario", username).getSingleResult();
 				em.getTransaction().commit();
-				session.close();
 				return query;
 			}catch(Exception e) {
 				return null;
@@ -94,20 +90,17 @@ public class UsuarioDao {
 		}
 		public void verificaAdmin(){
 			EntityManager em = new HibernateUtil().getEntityManager();
-			Session session = em.unwrap(Session.class);
 			try{
 				em.getTransaction().begin();
 				
-				User query = session.createQuery("select u from User u where u.usuario = :pUsuario and u.senha = :pSenha", User.class)
+				User query = em.createQuery("select u from User u where u.usuario = :pUsuario and u.senha = :pSenha", User.class)
 						.setParameter("pUsuario", "admin").setParameter("pSenha", "1").getSingleResult();
 				
 				em.getTransaction().commit();
-				 session.close();
 			}catch(NoResultException e) {
 				User admin = new User("admin", "1", "Administrador", 1);
 				em.persist(admin);
 				em.getTransaction().commit();
-				session.close();
 			}
 			
 		}
