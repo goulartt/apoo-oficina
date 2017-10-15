@@ -23,8 +23,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import tattool.dao.UsuarioDao;
 import tattool.domain.model.User;
+import tattool.rest.consume.UserRest;
 
 public class UsuarioController implements Initializable{
 	
@@ -41,7 +41,7 @@ public class UsuarioController implements Initializable{
 	private List<User> usuarios = new ArrayList<>();
 	
 	private User user = new User();
-	private UsuarioDao dao = new UsuarioDao();
+	private UserRest userRest = new UserRest();
 	public ObservableList<User> observableUsuario;
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -52,7 +52,7 @@ public class UsuarioController implements Initializable{
 
 		colunaUsuario.setCellValueFactory(new PropertyValueFactory<User, String>("usuario"));
 		colunaNome.setCellValueFactory(new PropertyValueFactory<User, String>("nome"));
-		observableUsuario = FXCollections.observableArrayList(dao.findAll());
+		observableUsuario = FXCollections.observableArrayList(userRest.findAllUsers());
 		tabela.setItems(observableUsuario);
 		
 		
@@ -62,12 +62,12 @@ public class UsuarioController implements Initializable{
 	public void cadastrar(ActionEvent event){
 		
 		
-		User usuario = dao.existeUsuario(txtUsuario.getText());
+		User usuario = userRest.existeUsername(txtUsuario.getText());
 		if(user.getRole() == 1) {
 			if(usuario == null) {
 				if(!txtUsuario.getText().isEmpty() && !txtSenha.getText().isEmpty() && !txtNome.getText().isEmpty()) {
 					User user = new User(txtUsuario.getText(), txtSenha.getText(), txtNome.getText(), 0);
-					dao.save(user);
+					userRest.save(user);
 					limpaCampo();
 					carregarTable();
 					lblSucesso.setText("Usuario salvo com sucesso!");

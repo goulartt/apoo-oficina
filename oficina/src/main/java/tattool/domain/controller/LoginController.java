@@ -16,8 +16,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import tattool.dao.UsuarioDao;
 import tattool.domain.model.User;
+import tattool.rest.consume.UserRest;
 
 public class LoginController implements Initializable{
 	
@@ -35,8 +35,8 @@ public class LoginController implements Initializable{
 	@FXML
 	public void logar(ActionEvent event){
 		
-		UsuarioDao dao = new UsuarioDao();
-		this.usuario = dao.verificaLogin(lblUsuario.getText(), lblSenha.getText());
+		UserRest rest = new UserRest();
+		this.usuario = rest.verificaLogin(lblUsuario.getText(), lblSenha.getText());
 		if(usuario != null) {
 			try {
 				

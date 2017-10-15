@@ -1,7 +1,10 @@
 package tattol.report.jasper;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+
+import org.springframework.web.client.RestTemplate;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -11,8 +14,8 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
-import tattool.dao.UsuarioDao;
 import tattool.domain.model.User;
+import tattool.rest.consume.UserRest;
 
 public class UsuarioRel {
 private String path; //Caminho base
@@ -46,11 +49,11 @@ private String path; //Caminho base
 	}
 	
 	public void geraRelatorio() throws Exception {
-		UsuarioDao dao = new UsuarioDao();
-		List<User> users = dao.findAll();
+		UserRest ur = new UserRest();
+		User[]  users = ur.findAllUsers();
 		HashMap parametros = new HashMap();
 		JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(
-				users);
+				Arrays.asList(users));
 		JasperPrint impressao = null;
 		try {
 			impressao = JasperFillManager.fillReport(JasperCompileManager.compileReport(this.getPathToReportPackage() + "usuarios.jrxml"), parametros, ds);
@@ -62,7 +65,6 @@ private String path; //Caminho base
 		}
 	}
 	public static void main(String[] args) throws Exception {
-		UsuarioDao dao = new UsuarioDao();
 		new UsuarioRel().geraRelatorio();
 	}
 }
