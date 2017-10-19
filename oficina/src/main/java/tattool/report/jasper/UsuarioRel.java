@@ -25,7 +25,7 @@ private String path; //Caminho base
 	//Recupera os caminhos para que a classe possa encontrar os relatórios
 	public UsuarioRel() {
 		this.path = this.getClass().getClassLoader().getResource("").getPath();
-		this.pathToReportPackage = this.path + "tattol/report/jasper/";
+		this.pathToReportPackage = this.path + "tattool/report/jasper/";
 		System.out.println(path);
 	}
 	
