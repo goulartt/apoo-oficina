@@ -1,4 +1,4 @@
-package tattol.report.jasper;
+package tattool.report.jasper;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -30,15 +30,7 @@ private String path; //Caminho base
 	}
 	
 	
-	//Imprime/gera uma lista de Clientes
-	public void imprimir(List<User> clientes) throws Exception	
-	{
-		JasperReport report = JasperCompileManager.compileReport(this.getPathToReportPackage() + "Relatorio_Usuarios.jrxml");
-		
-		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(clientes));
-
-		JasperExportManager.exportReportToPdfFile(print, "C:\\Users\\jvgou\\Desktop/Relatorio_de_Clientes.pdf");		
-	}
+	
 
 	public String getPathToReportPackage() {
 		return this.pathToReportPackage;
