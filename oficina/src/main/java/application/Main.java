@@ -3,6 +3,7 @@ package application;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import tattool.rest.consume.UserRest;
@@ -19,6 +20,7 @@ public class Main extends Application {
 			new UserRest().verificaAdmin();
 			/*scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());*/
 			primaryStage.setScene(scene);
+			primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/telas/icone.png")));
 			primaryStage.setResizable(false);
 			primaryStage.setTitle("Login");
 			primaryStage.show();
