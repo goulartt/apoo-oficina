@@ -13,7 +13,8 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("/telas/Login.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/telas/Login.fxml"));
+			AnchorPane root = (AnchorPane)loader.load();
 			Scene scene = new Scene(root);
 			new UserRest().verificaAdmin();
 			/*scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());*/
