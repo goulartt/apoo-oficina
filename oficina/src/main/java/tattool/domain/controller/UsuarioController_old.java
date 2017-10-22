@@ -6,13 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,41 +22,31 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import tattool.domain.model.User;
 import tattool.rest.consume.UserRest;
 
-public class UsuarioController implements Initializable{
+public class UsuarioController_old implements Initializable{
 	
 	@FXML  Button btnCadastrar = new Button();
 	@FXML  Button btnVoltar = new Button();
-	@FXML  Button btnPesquisar = new Button();
 	@FXML  TextField txtUsuario = new TextField();
 	@FXML  TextField txtNome = new TextField();
-
 	@FXML  Label lblErro = new Label();
-	@FXML  Label lblSucesso = new Label();	
+	@FXML  Label lblSucesso = new Label();
 	@FXML PasswordField txtSenha = new PasswordField();
 	@FXML TableView<User> tabela;
 	@FXML TableColumn<User, String> colunaUsuario;
 	@FXML TableColumn<User, String> colunaNome;
 	private List<User> usuarios = new ArrayList<>();
 	
-
-	
-	
 	private User user = new User();
 	private UserRest userRest = new UserRest();
 	public ObservableList<User> observableUsuario;
-	FXMLLoader loader = new FXMLLoader(pesquisaUsuarioController.class.getResource("/telas/pesquisaUsuario.fxml"));
-	pesquisaUsuarioController control = (pesquisaUsuarioController)loader.getController();
-
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		carregarTable();
 	}
-	
 	
 	public void carregarTable() {
 
@@ -122,7 +108,6 @@ public class UsuarioController implements Initializable{
 		carregarTable();
 	}
 	
-	
 	public void limpaCampo() {
 		txtUsuario.setText("");
 	    txtNome.setText("");
@@ -130,36 +115,8 @@ public class UsuarioController implements Initializable{
 		lblErro.setText("");
 	}
 
-	@FXML
-	public void pesquisarUsuario(ActionEvent event)
-	{
-		try {
-			FXMLLoader loader = new FXMLLoader(pesquisaUsuarioController.class.getResource("/telas/pesquisaUsuario.fxml"));
-	        Parent root = (Parent) loader.load();
-	        pesquisaUsuarioController control = (pesquisaUsuarioController)loader.getController();
-		
-	
-	        Scene scene = new Scene(root);
-	        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-	        stage.setTitle("Pesquisa de Usuário");
-	        stage.setScene(scene);
-	        stage.show();
-		}catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	public void user(User user) {
 		this.user = user;
 		
 	}
-	
-	@FXML
-	public void preencher()
-	{
-		User user = new User();
-		user = pesquisaUsuarioController.selectUser(null);
-		txtUsuario.setText(user.getUsuario());
-	}
-	
 }

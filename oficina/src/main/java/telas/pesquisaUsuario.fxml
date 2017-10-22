@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="473.0" prefWidth="738.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.domain.controller.pesquisaUsuarioController">
+   <children>
+      <TableView fx:id="tabelaPesquisa" layoutX="33.0" layoutY="42.0" prefHeight="417.0" prefWidth="569.0">
+        <columns>
+          <TableColumn fx:id="colunaUsuario" prefWidth="278.0" text="Usuário" />
+          <TableColumn fx:id="colunaNome" prefWidth="246.0" text="Nome" />
+        </columns>
+      </TableView>
+      <Label fx:id="lblFiltrar" layoutX="61.0" layoutY="20.0" text="Filtrar" />
+      <TextField fx:id="txtFiltrar" layoutX="97.0" layoutY="16.0" />
+   </children>
+</AnchorPane>

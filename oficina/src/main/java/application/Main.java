@@ -20,7 +20,7 @@ public class Main extends Application {
 			new UserRest().verificaAdmin();
 			/*scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());*/
 			primaryStage.setScene(scene);
-			primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/telas/icone.png")));
+			/*primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/telas/icone.png")));*/
 			primaryStage.setResizable(false);
 			primaryStage.setTitle("Login");
 			primaryStage.show();
