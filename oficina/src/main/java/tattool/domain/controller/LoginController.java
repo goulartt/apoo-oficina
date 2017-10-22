@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXSpinner;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,23 +21,41 @@ import javafx.stage.Stage;
 import tattool.domain.model.User;
 import tattool.rest.consume.UserRest;
 
-public class LoginController implements Initializable{
+public class LoginController {
 	
 	@FXML Button btnLogin = new Button();
 	@FXML Button btnSair = new Button();
 	@FXML TextField lblUsuario = new TextField();
 	@FXML Label lblErro = new Label();
 	@FXML PasswordField lblSenha = new PasswordField();
+	@FXML JFXSpinner spLoad = new JFXSpinner();
+	@FXML Label lblLoad = new Label();
 	public User usuario = new User();
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		
+	private UserRest rest = new UserRest();
+	
+	@FXML
+	public void initialize() {
+		rest.verificaAdmin();
 	}
 	
+	
+	
+	public void carregar() {
+		btnLogin.setDisable(true);
+		btnSair.setDisable(true);
+		spLoad.setVisible(true);
+		lblLoad.setText("Conectando com a base de Dados da API");
+		if(rest.verificaAdmin()) {
+			btnLogin.setDisable(false);
+			btnSair.setDisable(false);
+			spLoad.setDisable(true);
+			lblLoad.setText("aaaaaaaaaaaaaaaa");
+		}
+	}
 	@FXML
 	public void logar(ActionEvent event){
 		
-		UserRest rest = new UserRest();
+		
 		this.usuario = rest.verificaLogin(lblUsuario.getText(), lblSenha.getText());
 		if(usuario != null) {
 			try {
@@ -64,4 +84,8 @@ public class LoginController implements Initializable{
 		
 		System.exit(0);
 	}
+
+
+
+	
 }
