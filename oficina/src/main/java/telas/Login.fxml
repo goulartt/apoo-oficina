@@ -91,12 +91,7 @@
                   <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                </padding>
             </VBox>
-            <JFXSpinner fx:id="spLoad" layoutX="1100.0" layoutY="591.0" />
-            <Label fx:id="lblLoad" alignment="CENTER" layoutX="869.0" layoutY="604.0" prefHeight="18.0" prefWidth="214.0" text="Home Studio">
-               <font>
-                  <Font name="Verdana" size="14.0" />
-               </font>
-            </Label>
+          
          </children>
       </Pane>
    </children>
