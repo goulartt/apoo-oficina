@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.octicons.OctIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="596.0" prefWidth="1044.0" style="-fx-background-insets: 10;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.WindowController">
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+   <effect>
+      <DropShadow color="#000000e4" height="26.0" offsetX="-1.0" offsetY="1.5" radius="11.5" spread="0.14" width="22.0" />
+   </effect>
+   <left>
+      <VBox prefHeight="200.0" prefWidth="220.0" style="-fx-background-color: #607D8B;" BorderPane.alignment="CENTER" />
+   </left>
+   <center>
+      <BorderPane fx:id="main" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+   <top>
+      <VBox prefHeight="80.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
+         <children>
+            <BorderPane prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #212121;">
+               <right>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="272.0" spacing="10.0" styleClass="window-toolbar" stylesheets="@../../application/application.css" BorderPane.alignment="CENTER">
+                     <children>
+                        <OctIconView fill="#b0bec5" glyphName="DASH" onMouseClicked="#minimize" size="22" strokeWidth="0.0">
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </OctIconView>
+                        <OctIconView fill="#b0bec5" glyphName="PLUS" onMouseClicked="#maximize" size="18">
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </OctIconView>
+                        <OctIconView fill="#b0bec5" glyphName="X" onMouseClicked="#closeApp" size="18">
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </OctIconView>
+                     </children>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </HBox>
+               </right>
+            </BorderPane>
+            <BorderPane prefHeight="50.0" prefWidth="1024.0" style="-fx-background-color: #455A64;">
+               <left>
+                  <HBox prefHeight="200.0" prefWidth="273.0" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <HBox prefHeight="200.0" prefWidth="272.0" BorderPane.alignment="CENTER" />
+               </right>
+               <effect>
+                  <DropShadow color="#00000087" height="16.0" offsetY="1.0" radius="3.5" width="0.0" />
+               </effect>
+            </BorderPane>
+         </children>
+      </VBox>
+   </top>
+</BorderPane>
