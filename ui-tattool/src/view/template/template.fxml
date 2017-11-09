@@ -1,67 +1,222 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import de.jensd.fx.glyphs.octicons.OctIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="596.0" prefWidth="1044.0" style="-fx-background-insets: 10;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.WindowController">
-   <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-   </padding>
-   <effect>
-      <DropShadow color="#000000e4" height="26.0" offsetX="-1.0" offsetY="1.5" radius="11.5" spread="0.14" width="22.0" />
-   </effect>
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" stylesheets="@../../application/application.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DashboardController">
    <left>
-      <VBox prefHeight="200.0" prefWidth="220.0" style="-fx-background-color: #607D8B;" BorderPane.alignment="CENTER" />
+      <VBox prefHeight="200.0" prefWidth="220.0" style="-fx-background-color: #607D8B;" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Home" textFill="WHITE">
+               <font>
+                  <Font name="Verdana" size="16.0" />
+               </font>
+               <padding>
+                  <Insets bottom="8.0" left="16.0" right="16.0" top="8.0" />
+               </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="HOME" size="26">
+                     <effect>
+                        <InnerShadow color="#0000009f" height="4.0" radius="1.5" width="4.0" />
+                     </effect>
+                  </FontAwesomeIconView>
+               </graphic>
+            </JFXButton>
+            <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Clientes" textFill="WHITE">
+               <font>
+                  <Font name="Verdana" size="16.0" />
+               </font>
+               <padding>
+                  <Insets bottom="8.0" left="16.0" right="16.0" top="8.0" />
+               </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <OctIconView fill="WHITE" glyphName="ORGANIZATION" size="26">
+                     <effect>
+                        <InnerShadow color="#00000092" height="4.0" radius="1.5" width="4.0" />
+                     </effect>
+                  </OctIconView>
+               </graphic>
+            </JFXButton>
+            <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Serviços" textFill="WHITE">
+               <font>
+                  <Font name="Verdana" size="16.0" />
+               </font>
+               <padding>
+                  <Insets bottom="8.0" left="16.0" right="16.0" top="8.0" />
+               </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="BRIEFCASE" size="26">
+                     <effect>
+                        <InnerShadow color="#0000009f" height="4.0" radius="1.5" width="4.0" />
+                     </effect>
+                  </FontAwesomeIconView>
+               </graphic>
+            </JFXButton>
+            <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Sessões" textFill="WHITE">
+               <font>
+                  <Font name="Verdana" size="16.0" />
+               </font>
+               <padding>
+                  <Insets bottom="8.0" left="16.0" right="16.0" top="8.0" />
+               </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <OctIconView fill="WHITE" glyphName="CALENDAR" size="26">
+                     <effect>
+                        <InnerShadow color="#00000092" height="4.0" radius="1.5" width="4.0" />
+                     </effect>
+                  </OctIconView>
+               </graphic>
+            </JFXButton>
+            <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Galeria" textFill="WHITE">
+               <font>
+                  <Font name="Verdana" size="16.0" />
+               </font>
+               <padding>
+                  <Insets bottom="8.0" left="16.0" right="16.0" top="8.0" />
+               </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <MaterialDesignIconView fill="WHITE" glyphName="VIEW_DASHBOARD" size="26">
+                     <effect>
+                        <InnerShadow color="#0000009c" height="4.0" radius="1.5" width="4.0" />
+                     </effect>
+                  </MaterialDesignIconView>
+               </graphic>
+            </JFXButton>
+            <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Caixa" textFill="WHITE">
+               <font>
+                  <Font name="Verdana" size="16.0" />
+               </font>
+               <padding>
+                  <Insets bottom="8.0" left="16.0" right="16.0" top="8.0" />
+               </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <MaterialDesignIconView fill="WHITE" glyphName="CURRENCY_USD" size="26">
+                     <effect>
+                        <InnerShadow color="#0000009c" height="4.0" radius="1.5" width="4.0" />
+                     </effect>
+                  </MaterialDesignIconView>
+               </graphic>
+            </JFXButton>
+            <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Usuários" textFill="WHITE">
+               <font>
+                  <Font name="Verdana" size="16.0" />
+               </font>
+               <padding>
+                  <Insets bottom="8.0" left="16.0" right="16.0" top="8.0" />
+               </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <MaterialDesignIconView fill="WHITE" glyphName="ACCOUNT_MULTIPLE" size="26">
+                     <effect>
+                        <InnerShadow color="#0000009c" height="4.0" radius="1.5" width="4.0" />
+                     </effect>
+                  </MaterialDesignIconView>
+               </graphic>
+            </JFXButton>
+         </children></VBox>
    </left>
    <center>
       <BorderPane fx:id="main" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
    <top>
-      <VBox prefHeight="80.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <BorderPane prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #212121;">
+            <BorderPane fx:id="header" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #455A64;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <right>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="272.0" spacing="10.0" styleClass="window-toolbar" stylesheets="@../../application/application.css" BorderPane.alignment="CENTER">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0" BorderPane.alignment="CENTER">
                      <children>
-                        <OctIconView fill="#b0bec5" glyphName="DASH" onMouseClicked="#minimize" size="22" strokeWidth="0.0">
-                           <cursor>
-                              <Cursor fx:constant="DEFAULT" />
-                           </cursor>
-                        </OctIconView>
-                        <OctIconView fill="#b0bec5" glyphName="PLUS" onMouseClicked="#maximize" size="18">
-                           <cursor>
-                              <Cursor fx:constant="DEFAULT" />
-                           </cursor>
-                        </OctIconView>
-                        <OctIconView fill="#b0bec5" glyphName="X" onMouseClicked="#closeApp" size="18">
-                           <cursor>
-                              <Cursor fx:constant="DEFAULT" />
-                           </cursor>
-                        </OctIconView>
+                        <Label text="Admin" textFill="WHITE">
+                           <font>
+                              <Font name="Verdana" size="16.0" />
+                           </font>
+                           <graphic>
+                              <MaterialDesignIconView fill="WHITE" glyphName="ACCOUNT" size="22">
+                                 <effect>
+                                    <InnerShadow color="#000000a4" height="4.0" radius="1.5" width="4.0" />
+                                 </effect>
+                              </MaterialDesignIconView>
+                           </graphic>
+                        </Label>
+                        <MenuBar prefHeight="30.0" prefWidth="15.0" style="-fx-background-color: transparent;">
+                          <menus>
+                            <Menu mnemonicParsing="false">
+                              <items>
+                                <MenuItem mnemonicParsing="false" style="-fx-cursor: hand;" text="Perfil">
+                                       <graphic>
+                                          <MaterialDesignIconView glyphName="ACCOUNT" size="14" />
+                                       </graphic>
+                                    </MenuItem>
+                                    <MenuItem mnemonicParsing="false" text="Configurações">
+                                       <graphic>
+                                          <OctIconView glyphName="GEAR" size="14" />
+                                       </graphic>
+                                    </MenuItem>
+                                    <MenuItem mnemonicParsing="false" text="Ajuda">
+                                       <graphic>
+                                          <MaterialDesignIconView glyphName="HELP_CIRCLE" size="14" />
+                                       </graphic>
+                                    </MenuItem>
+                                    <MenuItem mnemonicParsing="false" text="Sair">
+                                       <graphic>
+                                          <MaterialDesignIconView glyphName="EXIT_TO_APP" size="14" />
+                                       </graphic>
+                                    </MenuItem>
+                              </items>
+                                 <graphic>
+                                    <OctIconView fill="WHITE" glyphName="TRIANGLE_DOWN" size="20">
+                                       <effect>
+                                          <InnerShadow color="#00000095" height="5.0" radius="2.0" width="5.0" />
+                                       </effect>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </OctIconView>
+                                 </graphic>
+                            </Menu>
+                          </menus>
+                        </MenuBar>
                      </children>
-                     <padding>
-                        <Insets right="10.0" />
-                     </padding>
                   </HBox>
                </right>
-            </BorderPane>
-            <BorderPane prefHeight="50.0" prefWidth="1024.0" style="-fx-background-color: #455A64;">
                <left>
-                  <HBox prefHeight="200.0" prefWidth="273.0" BorderPane.alignment="CENTER" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
                </left>
-               <right>
-                  <HBox prefHeight="200.0" prefWidth="272.0" BorderPane.alignment="CENTER" />
-               </right>
-               <effect>
-                  <DropShadow color="#00000087" height="16.0" offsetY="1.0" radius="3.5" width="0.0" />
-               </effect>
             </BorderPane>
          </children>
-      </VBox>
+      </AnchorPane>
    </top>
 </BorderPane>

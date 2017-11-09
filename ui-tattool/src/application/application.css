@@ -1,3 +1,20 @@
-.window-toolbar .glyph-icon:hover{
-	-fx-fill: white;
+/*
+ * 	##	LOGIN
+ */
+
+.login-txt-field{
+	-fx-text-fill: #fff;
+	-fx-prompt-text-fill: #fff;
+}
+
+/*
+ * 	##	DASHBOARD
+ */
+
+.drop-arrow:hover{
+	-fx-fill: #78909C;
+}
+
+.nav-button:hover{
+	-fx-background-color: #455A64;
 }

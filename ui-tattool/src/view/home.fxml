@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<fx:root minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="336.0" style="-fx-background-color: #CFD8DC;" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="336.0" style="-fx-background-color: #CFD8DC;" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomeController">
    <padding>
       <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
    </padding>
    <center>
-      <VBox prefHeight="200.0" prefWidth="743.0" spacing="25.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
+      <VBox fx:id="block" prefHeight="200.0" prefWidth="743.0" spacing="25.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
          <children>
             <Label text="Please enter your name:" textFill="#212121">
                <font>
@@ -34,9 +31,6 @@
          <padding>
             <Insets bottom="16.0" left="22.0" right="22.0" top="16.0" />
          </padding>
-         <effect>
-            <DropShadow color="#0000008d" height="22.48" radius="8.145" spread="0.06" width="12.1" />
-         </effect>
       </VBox>
    </center>
 </fx:root>

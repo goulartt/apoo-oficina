@@ -1,13 +1,10 @@
 package application;
 	
-import java.net.URL;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import com.jfoenix.controls.JFXDecorator;
 
 
 public class Main extends Application
@@ -17,22 +14,37 @@ public class Main extends Application
 	{
 		try
 		{
-			FXMLLoader template = new FXMLLoader(getClass().getResource("/view/template/template.fxml"));
-
-		    Scene scene = new Scene(template.load());
-
-		    URL content = getClass().getResource("/view/home.fxml");
-
-		    FXMLLoader main = new FXMLLoader(content);
-		    
-		    main.setRoot(template.getNamespace().get("main"));
-
-		    main.load();
+			FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
+			
+			JFXDecorator decorator = new JFXDecorator(primaryStage, loginLoader.load());
+			
+			decorator.setCustomMaximize(true);
+			
+			Scene scene = new Scene(decorator, 1024, 576);
 
 		    primaryStage.setScene(scene);
-		    primaryStage.initStyle(StageStyle.UNDECORATED);
+		    
 		    primaryStage.show();
-		}catch(Exception e)
+			
+			/*FXMLLoader templateLoader = new FXMLLoader(getClass().getResource("/view/template/template.fxml"));
+			
+			JFXDecorator decorator = new JFXDecorator(primaryStage, templateLoader.load());
+			
+			decorator.setCustomMaximize(false);
+			
+			Scene scene = new Scene(decorator, 1024, 576);
+
+		    FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("/view/home.fxml"));
+		    
+		    mainLoader.setRoot(templateLoader.getNamespace().get("main"));
+
+		    mainLoader.load();
+
+		    primaryStage.setScene(scene);
+		    
+		    primaryStage.show();*/
+		}
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
