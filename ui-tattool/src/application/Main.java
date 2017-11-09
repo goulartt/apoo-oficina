@@ -14,7 +14,7 @@ public class Main extends Application
 	{
 		try
 		{
-			FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
+			FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/view/home.fxml"));
 			
 			JFXDecorator decorator = new JFXDecorator(primaryStage, loginLoader.load());
 			

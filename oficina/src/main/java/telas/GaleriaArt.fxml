@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="706.0" prefWidth="1068.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.domain.controller.GalleryController">
+   <children>
+      <ScrollPane fx:id="scrollPane" layoutX="-1.0" layoutY="112.0" prefHeight="593.0" prefWidth="1068.0">
+         <content>
+            <TilePane fx:id="tilePane" prefHeight="595.0" prefWidth="1051.0" />
+         </content>
+      </ScrollPane>
+      <JFXButton layoutX="273.0" layoutY="45.0" onAction="#buscarImagem" text="Buscar" />
+      <JFXTextField fx:id="txtTag" layoutX="65.0" layoutY="45.0" />
+      <Label fx:id="lblErro" layoutX="674.0" layoutY="61.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

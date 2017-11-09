@@ -28,8 +28,6 @@ public class LoginController {
 	@FXML TextField lblUsuario = new TextField();
 	@FXML Label lblErro = new Label();
 	@FXML PasswordField lblSenha = new PasswordField();
-	@FXML JFXSpinner spLoad = new JFXSpinner();
-	@FXML Label lblLoad = new Label();
 	public User usuario = new User();
 	private UserRest rest = new UserRest();
 	
@@ -39,19 +37,7 @@ public class LoginController {
 	}
 	
 	
-	
-	public void carregar() {
-		btnLogin.setDisable(true);
-		btnSair.setDisable(true);
-		spLoad.setVisible(true);
-		lblLoad.setText("Conectando com a base de Dados da API");
-		if(rest.verificaAdmin()) {
-			btnLogin.setDisable(false);
-			btnSair.setDisable(false);
-			spLoad.setDisable(true);
-			lblLoad.setText("aaaaaaaaaaaaaaaa");
-		}
-	}
+
 	@FXML
 	public void logar(ActionEvent event){
 		
