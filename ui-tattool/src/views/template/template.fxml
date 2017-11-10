@@ -17,11 +17,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" stylesheets="@../../application/application.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DashboardController">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" stylesheets="@../../application/application.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DashboardController">
    <left>
       <VBox prefHeight="200.0" prefWidth="220.0" style="-fx-background-color: #607D8B;" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Home" textFill="WHITE">
+            <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" onAction="#home" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Home" textFill="WHITE">
                <font>
                   <Font name="Verdana" size="16.0" />
                </font>
@@ -39,7 +39,7 @@
                   </FontAwesomeIconView>
                </graphic>
             </JFXButton>
-            <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Clientes" textFill="WHITE">
+            <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" onAction="#costumers" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Clientes" textFill="WHITE">
                <font>
                   <Font name="Verdana" size="16.0" />
                </font>
@@ -57,7 +57,7 @@
                   </OctIconView>
                </graphic>
             </JFXButton>
-            <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Serviços" textFill="WHITE">
+            <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" onAction="#services" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Serviços" textFill="WHITE">
                <font>
                   <Font name="Verdana" size="16.0" />
                </font>
@@ -75,7 +75,7 @@
                   </FontAwesomeIconView>
                </graphic>
             </JFXButton>
-            <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Sessões" textFill="WHITE">
+            <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" onAction="#sessions" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Sessões" textFill="WHITE">
                <font>
                   <Font name="Verdana" size="16.0" />
                </font>
@@ -93,7 +93,7 @@
                   </OctIconView>
                </graphic>
             </JFXButton>
-            <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Galeria" textFill="WHITE">
+            <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" onAction="#gallery" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Galeria" textFill="WHITE">
                <font>
                   <Font name="Verdana" size="16.0" />
                </font>
@@ -111,7 +111,7 @@
                   </MaterialDesignIconView>
                </graphic>
             </JFXButton>
-            <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Caixa" textFill="WHITE">
+            <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" onAction="#cashier" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Caixa" textFill="WHITE">
                <font>
                   <Font name="Verdana" size="16.0" />
                </font>
@@ -129,7 +129,7 @@
                   </MaterialDesignIconView>
                </graphic>
             </JFXButton>
-            <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Usuários" textFill="WHITE">
+            <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" onAction="#users" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Usuários" textFill="WHITE">
                <font>
                   <Font name="Verdana" size="16.0" />
                </font>
@@ -175,22 +175,22 @@
                           <menus>
                             <Menu mnemonicParsing="false">
                               <items>
-                                <MenuItem mnemonicParsing="false" style="-fx-cursor: hand;" text="Perfil">
+                                <MenuItem mnemonicParsing="false" onAction="#profile" style="-fx-cursor: hand;" text="Perfil">
                                        <graphic>
                                           <MaterialDesignIconView glyphName="ACCOUNT" size="14" />
                                        </graphic>
                                     </MenuItem>
-                                    <MenuItem mnemonicParsing="false" text="Configurações">
+                                    <MenuItem mnemonicParsing="false" onAction="#settings" text="Configurações">
                                        <graphic>
                                           <OctIconView glyphName="GEAR" size="14" />
                                        </graphic>
                                     </MenuItem>
-                                    <MenuItem mnemonicParsing="false" text="Ajuda">
+                                    <MenuItem mnemonicParsing="false" onAction="#help" text="Ajuda">
                                        <graphic>
                                           <MaterialDesignIconView glyphName="HELP_CIRCLE" size="14" />
                                        </graphic>
                                     </MenuItem>
-                                    <MenuItem mnemonicParsing="false" text="Sair">
+                                    <MenuItem mnemonicParsing="false" onAction="#logout" text="Sair">
                                        <graphic>
                                           <MaterialDesignIconView glyphName="EXIT_TO_APP" size="14" />
                                        </graphic>
