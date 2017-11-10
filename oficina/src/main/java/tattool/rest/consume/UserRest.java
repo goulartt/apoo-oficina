@@ -7,6 +7,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import tatool.util.Constantes;
 import tattool.domain.model.User;
 
 public class UserRest {
@@ -14,7 +15,7 @@ public class UserRest {
 	private RestTemplate rest = new RestTemplate();
 	
 	public boolean verificaAdmin() {
-		if(rest.getForObject("http://ec2-18-220-233-44.us-east-2.compute.amazonaws.com/users/verify/", HttpStatus.class).is2xxSuccessful()) {
+		if(rest.getForObject(Constantes.Api.URL_API+"/users/verify/", HttpStatus.class).is2xxSuccessful()) {
 			return true;
 		}
 		return false;
@@ -23,12 +24,14 @@ public class UserRest {
 	
 	
 	public User[] findAllUsers() {
-		return rest.getForObject("http://ec2-18-220-233-44.us-east-2.compute.amazonaws.com/users/", User[].class);
+
+		return rest.getForObject(Constantes.Api.URL_API+"/users/", User[].class);
 	}
 
 	
 	public User existeUsername(String usuario) {
-		String url = "http://ec2-18-220-233-44.us-east-2.compute.amazonaws.com/users/verify/username";
+
+		String url = Constantes.Api.URL_API+"/users/verify/username";
 
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url)
 		        // Add query parameter
@@ -42,7 +45,7 @@ public class UserRest {
 			parametersMap.add("usuario", usuario);
 			parametersMap.add("senha", senha);
 		try {
-			return rest.postForObject("http://ec2-18-220-233-44.us-east-2.compute.amazonaws.com/users/verify", parametersMap, User.class);
+			return rest.postForObject(Constantes.Api.URL_API+"/users/verify", parametersMap, User.class);
 		}catch(HttpClientErrorException e) {
 			System.out.println("Usuario e senha invalido");
 			return null;
@@ -51,10 +54,8 @@ public class UserRest {
 	}
 	
 	public User save(User user) {
-		return rest.postForObject("http://ec2-18-220-233-44.us-east-2.compute.amazonaws.com/users", user, User.class);
+		return rest.postForObject(Constantes.Api.URL_API+"/users", user, User.class);
 	}
-	
-	
 	
 	
 }

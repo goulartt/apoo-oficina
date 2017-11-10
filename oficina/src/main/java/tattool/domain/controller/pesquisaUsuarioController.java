@@ -45,10 +45,10 @@ public class pesquisaUsuarioController implements Initializable{
     
     public void carregarTable() {
 
-	colunaUsuario.setCellValueFactory(new PropertyValueFactory<User, String>("usuario"));
-	colunaNome.setCellValueFactory(new PropertyValueFactory<User, String>("nome"));
-	observableUsuario = FXCollections.observableArrayList(dao.findAllUsers());
-	tabelaPesquisa.setItems(observableUsuario);
+		colunaUsuario.setCellValueFactory(new PropertyValueFactory<User, String>("usuario"));
+		colunaNome.setCellValueFactory(new PropertyValueFactory<User, String>("nome"));
+		observableUsuario = FXCollections.observableArrayList(dao.findAllUsers());
+		tabelaPesquisa.setItems(observableUsuario);
 		
 	}
 
