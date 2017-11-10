@@ -1,8 +1,7 @@
 /*
  * 	##	LOGIN
  */
-
-.login-txt-field{
+.login-txt-field {
 	-fx-text-fill: #fff;
 	-fx-prompt-text-fill: #fff;
 }
@@ -10,11 +9,10 @@
 /*
  * 	##	DASHBOARD
  */
-
-.drop-arrow:hover{
+.drop-arrow:hover {
 	-fx-fill: #78909C;
 }
 
-.nav-button:hover{
+.nav-button:hover {
 	-fx-background-color: #455A64;
 }

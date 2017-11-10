@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="804.0" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <padding>
+      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+   </padding>
+   <top>
+      <BorderPane prefHeight="79.0" prefWidth="774.0" BorderPane.alignment="CENTER">
+         <left>
+            <VBox alignment="CENTER_LEFT" prefHeight="79.0" prefWidth="297.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Usuários!" textFill="#00bcd4">
+                     <font>
+                        <Font name="Verdana" size="32.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </left>
+      </BorderPane>
+   </top>
+</fx:root>
