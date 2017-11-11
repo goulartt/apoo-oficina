@@ -7,6 +7,8 @@ import java.util.function.Predicate;
 
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.cells.editors.TextFieldEditorBuilder;
+import com.jfoenix.controls.cells.editors.base.GenericEditableTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -15,10 +17,15 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
+import javafx.scene.control.TreeTableColumn.CellEditEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.util.Callback;
 
 public class UserController
@@ -30,32 +37,14 @@ public class UserController
     @FXML
     private JFXTextField search;
     
+    /*
+     * 	##	INICIALIZAÇÃO
+     */
     public void initialize()
     {
     	createTableColumns();
     	populateTable();
-    	
-    	// Filtro de busca
-    	
-    	search.textProperty().addListener(new ChangeListener<String>()
-    	{
-			@Override
-			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
-			{
-				userTable.setPredicate(new Predicate<TreeItem<User>>()
-				{
-					@Override
-					public boolean test(TreeItem<User> user)
-					{
-						//Compara o valor do TextInput com as colunas da table
-						
-						return user.getValue().name.getValue().toLowerCase().contains(newValue.toLowerCase())     ||
-							   user.getValue().username.getValue().toLowerCase().contains(newValue.toLowerCase()) ||
-							   user.getValue().role.getValue().toLowerCase().contains(newValue.toLowerCase());
-					}
-				});
-			}
-    	});
+    	search();
     }
     
     /*
@@ -102,6 +91,19 @@ public class UserController
 			}
     	});
     	
+    	//	TABLE EDITÁVEL
+    	
+    	name.setCellFactory((TreeTableColumn<User, String> param) -> new GenericEditableTreeTableCell<>(new TextFieldEditorBuilder()));
+        name.setOnEditCommit((CellEditEvent<User, String> t) -> t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().name.set(t.getNewValue()));
+        
+        username.setCellFactory((TreeTableColumn<User, String> param) -> new GenericEditableTreeTableCell<>(new TextFieldEditorBuilder()));
+        username.setOnEditCommit((CellEditEvent<User, String> t) -> t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().username.set(t.getNewValue()));
+        
+        role.setCellFactory((TreeTableColumn<User, String> param) -> new GenericEditableTreeTableCell<>(new TextFieldEditorBuilder()));
+        role.setOnEditCommit((CellEditEvent<User, String> t) -> t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().role.set(t.getNewValue()));
+    	
+    	userTable.setEditable(true);
+    	
     	userTable.getColumns().setAll(name, username, role);
     }
     
@@ -123,6 +125,56 @@ public class UserController
     	
     	userTable.setRoot(root);
     	userTable.setShowRoot(false);
+    }
+    
+    /*
+     * 	##	FILTRO DE BUSCA
+     */
+    
+    void search()
+
+    {
+    	search.textProperty().addListener(new ChangeListener<String>()
+    	{
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
+			{
+				userTable.setPredicate(new Predicate<TreeItem<User>>()
+				{
+					@Override
+					public boolean test(TreeItem<User> user)
+					{
+						//Compara o valor do TextInput com as colunas da table
+						
+						return user.getValue().name.getValue().toLowerCase().contains(newValue.toLowerCase())     ||
+							   user.getValue().username.getValue().toLowerCase().contains(newValue.toLowerCase()) ||
+							   user.getValue().role.getValue().toLowerCase().contains(newValue.toLowerCase());
+					}
+				});
+			}
+    	});
+    }
+    
+    /*
+     * 	##	CRIAR USUÁRIO
+     */
+    
+    @FXML
+    void create(ActionEvent event)
+    {
+    	try
+    	{
+		    FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/users/create.fxml"));
+		    BorderPane main       = (BorderPane) ((Node) event.getSource()).getScene().lookup("#main");
+		    
+		    viewLoader.setRoot(main);
+		    main.getChildren().clear();
+		    viewLoader.load();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
     }
     
     //RecursiveTreeObject -> NECESSÁRIO PARA USAR O FILTRO DE BUSCA

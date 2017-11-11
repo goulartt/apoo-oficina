@@ -23,7 +23,7 @@ public class DashboardController
     private BorderPane header;
     
     /*
-     * 	##	CONFIGURAÇÕES DE INICIALZIAÇÃO
+     * 	##	INICIALIZAÇÃO
      */
     public void initialize()
     {

@@ -34,7 +34,7 @@
             </VBox>
          </left>
          <right>
-            <JFXButton contentDisplay="TOP" prefHeight="65.0" prefWidth="150.0" style="-fx-background-color: #4CAF50;" text="Novo Usuário" textFill="WHITE" BorderPane.alignment="CENTER">
+            <JFXButton contentDisplay="TOP" onAction="#create" prefHeight="65.0" prefWidth="150.0" style="-fx-background-color: #4CAF50;" text="Novo Usuário" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Verdana" size="16.0" />
                </font>

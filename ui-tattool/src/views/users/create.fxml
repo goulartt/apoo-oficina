@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root prefHeight="526.0" prefWidth="804.0" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CreateUserController">
+   <padding>
+      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+   </padding>
+   <top>
+      <BorderPane prefHeight="79.0" prefWidth="774.0" BorderPane.alignment="CENTER">
+         <left>
+            <VBox alignment="CENTER_LEFT" prefHeight="79.0" prefWidth="636.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label prefHeight="40.0" prefWidth="387.0" text="Cadastrar novo usuário" textFill="#00bcd4">
+                     <font>
+                        <Font name="Verdana" size="32.0" />
+                     </font>
+                  </Label>
+                  <Label text="Preencha os campos a baixo e pressione criar.">
+                     <font>
+                        <Font name="Verdana" size="16.0" />
+                     </font>
+                     <graphic>
+                        <MaterialDesignIconView fill="#ffca28" glyphName="COMMENT_OUTLINE" size="18" />
+                     </graphic>
+                  </Label>
+               </children>
+            </VBox>
+         </left>
+      </BorderPane>
+   </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXTextField fx:id="name" focusColor="#00bcd4" labelFloat="true" promptText="Nome" unFocusColor="#212121">
+               <font>
+                  <Font name="Verdana" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="26.0" />
+               </VBox.margin>
+            </JFXTextField>
+            <JFXTextField fx:id="username" focusColor="#00bcd4" labelFloat="true" promptText="Login" unFocusColor="#212121">
+               <font>
+                  <Font name="Verdana" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="36.0" />
+               </VBox.margin>
+            </JFXTextField>
+            <JFXPasswordField fx:id="password" focusColor="#00bcd4" labelFloat="true" promptText="Senha" unFocusColor="#212121">
+               <font>
+                  <Font name="Verdana" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="36.0" />
+               </VBox.margin>
+            </JFXPasswordField>
+            <JFXComboBox fx:id="role" focusColor="#00bcd4" labelFloat="true" prefHeight="25.0" prefWidth="987.0" promptText="Função" style="-fx-font-family: Verdana; -fx-font-size: 16px;" unFocusColor="#212121">
+               <VBox.margin>
+                  <Insets top="36.0" />
+               </VBox.margin>
+            </JFXComboBox>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <BorderPane prefHeight="44.0" prefWidth="774.0" BorderPane.alignment="CENTER">
+         <right>
+            <JFXButton contentDisplay="RIGHT" onAction="#store" style="-fx-background-color: #4CAF50;" text="Criar" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Verdana" size="16.0" />
+               </font>
+               <padding>
+                  <Insets bottom="8.0" left="20.0" right="20.0" top="8.0" />
+               </padding>
+               <graphic>
+                  <MaterialDesignIconView fill="WHITE" glyphName="PLUS" size="16" />
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </right>
+         <left>
+            <JFXButton onAction="#back" style="-fx-background-color: #78909C;" text="Voltar" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Verdana" size="16.0" />
+               </font>
+               <padding>
+                  <Insets bottom="8.0" left="20.0" right="20.0" top="8.0" />
+               </padding>
+               <graphic>
+                  <MaterialDesignIconView fill="WHITE" glyphName="ARROW_LEFT_BOLD" size="16" />
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </left>
+      </BorderPane>
+   </bottom>
+</fx:root>
