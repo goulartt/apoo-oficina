@@ -1,0 +1,187 @@
+package tattool.views.controller;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Predicate;
+
+import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXTreeTableColumn;
+import com.jfoenix.controls.JFXTreeTableView;
+import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.cells.editors.TextFieldEditorBuilder;
+import com.jfoenix.controls.cells.editors.base.GenericEditableTreeTableCell;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.TreeTableColumn.CellDataFeatures;
+import javafx.scene.control.TreeTableColumn.CellEditEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.util.Callback;
+import tatool.domain.modelfx.UserFX;
+import tatool.util.ConvertModelToFX;
+import tattool.domain.model.User;
+import tattool.rest.consume.UserRest;
+
+public class UserController
+{
+
+    @FXML
+    private JFXTreeTableView<UserFX> userTable;
+    
+    @FXML
+    private JFXTextField search;
+    
+    private UserRest rest = new UserRest();
+    
+    /*
+     * 	##	INICIALIZA��O
+     */
+    public void initialize()
+    {
+    	createTableColumns();
+    	populateTable();
+    	search();
+    }
+    
+    /*
+     * 	##	CRIA AS COLUNAS DA TABLE DE USU�RIOS (NECESS�RIO PARA USAR O JFXTableTreeView)
+     */
+    
+    @SuppressWarnings("unchecked")
+	void createTableColumns()
+    {
+    	JFXTreeTableColumn<UserFX, String> name     = new JFXTreeTableColumn<>("Nome");
+    	JFXTreeTableColumn<UserFX, String> username = new JFXTreeTableColumn<>("Login");
+    	JFXTreeTableColumn<UserFX, String> role     = new JFXTreeTableColumn<>("Função");
+    	
+    	//Colunas com largura responsiva
+    	
+    	name.prefWidthProperty().bind(userTable.widthProperty().multiply(0.3));
+    	username.prefWidthProperty().bind(userTable.widthProperty().multiply(0.3));
+    	role.prefWidthProperty().bind(userTable.widthProperty().multiply(0.396));	//0.396 -> Gambiarra pra coluna n�o atravessar a TableView
+    	
+    	name.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<UserFX, String>, ObservableValue<String>>()
+    	{
+			@Override
+			public ObservableValue<String> call(CellDataFeatures<UserFX, String> param)
+			{
+				return param.getValue().getValue().nome;
+			}
+    	});
+    	
+    	username.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<UserFX, String>, ObservableValue<String>>()
+    	{
+			@Override
+			public ObservableValue<String> call(CellDataFeatures<UserFX, String> param)
+			{
+				return param.getValue().getValue().usuario;
+			}
+    	});
+    	
+    	role.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<UserFX, String>, ObservableValue<String>>()
+    	{
+			@Override
+			public ObservableValue<String> call(CellDataFeatures<UserFX, String> param)
+			{
+				return param.getValue().getValue().role;
+			}
+    	});
+    	
+    	//	TABLE EDIT�VEL
+    	
+    	name.setCellFactory((TreeTableColumn<UserFX, String> param) -> new GenericEditableTreeTableCell<>(new TextFieldEditorBuilder()));
+        name.setOnEditCommit((CellEditEvent<UserFX, String> t) -> t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().nome.set(t.getNewValue()));
+        
+        username.setCellFactory((TreeTableColumn<UserFX, String> param) -> new GenericEditableTreeTableCell<>(new TextFieldEditorBuilder()));
+        username.setOnEditCommit((CellEditEvent<UserFX, String> t) -> t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().usuario.set(t.getNewValue()));
+        
+        role.setCellFactory((TreeTableColumn<UserFX, String> param) -> new GenericEditableTreeTableCell<>(new TextFieldEditorBuilder()));
+        role.setOnEditCommit((CellEditEvent<UserFX, String> t) -> t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().role.set(t.getNewValue()));
+    	
+    	userTable.setEditable(true);
+    	
+    	userTable.getColumns().setAll(name, username, role);
+    }
+    
+    /*
+     * 	##	POPULANDO TABELA
+     */
+    
+    public void populateTable()
+    {
+    	ObservableList<UserFX> users = FXCollections.observableArrayList();
+    	
+    	users = FXCollections.observableArrayList(ConvertModelToFX.convertListUser(rest.findAllUsers()));
+    	
+    	final TreeItem<UserFX> root = new RecursiveTreeItem<UserFX>(users, RecursiveTreeObject::getChildren);
+    	
+    	userTable.setRoot(root);
+    	userTable.setShowRoot(false);
+    }
+    
+    /*
+     * 	##	FILTRO DE BUSCA
+     */
+    
+    public void search()
+
+    {
+    	search.textProperty().addListener(new ChangeListener<String>()
+    	{
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
+			{
+				userTable.setPredicate(new Predicate<TreeItem<UserFX>>()
+				{
+					@Override
+					public boolean test(TreeItem<UserFX> user)
+					{
+						//Compara o valor do TextInput com as colunas da table
+						
+						return user.getValue().nome.getValue().toLowerCase().contains(newValue.toLowerCase())     ||
+							   user.getValue().usuario.getValue().toLowerCase().contains(newValue.toLowerCase()) ||
+							   user.getValue().role.getValue().toLowerCase().contains(newValue.toLowerCase());
+					}
+				});
+			}
+    	});
+    }
+    
+    /*
+     * 	##	CRIAR USU�RIO
+     */
+    
+    @FXML
+    public void create(ActionEvent event)
+    {
+    	try
+    	{
+		    FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/users/create.fxml"));
+		    BorderPane main       = (BorderPane) ((Node) event.getSource()).getScene().lookup("#main");
+		    
+		    viewLoader.setRoot(main);
+		    main.getChildren().clear();
+		    viewLoader.load();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+    }
+    
+    //RecursiveTreeObject -> NECESS�RIO PARA USAR O FILTRO DE BUSCA
+    
+ 
+}
+

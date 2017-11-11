@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.LoginController">
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #263238;" BorderPane.alignment="CENTER" />
+   </center>
+   <left>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="380.0" style="-fx-background-color: #26C6DA;" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="33.0" prefWidth="546.0" text="Let's work!" textFill="WHITE">
+               <font>
+                  <Font name="Verdana" size="30.0" />
+               </font>
+               <effect>
+                  <InnerShadow color="#00000073" height="4.0" radius="1.5" width="4.0" />
+               </effect>
+               <VBox.margin>
+                  <Insets top="18.0" />
+               </VBox.margin>
+            </Label>
+            <JFXTextField focusColor="WHITE" labelFloat="true" promptText="Usuário" styleClass="login-txt-field" unFocusColor="WHITE" fx:id="txtUsuario">
+               <font>
+                  <Font name="Verdana" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="32.0" />
+               </VBox.margin>
+            </JFXTextField>
+            <JFXPasswordField focusColor="WHITE" labelFloat="true" promptText="Senha" styleClass="login-txt-field" unFocusColor="WHITE" fx:id="txtSenha">
+               <VBox.margin>
+                  <Insets top="32.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Verdana" size="16.0" />
+               </font>
+            </JFXPasswordField>
+            <JFXCheckBox checkedColor="#263238" prefHeight="18.0" prefWidth="424.0" style="-jfx-checked-color: #26C6DA; -jfx-unchecked-color: #fff;" text="Lembrar-me" textFill="WHITE" unCheckedColor="WHITE">
+               <VBox.margin>
+                  <Insets top="22.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Verdana" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXCheckBox>
+            <JFXButton onAction="#login" prefHeight="25.0" prefWidth="487.0" style="-fx-background-color: #263238;" text="Entrar" textFill="WHITE">
+               <font>
+                  <Font name="Verdana" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="32.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton onAction="#closeApp" prefHeight="25.0" prefWidth="487.0" style="-fx-background-color: #e53935;" text="Encerrar" textFill="WHITE">
+               <font>
+                  <Font name="Verdana" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="12.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children>
+         <padding>
+            <Insets bottom="26.0" left="26.0" right="26.0" top="26.0" />
+         </padding>
+      </VBox>
+   </left>
+</BorderPane>

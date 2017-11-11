@@ -28,7 +28,8 @@ public class UserRest {
 	
 	
 	public User[] findAllUsers() {
-		return rest.getForObject(Constantes.Api.URL_API+"/users/", User[].class);
+		User [] u =  rest.getForObject(Constantes.Api.URL_API+"/users/", User[].class);
+		return u;
 	}
 
 	

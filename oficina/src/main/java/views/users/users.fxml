@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root prefHeight="526.0" prefWidth="804.0" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.UserController">
+   <padding>
+      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+   </padding>
+   <top>
+      <BorderPane prefHeight="79.0" prefWidth="774.0" BorderPane.alignment="CENTER">
+         <left>
+            <VBox alignment="CENTER_LEFT" prefHeight="79.0" prefWidth="386.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label prefHeight="40.0" prefWidth="387.0" text="Usuários" textFill="#00bcd4">
+                     <font>
+                        <Font name="Verdana" size="32.0" />
+                     </font>
+                  </Label>
+                  <Label text="Crie usuários para genrenciar o seu estúdio.">
+                     <font>
+                        <Font name="Verdana" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </left>
+         <right>
+            <JFXButton contentDisplay="TOP" onAction="#create" prefHeight="65.0" prefWidth="150.0" style="-fx-background-color: #4CAF50;" text="Novo Usuário" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Verdana" size="16.0" />
+               </font>
+               <graphic>
+                  <Label graphicTextGap="0.0" text="+" textFill="WHITE">
+                     <font>
+                        <Font name="Verdana Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <MaterialDesignIconView fill="WHITE" glyphName="ACCOUNT" size="22" />
+                     </graphic>
+                  </Label>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </right>
+      </BorderPane>
+   </top>
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <center>
+            <JFXTreeTableView fx:id="userTable" stylesheets="@../../application/application.css" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets top="22.0" />
+               </BorderPane.margin>
+            </JFXTreeTableView>
+         </center>
+         <top>
+            <JFXTextField fx:id="search" focusColor="#00bcd4" labelFloat="true" promptText="Pesquisar" style="-fx-text-fill: #212121;" unFocusColor="#212121" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Verdana" size="16.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets top="22.0" />
+               </BorderPane.margin>
+            </JFXTextField>
+         </top>
+      </BorderPane>
+   </center>
+</fx:root>
