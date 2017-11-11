@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.LoginController">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.LoginController">
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #263238;" BorderPane.alignment="CENTER" />
    </center>
@@ -30,7 +30,7 @@
                   <Insets top="18.0" />
                </VBox.margin>
             </Label>
-            <JFXTextField focusColor="WHITE" labelFloat="true" promptText="Usuário" styleClass="login-txt-field" unFocusColor="WHITE" fx:id="txtUsuario">
+            <JFXTextField fx:id="txtUsuario" focusColor="WHITE" labelFloat="true" promptText="Usuário" styleClass="login-txt-field" unFocusColor="WHITE">
                <font>
                   <Font name="Verdana" size="16.0" />
                </font>
@@ -38,7 +38,7 @@
                   <Insets top="32.0" />
                </VBox.margin>
             </JFXTextField>
-            <JFXPasswordField focusColor="WHITE" labelFloat="true" promptText="Senha" styleClass="login-txt-field" unFocusColor="WHITE" fx:id="txtSenha">
+            <JFXPasswordField fx:id="txtSenha" focusColor="WHITE" labelFloat="true" promptText="Senha" styleClass="login-txt-field" unFocusColor="WHITE">
                <VBox.margin>
                   <Insets top="32.0" />
                </VBox.margin>
