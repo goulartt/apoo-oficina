@@ -1,0 +1,43 @@
+CREATE TABLE IF NOT EXISTS `contact` (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  email VARCHAR(255) NULL DEFAULT NULL,
+  phone VARCHAR(255) NULL DEFAULT NULL,
+  PRIMARY KEY (id))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `address` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `city` VARCHAR(255) NULL DEFAULT NULL,
+  `neighborhood` VARCHAR(255) NULL DEFAULT NULL,
+  `number` VARCHAR(255) NULL DEFAULT NULL,
+  `state` VARCHAR(255) NULL DEFAULT NULL,
+  `street` VARCHAR(255) NULL DEFAULT NULL,
+  `zipCode` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `customer` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `birthDate` DATE NULL DEFAULT NULL,
+  `cpf` INT(11) NULL DEFAULT NULL,
+  `name` VARCHAR(255) NULL DEFAULT NULL,
+  `archived` CHAR(1) NOT NULL,
+  `contact_id` INT(11) NOT NULL,
+  `address_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_customer_contact1_idx` (`contact_id` ASC),
+  INDEX `fk_customer_address1_idx` (`address_id` ASC),
+  CONSTRAINT `fk_customer_contact1`
+    FOREIGN KEY (`contact_id`)
+    REFERENCES `contact` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_customer_address1`
+    FOREIGN KEY (`address_id`)
+    REFERENCES `address` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;

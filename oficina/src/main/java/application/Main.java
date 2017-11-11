@@ -20,8 +20,6 @@ public class Main extends Application {
 			LoginController control = (LoginController) loader.getController();
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
-			
-			//primaryStage.getIcons().add(SwingFXUtils.toFXImage(rest.findImg("1509581158_tattool.png"), null));
 			primaryStage.setTitle("TATTOOL - Software de Gerenciamento de Estúdios de Tatuagens");
 			
 			primaryStage.show();

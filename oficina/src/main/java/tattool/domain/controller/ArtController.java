@@ -71,7 +71,8 @@ public class ArtController implements Initializable{
 		FileChooser fc = new FileChooser();
 		FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
 		FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
-		fc.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+		FileChooser.ExtensionFilter extFilterJPEG = new FileChooser.ExtensionFilter("JPEG files (*.jpeg)", "*.JPEG");
+		fc.getExtensionFilters().addAll(extFilterJPG, extFilterPNG,extFilterJPEG);
 
 		imagem = fc.showOpenDialog(null);
 	}
@@ -109,16 +110,7 @@ public class ArtController implements Initializable{
 	
 	@FXML
 	public void buscarImagem(ActionEvent event){
-		if(!txtKey.getText().equals("")) {
-			try {
-				img.setImage(SwingFXUtils.toFXImage(rest.findImg(txtKey.getText()), null));
-			} catch (IOException e) {
-				e.printStackTrace();
-				lblErro.setText("Chave nao encontrada");
-			}
-		}else {
-			lblErro.setText("Insira uma chave por favor");
-		}
+	
 		
 	}
 	@FXML

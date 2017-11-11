@@ -30,7 +30,7 @@
                         <Font name="Verdana" size="16.0" />
                      </font>
                   </Label>
-                  <Label text="9 de Setembro, 2017.">
+                  <Label text="9 de Setembro, 2017." fx:id="lblData">
                      <font>
                         <Font name="Verdana" size="12.0" />
                      </font>

@@ -73,7 +73,7 @@ public class ArtRest {
 		return rest.getForObject(builder.buildAndExpand().toUri(), Art[].class);  
 	}
 	
-	public BufferedImage findImg(String key) throws IOException {
+	/*public BufferedImage findImg(String key) throws IOException {
 		String url = Constantes.Api.URL_DEV+"/art/img";
 
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url)
@@ -83,17 +83,9 @@ public class ArtRest {
 		File file = rest.getForObject(builder.buildAndExpand().toUri(), File.class); 
 		BufferedImage image = ImageIO.read(file);
 		return image;
-	}
+	}*/
 	
-	public File findFile(String key) throws IOException {
-		String url = Constantes.Api.URL_DEV+"/art/img";
 
-		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url)
-		        // Add query parameter
-		        .queryParam("key", key);
-		rest.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-		return rest.getForObject(builder.buildAndExpand().toUri(), File.class); 
-	}
 	
 	public Art[] findAll() {
 		String url = Constantes.Api.URL_DEV+"/art/all";
