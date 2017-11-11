@@ -19,18 +19,18 @@ public class ConsumerRest {
 	private RestTemplate rest = new RestTemplate();
 
 	public Customer[] findAll() {
-		String url = Constantes.Api.URL_DEV + "/customers";
+		String url = Constantes.Api.URL_API + "/customers";
 		rest.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 		return rest.getForObject(url, Customer[].class);
 
 	}
 
 	public void save(Customer customer) {
-		rest.postForObject(Constantes.Api.URL_DEV + "/customers", customer, Customer.class);
+		rest.postForObject(Constantes.Api.URL_API + "/customers", customer, Customer.class);
 	}
 	
 	public void deleteImage(Integer id) {
-		String url = Constantes.Api.URL_DEV+"/customers/{codigo}";
+		String url = Constantes.Api.URL_API+"/customers/{codigo}";
 		
 		Map<String, Integer> params = new HashMap<String, Integer>();
 	    params.put("codigo", id);

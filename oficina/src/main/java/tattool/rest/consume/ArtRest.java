@@ -32,7 +32,7 @@ public class ArtRest {
 		}
 		art.setImage(service.convertFileToByte(file));
 		try {
-			rest.postForObject(Constantes.Api.URL_DEV+"/art", art, Art.class);
+			rest.postForObject(Constantes.Api.URL_API+"/art", art, Art.class);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -41,7 +41,7 @@ public class ArtRest {
 	
 	public void saveArt(Art art) {
 		try {
-			rest.postForObject(Constantes.Api.URL_DEV+"/art", art, Art.class);
+			rest.postForObject(Constantes.Api.URL_API+"/art", art, Art.class);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -49,7 +49,7 @@ public class ArtRest {
 	}
 	
 	public HttpStatus deleteImage(Integer id) {
-		String url = Constantes.Api.URL_DEV+"/art/img/{id}";
+		String url = Constantes.Api.URL_API+"/art/img/{id}";
 		
 		Map<String, Integer> params = new HashMap<String, Integer>();
 	    params.put("id", id);
@@ -65,7 +65,7 @@ public class ArtRest {
 	}
 	
 	public Art[] findArt(String tag) {
-		String url = Constantes.Api.URL_DEV+"/art";
+		String url = Constantes.Api.URL_API+"/art";
 
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url)
 		        // Add query parameter
@@ -74,7 +74,7 @@ public class ArtRest {
 	}
 	
 	/*public BufferedImage findImg(String key) throws IOException {
-		String url = Constantes.Api.URL_DEV+"/art/img";
+		String url = Constantes.Api.URL_API+"/art/img";
 
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url)
 		        // Add query parameter
@@ -88,7 +88,7 @@ public class ArtRest {
 
 	
 	public Art[] findAll() {
-		String url = Constantes.Api.URL_DEV+"/art/all";
+		String url = Constantes.Api.URL_API+"/art/all";
 		rest.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 		return rest.getForObject(url,  Art[].class); 
 	
