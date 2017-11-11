@@ -17,7 +17,7 @@ public class Main extends Application
 		{
 			Parent root = (Parent) FXMLLoader.load(getClass().getResource("/views/login.fxml"));
 			
-			Scene scene = new Scene(new JFXDecorator(primaryStage, root), 1032, 598);
+			Scene scene = new Scene(new JFXDecorator(primaryStage, root), 1032, 612);
 
 		    primaryStage.setScene(scene);
 		    

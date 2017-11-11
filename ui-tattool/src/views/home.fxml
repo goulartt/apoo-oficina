@@ -44,7 +44,7 @@
          <right>
             <HBox alignment="CENTER_RIGHT" prefHeight="79.0" prefWidth="400.0" spacing="16.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton contentDisplay="TOP" graphicTextGap="2.0" prefHeight="66.0" prefWidth="153.0" style="-fx-background-color: #FFC024;" text="Novo Serviço" textFill="WHITE">
+                  <JFXButton contentDisplay="TOP" graphicTextGap="2.0" prefHeight="65.0" prefWidth="150.0" style="-fx-background-color: #FFCA28;" text="Novo Serviço" textFill="WHITE">
                      <font>
                         <Font name="Verdana" size="14.0" />
                      </font>
@@ -63,12 +63,12 @@
                               <FontAwesomeIconView fill="WHITE" glyphName="BRIEFCASE" size="22" />
                            </graphic>
                            <font>
-                              <Font name="Verdana" size="12.0" />
+                              <Font name="Verdana Bold" size="14.0" />
                            </font>
                         </Label>
                      </graphic>
                   </JFXButton>
-                  <JFXButton contentDisplay="TOP" graphicTextGap="2.0" prefHeight="66.0" prefWidth="153.0" style="-fx-background-color: #00c47a;" text="Novo Cliente" textFill="WHITE">
+                  <JFXButton contentDisplay="TOP" graphicTextGap="2.0" prefHeight="65.0" prefWidth="150.0" style="-fx-background-color: #4CAF50;" text="Novo Cliente" textFill="WHITE">
                      <font>
                         <Font name="Verdana" size="14.0" />
                      </font>
@@ -81,7 +81,7 @@
                      <graphic>
                         <Label text="+" textFill="WHITE">
                            <font>
-                              <Font name="Verdana" size="12.0" />
+                              <Font name="Verdana Bold" size="14.0" />
                            </font>
                            <graphic>
                               <OctIconView fill="WHITE" glyphName="PERSON" size="22" />
@@ -109,7 +109,7 @@
       </BorderPane>
    </center>
    <right>
-      <VBox alignment="CENTER" prefHeight="415.0" prefWidth="240.0" style="-fx-background-color: #607D8B;" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="240.0" style="-fx-background-color: #607D8B;" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets left="12.0" top="12.0" />
          </BorderPane.margin>

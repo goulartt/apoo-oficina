@@ -19,7 +19,7 @@
 
 <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" stylesheets="@../../application/application.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DashboardController">
    <left>
-      <VBox prefHeight="200.0" prefWidth="220.0" style="-fx-background-color: #607D8B;" BorderPane.alignment="CENTER">
+      <VBox fx:id="nav" prefHeight="200.0" prefWidth="220.0" style="-fx-background-color: #607D8B;" BorderPane.alignment="CENTER">
          <children>
             <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" onAction="#home" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Home" textFill="WHITE">
                <font>
