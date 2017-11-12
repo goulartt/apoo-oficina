@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -129,7 +130,7 @@
                   </MaterialDesignIconView>
                </graphic>
             </JFXButton>
-            <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" onAction="#users" fx:id="btnUsers" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Usuários" textFill="WHITE">
+            <JFXButton fx:id="btnUsers" alignment="TOP_LEFT" graphicTextGap="10.0" onAction="#users" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Usuários" textFill="WHITE">
                <font>
                   <Font name="Verdana" size="16.0" />
                </font>
@@ -150,7 +151,14 @@
          </children></VBox>
    </left>
    <center>
-      <BorderPane fx:id="main" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <center>
+            <StackPane fx:id="mainStack" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <BorderPane fx:id="main" prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </StackPane>
+         </center></BorderPane>
    </center>
    <top>
       <AnchorPane prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
@@ -21,6 +24,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
@@ -28,6 +32,8 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.control.TreeTableColumn.CellEditEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
 import tattool.domain.model.User;
 import tattool.domain.modelfx.UserFX;
@@ -78,7 +84,7 @@ public class UserController
     	
     	name.prefWidthProperty().bind(userTable.widthProperty().multiply(0.3));
     	username.prefWidthProperty().bind(userTable.widthProperty().multiply(0.3));
-    	role.prefWidthProperty().bind(userTable.widthProperty().multiply(0.396));	//0.396 -> Gambiarra pra coluna nï¿½o atravessar a TableView
+    	role.prefWidthProperty().bind(userTable.widthProperty().multiply(0.39));	//0.396 -> Gambiarra pra coluna nï¿½o atravessar a TableView
     	
     	name.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<UserFX, String>, ObservableValue<String>>()
     	{
@@ -224,16 +230,49 @@ public class UserController
     	error.setVisible(false);
     	
     	if(userTable.getSelectionModel().getSelectedItem() != null) {
-    		UserFX u = userTable.getSelectionModel().getSelectedItem().getValue();
-    		rest.deleteUser(u.getId());
-    		populateTable();
-    		error.setText("Usuario deletado");
-    		error.setVisible(true);
-    		
+    		loadDialog((StackPane) ((Node) event.getSource()).getScene().lookup("#mainStack"));
     	} else {
     		error.setText("Selecione um usuário para excluílo");
     		error.setVisible(true);
     	}
+    }
+    
+    /*
+     * 	##	DIALOG DELETE
+     */
+    
+    void loadDialog(StackPane mainStack) {
+    	
+    	JFXDialogLayout dialogContent = new JFXDialogLayout();
+    	JFXDialog dialog              = new JFXDialog(mainStack, dialogContent, JFXDialog.DialogTransition.CENTER);
+    	JFXButton yes                 = new JFXButton("Sim");
+    	JFXButton no                  = new JFXButton("Não");
+    	
+    	dialogContent.setHeading(new Text("Tem certeza que quer excluir este usuário?"));
+    	dialogContent.setBody(new Text("\n Todos os dados deste usuário serão perdidos.\n"));
+    	
+    	yes.setCursor(Cursor.HAND);
+    	no.setCursor(Cursor.HAND);
+    	
+		yes.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				UserFX u = userTable.getSelectionModel().getSelectedItem().getValue();
+	    		rest.deleteUser(u.getId());
+	    		dialog.close();
+	    		populateTable();
+			}
+		});
+		no.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				dialog.close();
+			}
+		});
+		
+		dialogContent.setActions(no, yes);
+		dialog.setOverlayClose(false);
+		dialog.show();
     }
     
     @FXML
@@ -243,6 +282,5 @@ public class UserController
     		rest.save(u);
     	}
     }
- 
 }
 
