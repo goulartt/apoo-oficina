@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import com.jfoenix.controls.JFXDecorator;
@@ -13,24 +14,27 @@ import com.jfoenix.effects.JFXDepthManager;
 public class DashboardController 
 {
 	@FXML
+    private VBox nav;
+	
+	@FXML
 	private BorderPane main;
 	
     @FXML
     private BorderPane header;
     
     /*
-     * 	##	CONFIGURAÇÕES DE INICIALZIAÇÃO
+     * 	##	INICIALIZAÇÃO
      */
     public void initialize()
     {
-    	JFXDepthManager.setDepth(header, 1);
+    	depthManager();
     }
     
     @FXML
     void home(ActionEvent event)
     {
-    	try {
-			
+    	try
+    	{
 		    FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/home.fxml"));
 		    
 		    viewLoader.setRoot(main);
@@ -46,8 +50,8 @@ public class DashboardController
     @FXML
     void costumers(ActionEvent event)
     {
-		try {
-			
+		try
+		{
 		    FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/costumers/costumers.fxml"));
 		    
 		    viewLoader.setRoot(main);
@@ -63,8 +67,8 @@ public class DashboardController
     @FXML
     void services(ActionEvent event)
     {
-    	try {
-			
+    	try
+    	{
 		    FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/services/services.fxml"));
 		    
 		    viewLoader.setRoot(main);
@@ -80,8 +84,8 @@ public class DashboardController
     @FXML
     void sessions(ActionEvent event)
     {
-    	try {
-			
+    	try
+    	{
 		    FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/sessions/sessions.fxml"));
 		    
 		    viewLoader.setRoot(main);
@@ -97,8 +101,8 @@ public class DashboardController
     @FXML
     void gallery(ActionEvent event)
     {
-    	try {
-			
+    	try
+    	{
 		    FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/gallery/gallery.fxml"));
 		    
 		    viewLoader.setRoot(main);
@@ -114,8 +118,8 @@ public class DashboardController
     @FXML
     void cashier(ActionEvent event)
     {
-    	try {
-			
+    	try
+    	{
 		    FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/cashier/cashier.fxml"));
 		    
 		    viewLoader.setRoot(main);
@@ -131,8 +135,8 @@ public class DashboardController
     @FXML
     void users(ActionEvent event)
     {
-    	try {
-			
+    	try
+    	{
 		    FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/users/users.fxml"));
 		    
 		    viewLoader.setRoot(main);
@@ -148,8 +152,8 @@ public class DashboardController
     @FXML
     void profile(ActionEvent event)
     {
-    	try {
-			
+    	try
+    	{
 		    FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/users/profile.fxml"));
 		    
 		    viewLoader.setRoot(main);
@@ -165,8 +169,8 @@ public class DashboardController
     @FXML
     void settings(ActionEvent event)
     {
-    	try {
-			
+    	try
+    	{
 		    FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/settings.fxml"));
 		    
 		    viewLoader.setRoot(main);
@@ -182,8 +186,8 @@ public class DashboardController
     @FXML
     void help(ActionEvent event)
     {
-    	try {
-			
+    	try
+    	{
 		    FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/help.fxml"));
 		    
 		    viewLoader.setRoot(main);
@@ -205,8 +209,8 @@ public class DashboardController
     	
 		Stage primaryStage = (Stage) main.getScene().getWindow();
 		
-		try {
-			
+		try
+		{
 			/*
 			 * 	##	New Stage login
 			 */
@@ -223,5 +227,15 @@ public class DashboardController
 		{
 			e.printStackTrace();
 		}
+    }
+    
+    /*
+     * 	## SOMBRAS
+     */
+    
+    void depthManager()
+    {
+    	JFXDepthManager.setDepth(header, 1);
+    	JFXDepthManager.setDepth(nav, 1);
     }
 }

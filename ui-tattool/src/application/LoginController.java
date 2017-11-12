@@ -39,7 +39,9 @@ public class LoginController
 			Scene scene 			  = new Scene(new JFXDecorator(stage, templateLoader.load()), 1032, 612);
 		    FXMLLoader mainLoader 	  = new FXMLLoader(getClass().getResource("/views/home.fxml"));
 		    
-		    
+		    String style = getClass().getResource("application.css").toExternalForm();
+			scene.getStylesheets().add(style);
+			
 		    mainLoader.setRoot(templateLoader.getNamespace().get("main"));
 		    mainLoader.load();
 		    

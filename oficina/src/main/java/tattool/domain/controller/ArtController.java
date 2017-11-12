@@ -3,16 +3,12 @@ package tattool.domain.controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -71,7 +67,8 @@ public class ArtController implements Initializable{
 		FileChooser fc = new FileChooser();
 		FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
 		FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
-		fc.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+		FileChooser.ExtensionFilter extFilterJPEG = new FileChooser.ExtensionFilter("JPEG files (*.jpeg)", "*.JPEG");
+		fc.getExtensionFilters().addAll(extFilterJPG, extFilterPNG,extFilterJPEG);
 
 		imagem = fc.showOpenDialog(null);
 	}
@@ -109,16 +106,7 @@ public class ArtController implements Initializable{
 	
 	@FXML
 	public void buscarImagem(ActionEvent event){
-		if(!txtKey.getText().equals("")) {
-			try {
-				img.setImage(SwingFXUtils.toFXImage(rest.findImg(txtKey.getText()), null));
-			} catch (IOException e) {
-				e.printStackTrace();
-				lblErro.setText("Chave nao encontrada");
-			}
-		}else {
-			lblErro.setText("Insira uma chave por favor");
-		}
+	
 		
 	}
 	@FXML

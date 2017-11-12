@@ -71,7 +71,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton onAction="#closeApp" prefHeight="25.0" prefWidth="487.0" style="-fx-background-color: #c62828;" text="Sair" textFill="WHITE">
+            <JFXButton onAction="#closeApp" prefHeight="25.0" prefWidth="487.0" style="-fx-background-color: #e53935;" text="Encerrar" textFill="WHITE">
                <font>
                   <Font name="Verdana" size="18.0" />
                </font>
