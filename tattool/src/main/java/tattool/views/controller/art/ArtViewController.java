@@ -1,4 +1,4 @@
-package tattool.views.controller;
+package tattool.views.controller.art;
 
 import java.net.URL;
 import java.util.ArrayList;
