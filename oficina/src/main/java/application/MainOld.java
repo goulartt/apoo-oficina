@@ -1,7 +1,6 @@
 package application;
 
 import javafx.application.Application;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;

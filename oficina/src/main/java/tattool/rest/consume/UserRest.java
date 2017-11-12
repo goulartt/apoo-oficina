@@ -1,9 +1,5 @@
 package tattool.rest.consume;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;

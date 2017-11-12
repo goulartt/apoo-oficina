@@ -1,19 +1,13 @@
 package tattool.rest.consume;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import tatool.util.Constantes;
-import tattool.domain.model.Art;
 import tattool.domain.model.Customer;
-import tattool.domain.model.Tag;
 
 public class ConsumerRest {
 	private RestTemplate rest = new RestTemplate();

@@ -1,12 +1,7 @@
 package tattool.domain.controller;
 
-import java.awt.print.Book;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -20,13 +15,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import tattool.domain.model.Art;
-import tattool.domain.model.Tag;
 import tattool.domain.model.User;
-import tattool.rest.consume.ArtRest;
 
 public class DashboardController implements Initializable {
 

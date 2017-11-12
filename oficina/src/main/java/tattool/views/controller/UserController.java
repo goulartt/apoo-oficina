@@ -1,9 +1,5 @@
 package tattool.views.controller;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.function.Predicate;
 
 import com.jfoenix.controls.JFXTextField;
@@ -30,7 +26,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.util.Callback;
 import tatool.domain.modelfx.UserFX;
 import tatool.util.ConvertModelToFX;
-import tattool.domain.model.User;
 import tattool.rest.consume.UserRest;
 
 public class UserController
@@ -112,6 +107,7 @@ public class UserController
     	userTable.setEditable(true);
     	
     	userTable.getColumns().setAll(name, username, role);
+    
     }
     
     /*

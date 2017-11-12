@@ -1,11 +1,12 @@
 package application;
 	
+import com.jfoenix.controls.JFXDecorator;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import com.jfoenix.controls.JFXDecorator;
+import javafx.stage.Stage;
 
 
 public class Main extends Application
@@ -19,8 +20,9 @@ public class Main extends Application
 			
 			Scene scene = new Scene(new JFXDecorator(primaryStage, root), 1032, 612);
 			primaryStage.setTitle("TATTOOL - Software de Gerenciamento de Estúdios de Tatuagens");
+			  scene.getStylesheets().add(getClass().getResource("css/application.css").toExternalForm());
 		    primaryStage.setScene(scene);
-		    
+		  
 		    primaryStage.show();
 		}
 		catch(Exception e)
