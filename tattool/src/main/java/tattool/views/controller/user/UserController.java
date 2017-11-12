@@ -230,7 +230,7 @@ public class UserController
     	error.setVisible(false);
     	
     	if(userTable.getSelectionModel().getSelectedItem() != null) {
-    		loadDialog((StackPane) ((Node) event.getSource()).getScene().lookup("#mainStack"));
+    		loadDialogDelete((StackPane) ((Node) event.getSource()).getScene().lookup("#mainStack"));
     	} else {
     		error.setText("Selecione um usuário para excluílo");
     		error.setVisible(true);
@@ -241,7 +241,7 @@ public class UserController
      * 	##	DIALOG DELETE
      */
     
-    void loadDialog(StackPane mainStack) {
+    void loadDialogDelete(StackPane mainStack) {
     	
     	JFXDialogLayout dialogContent = new JFXDialogLayout();
     	JFXDialog dialog              = new JFXDialog(mainStack, dialogContent, JFXDialog.DialogTransition.CENTER);
@@ -278,9 +278,42 @@ public class UserController
     @FXML
     public void update(ActionEvent event) {
     	userUpdate = ConvertModelToFX.convertListUserFX(userTest);
+    	
     	for(User u : userUpdate) {
     		rest.save(u);
     	}
+    	
+    	if(userTest.isEmpty())
+    	{
+    		loadDialogUpdate((StackPane) ((Node) event.getSource()).getScene().lookup("#mainStack"), new Text("Não há nenhum alteração para salvar!"));
+    	}else {
+    		loadDialogUpdate((StackPane) ((Node) event.getSource()).getScene().lookup("#mainStack"), new Text("As atualizações foram salvas!"));
+    	}
+    }
+    
+    /*
+     * 	##	DIALOG DELETE
+     */
+    
+    void loadDialogUpdate(StackPane mainStack, Text text) {
+    	
+    	JFXDialogLayout dialogContent = new JFXDialogLayout();
+    	JFXDialog dialog              = new JFXDialog(mainStack, dialogContent, JFXDialog.DialogTransition.CENTER);
+    	JFXButton ok                 = new JFXButton("Ok");
+    	
+    	dialogContent.setHeading(text);
+    	
+    	ok.setCursor(Cursor.HAND);
+    	
+		ok.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+	    		dialog.close();
+			}
+		});
+		
+		dialogContent.setActions(ok);
+		dialog.show();
     }
 }
 
