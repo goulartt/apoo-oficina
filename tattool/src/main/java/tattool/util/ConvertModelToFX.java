@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import tattool.domain.model.User;
 import tattool.domain.modelfx.UserFX;
 
@@ -13,10 +11,12 @@ public class ConvertModelToFX {
 	
 	public static User convertUser(UserFX u) {
 		User user = new User();
-		user.setNome(u.getNome().toString());
-		user.setRole(Integer.parseInt(u.getRole().toString()));
-		user.setSenha(u.getSenha().toString());
-		user.setUsuario(u.getUsuario().toString());
+		if(u.getId() != null) user.setId(u.getId());
+		user.setNome(u.getNome().get());
+		String role = u.getRole().get();
+		user.setRole(Integer.parseInt(role));
+		user.setSenha(u.getSenha().get());
+		user.setUsuario(u.getUsuario().get());
 		return user;
 		
 	}
@@ -34,5 +34,13 @@ public class ConvertModelToFX {
     		userFX.add(ConvertModelToFX.convertUserFX(u));
     	}
     	return userFX;
+	}
+	
+	public static List<User> convertListUserFX(List<UserFX> user){
+		List<User> userConvertido = new ArrayList<>();
+		for(UserFX u : user) {
+			userConvertido.add(ConvertModelToFX.convertUser(u));
+    	}
+    	return userConvertido;
 	}
 }

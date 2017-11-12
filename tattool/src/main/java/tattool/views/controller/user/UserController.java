@@ -1,5 +1,7 @@
 package tattool.views.controller.user;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 import com.jfoenix.controls.JFXTextField;
@@ -10,11 +12,13 @@ import com.jfoenix.controls.cells.editors.TextFieldEditorBuilder;
 import com.jfoenix.controls.cells.editors.base.GenericEditableTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -25,6 +29,7 @@ import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.control.TreeTableColumn.CellEditEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Callback;
+import tattool.domain.model.User;
 import tattool.domain.modelfx.UserFX;
 import tattool.rest.consume.UserRest;
 import tattool.util.ConvertModelToFX;
@@ -41,8 +46,10 @@ public class UserController
     @FXML
     private Label error;
     
-    private UserRest rest = new UserRest();
+    private List<User> userUpdate = new ArrayList<>();
     
+    private UserRest rest = new UserRest();
+    private List<UserFX> userTest = new ArrayList<>();
     /*
      * 	##	INICIALIZAï¿½ï¿½O
      */
@@ -103,14 +110,37 @@ public class UserController
     	//	TABLE EDITï¿½VEL
     	
     	name.setCellFactory((TreeTableColumn<UserFX, String> param) -> new GenericEditableTreeTableCell<>(new TextFieldEditorBuilder()));
-        name.setOnEditCommit((CellEditEvent<UserFX, String> t) -> 
-        t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().nome.set(t.getNewValue()));
+        name.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<UserFX, String>>() { 
+			
+
+			@Override
+			public void handle(CellEditEvent<UserFX, String> event) {
+				event.getTreeTableView().getTreeItem(event.getTreeTablePosition().getRow()).getValue().nome.set(event.getNewValue());
+				TreeItem<UserFX> item = event.getRowValue();
+                UserFX userOld = item.getValue();
+                String newer = event.getNewValue();
+                userOld.setNome(new SimpleStringProperty(newer));
+                userTest.add(userOld);
+              
+			}
+        });
         
         username.setCellFactory((TreeTableColumn<UserFX, String> param) -> new GenericEditableTreeTableCell<>(new TextFieldEditorBuilder()));
-        username.setOnEditCommit((CellEditEvent<UserFX, String> t) -> t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().usuario.set(t.getNewValue()));
+        username.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<UserFX, String>>() { 
+			@Override
+			public void handle(CellEditEvent<UserFX, String> event) {
+				event.getTreeTableView().getTreeItem(event.getTreeTablePosition().getRow()).getValue().usuario.set(event.getNewValue());
+				TreeItem<UserFX> item = event.getRowValue();
+                UserFX userOld = item.getValue();
+                String newer = event.getNewValue();
+                userOld.setUsuario(new SimpleStringProperty(newer));
+                userTest.add(userOld);
+				
+			}
+        });
         
-        role.setCellFactory((TreeTableColumn<UserFX, String> param) -> new GenericEditableTreeTableCell<>(new TextFieldEditorBuilder()));
-        role.setOnEditCommit((CellEditEvent<UserFX, String> t) -> t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().role.set(t.getNewValue()));
+        //role.setCellFactory((TreeTableColumn<UserFX, String> param) -> new GenericEditableTreeTableCell<>(new TextFieldEditorBuilder()));
+        //role.setOnEditCommit((CellEditEvent<UserFX, String> t) -> t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().role.set(t.getNewValue()));
     	
     	userTable.setEditable(true);
     	
@@ -203,6 +233,14 @@ public class UserController
     	} else {
     		error.setText("Selecione um usuário para excluílo");
     		error.setVisible(true);
+    	}
+    }
+    
+    @FXML
+    public void update(ActionEvent event) {
+    	userUpdate = ConvertModelToFX.convertListUserFX(userTest);
+    	for(User u : userUpdate) {
+    		rest.save(u);
     	}
     }
  
