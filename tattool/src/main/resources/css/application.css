@@ -9,8 +9,8 @@
 /*
  * 	##	DASHBOARD
  */
-.drop-arrow:hover{
-	-fx-fill: #78909C;
+.menu:hover, .menu:showing{
+	-fx-background-color: #03A9F4;
 }
 
 .nav-button:hover{
@@ -28,6 +28,7 @@
     -fx-font-family: Verdana;
     
 }
+
 .tree-table-view:focused .tree-table-row-cell:selected{
     -fx-background-color: -fx-tree-table-color  ;
     -fx-table-cell-border-color: -fx-tree-table-color;
@@ -99,5 +100,22 @@
 .tree-table-row-cell .jfx-text-field{
     -jfx-focus-color: #00bcd4;
     -jfx-unfocus-color: #fff;
+}
+
+/*
+ *	##	JFXDecorator 
+  */
+  
+.jfx-decorator {
+    -fx-decorator-color: #212121;
+}
+
+.jfx-decorator .jfx-decorator-buttons-container {
+    -fx-background-color: -fx-decorator-color;
+}
+
+.jfx-decorator .resize-border {
+    -fx-border-color: -fx-decorator-color;
+    -fx-border-width: 0 4 4 4;
 }
  

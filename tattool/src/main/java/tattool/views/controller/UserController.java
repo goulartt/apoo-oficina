@@ -58,7 +58,7 @@ public class UserController
     {
     	JFXTreeTableColumn<UserFX, String> name     = new JFXTreeTableColumn<>("Nome");
     	JFXTreeTableColumn<UserFX, String> username = new JFXTreeTableColumn<>("Login");
-    	JFXTreeTableColumn<UserFX, String> role     = new JFXTreeTableColumn<>("FunÃ§Ã£o");
+    	JFXTreeTableColumn<UserFX, String> role     = new JFXTreeTableColumn<>("Função");
     	
     	//Colunas com largura responsiva
     	
@@ -146,7 +146,7 @@ public class UserController
 						//Compara o valor do TextInput com as colunas da table
 						
 						return user.getValue().nome.getValue().toLowerCase().contains(newValue.toLowerCase())     ||
-							   user.getValue().usuario.getValue().toLowerCase().contains(newValue.toLowerCase()) ||
+							   user.getValue().usuario.getValue().toLowerCase().contains(newValue.toLowerCase())  ||
 							   user.getValue().role.getValue().toLowerCase().contains(newValue.toLowerCase());
 					}
 				});
@@ -176,8 +176,19 @@ public class UserController
 		}
     }
     
-    //RecursiveTreeObject -> NECESSï¿½RIO PARA USAR O FILTRO DE BUSCA
+    /*
+     * 	##	DELETE USUARIO
+     */
     
+    @FXML
+    public void delete(ActionEvent event)
+    {   	
+    	if(userTable.getSelectionModel().getSelectedItem() != null) {
+    		
+    	} else {
+    		
+    	}
+    }
  
 }
 

@@ -8,10 +8,11 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="526.0" prefWidth="804.0" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.UserController">
+<fx:root prefHeight="526.0" prefWidth="804.0" stylesheets="@../../css/application.css" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.UserController">
    <padding>
       <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
    </padding>
@@ -25,40 +26,65 @@
                         <Font name="Verdana" size="32.0" />
                      </font>
                   </Label>
-                  <Label text="Crie usuários para genrenciar o seu estúdio.">
+                  <Label text="Crie usuários para gerenciar o seu estúdio">
                      <font>
                         <Font name="Verdana" size="16.0" />
                      </font>
+                     <graphic>
+                        <MaterialDesignIconView fill="#ffca28" glyphName="COMMENT_OUTLINE" size="18" />
+                     </graphic>
                   </Label>
                </children>
             </VBox>
          </left>
          <right>
-            <JFXButton contentDisplay="TOP" onAction="#create" prefHeight="65.0" prefWidth="150.0" style="-fx-background-color: #4CAF50;" text="Novo Usuário" textFill="WHITE" BorderPane.alignment="CENTER">
-               <font>
-                  <Font name="Verdana" size="16.0" />
-               </font>
-               <graphic>
-                  <Label graphicTextGap="0.0" text="+" textFill="WHITE">
+            <HBox alignment="CENTER_RIGHT" prefHeight="79.0" prefWidth="343.0" spacing="16.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton contentDisplay="TOP" onAction="#delete" prefHeight="65.0" prefWidth="150.0" style="-fx-background-color: rgba(229,57,53 ,1);" text="Excluir Usuário" textFill="WHITE">
                      <font>
-                        <Font name="Verdana Bold" size="14.0" />
+                        <Font name="Verdana" size="16.0" />
                      </font>
                      <graphic>
-                        <MaterialDesignIconView fill="WHITE" glyphName="ACCOUNT" size="22" />
+                        <Label graphicTextGap="0.0" text="x" textFill="WHITE">
+                           <font>
+                              <Font name="Verdana Bold" size="14.0" />
+                           </font>
+                           <graphic>
+                              <MaterialDesignIconView fill="WHITE" glyphName="ACCOUNT" size="22" />
+                           </graphic>
+                        </Label>
                      </graphic>
-                  </Label>
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXButton contentDisplay="TOP" onAction="#create" prefHeight="65.0" prefWidth="150.0" style="-fx-background-color: #4CAF50;" text="Novo Usuário" textFill="WHITE">
+                     <font>
+                        <Font name="Verdana" size="16.0" />
+                     </font>
+                     <graphic>
+                        <Label graphicTextGap="0.0" text="+" textFill="WHITE">
+                           <font>
+                              <Font name="Verdana Bold" size="14.0" />
+                           </font>
+                           <graphic>
+                              <MaterialDesignIconView fill="WHITE" glyphName="ACCOUNT" size="22" />
+                           </graphic>
+                        </Label>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+               </children>
+            </HBox>
          </right>
       </BorderPane>
    </top>
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <center>
-            <JFXTreeTableView fx:id="userTable" stylesheets="@../../application/application.css" BorderPane.alignment="CENTER">
+            <JFXTreeTableView fx:id="userTable" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets top="22.0" />
                </BorderPane.margin>
