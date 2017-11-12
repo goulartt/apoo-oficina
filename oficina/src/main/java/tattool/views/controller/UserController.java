@@ -64,7 +64,7 @@ public class UserController
     	
     	name.prefWidthProperty().bind(userTable.widthProperty().multiply(0.3));
     	username.prefWidthProperty().bind(userTable.widthProperty().multiply(0.3));
-    	role.prefWidthProperty().bind(userTable.widthProperty().multiply(0.396));	//0.396 -> Gambiarra pra coluna n�o atravessar a TableView
+    	role.prefWidthProperty().bind(userTable.widthProperty().multiply(0.396));	//0.396 -> Gambiarra pra coluna nao atravessar a TableView
     	
     	name.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<UserFX, String>, ObservableValue<String>>()
     	{
@@ -174,10 +174,7 @@ public class UserController
 		{
 			e.printStackTrace();
 		}
-    }
-    
-    //RecursiveTreeObject -> NECESS�RIO PARA USAR O FILTRO DE BUSCA
-    
+    }  
  
 }
 

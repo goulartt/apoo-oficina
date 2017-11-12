@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" stylesheets="@../../application/application.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.DashboardController">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" stylesheets="@../../../../../target/classes/application/application.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.DashboardController">
    <left>
       <VBox fx:id="nav" prefHeight="200.0" prefWidth="220.0" style="-fx-background-color: #607D8B;" BorderPane.alignment="CENTER">
          <children>

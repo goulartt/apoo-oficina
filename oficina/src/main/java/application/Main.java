@@ -19,6 +19,9 @@ public class Main extends Application
 			Parent root = (Parent) FXMLLoader.load(getClass().getResource("/views/login.fxml"));
 			
 			Scene scene = new Scene(new JFXDecorator(primaryStage, root), 1032, 612);
+			
+			scene.getStylesheets().add("@../../application/application.css");
+			
 			primaryStage.setTitle("TATTOOL - Software de Gerenciamento de Estúdios de Tatuagens");
 			  scene.getStylesheets().add(getClass().getResource("css/application.css").toExternalForm());
 		    primaryStage.setScene(scene);
