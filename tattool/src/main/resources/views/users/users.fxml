@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import de.jensd.fx.glyphs.octicons.OctIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -12,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="526.0" prefWidth="804.0" stylesheets="@../../css/application.css" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.UserController">
+<fx:root prefHeight="526.0" prefWidth="804.0" stylesheets="@../../css/application.css" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.User.UserController">
    <padding>
       <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
    </padding>
@@ -86,19 +87,34 @@
          <center>
             <JFXTreeTableView fx:id="userTable" BorderPane.alignment="CENTER">
                <BorderPane.margin>
-                  <Insets top="22.0" />
+                  <Insets />
                </BorderPane.margin>
             </JFXTreeTableView>
          </center>
          <top>
-            <JFXTextField fx:id="search" focusColor="#00bcd4" labelFloat="true" promptText="Pesquisar" style="-fx-text-fill: #212121;" unFocusColor="#212121" BorderPane.alignment="CENTER">
-               <font>
-                  <Font name="Verdana" size="16.0" />
-               </font>
-               <BorderPane.margin>
-                  <Insets top="22.0" />
-               </BorderPane.margin>
-            </JFXTextField>
+            <VBox prefHeight="75.0" prefWidth="774.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXTextField fx:id="search" focusColor="#00bcd4" labelFloat="true" promptText="Pesquisar" style="-fx-text-fill: #212121;" unFocusColor="#212121">
+                     <font>
+                        <Font name="Verdana" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="18.0" />
+                     </VBox.margin>
+                  </JFXTextField>
+                  <Label fx:id="error" graphicTextGap="10.0" textFill="#e53935">
+                     <font>
+                        <Font name="Verdana" size="16.0" />
+                     </font>
+                     <graphic>
+                        <OctIconView fill="#e53935" glyphName="ISSUE_OPENED" size="22" />
+                     </graphic>
+                     <VBox.margin>
+                        <Insets bottom="16.0" top="16.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
          </top>
       </BorderPane>
    </center>

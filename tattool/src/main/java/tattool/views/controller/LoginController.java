@@ -44,6 +44,9 @@ public class LoginController implements Initializable {
 	            txtUsuario.requestFocus();
 	        }
 	    });
+		
+		error.managedProperty().bind(error.visibleProperty());
+		error.setVisible(false);
 	}
 
 	/*
@@ -84,7 +87,13 @@ public class LoginController implements Initializable {
 		}
 	}
 	
+	/*
+	 * 	##	LOGIN
+	 */
+	
 	void login(Stage primaryStage) {
+		
+		error.setVisible(false);
 		
 		//Stage view login
 
@@ -116,10 +125,14 @@ public class LoginController implements Initializable {
 			}else {
 				error.setText("Credenciais Inváldias");
 				error.setVisible(true);
+				txtUsuario.setText("");
+				txtSenha.setText("");
+				txtUsuario.requestFocus();
 			}
 		}else {
 			error.setText("Por favor preencha os campos");
 			error.setVisible(true);
+			txtUsuario.requestFocus();
 		}
 	}
 	

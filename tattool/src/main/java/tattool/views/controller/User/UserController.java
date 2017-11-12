@@ -1,4 +1,4 @@
-package tattool.views.controller;
+package tattool.views.controller.User;
 
 import java.util.function.Predicate;
 
@@ -18,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
@@ -37,6 +38,9 @@ public class UserController
     @FXML
     private JFXTextField search;
     
+    @FXML
+    private Label error;
+    
     private UserRest rest = new UserRest();
     
     /*
@@ -47,6 +51,9 @@ public class UserController
     	createTableColumns();
     	populateTable();
     	search();
+    	
+    	error.managedProperty().bind(error.visibleProperty());
+    	error.setVisible(false);
     }
     
     /*
@@ -182,11 +189,16 @@ public class UserController
     
     @FXML
     public void delete(ActionEvent event)
-    {   	
+    {   
+    	error.setVisible(false);
+    	
     	if(userTable.getSelectionModel().getSelectedItem() != null) {
     		
-    	} else {
+    		// Deleta usuario selecionado
     		
+    	} else {
+    		error.setText("Selecione um usuário para excluílo");
+    		error.setVisible(true);
     	}
     }
  

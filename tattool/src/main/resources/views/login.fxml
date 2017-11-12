@@ -47,7 +47,7 @@
                   <Font name="Verdana" size="16.0" />
                </font>
             </JFXPasswordField>
-            <Label fx:id="error" graphicTextGap="10.0" prefHeight="17.0" prefWidth="512.0" textFill="#e53935" visible="false">
+            <Label fx:id="error" graphicTextGap="10.0" prefHeight="17.0" prefWidth="512.0" textFill="#e53935">
                <font>
                   <Font name="Verdana" size="16.0" />
                </font>
@@ -55,12 +55,12 @@
                   <MaterialDesignIconView fill="#e53935" glyphName="ACCOUNT_ALERT" size="22" />
                </graphic>
                <VBox.margin>
-                  <Insets top="12.0" />
+                  <Insets bottom="-10.0" top="16.0" />
                </VBox.margin>
             </Label>
             <JFXCheckBox checkedColor="#263238" prefHeight="18.0" prefWidth="424.0" style="-jfx-checked-color: #26C6DA; -jfx-unchecked-color: #fff;" text="Lembrar-me" textFill="WHITE" unCheckedColor="WHITE">
                <VBox.margin>
-                  <Insets top="8.0" />
+                  <Insets top="22.0" />
                </VBox.margin>
                <font>
                   <Font name="Verdana" size="16.0" />
