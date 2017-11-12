@@ -1,4 +1,5 @@
 package application;
+
 import com.jfoenix.controls.JFXDecorator;
 
 import javafx.application.Application;
@@ -19,6 +20,7 @@ public class Main extends Application
 			
 			Scene scene = new Scene(new JFXDecorator(primaryStage, root), 1032, 612);
 			primaryStage.setTitle("TATTOOL - Software de Gerenciamento de Estúdios de Tatuagens");
+			scene.getStylesheets().add("/css/application.css");
 		    primaryStage.setScene(scene);
 		  
 		    primaryStage.show();

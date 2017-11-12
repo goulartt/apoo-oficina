@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -12,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" stylesheets="/css/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.LoginController">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.LoginController">
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #263238;" BorderPane.alignment="CENTER" />
    </center>
@@ -30,7 +31,7 @@
                   <Insets top="18.0" />
                </VBox.margin>
             </Label>
-            <JFXTextField fx:id="txtUsuario" focusColor="WHITE" labelFloat="true" promptText="Usuário" styleClass="login-txt-field" unFocusColor="WHITE">
+            <JFXTextField fx:id="txtUsuario" focusColor="WHITE" labelFloat="true" onKeyPressed="#keyPressed" promptText="Usuário" styleClass="login-txt-field" unFocusColor="WHITE">
                <font>
                   <Font name="Verdana" size="16.0" />
                </font>
@@ -38,14 +39,25 @@
                   <Insets top="32.0" />
                </VBox.margin>
             </JFXTextField>
-            <JFXPasswordField fx:id="txtSenha" focusColor="WHITE" labelFloat="true" promptText="Senha" styleClass="login-txt-field" unFocusColor="WHITE">
+            <JFXPasswordField fx:id="txtSenha" focusColor="WHITE" labelFloat="true" onKeyPressed="#keyPressed" promptText="Senha" styleClass="login-txt-field" unFocusColor="WHITE">
                <VBox.margin>
-                  <Insets top="32.0" />
+                  <Insets top="34.0" />
                </VBox.margin>
                <font>
                   <Font name="Verdana" size="16.0" />
                </font>
             </JFXPasswordField>
+            <Label fx:id="error" graphicTextGap="10.0" prefHeight="17.0" prefWidth="512.0" textFill="#e53935">
+               <font>
+                  <Font name="Verdana" size="16.0" />
+               </font>
+               <graphic>
+                  <MaterialDesignIconView fill="#e53935" glyphName="ACCOUNT_ALERT" size="22" />
+               </graphic>
+               <VBox.margin>
+                  <Insets bottom="-10.0" top="16.0" />
+               </VBox.margin>
+            </Label>
             <JFXCheckBox checkedColor="#263238" prefHeight="18.0" prefWidth="424.0" style="-jfx-checked-color: #26C6DA; -jfx-unchecked-color: #fff;" text="Lembrar-me" textFill="WHITE" unCheckedColor="WHITE">
                <VBox.margin>
                   <Insets top="22.0" />

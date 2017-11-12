@@ -22,9 +22,6 @@ public class DashboardController
     @FXML
     private BorderPane header;
     
-    /*
-     * 	##	INICIALIZA��O
-     */
     public void initialize()
     {
     	depthManager();
@@ -203,21 +200,19 @@ public class DashboardController
     @FXML
     void logout(ActionEvent event)
     {
-    	/*
-    	 * 	##	Stage view dashboard
-    	 */
+    	//Stage view dashboard
     	
 		Stage primaryStage = (Stage) main.getScene().getWindow();
 		
 		try
 		{
-			/*
-			 * 	##	New Stage login
-			 */
+			//New Stage login
 			
 			Stage stage 			  = new Stage();	
 			FXMLLoader templateLoader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
 			Scene scene 			  = new Scene(new JFXDecorator(stage, templateLoader.load()), 1032, 612);
+			
+			scene.getStylesheets().add("/css/application.css");
 		    
 		    stage.setScene(scene);
 		    primaryStage.hide();
