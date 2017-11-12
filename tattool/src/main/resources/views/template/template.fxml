@@ -129,7 +129,7 @@
                   </MaterialDesignIconView>
                </graphic>
             </JFXButton>
-            <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" onAction="#users" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Usuários" textFill="WHITE">
+            <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" onAction="#users" fx:id="btnUsers" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Usuários" textFill="WHITE">
                <font>
                   <Font name="Verdana" size="16.0" />
                </font>
