@@ -1,4 +1,4 @@
-package tattool.views.controller.User;
+package tattool.views.controller.user;
 
 import java.util.function.Predicate;
 
@@ -103,7 +103,8 @@ public class UserController
     	//	TABLE EDITï¿½VEL
     	
     	name.setCellFactory((TreeTableColumn<UserFX, String> param) -> new GenericEditableTreeTableCell<>(new TextFieldEditorBuilder()));
-        name.setOnEditCommit((CellEditEvent<UserFX, String> t) -> t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().nome.set(t.getNewValue()));
+        name.setOnEditCommit((CellEditEvent<UserFX, String> t) -> 
+        t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().nome.set(t.getNewValue()));
         
         username.setCellFactory((TreeTableColumn<UserFX, String> param) -> new GenericEditableTreeTableCell<>(new TextFieldEditorBuilder()));
         username.setOnEditCommit((CellEditEvent<UserFX, String> t) -> t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().usuario.set(t.getNewValue()));
@@ -193,8 +194,11 @@ public class UserController
     	error.setVisible(false);
     	
     	if(userTable.getSelectionModel().getSelectedItem() != null) {
-    		
-    		// Deleta usuario selecionado
+    		UserFX u = userTable.getSelectionModel().getSelectedItem().getValue();
+    		rest.deleteUser(u.getId());
+    		populateTable();
+    		error.setText("Usuario deletado");
+    		error.setVisible(true);
     		
     	} else {
     		error.setText("Selecione um usuário para excluílo");

@@ -1,5 +1,8 @@
 package tattool.rest.consume;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -56,6 +59,21 @@ public class UserRest {
 		return rest.postForObject(Constantes.Api.URL_API+"/users", user, User.class);
 	}
 	
+	public HttpStatus deleteUser(Integer codigo) {
+		String url = Constantes.Api.URL_API+"/users/{codigo}";
+		
+		Map<String, Integer> params = new HashMap<String, Integer>();
+	    params.put("codigo", codigo);
+	     
+	    RestTemplate restTemplate = new RestTemplate();
+	    try {
+	    	restTemplate.delete ( url,  params );
+	    	return HttpStatus.OK;
+	    }catch(Exception e) {
+	    	e.printStackTrace();
+	    	return HttpStatus.INTERNAL_SERVER_ERROR;
+	    }
+	}
 	
 	
 	

@@ -1,4 +1,4 @@
-package tattool.views.controller;
+package tattool.views.controller.art;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -73,8 +73,8 @@ public class GalleryController implements Initializable{
 		ImageView imageView = null;
 		final Image img = SwingFXUtils.toFXImage(service.createImageFromBytes(art.getImage()), null);
 		imageView = new ImageView(img);
-		imageView.setFitHeight(250);
-		imageView.setFitWidth(250);
+		imageView.setFitHeight(150);
+		imageView.setFitWidth(150);
 		imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
@@ -84,7 +84,7 @@ public class GalleryController implements Initializable{
 
 					if (mouseEvent.getClickCount() == 1) {
 						try {
-							FXMLLoader loader = new FXMLLoader(getClass().getResource("/telas/ArtView.fxml"));
+							FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/gallery/view.fxml"));
 							Pane root = (Pane) loader.load();
 							Scene scene = new Scene(root);
 							Stage primaryStage = new Stage();

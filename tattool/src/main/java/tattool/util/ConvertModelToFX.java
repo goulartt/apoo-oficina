@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import tattool.domain.model.User;
 import tattool.domain.modelfx.UserFX;
 
@@ -21,7 +23,7 @@ public class ConvertModelToFX {
 	
 	public static UserFX convertUserFX(User u) {
 		UserFX user = new UserFX(u.getUsuario(), u.getSenha(), u.getNome(), u.getRole().toString());
-
+		user.setId(u.getId());
 		return user;
 	}
 
