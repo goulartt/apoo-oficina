@@ -1,4 +1,4 @@
-package tattool.views.controller.user;
+package tattool.views.controller.User;
 
 /*
  * 	##	NECESS�RIO CRIAR UM CONTROLLER EXCLUSIVO POR HAVER DISPARO DE EXCESS�O NA INICIALIZA��O DO USERCONTROLLER PELA TABELA DO USU�RIO

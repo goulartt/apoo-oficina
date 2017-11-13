@@ -66,7 +66,7 @@ public class CadastroClienteController implements Initializable{
 
 	@FXML
 	public void cadastrar(ActionEvent event){
-		Customer customer = customerRest.existeUsername(txtCpf.getText());
+		Customer customer = customerRest.existeCostumer(txtName.getText());
 		if(customer == null)
 		{
 			if(!txtName.getText().isEmpty() && !txtCpf.getText().isEmpty() && !txtName.getText().isEmpty() && !txtCel.getText().isEmpty() && !txtStreet.getText().isEmpty() &&
