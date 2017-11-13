@@ -48,7 +48,6 @@ public class GalleryController implements Initializable{
 		carregaArte();
 		scrollPane.setFitToWidth(true);
 		scrollPane.setContent(tilePane);
-		long tempoFinal = System.currentTimeMillis();
 		
 	}
 

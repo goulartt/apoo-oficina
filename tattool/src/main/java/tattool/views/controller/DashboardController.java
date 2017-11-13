@@ -1,5 +1,6 @@
 package tattool.views.controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDecorator;
 import com.jfoenix.effects.JFXDepthManager;
 
@@ -21,6 +22,9 @@ public class DashboardController
 	
     @FXML
     private BorderPane header;
+    
+    @FXML
+    public JFXButton btnUsers = new JFXButton();
     
     public void initialize()
     {
