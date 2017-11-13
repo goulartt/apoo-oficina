@@ -67,7 +67,7 @@
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <center>
-            <JFXTreeTableView fx:id="costumerTable" prefHeight="234.0" prefWidth="774.0" BorderPane.alignment="CENTER">
+            <JFXTreeTableView fx:id="costumerTable" prefHeight="234.0" prefWidth="774.0" styleClass="costumer-table" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets />
                </BorderPane.margin>

@@ -38,6 +38,7 @@
 .jfx-dialog{
 	-fx-font-family: Verdana;
 	-fx-font-size: 14px;
+	-fx-font-wheight: 500;
 }
 
 /*
@@ -55,6 +56,11 @@
 .tree-table-view:focused .tree-table-row-cell:selected{
     -fx-background-color: -fx-tree-table-color  ;
     -fx-table-cell-border-color: -fx-tree-table-color;
+}
+
+.costumer-table .tree-table-row-cell:hover{
+	-fx-background-color: #29B6F6 ;
+    -fx-table-cell-border-color: #29B6F6;
 }
 
 .tree-table-view:focused .tree-table-row-cell:selected .tree-table-cell{
@@ -96,7 +102,7 @@
 
 .tree-table-view .tree-table-cell{
     -fx-border-width:0 0 0 0;
-    -fx-padding : 16 0 16 0 ;
+    -fx-padding : 16 8 16 8;
 }
 
 .tree-table-view .column-overlay{

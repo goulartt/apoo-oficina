@@ -22,12 +22,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -51,10 +52,24 @@ public class CostumerController {
     	search();
     	popup();
     }
+    
+    /*
+     * 	##	CADASTRAR CLIENTE
+     */
 
     @FXML
     void create(ActionEvent event){
-    	
+    	try {
+    		FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/costumers/create-edit.fxml"));
+    		BorderPane main       = (BorderPane) ((Node) event.getSource()).getScene().lookup("#main");
+    		
+    		viewLoader.setRoot(main);
+    		main.getChildren().clear();
+    		viewLoader.load();
+    	}catch(Exception e)
+    	{
+    		e.printStackTrace();
+    	}
     }
     
     /*
@@ -105,7 +120,6 @@ public class CostumerController {
     	costumerTable.setRowFactory(table -> {
     		JFXTreeTableRow<Costumer> row = new JFXTreeTableRow<>();
     		
-    		row.setCursor(Cursor.HAND);
     		row.setOnMouseClicked(event -> popup.show(row, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.LEFT, event.getX(), event.getY()));
     		
     		return row;
@@ -216,7 +230,17 @@ public class CostumerController {
     
     void edit()
     {
-    	//edit.fxml
+    	try {
+    		FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/costumers/create-edit.fxml"));
+    		BorderPane main       = (BorderPane) costumerTable.getScene().lookup("#main");
+    		
+    		viewLoader.setRoot(main);
+    		main.getChildren().clear();
+    		viewLoader.load();
+    	}catch(Exception e)
+    	{
+    		e.printStackTrace();
+    	}
     }
     
     /*
