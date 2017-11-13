@@ -18,6 +18,29 @@
 }
 
 /*
+ * 	##	JFXPopup
+ */
+
+.jfx-popup{
+	-fx-font-family: Verdana;
+	-fx-font-size: 16px;
+}
+
+.jfx-popup .button{
+	-fx-padding: 12 8 12 8;
+	-fx-cursor: hand;
+}
+
+/*
+ * 	##	JFXDialog
+ */
+ 
+.jfx-dialog{
+	-fx-font-family: Verdana;
+	-fx-font-size: 14px;
+}
+
+/*
  * 	##	JFXTreeTableView Style
  */
  
@@ -104,7 +127,7 @@
 
 /*
  *	##	JFXDecorator 
-  */
+ */
   
 .jfx-decorator {
     -fx-decorator-color: #212121;

@@ -57,7 +57,7 @@ public class UserController
     private UserRest rest = new UserRest();
     private List<UserFX> userTest = new ArrayList<>();
     /*
-     * 	##	INICIALIZAï¿½ï¿½O
+     * 	##	INICIALIZACAO
      */
     public void initialize()
     {
@@ -70,7 +70,7 @@ public class UserController
     }
     
     /*
-     * 	##	CRIA AS COLUNAS DA TABLE DE USUï¿½RIOS (NECESSï¿½RIO PARA USAR O JFXTableTreeView)
+     * 	##	CRIA AS COLUNAS DA TABLE DE USUARIOS
      */
     
     @SuppressWarnings("unchecked")
@@ -84,15 +84,15 @@ public class UserController
     	
     	name.prefWidthProperty().bind(userTable.widthProperty().multiply(0.3));
     	username.prefWidthProperty().bind(userTable.widthProperty().multiply(0.3));
-    	role.prefWidthProperty().bind(userTable.widthProperty().multiply(0.39));	//0.396 -> Gambiarra pra coluna nï¿½o atravessar a TableView
+    	role.prefWidthProperty().bind(userTable.widthProperty().multiply(0.39));	//0.39 -> Gambiarra pra coluna nao atravessar a TableView
     	
     	name.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<UserFX, String>, ObservableValue<String>>()
     	{
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<UserFX, String> param)
-			{
-				return param.getValue().getValue().nome;
-			}
+    		@Override
+    		public ObservableValue<String> call(CellDataFeatures<UserFX, String> param)
+    		{
+    			return param.getValue().getValue().nome;
+    		}
     	});
     	
     	username.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<UserFX, String>, ObservableValue<String>>()
@@ -113,7 +113,7 @@ public class UserController
 			}
     	});
     	
-    	//	TABLE EDITï¿½VEL
+    	//	TABLE EDITAVEL
     	
     	name.setCellFactory((TreeTableColumn<UserFX, String> param) -> new GenericEditableTreeTableCell<>(new TextFieldEditorBuilder()));
         name.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<UserFX, String>>() { 
@@ -199,7 +199,7 @@ public class UserController
     }
     
     /*
-     * 	##	CRIAR USUï¿½RIO
+     * 	##	CRIAR USUARIO
      */
     
     @FXML
@@ -249,7 +249,7 @@ public class UserController
     	JFXButton no                  = new JFXButton("Não");
     	
     	dialogContent.setHeading(new Text("Tem certeza que quer excluir este usuário?"));
-    	dialogContent.setBody(new Text("\n Todos os dados deste usuário serão perdidos.\n"));
+    	dialogContent.setBody(new Text("Todos os dados deste usuário serão perdidos."));
     	
     	yes.setCursor(Cursor.HAND);
     	no.setCursor(Cursor.HAND);
@@ -283,16 +283,20 @@ public class UserController
     		rest.save(u);
     	}
     	
-    	if(userTest.isEmpty())
+    	//Essa verificação só funciona na primeira tentativa, depois mesmo nao alterando nada não recebe vazio userUpdate;
+    	
+    	if(userUpdate.isEmpty())
     	{
-    		loadDialogUpdate((StackPane) ((Node) event.getSource()).getScene().lookup("#mainStack"), new Text("Não há nenhum alteração para salvar!"));
+    		loadDialogUpdate((StackPane) ((Node) event.getSource()).getScene().lookup("#mainStack"), new Text("Não há nenhuma alteração para salvar!"));
     	}else {
-    		loadDialogUpdate((StackPane) ((Node) event.getSource()).getScene().lookup("#mainStack"), new Text("As atualizações foram salvas!"));
+    		loadDialogUpdate((StackPane) ((Node) event.getSource()).getScene().lookup("#mainStack"), new Text("As alterações foram salvas!"));
     	}
+    	
+    	//userUpdate = null;
     }
     
     /*
-     * 	##	DIALOG DELETE
+     * 	##	DIALOG UPDATE
      */
     
     void loadDialogUpdate(StackPane mainStack, Text text) {
