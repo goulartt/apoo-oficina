@@ -52,6 +52,9 @@ public class UserController
     @FXML
     private Label error;
     
+    @FXML
+    private JFXButton update = new JFXButton();
+    
     private List<User> userUpdate = new ArrayList<>();
     
     private UserRest rest = new UserRest();
@@ -64,7 +67,7 @@ public class UserController
     	createTableColumns();
     	populateTable();
     	search();
-    	
+    	update.setDisable(true);
     	error.managedProperty().bind(error.visibleProperty());
     	error.setVisible(false);
     }
@@ -126,6 +129,7 @@ public class UserController
                 UserFX userOld = item.getValue();
                 String newer = event.getNewValue();
                 userOld.setNome(new SimpleStringProperty(newer));
+            	update.setDisable(false);
                 userTest.add(userOld);
               
 			}
@@ -140,6 +144,7 @@ public class UserController
                 UserFX userOld = item.getValue();
                 String newer = event.getNewValue();
                 userOld.setUsuario(new SimpleStringProperty(newer));
+                update.setDisable(false);
                 userTest.add(userOld);
 				
 			}
@@ -281,17 +286,14 @@ public class UserController
     	
     	for(User u : userUpdate) {
     		rest.save(u);
+    		update.setDisable(true);
     	}
     	
     	//Essa verificação só funciona na primeira tentativa, depois mesmo nao alterando nada não recebe vazio userUpdate;
     	
-    	if(userUpdate.isEmpty())
-    	{
-    		loadDialogUpdate((StackPane) ((Node) event.getSource()).getScene().lookup("#mainStack"), new Text("Não há nenhuma alteração para salvar!"));
-    	}else {
-    		loadDialogUpdate((StackPane) ((Node) event.getSource()).getScene().lookup("#mainStack"), new Text("As alterações foram salvas!"));
-    	}
+    	loadDialogUpdate((StackPane) ((Node) event.getSource()).getScene().lookup("#mainStack"), new Text("As alterações foram salvas!"));
     	
+    
     	//userUpdate = null;
     }
     

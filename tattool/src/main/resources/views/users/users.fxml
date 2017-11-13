@@ -112,7 +112,7 @@
                               </JFXButton>
                            </children>
                         </StackPane>
-                        <JFXButton graphicTextGap="10.0" onAction="#update" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #4CAF50;" text="Salvar" textFill="WHITE">
+                        <JFXButton graphicTextGap="10.0" onAction="#update" fx:id="update" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #4CAF50;" text="Salvar" textFill="WHITE">
                            <font>
                               <Font name="Verdana" size="16.0" />
                            </font>
