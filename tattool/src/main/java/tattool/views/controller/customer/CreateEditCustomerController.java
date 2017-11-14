@@ -1,38 +1,29 @@
-package tattool.views.controller.costumer;
-
-import java.util.Date;
+package tattool.views.controller.customer;
 
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 
+import de.jensd.fx.glyphs.octicons.OctIconView;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
-import tattool.domain.model.Address;
-import tattool.domain.model.Contact;
+import javafx.scene.paint.Color;
 import tattool.domain.model.Customer;
-import tattool.domain.model.User;
 import tattool.rest.consume.CustomerRest;
-import tattool.util.ConvertModelToFX;
 
 /*
  * 	??	A IDEIA E USAR ESTE CONTROLLER PARA O CREATE E EDIT DO CLIENTE
  * 	??	PORQUE A VIEW E A MESMA
  */
 
-public class CreateEditCostumerController {
+public class CreateEditCustomerController {
 
-    @FXML
-    private ScrollPane scrollPane;
-    
     @FXML
     private JFXTextField name;
     
@@ -66,12 +57,12 @@ public class CreateEditCostumerController {
     @FXML
     private JFXTextField neighborhood;
     
+    @FXML
+    private Label error;
+    
     /*
      * 	??	NAO SEI COMO SERA O PREENCHIMENTO DE ALGUNS ATRIBUTOS, MAS JA CRIEI UMA LABEL DE ERRO PRA TODOS
      */
-
-    @FXML
-    private Label error;
 
     @FXML
     private Label errorName;
@@ -105,38 +96,21 @@ public class CreateEditCostumerController {
 
     @FXML
     private Label errorNeighborhood;
+	
+    @FXML
+    private Tab customerTab;
+    
+    @FXML
+    private Tab contactTab;
+    
+    @FXML
+    private Tab addressTab;
     
     
     private CustomerRest rest = new CustomerRest();
     public void initialize()
     {
-    	scrollPane.setFitToWidth(true);
-    	
-    	error.managedProperty().bind(error.visibleProperty());
-    	errorName.managedProperty().bind(errorName.visibleProperty());
-    	errorCpf.managedProperty().bind(errorCpf.visibleProperty());
-    	errorBirthdate.managedProperty().bind(errorBirthdate.visibleProperty());
-    	errorEmail.managedProperty().bind(errorEmail.visibleProperty());
-    	errorPhone.managedProperty().bind(errorPhone.visibleProperty());
-    	errorZipCode.managedProperty().bind(errorZipCode.visibleProperty());
-    	errorStreet.managedProperty().bind(errorStreet.visibleProperty());
-    	errorNumber.managedProperty().bind(errorNumber.visibleProperty());
-    	errorCity.managedProperty().bind(errorCity.visibleProperty());
-    	errorState.managedProperty().bind(errorState.visibleProperty());
-    	errorNeighborhood.managedProperty().bind(errorNeighborhood.visibleProperty());
-    	
-    	error.setVisible(false);
-    	errorName.setVisible(false);
-    	errorCpf.setVisible(false);
-    	errorBirthdate.setVisible(false);
-    	errorEmail.setVisible(false);
-    	errorPhone.setVisible(false);
-    	errorZipCode.setVisible(false);
-    	errorStreet.setVisible(false);
-    	errorNumber.setVisible(false);
-    	errorCity.setVisible(false);
-    	errorState.setVisible(false);
-    	errorNeighborhood.setVisible(false);
+    	loadValidationErrors();
     	
     	Platform.runLater(new Runnable() {
 	        @Override
@@ -163,16 +137,21 @@ public class CreateEditCostumerController {
     	System.out.println(email.getText());
     	
     	//rest.save(customer);
-    	// REST SAVE
+
     }
     
+    /*
+     * 	##	VALIDACAO FORM
+     */
+    
+   
     /*
      * 	##	VOLTAR
      */
     
     void back(BorderPane main) {
     	try {
-    		FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/costumers/costumers.fxml"));
+    		FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/customers/customers.fxml"));
     		
     		viewLoader.setRoot(main);
     		main.getChildren().clear();
@@ -228,6 +207,10 @@ public class CreateEditCostumerController {
 				break;
 		}
 	}
+	
+	/*
+	 * 	##	VALIDATION ERRORS LABELS
+	 */
     
 	boolean validate()
 	{
@@ -246,10 +229,54 @@ public class CreateEditCostumerController {
 			errorCpf.setVisible(true);
 			validate = false;
 		}
-	
+		return validate;
 	}
 
 	 
 	
 	
+	void loadValidationErrors()
+	{
+		errorName.managedProperty().bind(errorName.visibleProperty());
+    	errorCpf.managedProperty().bind(errorCpf.visibleProperty());
+    	errorBirthdate.managedProperty().bind(errorBirthdate.visibleProperty());
+    	errorEmail.managedProperty().bind(errorEmail.visibleProperty());
+    	errorPhone.managedProperty().bind(errorPhone.visibleProperty());
+    	errorZipCode.managedProperty().bind(errorZipCode.visibleProperty());
+    	errorStreet.managedProperty().bind(errorStreet.visibleProperty());
+    	errorNumber.managedProperty().bind(errorNumber.visibleProperty());
+    	errorCity.managedProperty().bind(errorCity.visibleProperty());
+    	errorState.managedProperty().bind(errorState.visibleProperty());
+    	errorNeighborhood.managedProperty().bind(errorNeighborhood.visibleProperty());
+    	
+    	resetValidation();
+	}
+	
+	void resetValidation()
+	{
+		errorName.setVisible(false);
+    	errorCpf.setVisible(false);
+    	errorBirthdate.setVisible(false);
+    	errorEmail.setVisible(false);
+    	errorPhone.setVisible(false);
+    	errorZipCode.setVisible(false);
+    	errorStreet.setVisible(false);
+    	errorNumber.setVisible(false);
+    	errorCity.setVisible(false);
+    	errorState.setVisible(false);
+    	errorNeighborhood.setVisible(false);
+    	customerTab.setGraphic(null);
+    	contactTab.setGraphic(null);
+    	addressTab.setGraphic(null);
+	}
+	
+	private class ErrorIcon extends OctIconView {
+		
+		ErrorIcon()
+		{
+			setGlyphName("ISSUE_OPENED");
+			setGlyphSize(18);
+			setFill(Color.WHITE);
+		}
+	}
 }
