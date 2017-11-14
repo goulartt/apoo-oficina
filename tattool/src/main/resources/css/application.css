@@ -18,6 +18,36 @@
 }
 
 /*
+ * 	##	JFXTabPane
+ */
+
+.jfx-tab-pane .headers-region {
+    -fx-background-color: #00BCD4;
+}
+
+.jfx-tab-pane .headers-region .tab{
+	-fx-font-family: Verdana;
+	-fx-font-size: 16px;
+	-fx-font-weight: normal;
+}
+
+.jfx-tab-pane .tab-header-background {
+    -fx-background-color: #00BCD4;
+}
+.jfx-tab-pane .tab-selected-line {
+    -fx-background-color: #fff;
+    -fx-stroke-width: 3pt;
+}
+
+.jfx-tab-pane .tab-header-area .jfx-rippler{
+    -jfx-rippler-fill: white;
+    -fx-cursor: hand;
+}
+.jfx-tab-pane .tab-selected-line{
+    -fx-stroke : RED;
+}
+
+/*
  * 	##	JFXPopup
  */
 
@@ -26,9 +56,13 @@
 	-fx-font-size: 16px;
 }
 
-.jfx-popup .button{
+.jfx-popup .jfx-button{
 	-fx-padding: 12 8 12 8;
-	-fx-cursor: hand;
+	-fx-border-radius: 0px;
+}
+
+.jfx-popup .jfx-button:hover{
+	-fx-background-color: #29B6F6;
 }
 
 /*
@@ -46,7 +80,7 @@
  */
  
  .tree-table-view{
-    -fx-tree-table-color: #03A9F4;
+    -fx-tree-table-color: #00BCD4;
     -fx-tree-table-rippler-color : rgba(255, 0, 0, 0.9);
     
     -fx-font-family: Verdana;
@@ -59,8 +93,8 @@
 }
 
 .costumer-table .tree-table-row-cell:hover{
-	-fx-background-color: #29B6F6 ;
-    -fx-table-cell-border-color: #29B6F6;
+	-fx-background-color: #4DD0E1 ;
+    -fx-table-cell-border-color: #4DD0E1;
 }
 
 .tree-table-view:focused .tree-table-row-cell:selected .tree-table-cell{

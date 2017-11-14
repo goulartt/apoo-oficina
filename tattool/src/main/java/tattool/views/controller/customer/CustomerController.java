@@ -1,4 +1,4 @@
-package tattool.views.controller.costumer;
+package tattool.views.controller.customer;
 
 import java.util.function.Predicate;
 
@@ -28,6 +28,7 @@ import javafx.scene.Node;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -35,7 +36,7 @@ import javafx.scene.text.Text;
 import javafx.util.Callback;
 //import tattool.domain.modelfx.UserFX;
 
-public class CostumerController {
+public class CustomerController {
 
     @FXML
     private JFXTreeTableView<Costumer> costumerTable;
@@ -60,7 +61,7 @@ public class CostumerController {
     @FXML
     void create(ActionEvent event){
     	try {
-    		FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/costumers/create-edit.fxml"));
+    		FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/customers/create-edit.fxml"));
     		BorderPane main       = (BorderPane) ((Node) event.getSource()).getScene().lookup("#main");
     		
     		viewLoader.setRoot(main);
@@ -120,7 +121,12 @@ public class CostumerController {
     	costumerTable.setRowFactory(table -> {
     		JFXTreeTableRow<Costumer> row = new JFXTreeTableRow<>();
     		
-    		row.setOnMouseClicked(event -> popup.show(row, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.LEFT, event.getX(), event.getY()));
+    		row.setOnMouseClicked(event -> {
+    			if(event.getButton().equals(MouseButton.SECONDARY))
+    			{
+    				popup.show(row, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.LEFT, event.getX(), event.getY());
+    			}
+    		});
     		
     		return row;
     	});
@@ -231,7 +237,7 @@ public class CostumerController {
     void edit()
     {
     	try {
-    		FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/costumers/create-edit.fxml"));
+    		FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/customers/create-edit.fxml"));
     		BorderPane main       = (BorderPane) costumerTable.getScene().lookup("#main");
     		
     		viewLoader.setRoot(main);
@@ -265,9 +271,6 @@ public class CostumerController {
     	
     	dialogContent.setHeading(new Text("Tem certeza que quer excluir este cliente?"));
     	dialogContent.setBody(new Text("Todos os dados deste cliente serão perdidos."));
-    	
-    	yes.setCursor(Cursor.HAND);
-    	no.setCursor(Cursor.HAND);
     	
 		yes.setOnAction(new EventHandler<ActionEvent>() {
 			@Override

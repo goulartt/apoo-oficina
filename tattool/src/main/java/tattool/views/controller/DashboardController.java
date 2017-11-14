@@ -49,11 +49,11 @@ public class DashboardController
     }
     
     @FXML
-    void costumers(ActionEvent event)
+    void customers(ActionEvent event)
     {
 		try
 		{
-		    FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/costumers/costumers.fxml"));
+		    FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/customers/customers.fxml"));
 		    
 		    viewLoader.setRoot(main);
 		    main.getChildren().clear();
