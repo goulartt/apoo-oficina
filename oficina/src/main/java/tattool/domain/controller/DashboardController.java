@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import tattool.domain.model.Customer;
 import tattool.domain.model.User;
 
 public class DashboardController implements Initializable {
@@ -29,6 +30,7 @@ public class DashboardController implements Initializable {
 	@FXML
 	ImageView myImageView = new ImageView();
 	public User user = new User();
+	public Customer customer = new Customer();
 
 	public void initialize(URL location, ResourceBundle resources) {
 		
@@ -101,6 +103,11 @@ public class DashboardController implements Initializable {
 
 	public void user(User usuario) {
 		this.user = usuario;
+
+	}
+	
+	public void customer(Customer cliente) {
+		this.customer = cliente;
 
 	}
 }

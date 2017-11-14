@@ -1,4 +1,4 @@
-package tattool.views.controller.User;
+package tattool.views.controller.user;
 
 import com.jfoenix.controls.JFXButton;
 

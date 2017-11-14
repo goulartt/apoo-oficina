@@ -1,5 +1,7 @@
 package tattool.views.controller.costumer;
 
+import java.util.Date;
+
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 
@@ -12,6 +14,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
+import tattool.domain.model.Address;
+import tattool.domain.model.Contact;
+import tattool.domain.model.Customer;
+import tattool.domain.model.User;
+import tattool.rest.consume.CustomerRest;
+import tattool.util.ConvertModelToFX;
 
 /*
  * 	??	A IDEIA E USAR ESTE CONTROLLER PARA O CREATE E EDIT DO CLIENTE
@@ -96,6 +106,8 @@ public class CreateEditCostumerController {
     @FXML
     private Label errorNeighborhood;
     
+    
+    private CustomerRest rest = new CustomerRest();
     public void initialize()
     {
     	scrollPane.setFitToWidth(true);
@@ -140,6 +152,17 @@ public class CreateEditCostumerController {
     
     void store()
     {
+    	Customer customer = new Customer();
+    	customer.setName(name.getText());
+    	customer.setCpf(cpf.getText());
+    	customer.getContact().setPhone(phone.getText());
+    	customer.getContact().setEmail(email.getText());
+    	System.out.println(name.getText());
+    	System.out.println(cpf.getText());
+    	System.out.println(phone.getText());
+    	System.out.println(email.getText());
+    	
+    	//rest.save(customer);
     	// REST SAVE
     }
     
@@ -161,8 +184,25 @@ public class CreateEditCostumerController {
     
     @FXML
     void store(ActionEvent event) {
-    	store();
-    }
+    
+    	
+    	
+    	
+    	/* private JFXTextField name;
+    
+	    
+	    private JFXTextField cpf;
+	    private JFXDatePicker birthdate;
+	    private JFXTextField email;
+	    private JFXTextField phone;
+	    private JFXTextField zipCode;
+	    private JFXTextField city;
+	    private JFXTextField state;
+	    private JFXTextField number;
+	    private JFXTextField street;
+	    private JFXTextField neighborhood;
+    */ 
+    	}
     
     @FXML
     void back(ActionEvent event) {
@@ -189,4 +229,27 @@ public class CreateEditCostumerController {
 		}
 	}
     
+	boolean validate()
+	{
+		boolean validate = true;
+		
+		if(name.getText().isEmpty())
+		{
+			errorName.setText("Insira um nome para o cliente");
+			errorName.setVisible(true);
+			validate = false;
+		}
+		
+		if(cpf.getText().isEmpty())
+		{
+			errorCpf.setText("Insira um CPF para o cliente");
+			errorCpf.setVisible(true);
+			validate = false;
+		}
+	
+	}
+
+	 
+	
+	
 }

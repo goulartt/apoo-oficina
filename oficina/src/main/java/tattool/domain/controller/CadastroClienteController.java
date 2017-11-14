@@ -89,12 +89,10 @@ public class CadastroClienteController implements Initializable{
 	public void voltar(ActionEvent event){
 		
 		try {
-			
-		    
 		    FXMLLoader loader = new FXMLLoader(DashboardController.class.getResource("/telas/Dashboard.fxml"));
 	        Parent root = (Parent) loader.load();
 	        DashboardController control = (DashboardController)loader.getController();
-	        control.user(customer);
+	        control.customer(customer);
 	        control.lblNome.setText(customer.getName());
 	        Scene scene = new Scene(root);
 	        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -127,7 +125,7 @@ public class CadastroClienteController implements Initializable{
 		lblErro.setText("");
 	}
 
-	public void user(User user) {
+	public void customer(Customer customer) {
 		this.customer = customer;
 		
 	}

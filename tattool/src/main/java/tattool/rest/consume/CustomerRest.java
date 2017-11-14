@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 import tattool.domain.model.Customer;
 import tattool.util.Constantes;
 
-public class ConsumerRest {
+public class CustomerRest {
 	private RestTemplate rest = new RestTemplate();
 
 	public Customer[] findAll() {
