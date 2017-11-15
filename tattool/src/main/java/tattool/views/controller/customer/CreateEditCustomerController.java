@@ -14,6 +14,8 @@ import javafx.scene.control.Tab;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import tattool.domain.model.Customer;
+import tattool.rest.consume.CustomerRest;
 
 /*
  * 	??	A IDEIA E USAR ESTE CONTROLLER PARA O CREATE E EDIT DO CLIENTE
@@ -104,6 +106,8 @@ public class CreateEditCustomerController {
     @FXML
     private Tab addressTab;
     
+    
+    private CustomerRest rest = new CustomerRest();
     public void initialize()
     {
     	loadValidationErrors();
@@ -122,65 +126,44 @@ public class CreateEditCustomerController {
     
     void store()
     {
-    	if(validate())
-    	{
-    		//REST SAVE
-    	}
+    	Customer customer = new Customer();
+    	customer.setName(name.getText());
+    	customer.setCpf(cpf.getText());
+    	customer.setBirthDate(birthdate.getValue());
+    	customer.getContact().setPhone(phone.getText());
+    	customer.getContact().setEmail(email.getText());
+    	customer.getAddress().setCity(city.getText());
+    	customer.getAddress().setState(state.getText());
+    	customer.getAddress().setNumber(number.getText());
+    	customer.getAddress().setStreet(street.getText());
+    	customer.getAddress().setNeighborhood(neighborhood.getText());
+    	customer.getAddress().setZipCode(Integer.parseInt(zipCode.getText()));
+ 
+    	
+    	
+    	rest.save(customer);
+    	/*
+  
+    	    @FXML
+    	    private JFXTextField zipCode;
+    	    
+    	    
+    	    @FXML
+    	    private JFXTextField number;
+    	    
+    	    @FXML
+    	    private JFXTextField street;
+    	    
+    	    @FXML
+    	    private JFXTextField neighborhood;
+    	    */
     }
     
     /*
      * 	##	VALIDACAO FORM
      */
     
-    boolean validate()
-    {
-    	boolean validate = true;
-    	boolean customer = false, contact = false, address = false;
-    	
-    	resetValidation();
-    	
-    	if(name.getText().isEmpty())
-    	{
-    		errorName.setText("Por favor, insira o nome do cliente");
-    		errorName.setVisible(true);
-    		validate = false;
-    		customer = true;
-    	}
-    	
-    	if(cpf.getText().isEmpty())
-    	{
-    		errorCpf.setText("Informe o CPF do cliente");
-    		errorCpf.setVisible(true);
-    		validate = false;
-    		customer = true;
-    	}
-    	
-    	if(email.getText().isEmpty() && phone.getText().isEmpty())
-    	{
-    		errorEmail.setText("Pelo menos uma forma de contato deve ser informada");
-    		errorEmail.setVisible(true);
-    		validate = false;
-    		contact = true;
-    	}
-    	
-    	if(zipCode.getText().isEmpty())
-    	{
-    		errorZipCode.setText("Por favor, informe o CEP do cliente");
-    		errorZipCode.setVisible(true);
-    		validate = false;
-    		address = true;
-    	}
-    	
-    	if(customer)
-    		customerTab.setGraphic(new ErrorIcon());
-    	if(contact)
-    		contactTab.setGraphic(new ErrorIcon());
-    	if(address)
-    		addressTab.setGraphic(new ErrorIcon());
-    	
-    	return validate;
-    }
-    
+   
     /*
      * 	##	VOLTAR
      */
@@ -200,7 +183,8 @@ public class CreateEditCustomerController {
     @FXML
     void store(ActionEvent event) {
     	store();
-    }
+
+    	}
     
     @FXML
     void back(ActionEvent event) {
@@ -231,6 +215,38 @@ public class CreateEditCustomerController {
 	 * 	##	VALIDATION ERRORS LABELS
 	 */
     
+	boolean validate()
+	{
+		boolean validate = true;
+		
+		if(name.getText().isEmpty())
+		{
+			errorName.setText("Insira um nome para o cliente");
+			errorName.setVisible(true);
+			validate = false;
+		}
+		
+		if(cpf.getText().isEmpty())
+		{
+			errorCpf.setText("Insira um CPF para o cliente");
+			errorCpf.setVisible(true);
+			validate = false;
+		}
+		
+		
+		if(birthdate.getValue() != null)
+		{
+			errorBirthdate.setText("Insira uma data de nascimento para o cliente");
+			errorBirthdate.setVisible(true);
+			validate = false;
+		}
+		
+		return validate;
+		
+	}
+	 
+	
+	
 	void loadValidationErrors()
 	{
 		errorName.managedProperty().bind(errorName.visibleProperty());

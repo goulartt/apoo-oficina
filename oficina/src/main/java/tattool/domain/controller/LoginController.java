@@ -23,6 +23,10 @@ public class LoginController {
 	@FXML TextField lblUsuario = new TextField();
 	@FXML Label lblErro = new Label();
 	@FXML PasswordField lblSenha = new PasswordField();
+
+	@FXML Label lblLoad = new Label();
+
+
 	public User usuario = new User();
 	private UserRest rest = new UserRest();
 	
@@ -31,7 +35,7 @@ public class LoginController {
 		rest.verificaAdmin();
 	}
 	
-	
+
 
 	@FXML
 	public void logar(ActionEvent event){

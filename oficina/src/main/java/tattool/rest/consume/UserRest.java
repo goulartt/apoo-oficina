@@ -24,12 +24,14 @@ public class UserRest {
 	
 	
 	public User[] findAllUsers() {
-		User [] u =  rest.getForObject(Constantes.Api.URL_API+"/users/", User[].class);
-		return u;
+
+		return rest.getForObject(Constantes.Api.URL_API+"/users/", User[].class);
+
 	}
 
 	
 	public User existeUsername(String usuario) {
+
 		String url = Constantes.Api.URL_API+"/users/verify/username";
 
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url)
@@ -55,8 +57,6 @@ public class UserRest {
 	public User save(User user) {
 		return rest.postForObject(Constantes.Api.URL_API+"/users", user, User.class);
 	}
-	
-	
 	
 	
 }
