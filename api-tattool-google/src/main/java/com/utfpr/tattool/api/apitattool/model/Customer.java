@@ -28,7 +28,7 @@ public class Customer {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address address;
 	
-	private char archived;
+	private Integer removed;
 	
 	public Integer getId() {
 		return id;
@@ -78,13 +78,15 @@ public class Customer {
 		this.address = address;
 	}
 
-	public char getArchived() {
-		return archived;
+	public Integer getRemoved() {
+		return removed;
 	}
 
-	public void setArchived(char archived) {
-		this.archived = archived;
+	public void setRemoved(Integer removed) {
+		this.removed = removed;
 	}
+
+	
 	
 	
 }

@@ -71,6 +71,7 @@ public class CustomerResource {
 		Address enderecoSalvo = addressRepository.save(customers.getAddress());
 		customers.setContact(contatoSalvo);
 		customers.setAddress(enderecoSalvo);
+		customers.setRemoved(0);
 		Customer customerSalva = customerRepository.save(customers);
 		publisher.publishEvent(new RecursoCriadoEvento(this, response, customerSalva.getId().longValue()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(customerSalva);

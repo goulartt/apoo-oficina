@@ -100,7 +100,7 @@ public class UserResource {
 	public HttpStatus start(){
 		User usuarioVerificado = userRepository.verificaAdmin();
 		if(usuarioVerificado == null){
-			userRepository.save(new User("Admin", "1", "Administrador", 1, 'N'));
+			userRepository.save(new User("Admin", "1", "Administrador", 1, 0));
 			return HttpStatus.CREATED;
 		}
 		return HttpStatus.OK;

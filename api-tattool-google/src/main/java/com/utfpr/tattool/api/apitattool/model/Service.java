@@ -1,35 +1,37 @@
 package com.utfpr.tattool.api.apitattool.model;
 
+import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
-public class Service {
+public class Service implements Serializable {
+
+	private static final long serialVersionUID = -5680202725613141522L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@Column(name="name_service")
 	private String nameService;
 	
 	@OneToMany
 	private List<Art> arts;
 	
-	@OneToMany
-	private List<Session> sessions;
-	
-	@ManyToOne
+	@OneToOne
 	private Customer customer;
 	
 	private Integer status;
 	
-	private char archived;
+	private Integer removed;
 
 	public Integer getId() {
 		return id;
@@ -55,14 +57,6 @@ public class Service {
 		this.arts = arts;
 	}
 
-	public List<Session> getSessions() {
-		return sessions;
-	}
-
-	public void setSessions(List<Session> sessions) {
-		this.sessions = sessions;
-	}
-
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -79,13 +73,14 @@ public class Service {
 		this.status = status;
 	}
 
-	public char getArchived() {
-		return archived;
+	public Integer getRemoved() {
+		return removed;
 	}
 
-	public void setArchived(char archived) {
-		this.archived = archived;
+	public void setRemoved(Integer removed) {
+		this.removed = removed;
 	}
+
 	
 	
 	

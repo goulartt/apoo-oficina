@@ -1,8 +1,10 @@
 package com.utfpr.tattool.api.apitattool.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.util.Calendar;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,19 +13,23 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Session {
+public class Session implements Serializable{
 	
+	private static final long serialVersionUID = -8843063860683914321L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date dateSession;
+	@Column(name="date_session")
+	private Calendar dateSession;
 	
 	private BigDecimal price;
 	
 	private Integer status;
 	
+	@Column(name="obs")
 	private String obs;
 	
 	
@@ -35,13 +41,6 @@ public class Session {
 		this.id = id;
 	}
 
-	public Date getDateSession() {
-		return dateSession;
-	}
-
-	public void setDateSession(Date dateSession) {
-		this.dateSession = dateSession;
-	}
 
 	public BigDecimal getPrice() {
 		return price;

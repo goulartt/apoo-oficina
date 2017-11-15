@@ -16,16 +16,16 @@ public class User {
 	private String senha;
 	private String nome;
 	private Integer role;
-	private char archived;
+	private Integer removed;
 	
 	public User() {
 	}
-	public User(String usuario, String senha, String nome, Integer role, char archived) {
+	public User(String usuario, String senha, String nome, Integer role,  Integer removed) {
 		this.usuario = usuario;
 		this.senha = senha;
 		this.nome = nome;
 		this.role = role;
-		this.archived = archived;
+		 this.removed = removed;
 	}
 	public Long getId() {
 		return id;
@@ -57,12 +57,11 @@ public class User {
 	public void setRole(Integer role) {
 		this.role = role;
 	}
-	public char getArchived() {
-		return archived;
+	public Integer getRemoved() {
+		return removed;
 	}
-	public void setArchived(char archived) {
-		this.archived = archived;
+	public void setRemoved(Integer removed) {
+		this.removed = removed;
 	}
-	
-	
+
 }
