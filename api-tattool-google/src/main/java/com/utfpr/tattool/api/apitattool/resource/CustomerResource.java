@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +20,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.utfpr.tattool.api.apitattool.event.RecursoCriadoEvento;
+import com.utfpr.tattool.api.apitattool.model.Address;
+import com.utfpr.tattool.api.apitattool.model.Contact;
 import com.utfpr.tattool.api.apitattool.model.Customer;
+import com.utfpr.tattool.api.apitattool.repository.AddressRepository;
+import com.utfpr.tattool.api.apitattool.repository.ContactRepository;
 import com.utfpr.tattool.api.apitattool.repository.CustomerRepository;
 import com.utfpr.tattool.api.apitattool.service.CustomerService;
 
@@ -40,6 +43,10 @@ public class CustomerResource {
 	
 	@Autowired
 	private CustomerRepository customerRepository;
+	@Autowired
+	private ContactRepository contactRepository;
+	@Autowired
+	private AddressRepository addressRepository;
 	
 	@Autowired
 	private CustomerService service;
@@ -59,10 +66,14 @@ public class CustomerResource {
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@ApiOperation(value = "Salvar novo cliente na API",response = Customer.class)
-	public ResponseEntity<Customer> save(@Valid @RequestBody Customer Customers, HttpServletResponse response) {
-		Customer CustomerSalva = customerRepository.save(Customers);
-		publisher.publishEvent(new RecursoCriadoEvento(this, response, CustomerSalva.getId().longValue()));
-		return ResponseEntity.status(HttpStatus.CREATED).body(CustomerSalva);
+	public ResponseEntity<Customer> save(@Valid @RequestBody Customer customers, HttpServletResponse response) {
+		Contact contatoSalvo = contactRepository.save(customers.getContact());
+		Address enderecoSalvo = addressRepository.save(customers.getAddress());
+		customers.setContact(contatoSalvo);
+		customers.setAddress(enderecoSalvo);
+		Customer customerSalva = customerRepository.save(customers);
+		publisher.publishEvent(new RecursoCriadoEvento(this, response, customerSalva.getId().longValue()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(customerSalva);
 	}
 
 	@GetMapping("/{codigo}")

@@ -2,7 +2,7 @@ package com.utfpr.tattool.api.apitattool.model;
 
 import java.util.Date;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,10 +22,10 @@ public class Customer {
 	@Temporal(TemporalType.DATE)
 	private Date birthDate;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Contact contact;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Address address;
 	
 	private char archived;
