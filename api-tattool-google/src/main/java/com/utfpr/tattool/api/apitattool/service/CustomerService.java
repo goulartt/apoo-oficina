@@ -15,12 +15,9 @@ import com.utfpr.tattool.api.apitattool.repository.CustomerRepository;
 @Service
 public class CustomerService {
 
-	@Autowired private CustomerRepository customerRepository;
-	@Autowired
-	private ContactRepository contactRepository;
-	@Autowired
-	private AddressRepository addressRepository;
-	
+	@Autowired 
+	private CustomerRepository customerRepository;
+
 	public Customer customerAtualiza(Integer codigo, Customer customer) {
 		Customer customerSalvo = customerRepository.findOne(codigo);
 		if(customerSalvo == null) {

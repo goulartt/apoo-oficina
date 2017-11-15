@@ -15,7 +15,7 @@ public class Service implements Serializable {
 	
 	private Customer customer;
 	
-	private Integer status;
+	private String status;
 	
 	private Integer removed;
 
@@ -51,11 +51,11 @@ public class Service implements Serializable {
 		this.customer = customer;
 	}
 
-	public Integer getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 

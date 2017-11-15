@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Calendar;
 
+
 public class Session implements Serializable{
 	
 	private static final long serialVersionUID = -8843063860683914321L;
@@ -14,10 +15,11 @@ public class Session implements Serializable{
 	
 	private BigDecimal price;
 	
-	private Integer status;
+	private String status;
 	
 	private String obs;
 	
+	private Service service;
 	
 	public Integer getId() {
 		return id;
@@ -36,11 +38,11 @@ public class Session implements Serializable{
 		this.price = price;
 	}
 
-	public Integer getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
@@ -52,6 +54,23 @@ public class Session implements Serializable{
 		this.obs = obs;
 	}
 
+	public Calendar getDateSession() {
+		return dateSession;
+	}
+
+	public void setDateSession(Calendar dateSession) {
+		this.dateSession = dateSession;
+	}
+
+	public Service getService() {
+		return service;
+	}
+
+	public void setService(Service service) {
+		this.service = service;
+	}
+	
+	
 
 	
 	

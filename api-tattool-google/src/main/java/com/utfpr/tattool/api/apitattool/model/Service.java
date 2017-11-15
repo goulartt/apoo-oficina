@@ -3,11 +3,15 @@ package com.utfpr.tattool.api.apitattool.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -23,13 +27,15 @@ public class Service implements Serializable {
 	@Column(name="name_service")
 	private String nameService;
 	
-	@OneToMany
+	@ManyToMany
+	@JoinTable(name = "service_has_art", joinColumns = @JoinColumn(name = "service_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "art_id_art", referencedColumnName = "id_art"))
 	private List<Art> arts;
 	
 	@OneToOne
+	@JoinColumn(name = "customer_id", unique=true)
 	private Customer customer;
 	
-	private Integer status;
+	private String status;
 	
 	private Integer removed;
 
@@ -65,11 +71,11 @@ public class Service implements Serializable {
 		this.customer = customer;
 	}
 
-	public Integer getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 

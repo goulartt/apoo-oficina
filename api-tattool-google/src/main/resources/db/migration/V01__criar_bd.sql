@@ -128,10 +128,10 @@ CREATE TABLE IF NOT EXISTS `oficina`.`service` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `removed` INT NOT NULL,
   `name_service` VARCHAR(255) NOT NULL,
-  `status` INT(11) NULL DEFAULT NULL,
-  `art_id_art` INT NOT NULL,
+  `status` VARCHAR(20) NULL DEFAULT NULL,
+  `art_id_art` INT(11) DEFAULT NULL,
   `customer_id` INT(11) NOT NULL,
-  PRIMARY KEY (`id`, `art_id_art`),
+  PRIMARY KEY (`id`),
   INDEX `fk_service_art1_idx` (`art_id_art` ASC),
   INDEX `fk_service_customer1_idx` (`customer_id` ASC),
   CONSTRAINT `fk_service_art1`
@@ -156,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `oficina`.`session` (
   `date_session` DATETIME NULL DEFAULT NULL,
   `obs` VARCHAR(255) NULL DEFAULT NULL,
   `price` DECIMAL(19,2) NULL DEFAULT NULL,
-  `status` INT(11) NULL DEFAULT NULL,
+  `status` VARCHAR(20) NULL DEFAULT NULL,
   `service_id` INT(11) NOT NULL,
   `removed` INT NULL,
   PRIMARY KEY (`id`),
@@ -185,6 +185,25 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
 
+
+CREATE TABLE IF NOT EXISTS `oficina`.`service_has_art` (
+  `service_id` INT(11) NOT NULL,
+  `art_id_art` INT NOT NULL,
+  PRIMARY KEY (`service_id`, `art_id_art`),
+  INDEX `fk_service_has_art_art1_idx` (`art_id_art` ASC),
+  INDEX `fk_service_has_art_service1_idx` (`service_id` ASC),
+  CONSTRAINT `fk_service_has_art_service1`
+    FOREIGN KEY (`service_id`)
+    REFERENCES `oficina`.`service` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_service_has_art_art1`
+    FOREIGN KEY (`art_id_art`)
+    REFERENCES `oficina`.`art` (`id_art`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
