@@ -129,15 +129,34 @@ public class CreateEditCustomerController {
     	Customer customer = new Customer();
     	customer.setName(name.getText());
     	customer.setCpf(cpf.getText());
+    	customer.setBirthDate(birthdate.getValue());
     	customer.getContact().setPhone(phone.getText());
     	customer.getContact().setEmail(email.getText());
-    	System.out.println(name.getText());
-    	System.out.println(cpf.getText());
-    	System.out.println(phone.getText());
-    	System.out.println(email.getText());
+    	customer.getAddress().setCity(city.getText());
+    	customer.getAddress().setState(state.getText());
+    	customer.getAddress().setNumber(number.getText());
+    	customer.getAddress().setStreet(street.getText());
+    	customer.getAddress().setNeighborhood(neighborhood.getText());
+    	customer.getAddress().setZipCode(Integer.parseInt(zipCode.getText()));
+ 
     	
-    	//rest.save(customer);
-
+    	
+    	rest.save(customer);
+    	/*
+  
+    	    @FXML
+    	    private JFXTextField zipCode;
+    	    
+    	    
+    	    @FXML
+    	    private JFXTextField number;
+    	    
+    	    @FXML
+    	    private JFXTextField street;
+    	    
+    	    @FXML
+    	    private JFXTextField neighborhood;
+    	    */
     }
     
     /*
@@ -163,24 +182,8 @@ public class CreateEditCustomerController {
     
     @FXML
     void store(ActionEvent event) {
-    
-    	
-    	
-    	
-    	/* private JFXTextField name;
-    
-	    
-	    private JFXTextField cpf;
-	    private JFXDatePicker birthdate;
-	    private JFXTextField email;
-	    private JFXTextField phone;
-	    private JFXTextField zipCode;
-	    private JFXTextField city;
-	    private JFXTextField state;
-	    private JFXTextField number;
-	    private JFXTextField street;
-	    private JFXTextField neighborhood;
-    */ 
+    	store();
+
     	}
     
     @FXML
@@ -229,9 +232,18 @@ public class CreateEditCustomerController {
 			errorCpf.setVisible(true);
 			validate = false;
 		}
+		
+		
+		if(birthdate.getValue() != null)
+		{
+			errorBirthdate.setText("Insira uma data de nascimento para o cliente");
+			errorBirthdate.setVisible(true);
+			validate = false;
+		}
+		
 		return validate;
+		
 	}
-
 	 
 	
 	

@@ -9,6 +9,17 @@ public class Address {
 	private Integer zipCode;
 	private String city;
 	private String state;
+	
+	public Address() {
+		super();
+		this.id = 0;
+		this.street = "";
+		this.neighborhood = "";
+		this.number = "";
+		this.zipCode = 0;
+		this.city = "";
+		this.state = "";
+	}
 	public Integer getId() {
 		return id;
 	}

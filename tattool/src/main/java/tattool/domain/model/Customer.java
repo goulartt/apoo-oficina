@@ -1,5 +1,6 @@
 package tattool.domain.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Customer {
@@ -8,14 +9,25 @@ public class Customer {
 	private String cpf;
 	private String name;
 	
-	private Date birthDate;
+	private LocalDate birthDate;
 	
 	private Contact contact;
 	
 	private Address address;
 	
-	private char archived;
+	private char[] archived;
 	
+	public Customer() {
+		super();
+		this.id = 0;
+		this.cpf = "";
+		this.name = "";
+		this.birthDate = null;
+		this.contact = new Contact();
+		this.address = new Address();
+		this.archived = new char['N'];
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -40,11 +52,11 @@ public class Customer {
 		this.name = name;
 	}
 
-	public Date getBirthDate() {
+	public LocalDate getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
 	}
 
@@ -64,11 +76,11 @@ public class Customer {
 		this.address = address;
 	}
 
-	public char getArchived() {
+	public char[] getArchived() {
 		return archived;
 	}
 
-	public void setArchived(char archived) {
+	public void setArchived(char[] archived) {
 		this.archived = archived;
 	}
 	
