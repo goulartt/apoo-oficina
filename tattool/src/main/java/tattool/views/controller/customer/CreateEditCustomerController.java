@@ -16,6 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import tattool.domain.model.Customer;
 import tattool.rest.consume.CustomerRest;
+import tattool.util.DateUtil;
 
 /*
  * 	??	A IDEIA E USAR ESTE CONTROLLER PARA O CREATE E EDIT DO CLIENTE
@@ -129,7 +130,7 @@ public class CreateEditCustomerController {
     	Customer customer = new Customer();
     	customer.setName(name.getText());
     	customer.setCpf(cpf.getText());
-    	customer.setBirthDate(birthdate.getValue());
+    	customer.setBirthDate(DateUtil.asDate(birthdate.getValue()));
     	customer.getContact().setPhone(phone.getText());
     	customer.getContact().setEmail(email.getText());
     	customer.getAddress().setCity(city.getText());

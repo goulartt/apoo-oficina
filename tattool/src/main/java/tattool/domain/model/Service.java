@@ -1,8 +1,11 @@
 package tattool.domain.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Service {
+public class Service implements Serializable {
+
+	private static final long serialVersionUID = -5680202725613141522L;
 
 	private Integer id;
 	
@@ -10,13 +13,11 @@ public class Service {
 	
 	private List<Art> arts;
 	
-	private List<Session> sessions;
-	
 	private Customer customer;
 	
 	private Integer status;
 	
-	private char archived;
+	private Integer removed;
 
 	public Integer getId() {
 		return id;
@@ -42,14 +43,6 @@ public class Service {
 		this.arts = arts;
 	}
 
-	public List<Session> getSessions() {
-		return sessions;
-	}
-
-	public void setSessions(List<Session> sessions) {
-		this.sessions = sessions;
-	}
-
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -66,13 +59,14 @@ public class Service {
 		this.status = status;
 	}
 
-	public char getArchived() {
-		return archived;
+	public Integer getRemoved() {
+		return removed;
 	}
 
-	public void setArchived(char archived) {
-		this.archived = archived;
+	public void setRemoved(Integer removed) {
+		this.removed = removed;
 	}
+
 	
 	
 	

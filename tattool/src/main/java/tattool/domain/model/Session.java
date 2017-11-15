@@ -1,13 +1,16 @@
 package tattool.domain.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.util.Calendar;
 
-public class Session {
+public class Session implements Serializable{
 	
+	private static final long serialVersionUID = -8843063860683914321L;
+
 	private Integer id;
 	
-	private Date dateSession;
+	private Calendar dateSession;
 	
 	private BigDecimal price;
 	
@@ -24,13 +27,6 @@ public class Session {
 		this.id = id;
 	}
 
-	public Date getDateSession() {
-		return dateSession;
-	}
-
-	public void setDateSession(Date dateSession) {
-		this.dateSession = dateSession;
-	}
 
 	public BigDecimal getPrice() {
 		return price;

@@ -99,7 +99,7 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `oficina`.`customer` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `birth_date` DATE NULL,
-  `cpf` INT(11) NOT NULL,
+  `cpf` VARCHAR(22) NOT NULL,
   `name` VARCHAR(255) NOT NULL,
   `removed` INT NULL,
   `contact_id` INT(11) NOT NULL,
