@@ -10,6 +10,8 @@ import com.jfoenix.controls.events.JFXDialogEvent;
 
 import de.jensd.fx.glyphs.octicons.OctIconView;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -24,6 +26,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import tattool.domain.model.Cep;
 import tattool.domain.model.Customer;
 import tattool.rest.consume.CustomerRest;
 import tattool.util.DateUtil;
@@ -130,7 +133,19 @@ public class CreateEditCustomerController {
 	            name.requestFocus();
 	        }
 	    });
-    	
+    	zipCode.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if(newValue.length() == 8) {
+					Cep cep = rest.buscaCep(newValue);
+					street.setText(cep.getLogradouro());
+					state.setText(cep.getUf());
+					city.setText(cep.getLocalidade());
+					neighborhood.setText(cep.getBairro());
+					
+				}
+			}
+		});
     }
     
     /*

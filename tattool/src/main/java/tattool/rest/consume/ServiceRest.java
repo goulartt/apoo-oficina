@@ -18,18 +18,18 @@ public class ServiceRest {
 	private RestTemplate rest = new RestTemplate();
 
 	public Service[] findAll() {
-		String url = Constantes.Api.URL_DEV + "/services";
+		String url = Constantes.Api.URL_API + "/services";
 		rest.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 		return rest.getForObject(url, Service[].class);
 
 	}
 
 	public Service save(Service customer) {
-		return rest.postForObject(Constantes.Api.URL_DEV + "/services", customer, Service.class);
+		return rest.postForObject(Constantes.Api.URL_API + "/services", customer, Service.class);
 	}
 	
 	public void deleteService(Integer id) {
-		String url = Constantes.Api.URL_DEV+"/services/{codigo}";
+		String url = Constantes.Api.URL_API+"/services/{codigo}";
 		
 		Map<String, Integer> params = new HashMap<String, Integer>();
 	    params.put("codigo", id);
@@ -42,7 +42,7 @@ public class ServiceRest {
 	}
 	
 	public void atualizaService(Integer id, Service customer) {
-		String url = Constantes.Api.URL_DEV+"/services/"+id;
+		String url = Constantes.Api.URL_API+"/services/"+id;
 		HttpEntity<Service> entity = new HttpEntity<Service>(customer);
 		rest.exchange(url, HttpMethod.PUT, entity, Service.class);
 	}

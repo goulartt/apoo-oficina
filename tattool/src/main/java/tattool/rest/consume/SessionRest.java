@@ -20,18 +20,18 @@ public class SessionRest {
 	private RestTemplate rest = new RestTemplate();
 
 	public Session[] findAll() {
-		String url = Constantes.Api.URL_DEV + "/sessions";
+		String url = Constantes.Api.URL_API + "/sessions";
 		rest.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 		return rest.getForObject(url, Session[].class);
 
 	}
 
 	public Session save(Session customer) {
-		return rest.postForObject(Constantes.Api.URL_DEV + "/sessions", customer, Session.class);
+		return rest.postForObject(Constantes.Api.URL_API + "/sessions", customer, Session.class);
 	}
 	
 	public void deleteSession(Integer id) {
-		String url = Constantes.Api.URL_DEV+"/sessions/{codigo}";
+		String url = Constantes.Api.URL_API+"/sessions/{codigo}";
 		
 		Map<String, Integer> params = new HashMap<String, Integer>();
 	    params.put("codigo", id);
@@ -44,7 +44,7 @@ public class SessionRest {
 	}
 	
 	public void atualizaSession(Integer id, Session customer) {
-		String url = Constantes.Api.URL_DEV+"/sessions/"+id;
+		String url = Constantes.Api.URL_API+"/sessions/"+id;
 		HttpEntity<Session> entity = new HttpEntity<Session>(customer);
 		rest.exchange(url, HttpMethod.PUT, entity, Session.class);
 	}
