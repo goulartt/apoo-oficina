@@ -1,5 +1,6 @@
 package tattool.views.controller.customer;
 
+import java.io.IOException;
 import java.util.function.Predicate;
 
 import com.jfoenix.controls.JFXButton;
@@ -13,6 +14,7 @@ import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import de.jensd.fx.glyphs.octicons.OctIconView;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
@@ -29,6 +31,7 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -38,12 +41,15 @@ import javafx.util.Callback;
 public class CustomerController {
 
     @FXML
-    private JFXTreeTableView<Costumer> costumerTable;
+    private JFXTreeTableView<Costumer> customerTable;
 
     @FXML
     private JFXTextField search;
     
     JFXPopup popup = new JFXPopup();
+    
+    @FXML
+    private OctIconView closeButton;
     
     public void initialize()
     {
@@ -85,9 +91,9 @@ public class CustomerController {
     	
     	//Colunas com largura responsiva
     	
-    	cpf.prefWidthProperty().bind(costumerTable.widthProperty().multiply(0.3));
-    	name.prefWidthProperty().bind(costumerTable.widthProperty().multiply(0.3));
-    	contact.prefWidthProperty().bind(costumerTable.widthProperty().multiply(0.39));	//0.39 -> Gambiarra pra coluna nao atravessar a TableView
+    	cpf.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.3));
+    	name.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.3));
+    	contact.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.39));	//0.39 -> Gambiarra pra coluna nao atravessar a TableView
     	
     	cpf.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Costumer, String>, ObservableValue<String>>()
     	{
@@ -114,10 +120,10 @@ public class CustomerController {
 			}
     	});
     	
-    	costumerTable.getColumns().setAll(cpf, name, contact);
+    	customerTable.getColumns().setAll(cpf, name, contact);
     	
     	//Popup click event
-    	costumerTable.setRowFactory(table -> {
+    	customerTable.setRowFactory(table -> {
     		JFXTreeTableRow<Costumer> row = new JFXTreeTableRow<>();
     		
     		row.setOnMouseClicked(event -> {
@@ -151,8 +157,8 @@ public class CustomerController {
     	
     	final TreeItem<Costumer> root = new RecursiveTreeItem<Costumer>(costumers, RecursiveTreeObject::getChildren);
     	
-    	costumerTable.setRoot(root);
-    	costumerTable.setShowRoot(false);
+    	customerTable.setRoot(root);
+    	customerTable.setShowRoot(false);
     }
     
     /*
@@ -167,7 +173,7 @@ public class CustomerController {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
 			{
-				costumerTable.setPredicate(new Predicate<TreeItem<Costumer>>()
+				customerTable.setPredicate(new Predicate<TreeItem<Costumer>>()
 				{
 					@Override
 					public boolean test(TreeItem<Costumer> user)
@@ -199,7 +205,7 @@ public class CustomerController {
     	
     	view.setOnMouseClicked(event -> {
     		popup.hide();
-    		view();
+    		view((StackPane) customerTable.getScene().lookup("#mainStack"));
     	});
     	edit.setOnMouseClicked(event -> {
     		popup.hide();
@@ -224,9 +230,17 @@ public class CustomerController {
      * 	##	VISUALIZAR CLIENTE
      */
     
-    void view()
-    {
-    	// view.fxml
+    void view(StackPane mainStack) {
+		try {
+			FXMLLoader customerLoader = new FXMLLoader(getClass().getResource("/views/customers/show-customer.fxml"));
+			Region customerContent = customerLoader.load();
+			JFXDialog customerModal = new JFXDialog(mainStack, customerContent, JFXDialog.DialogTransition.CENTER, false);
+			OctIconView closeButton = (OctIconView) mainStack.getScene().lookup("#closeButton");
+    		closeButton.setOnMouseClicked(event -> customerModal.close());
+			customerModal.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
     
     /*
@@ -237,7 +251,7 @@ public class CustomerController {
     {
     	try {
     		FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/customers/create-edit.fxml"));
-    		BorderPane main       = (BorderPane) costumerTable.getScene().lookup("#main");
+    		BorderPane main       = (BorderPane) customerTable.getScene().lookup("#main");
     		
     		viewLoader.setRoot(main);
     		main.getChildren().clear();
@@ -254,7 +268,7 @@ public class CustomerController {
     
     void delete()
     {
-    	loadDialogDelete((StackPane) costumerTable.getScene().lookup("#mainStack"));
+    	loadDialogDelete((StackPane) customerTable.getScene().lookup("#mainStack"));
     }
     
     /*

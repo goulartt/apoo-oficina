@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="526.0" prefWidth="804.0" stylesheets="@../../css/application.css" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.customer.CreateEditCustomerController">
+<fx:root prefHeight="526.0" prefWidth="804.0" stylesheets="@../../css/application.css" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.customer.CreateEditCustomerController">
    <padding>
       <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
    </padding>
@@ -46,7 +46,7 @@
       </BorderPane>
    </top>
    <center>
-      <JFXTabPane BorderPane.alignment="CENTER">
+      <JFXTabPane fx:id="tabPane" BorderPane.alignment="CENTER">
          <tabs>
             <Tab fx:id="customerTab" text="Cliente">
               <content>
@@ -54,7 +54,7 @@
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <JFXTextField fx:id="name" focusColor="#26c6da" labelFloat="true" promptText="Nome" unFocusColor="#212121">
+                              <JFXTextField fx:id="name" focusColor="#26c6da" labelFloat="true" onKeyPressed="#keyPressed" promptText="Nome" unFocusColor="#212121">
                                  <font>
                                     <Font name="Verdana" size="16.0" />
                                  </font>
@@ -64,7 +64,7 @@
                               </JFXTextField>
                               <Label fx:id="errorName" graphicTextGap="10.0" textFill="#e53935">
                                  <font>
-                                    <Font name="Verdana" size="16.0" />
+                                    <Font name="Verdana" size="14.0" />
                                  </font>
                                  <graphic>
                                     <OctIconView fill="#e53935" glyphName="ISSUE_OPENED" size="18" />
@@ -82,16 +82,19 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <JFXDatePicker fx:id="birthdate" defaultColor="#26c6da" editable="false" prefHeight="32.0" prefWidth="834.0" style="-fx-font-family: Verdana; -fx-font-size: 16px;">
+                                          <JFXTextField fx:id="cpf" focusColor="#26c6da" labelFloat="true" onKeyPressed="#keyPressed" promptText="CPF" unFocusColor="#212121">
+                                             <font>
+                                                <Font name="Verdana" size="16.0" />
+                                             </font>
                                              <VBox.margin>
                                                 <Insets top="32.0" />
                                              </VBox.margin>
-                                          </JFXDatePicker>
-                                          <Label fx:id="errorBirthdate" graphicTextGap="10.0" textFill="#e53935">
+                                          </JFXTextField>
+                                          <Label fx:id="errorCpf" graphicTextGap="10.0" textFill="#e53935">
                                              <font>
-                                                <Font name="Verdana" size="16.0" />
+                                                <Font name="Verdana" size="14.0" />
                                              </font>
                                              <graphic>
                                                 <OctIconView fill="#e53935" glyphName="ISSUE_OPENED" size="18" />
@@ -102,19 +105,16 @@
                                           </Label>
                                        </children>
                                     </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                    <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                                        <children>
-                                          <JFXTextField fx:id="cpf" focusColor="#26c6da" labelFloat="true" promptText="CPF" unFocusColor="#212121">
-                                             <font>
-                                                <Font name="Verdana" size="16.0" />
-                                             </font>
+                                          <JFXDatePicker fx:id="birthdate" defaultColor="#26c6da" editable="false" prefHeight="32.0" prefWidth="834.0" style="-fx-font-family: Verdana; -fx-font-size: 16px;">
                                              <VBox.margin>
                                                 <Insets top="32.0" />
                                              </VBox.margin>
-                                          </JFXTextField>
-                                          <Label fx:id="errorCpf" graphicTextGap="10.0" textFill="#e53935">
+                                          </JFXDatePicker>
+                                          <Label fx:id="errorBirthdate" graphicTextGap="10.0" textFill="#e53935">
                                              <font>
-                                                <Font name="Verdana" size="16.0" />
+                                                <Font name="Verdana" size="14.0" />
                                              </font>
                                              <graphic>
                                                 <OctIconView fill="#e53935" glyphName="ISSUE_OPENED" size="18" />
@@ -145,7 +145,7 @@
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <JFXTextField fx:id="email" focusColor="#26c6da" labelFloat="true" promptText="E-mail" unFocusColor="#212121">
+                              <JFXTextField fx:id="email" focusColor="#26c6da" labelFloat="true" onKeyPressed="#keyPressed" promptText="E-mail" unFocusColor="#212121">
                                  <font>
                                     <Font name="Verdana" size="16.0" />
                                  </font>
@@ -155,7 +155,7 @@
                               </JFXTextField>
                               <Label fx:id="errorEmail" graphicTextGap="10.0" textFill="#e53935">
                                  <font>
-                                    <Font name="Verdana" size="16.0" />
+                                    <Font name="Verdana" size="14.0" />
                                  </font>
                                  <graphic>
                                     <OctIconView fill="#e53935" glyphName="ISSUE_OPENED" size="18" />
@@ -164,7 +164,7 @@
                                     <Insets bottom="-10.0" top="16.0" />
                                  </padding>
                               </Label>
-                              <JFXTextField fx:id="phone" focusColor="#26c6da" labelFloat="true" layoutX="10.0" layoutY="42.0" promptText="Telefone" unFocusColor="#212121">
+                              <JFXTextField fx:id="phone" focusColor="#26c6da" labelFloat="true" layoutX="10.0" layoutY="42.0" onKeyPressed="#keyPressed" promptText="Telefone" unFocusColor="#212121">
                                  <font>
                                     <Font name="Verdana" size="16.0" />
                                  </font>
@@ -174,7 +174,7 @@
                               </JFXTextField>
                               <Label fx:id="errorPhone" graphicTextGap="10.0" textFill="#e53935">
                                  <font>
-                                    <Font name="Verdana" size="16.0" />
+                                    <Font name="Verdana" size="14.0" />
                                  </font>
                                  <graphic>
                                     <OctIconView fill="#e53935" glyphName="ISSUE_OPENED" size="18" />
@@ -201,7 +201,7 @@
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <JFXTextField fx:id="zipCode" focusColor="#26c6da" labelFloat="true" promptText="CEP" unFocusColor="#212121">
+                              <JFXTextField fx:id="zipCode" focusColor="#26c6da" labelFloat="true" onKeyPressed="#keyPressed" promptText="CEP" unFocusColor="#212121">
                                  <font>
                                     <Font name="Verdana" size="16.0" />
                                  </font>
@@ -211,7 +211,7 @@
                               </JFXTextField>
                               <Label fx:id="errorZipCode" graphicTextGap="10.0" textFill="#e53935">
                                  <font>
-                                    <Font name="Verdana" size="16.0" />
+                                    <Font name="Verdana" size="14.0" />
                                  </font>
                                  <graphic>
                                     <OctIconView fill="#e53935" glyphName="ISSUE_OPENED" size="18" />
@@ -232,7 +232,7 @@
                                  <children>
                                     <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <JFXTextField fx:id="street" focusColor="#26c6da" labelFloat="true" promptText="Rua" unFocusColor="#212121">
+                                          <JFXTextField fx:id="street" focusColor="#26c6da" labelFloat="true" onKeyPressed="#keyPressed" promptText="Rua" unFocusColor="#212121">
                                              <font>
                                                 <Font name="Verdana" size="16.0" />
                                              </font>
@@ -242,7 +242,7 @@
                                           </JFXTextField>
                                           <Label fx:id="errorStreet" graphicTextGap="10.0" textFill="#e53935">
                                              <font>
-                                                <Font name="Verdana" size="16.0" />
+                                                <Font name="Verdana" size="14.0" />
                                              </font>
                                              <graphic>
                                                 <OctIconView fill="#e53935" glyphName="ISSUE_OPENED" size="18" />
@@ -255,7 +255,7 @@
                                     </VBox>
                                     <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                                        <children>
-                                          <JFXTextField fx:id="number" focusColor="#26c6da" labelFloat="true" promptText="Número" unFocusColor="#212121">
+                                          <JFXTextField fx:id="number" focusColor="#26c6da" labelFloat="true" onKeyPressed="#keyPressed" promptText="Número" unFocusColor="#212121">
                                              <font>
                                                 <Font name="Verdana" size="16.0" />
                                              </font>
@@ -265,7 +265,7 @@
                                           </JFXTextField>
                                           <Label fx:id="errorNumber" graphicTextGap="10.0" textFill="#e53935">
                                              <font>
-                                                <Font name="Verdana" size="16.0" />
+                                                <Font name="Verdana" size="14.0" />
                                              </font>
                                              <graphic>
                                                 <OctIconView fill="#e53935" glyphName="ISSUE_OPENED" size="18" />
@@ -287,7 +287,7 @@
                                        <children>
                                           <VBox prefHeight="200.0" prefWidth="100.0">
                                              <children>
-                                                <JFXTextField fx:id="city" focusColor="#26c6da" labelFloat="true" promptText="Cidade" unFocusColor="#212121">
+                                                <JFXTextField fx:id="city" focusColor="#26c6da" labelFloat="true" onKeyPressed="#keyPressed" promptText="Cidade" unFocusColor="#212121">
                                                    <font>
                                                       <Font name="Verdana" size="16.0" />
                                                    </font>
@@ -297,7 +297,7 @@
                                                 </JFXTextField>
                                                 <Label fx:id="errorCity" graphicTextGap="10.0" textFill="#e53935">
                                                    <font>
-                                                      <Font name="Verdana" size="16.0" />
+                                                      <Font name="Verdana" size="14.0" />
                                                    </font>
                                                    <graphic>
                                                       <OctIconView fill="#e53935" glyphName="ISSUE_OPENED" size="18" />
@@ -310,7 +310,7 @@
                                           </VBox>
                                           <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                                              <children>
-                                                <JFXTextField fx:id="state" focusColor="#26c6da" labelFloat="true" promptText="Estado" unFocusColor="#212121">
+                                                <JFXTextField fx:id="state" focusColor="#26c6da" labelFloat="true" onKeyPressed="#keyPressed" promptText="Estado" unFocusColor="#212121">
                                                    <font>
                                                       <Font name="Verdana" size="16.0" />
                                                    </font>
@@ -320,7 +320,7 @@
                                                 </JFXTextField>
                                                 <Label fx:id="errorState" graphicTextGap="10.0" textFill="#e53935">
                                                    <font>
-                                                      <Font name="Verdana" size="16.0" />
+                                                      <Font name="Verdana" size="14.0" />
                                                    </font>
                                                    <graphic>
                                                       <OctIconView fill="#e53935" glyphName="ISSUE_OPENED" size="18" />
@@ -335,7 +335,7 @@
                                     </GridPane>
                                     <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <children>
-                                          <JFXTextField fx:id="neighborhood" focusColor="#26c6da" labelFloat="true" promptText="Bairro" unFocusColor="#212121">
+                                          <JFXTextField fx:id="neighborhood" focusColor="#26c6da" labelFloat="true" onKeyPressed="#keyPressed" promptText="Bairro" unFocusColor="#212121">
                                              <font>
                                                 <Font name="Verdana" size="16.0" />
                                              </font>
@@ -345,7 +345,7 @@
                                           </JFXTextField>
                                           <Label fx:id="errorNeighborhood" graphicTextGap="10.0" textFill="#e53935">
                                              <font>
-                                                <Font name="Verdana" size="16.0" />
+                                                <Font name="Verdana" size="14.0" />
                                              </font>
                                              <graphic>
                                                 <OctIconView fill="#e53935" glyphName="ISSUE_OPENED" size="18" />

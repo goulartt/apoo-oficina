@@ -75,6 +75,18 @@
 	-fx-font-wheight: 500;
 }
 
+.jfx-dialog .jfx-button{
+	-fx-cursor: hand;
+}
+
+.jfx-dialog .jfx-button:hover{
+	-fx-background-color: #ECEFF1;
+}
+
+.close-button:hover{
+	-fx-fill: #ECEFF1;
+}
+
 /*
  * 	##	JFXTreeTableView Style
  */
