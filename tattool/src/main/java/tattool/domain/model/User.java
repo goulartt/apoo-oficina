@@ -8,7 +8,7 @@ public class User {
 	private String senha;
 	private String nome;
 	private Integer role;
-	private char archived;
+	private Integer removed;
 	
 	public User() {
 	}
@@ -17,6 +17,7 @@ public class User {
 		this.senha = senha;
 		this.nome = nome;
 		this.role = role;
+		this.removed = 0;
 	}
 	public Integer getId() {
 		return id;
@@ -48,12 +49,13 @@ public class User {
 	public void setRole(Integer role) {
 		this.role = role;
 	}
-	public char getArchived() {
-		return archived;
+	public Integer getRemoved() {
+		return removed;
 	}
-	public void setArchived(char archived) {
-		this.archived = archived;
+	public void setRemoved(Integer removed) {
+		this.removed = removed;
 	}
+	
 	
 	
 }

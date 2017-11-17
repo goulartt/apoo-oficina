@@ -111,7 +111,7 @@ public class LoginController implements Initializable {
 					Scene scene               = new Scene(new JFXDecorator(stage, templateLoader.load()), 1032, 612);
 					FXMLLoader mainLoader     = new FXMLLoader(getClass().getResource("/views/home.fxml"));
 					DashboardController control = (DashboardController) templateLoader.getController();
-					if(user.getRole() != 1) control.btnUsers.setManaged(false);
+					if(user.getRole() != 1) control.btnUsers.setVisible(false);
 					mainLoader.setRoot(templateLoader.getNamespace().get("main"));
 					mainLoader.load();
 					
