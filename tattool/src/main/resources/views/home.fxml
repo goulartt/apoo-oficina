@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="804.0" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.HomeController">
+<fx:root minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="804.0" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.HomeController">
    <padding>
       <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
    </padding>
@@ -30,7 +30,7 @@
                         <Font name="Verdana" size="16.0" />
                      </font>
                   </Label>
-                  <Label text="9 de Setembro, 2017." fx:id="lblData">
+                  <Label fx:id="lblData" text="9 de Setembro, 2017.">
                      <font>
                         <Font name="Verdana" size="12.0" />
                      </font>
@@ -44,7 +44,7 @@
          <right>
             <HBox alignment="CENTER_RIGHT" prefHeight="79.0" prefWidth="400.0" spacing="16.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton contentDisplay="TOP" graphicTextGap="2.0" prefHeight="65.0" prefWidth="150.0" style="-fx-background-color: #FFCA28;" text="Novo Serviço" textFill="WHITE">
+                  <JFXButton contentDisplay="TOP" graphicTextGap="2.0" onAction="#createService" prefHeight="65.0" prefWidth="150.0" style="-fx-background-color: #FFCA28;" text="Novo Serviço" textFill="WHITE">
                      <font>
                         <Font name="Verdana" size="14.0" />
                      </font>
@@ -68,7 +68,7 @@
                         </Label>
                      </graphic>
                   </JFXButton>
-                  <JFXButton contentDisplay="TOP" graphicTextGap="2.0" prefHeight="65.0" prefWidth="150.0" style="-fx-background-color: #4CAF50;" text="Novo Cliente" textFill="WHITE">
+                  <JFXButton contentDisplay="TOP" graphicTextGap="2.0" onAction="#createCustomer" prefHeight="65.0" prefWidth="150.0" style="-fx-background-color: #4CAF50;" text="Novo Cliente" textFill="WHITE">
                      <font>
                         <Font name="Verdana" size="14.0" />
                      </font>

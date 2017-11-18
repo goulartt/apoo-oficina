@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import de.jensd.fx.glyphs.octicons.OctIconView?>
 <?import javafx.geometry.Insets?>
@@ -33,8 +34,8 @@
                   </HBox>
                   <GridPane prefHeight="158.0" prefWidth="668.0">
                     <columnConstraints>
-                      <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" maxWidth="363.0" minWidth="10.0" prefWidth="196.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="563.0" minWidth="10.0" prefWidth="440.0" />
+                      <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" maxWidth="363.0" minWidth="10.0" prefWidth="189.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="563.0" minWidth="10.0" prefWidth="447.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -93,79 +94,101 @@
                </padding>
             </VBox>
          </top>
-         <center>
-            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Label text="Contato:">
-                     <font>
-                        <Font name="Verdana" size="16.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="10.0" layoutY="26.0" text="- renanbatel@gmail.com.">
-                     <font>
-                        <Font name="Verdana" size="14.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="46.0" top="6.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label layoutX="10.0" layoutY="26.0" text="- (14) 99769-0208.">
-                     <font>
-                        <Font name="Verdana" size="14.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="46.0" top="6.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label layoutX="56.0" layoutY="76.0" text="Endereço:">
-                     <font>
-                        <Font name="Verdana" size="16.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets top="16.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label text="- CEP: 265179-653">
-                     <font>
-                        <Font name="Verdana" size="14.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="46.0" top="6.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label layoutX="56.0" layoutY="136.0" text="- João Goulart, 46.">
-                     <font>
-                        <Font name="Verdana" size="14.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="46.0" top="6.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label layoutX="56.0" layoutY="160.0" text="- Corńeio Procópio/PR.">
-                     <font>
-                        <Font name="Verdana" size="14.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="46.0" top="6.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label layoutX="56.0" layoutY="184.0" text="- Jardim Vitória.">
-                     <font>
-                        <Font name="Verdana" size="14.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="46.0" top="6.0" />
-                     </VBox.margin>
-                  </Label>
-               </children>
-               <padding>
-                  <Insets bottom="16.0" top="16.0" />
-               </padding>
-            </VBox>
-         </center>
          <left>
             <VBox prefHeight="345.0" prefWidth="218.0" BorderPane.alignment="CENTER" />
          </left>
+         <center>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="245.0" prefWidth="275.0">
+                     <children>
+                        <Label text="Contato:">
+                           <font>
+                              <Font name="Verdana" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="26.0" text="- renanbatel@gmail.com.">
+                           <font>
+                              <Font name="Verdana" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="46.0" top="6.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="26.0" text="- (14) 99769-0208.">
+                           <font>
+                              <Font name="Verdana" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="46.0" top="6.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label layoutX="56.0" layoutY="76.0" text="Endereço:">
+                           <font>
+                              <Font name="Verdana" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="16.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="- CEP: 265179-653">
+                           <font>
+                              <Font name="Verdana" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="46.0" top="6.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label layoutX="56.0" layoutY="136.0" text="- João Goulart, 46.">
+                           <font>
+                              <Font name="Verdana" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="46.0" top="6.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label layoutX="56.0" layoutY="160.0" text="- Corńeio Procópio/PR.">
+                           <font>
+                              <Font name="Verdana" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="46.0" top="6.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label layoutX="56.0" layoutY="184.0" text="- Jardim Vitória.">
+                           <font>
+                              <Font name="Verdana" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="46.0" top="6.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets bottom="16.0" top="16.0" />
+                     </padding>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="245.0" prefWidth="252.0">
+                     <children>
+                        <JFXButton graphicTextGap="10.0" style="-fx-background-color: #FFC107;" text="Histórico" textFill="WHITE">
+                           <font>
+                              <Font name="Verdana" size="16.0" />
+                           </font>
+                           <graphic>
+                              <MaterialDesignIconView fill="WHITE" glyphName="HISTORY" size="22" />
+                           </graphic>
+                           <padding>
+                              <Insets bottom="8.0" left="16.0" right="16.0" top="8.0" />
+                           </padding>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </center>
       </BorderPane>
       <HBox alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="700.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>

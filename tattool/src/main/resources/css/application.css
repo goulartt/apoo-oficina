@@ -18,6 +18,16 @@
 }
 
 /*
+ * 	##	GALLERY
+ */
+ 
+.gallery-image {
+	-fx-cursor: hand;
+	-fx-scale-x: 0.9;
+	-fx-scale-y: 0.9;
+}
+ 
+/*
  * 	##	JFXTabPane
  */
 
@@ -62,7 +72,7 @@
 }
 
 .jfx-popup .jfx-button:hover{
-	-fx-background-color: #29B6F6;
+	-fx-background-color: #26C6DA;
 }
 
 /*

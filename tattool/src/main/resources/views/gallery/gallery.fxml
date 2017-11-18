@@ -1,37 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="804.0" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.art.GalleryController">
+<fx:root minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="804.0" stylesheets="@../../css/application.css" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.art.GalleryController">
    <padding>
       <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
    </padding>
+   <center>
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <content>
+            <BorderPane prefHeight="415.0" prefWidth="774.0">
+               <center>
+                  <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <VBox fx:id="column1" prefHeight="200.0" prefWidth="193.5">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox fx:id="column2" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="193.5" />
+                        <VBox fx:id="column3" layoutX="110.0" layoutY="10.0" prefHeight="200.0" prefWidth="193.5" />
+                        <VBox fx:id="column4" layoutX="210.0" layoutY="10.0" prefHeight="415.0" prefWidth="191.0" />
+                     </children>
+                  </HBox>
+               </center>
+            </BorderPane>
+         </content>
+      </ScrollPane>
+   </center>
    <top>
-      <BorderPane prefHeight="79.0" prefWidth="774.0" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="93.0" prefWidth="774.0" BorderPane.alignment="CENTER">
          <left>
-            <VBox alignment="CENTER_LEFT" prefHeight="79.0" prefWidth="297.0" BorderPane.alignment="CENTER">
+            <VBox alignment="CENTER_LEFT" prefHeight="79.0" prefWidth="545.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Galeria" textFill="#00bcd4">
+                  <Label prefHeight="40.0" prefWidth="387.0" text="Galeria de artes" textFill="#00bcd4">
                      <font>
                         <Font name="Verdana" size="32.0" />
                      </font>
                   </Label>
+                  <Label text="Gerencie as artes de seu estúdio.">
+                     <font>
+                        <Font name="Verdana" size="16.0" />
+                     </font>
+                     <graphic>
+                        <MaterialDesignIconView fill="#ffca28" glyphName="COMMENT_OUTLINE" size="18" />
+                     </graphic>
+                  </Label>
                </children>
             </VBox>
          </left>
+         <right>
+            <HBox alignment="CENTER_RIGHT" prefHeight="79.0" prefWidth="153.0" spacing="16.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton contentDisplay="TOP" onAction="#create" prefHeight="65.0" prefWidth="150.0" style="-fx-background-color: #4CAF50;" text="Cadastrar Arte" textFill="WHITE">
+                     <font>
+                        <Font name="Verdana" size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <Label graphicTextGap="1.0" text="+" textFill="WHITE">
+                           <font>
+                              <Font name="Verdana" size="12.0" />
+                           </font>
+                           <graphic>
+                              <MaterialDesignIconView fill="WHITE" glyphName="IMAGE" size="22" />
+                           </graphic>
+                        </Label>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </right>
       </BorderPane>
    </top>
-   <center>
-      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" fx:id="scrollPane">
-         <content>
-            <TilePane prefHeight="413.0" prefWidth="770.0" fx:id="tilePane"/>
-         </content>
-      </ScrollPane>
-   </center>
 </fx:root>

@@ -18,7 +18,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.input.KeyEvent;
@@ -295,13 +294,6 @@ public class CreateEditCustomerController {
 			case ESCAPE:
 				back((BorderPane) ((Node) event.getSource()).getScene().lookup("#main"));
 				break;
-			case TAB:
-				if(((Control) event.getSource()).getId().equals("birthdate"))
-					tabPane.getSelectionModel().select(2);
-				if(((Control) event.getSource()).getId().equals("phone"))
-					tabPane.getSelectionModel().select(2);
-				if(((Control) event.getSource()).getId().equals("neighborhood"))
-					tabPane.getSelectionModel().select(0);
 			default:
 				break;
 		}
@@ -359,14 +351,6 @@ public class CreateEditCustomerController {
 				email.requestFocus();
 			if(tabPane.getSelectionModel().getSelectedIndex() == 2)
 				zipCode.requestFocus();
-		});
-		tabPane.setOnKeyPressed(event -> {
-			if(tabPane.getSelectionModel().getSelectedIndex() == 0)
-				email.requestFocus();
-			if(tabPane.getSelectionModel().getSelectedIndex() == 1)
-				zipCode.requestFocus();
-			if(tabPane.getSelectionModel().getSelectedIndex() == 2)
-				name.requestFocus();
 		});
 	}
 	
