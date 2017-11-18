@@ -7,6 +7,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXDialog;
+
+import de.jensd.fx.glyphs.octicons.OctIconView;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.embed.swing.SwingFXUtils;
@@ -30,6 +33,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -139,8 +144,6 @@ public class GalleryController implements Initializable{
 
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
-    	scrollPane.setFitToHeight(true);
-    	scrollPane.setFitToWidth(true);
     	loadGallery();
 	}
     
@@ -154,6 +157,31 @@ public class GalleryController implements Initializable{
     }
     
     /*
+     * 	##	VISUALIZAR ARTE
+     */
+    
+    void show(String url, StackPane mainStack) {
+    	try {
+			FXMLLoader artLoader    = new FXMLLoader(getClass().getResource("/views/gallery/show-art.fxml"));
+			Region artContent       = artLoader.load();
+			JFXDialog customerModal = new JFXDialog(mainStack, artContent, JFXDialog.DialogTransition.CENTER, false);
+			
+			ImageView image      = (ImageView) mainStack.getScene().lookup("#image");
+			StackPane imageStack = (StackPane) mainStack.getScene().lookup("imageStack");
+			image.setImage(new Image(url));
+			image.setPreserveRatio(true);
+			//image.fitHeightProperty().bind(imageStack.heightProperty().subtract(30));
+			
+			OctIconView closeButton = (OctIconView) mainStack.getScene().lookup("#closeButton");
+    		closeButton.setOnMouseClicked(event -> customerModal.close());
+    		
+			customerModal.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+    
+    /*
      * 	##	GALERIA !! RESPEITA AS GAMBIARRA (JAVA) !!
      */
     
@@ -161,12 +189,10 @@ public class GalleryController implements Initializable{
     	
     	//Colunas responsivas
     	
-    	scrollPane.widthProperty().addListener(event -> {
-    		column1.setPrefWidth((scrollPane.getWidth() / 4) - 3.5);
-    		column2.setPrefWidth((scrollPane.getWidth() / 4) - 3.5);
-    		column3.setPrefWidth((scrollPane.getWidth() / 4) - 3.5);
-    		column4.setPrefWidth((scrollPane.getWidth() / 4) - 3.5);
-    	});
+    	column1.prefWidthProperty().bind(scrollPane.widthProperty().divide(4).subtract(3.5));
+    	column2.prefWidthProperty().bind(scrollPane.widthProperty().divide(4).subtract(3.5));
+    	column3.prefWidthProperty().bind(scrollPane.widthProperty().divide(4).subtract(3.5));
+    	column4.prefWidthProperty().bind(scrollPane.widthProperty().divide(4).subtract(3.5));
     	
     	loadImages();
     }
@@ -210,6 +236,7 @@ public class GalleryController implements Initializable{
     	GalleryImage(String url, VBox column) {
     		
     		setImage(new Image(url));
+    		
     		fitWidthProperty().bind(column.prefWidthProperty());
     		getStyleClass().add("gallery-image");
     		setPreserveRatio(true);
@@ -219,6 +246,10 @@ public class GalleryController implements Initializable{
     		});
     		setOnMouseExited(event -> {
     			setEffect(null);
+    		});
+    		
+    		setOnMouseClicked(event -> {
+    			show(url, (StackPane) scrollPane.getScene().lookup("#mainStack"));
     		});
     	}
     }

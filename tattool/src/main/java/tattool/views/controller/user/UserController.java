@@ -87,7 +87,7 @@ public class UserController
     	
     	name.prefWidthProperty().bind(userTable.widthProperty().multiply(0.3));
     	username.prefWidthProperty().bind(userTable.widthProperty().multiply(0.3));
-    	role.prefWidthProperty().bind(userTable.widthProperty().multiply(0.39));	//0.39 -> Gambiarra pra coluna nao atravessar a TableView
+    	role.prefWidthProperty().bind(userTable.widthProperty().multiply(0.4));
     	
     	name.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<UserFX, String>, ObservableValue<String>>()
     	{

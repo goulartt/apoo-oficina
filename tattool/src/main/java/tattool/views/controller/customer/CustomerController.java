@@ -85,6 +85,8 @@ public class CustomerController {
     @SuppressWarnings("unchecked")
 	void createTableColumns()
     {
+    	
+    	
     	JFXTreeTableColumn<Costumer,String> cpf     = new JFXTreeTableColumn<>("CPF");
     	JFXTreeTableColumn<Costumer,String> name    = new JFXTreeTableColumn<>("Nome");
     	JFXTreeTableColumn<Costumer,String> contact = new JFXTreeTableColumn<>("Contato");
@@ -93,7 +95,7 @@ public class CustomerController {
     	
     	cpf.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.3));
     	name.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.3));
-    	contact.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.39));	//0.39 -> Gambiarra pra coluna nao atravessar a TableView
+    	contact.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.4));
     	
     	cpf.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Costumer, String>, ObservableValue<String>>()
     	{
@@ -195,7 +197,7 @@ public class CustomerController {
     
     void popup()
     {
-    	JFXButton view   = new JFXButton("Visualizar");
+    	JFXButton show   = new JFXButton("Visualizar");
     	JFXButton edit   = new JFXButton("Editar");
     	JFXButton delete = new JFXButton("Apagar");
     	
@@ -203,9 +205,9 @@ public class CustomerController {
     	
     	//Popup Menu Events
     	
-    	view.setOnMouseClicked(event -> {
+    	show.setOnMouseClicked(event -> {
     		popup.hide();
-    		view((StackPane) customerTable.getScene().lookup("#mainStack"));
+    		show((StackPane) customerTable.getScene().lookup("#mainStack"));
     	});
     	edit.setOnMouseClicked(event -> {
     		popup.hide();
@@ -216,12 +218,12 @@ public class CustomerController {
     		delete();
     	});
     	
-    	view.setMaxWidth(Double.MAX_VALUE);
+    	show.setMaxWidth(Double.MAX_VALUE);
     	edit.setMaxWidth(Double.MAX_VALUE);
     	delete.setMaxWidth(Double.MAX_VALUE);
     	
     	vbox.setFillWidth(true);
-    	vbox.getChildren().addAll(view, edit, delete);
+    	vbox.getChildren().addAll(show, edit, delete);
     	
     	popup.setPopupContent(vbox);
     }
@@ -230,7 +232,7 @@ public class CustomerController {
      * 	##	VISUALIZAR CLIENTE
      */
     
-    void view(StackPane mainStack) {
+    void show(StackPane mainStack) {
 		try {
 			FXMLLoader customerLoader = new FXMLLoader(getClass().getResource("/views/customers/show-customer.fxml"));
 			Region customerContent = customerLoader.load();

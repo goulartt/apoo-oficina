@@ -16,7 +16,7 @@
       <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
    </padding>
    <center>
-      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: none;" styleClass="gallery-scroll-pane" stylesheets="@../../css/application.css" BorderPane.alignment="CENTER">
          <content>
             <BorderPane prefHeight="415.0" prefWidth="774.0">
                <center>

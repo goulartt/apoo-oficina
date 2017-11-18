@@ -220,6 +220,8 @@ public class DashboardController
 		    
 		    stage.setScene(scene);
 		    primaryStage.hide();
+		    stage.setMinHeight(612);
+		    stage.setMinWidth(1032);
 		    stage.show();
 		}
 		catch(Exception e)
