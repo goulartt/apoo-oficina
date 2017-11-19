@@ -167,13 +167,17 @@ public class GalleryController implements Initializable{
 			JFXDialog customerModal = new JFXDialog(mainStack, artContent, JFXDialog.DialogTransition.CENTER, false);
 			
 			ImageView image      = (ImageView) mainStack.getScene().lookup("#image");
-			StackPane imageStack = (StackPane) mainStack.getScene().lookup("imageStack");
+			StackPane imageStack = (StackPane) mainStack.getScene().lookup("#imageStack");
 			image.setImage(new Image(url));
 			image.setPreserveRatio(true);
-			//image.fitHeightProperty().bind(imageStack.heightProperty().subtract(30));
 			
 			OctIconView closeButton = (OctIconView) mainStack.getScene().lookup("#closeButton");
     		closeButton.setOnMouseClicked(event -> customerModal.close());
+    		
+    		artContent.prefHeightProperty().bind(mainStack.heightProperty().subtract(60));
+    		artContent.prefWidthProperty().bind(mainStack.widthProperty().subtract(80));
+    		image.fitHeightProperty().bind(imageStack.heightProperty().subtract(50));
+    		image.fitWidthProperty().bind(imageStack.widthProperty());
     		
 			customerModal.show();
 		} catch (IOException e) {
