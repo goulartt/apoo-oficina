@@ -1,6 +1,8 @@
 package tattool.views.controller.art;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.jfoenix.controls.JFXTextField;
 
@@ -19,6 +21,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import tattool.domain.model.Art;
+import tattool.domain.model.Tag;
+import tattool.rest.consume.ArtRest;
+import tattool.service.ArtService;
 
 public class CreateArtController {
 
@@ -33,6 +39,9 @@ public class CreateArtController {
     
     private File imageFile;
     
+    private ArtRest rest = new ArtRest();
+    
+    private ArtService service = new ArtService();
     /*
      * 	##	CADASTRA ARTE NOVA
      */
@@ -89,11 +98,21 @@ public class CreateArtController {
 
     @FXML
     void store(ActionEvent event) {
-    	store();
+    	List<Tag> tag = new ArrayList<>();
+    	tags.getChildren().forEach(t -> {
+    		tag.add(new Tag(((Label)t).getText()));
+    	});
+    	Art art = new Art();
+    	for(Tag t : tag) {
+			art.getTags().add(t);
+		}
+		art.setImage(service.convertFileToByte(imageFile));
+		rest.saveArt(art);
+    	
+    	
     }
     
     private class Chip extends Label {
-    	
     	Chip(String text) {
     		setText(text);
     		
@@ -108,5 +127,7 @@ public class CreateArtController {
     		setGraphicTextGap(8);
     		getStyleClass().add("chip");
     	}
+
+    	
     }
 }

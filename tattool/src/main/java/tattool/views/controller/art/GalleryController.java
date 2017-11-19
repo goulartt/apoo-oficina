@@ -2,11 +2,15 @@ package tattool.views.controller.art;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXDialog;
 
 import de.jensd.fx.glyphs.octicons.OctIconView;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,8 +24,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import tattool.domain.model.Customer;
-import tattool.views.controller.customer.CreateEditCustomerController;
+import tattool.domain.model.Art;
+import tattool.rest.consume.ArtRest;
+import tattool.service.ArtService;
 
 public class GalleryController implements Initializable{
 	
@@ -121,16 +126,24 @@ public class GalleryController implements Initializable{
 
     @FXML
     private VBox column4;
+    
+    private ArtRest rest = new ArtRest();
+	private ArtService service = new ArtService();
+	private Art[] array;
+	private List<Art> artes = new ArrayList<>();
 
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
+    	
+    	array = rest.findAll();
+    	artes = Arrays.asList(array);
     	loadGallery();
 	}
     
     /*
      * 	##	CRIAR ARTE
      */
-    
+	
     @FXML
     void create(ActionEvent event) {
     	try {
@@ -150,7 +163,7 @@ public class GalleryController implements Initializable{
      * 	##	VISUALIZAR ARTE
      */
     
-    void show(String url, StackPane mainStack) {
+    void show(Image img, StackPane mainStack) {
     	try {
 			FXMLLoader artLoader    = new FXMLLoader(getClass().getResource("/views/gallery/show-art.fxml"));
 			Region artContent       = artLoader.load();
@@ -158,7 +171,7 @@ public class GalleryController implements Initializable{
 			
 			ImageView image      = (ImageView) mainStack.getScene().lookup("#image");
 			StackPane imageStack = (StackPane) mainStack.getScene().lookup("#imageStack");
-			image.setImage(new Image(url));
+			image.setImage(img);
 			image.setPreserveRatio(true);
 			
 			OctIconView closeButton = (OctIconView) mainStack.getScene().lookup("#closeButton");
@@ -196,29 +209,31 @@ public class GalleryController implements Initializable{
     	//Contador da coluna atual
     	int column = 1;
     	
-    	for(int photos = 1; photos <= 10; photos++) {
-    		
+
+    	for(Art a : artes) {
+    		Image img = SwingFXUtils.toFXImage(service.createImageFromBytes(a.getImage()), null);
     		switch(column) {
 	    		case 1:
-	    			column1.getChildren().add(new GalleryImage("/images/tattoo" + photos + ".jpg", column1));
+	    			column1.getChildren().add(new GalleryImage(img, column1));
 	    			column++;
 	    			break;
 	    		case 2:
-	    			column2.getChildren().add(new GalleryImage("/images/tattoo" + photos + ".jpg", column2));
+	    			column2.getChildren().add(new GalleryImage(img, column2));
 	    			column++;
 	    			break;
 	    		case 3:
-	    			column3.getChildren().add(new GalleryImage("/images/tattoo" + photos + ".jpg", column3));
+	    			column3.getChildren().add(new GalleryImage(img, column3));
 	    			column++;
 	    			break;
 	    		case 4:
-	    			column4.getChildren().add(new GalleryImage("/images/tattoo" + photos + ".jpg", column4));
+	    			column4.getChildren().add(new GalleryImage(img, column4));
 	    			column = 1;
 	    			break;
 	    		default: 
 	    			break;
-    		}
-    	}
+	    		
+	    		}
+    	};
     }
     
     /*
@@ -227,9 +242,9 @@ public class GalleryController implements Initializable{
 
     private class GalleryImage extends ImageView {
     	
-    	GalleryImage(String url, VBox column) {
+    	GalleryImage(Image img, VBox column) {
     		
-    		setImage(new Image(url));
+    		setImage(img);
     		
     		fitWidthProperty().bind(column.prefWidthProperty());
     		getStyleClass().add("gallery-image");
@@ -243,7 +258,7 @@ public class GalleryController implements Initializable{
     		});
     		
     		setOnMouseClicked(event -> {
-    			show(url, (StackPane) scrollPane.getScene().lookup("#mainStack"));
+    			show(img, (StackPane) scrollPane.getScene().lookup("#mainStack"));
     		});
     	}
     }
