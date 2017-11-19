@@ -1,7 +1,6 @@
 package tattool.rest.consume;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +55,7 @@ public class CustomerRest {
 		Customer c = new Customer();
 		c.setName("teste2");
 		c.setCpf("cpf2");
-		c.setBirthDate(new Date());
+		//c.setBirthDate(new Date());
 		c.getContact().setEmail("jv.goulart.almeida@hotmail.com");
 		c.getContact().setPhone("18 996501306");
 		c.getAddress().setCity("Assis");

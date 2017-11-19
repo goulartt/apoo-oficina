@@ -30,6 +30,7 @@ public class Customer {
 	
 	private Integer removed;
 	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -85,6 +86,8 @@ public class Customer {
 	public void setRemoved(Integer removed) {
 		this.removed = removed;
 	}
+
+
 
 	
 	

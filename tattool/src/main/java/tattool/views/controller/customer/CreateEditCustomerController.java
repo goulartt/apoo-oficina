@@ -121,11 +121,18 @@ public class CreateEditCustomerController {
     
     private CustomerRest rest = new CustomerRest();
     
+    private Customer customer = new Customer();
+    
+    
+    public CreateEditCustomerController(Customer customer) { 
+        this.customer = customer;
+    }
+    
     public void initialize()
     {
+    	carregaCampos();
     	loadValidationErrors();
     	loadTab();
-    	
     	Platform.runLater(new Runnable() {
 	        @Override
 	        public void run() {
@@ -147,32 +154,61 @@ public class CreateEditCustomerController {
 		});
     }
     
-    /*
+    private void carregaCampos() {
+    	if(customer.getId() != null) {
+    		name.setText(customer.getName());
+    		cpf.setText(customer.getCpf());
+    		birthdate.setValue(DateUtil.asLocalDate(customer.getBirthDate()));
+    		phone.setText(customer.getContact().getPhone());
+    		email.setText(customer.getContact().getEmail());
+    		city.setText(customer.getAddress().getCity());
+    		state.setText(customer.getAddress().getState());
+    		number.setText(customer.getAddress().getNumber());
+    		street.setText(customer.getAddress().getStreet());
+    		neighborhood.setText(customer.getAddress().getNeighborhood());
+    		zipCode.setText(customer.getAddress().getZipCode().toString());
+    	}
+	}
+
+	/*
      * 	##	REGISTRA O CLINTE
      */
     
     void store(StackPane mainStack)
     {
-    	if(validate())
-    	{
-    		Customer customer = new Customer();
-        	customer.setName(name.getText());
-        	customer.setCpf(cpf.getText());
-        	customer.setBirthDate(DateUtil.asDate(birthdate.getValue()));
-        	customer.getContact().setPhone(phone.getText());
-        	customer.getContact().setEmail(email.getText());
-        	customer.getAddress().setCity(city.getText());
-        	customer.getAddress().setState(state.getText());
-        	customer.getAddress().setNumber(number.getText());
-        	customer.getAddress().setStreet(street.getText());
-        	customer.getAddress().setNeighborhood(neighborhood.getText());
-        	customer.getAddress().setZipCode(Integer.parseInt(zipCode.getText()));
-        	
-        	rest.save(customer);
-        	
-        	loadDialog(mainStack);
+    	if(this.customer.getId() == null) {
+    		if(validate())
+        	{
+        		Customer customer = MontaCustomer();
+            	
+            	rest.save(customer);
+            	
+            	loadDialog(mainStack);
+        	}
+    	}else {
+    		Customer customer = MontaCustomer();
+    		customer.setId(this.customer.getId());
+    		rest.atualizaCustomer(customer.getId(), customer);
+    		loadDialog(mainStack);
     	}
+    	
     }
+
+	public Customer MontaCustomer() {
+		Customer customer = new Customer();
+		customer.setName(name.getText());
+		customer.setCpf(cpf.getText());
+		customer.setBirthDate(DateUtil.asDate(birthdate.getValue()));
+		customer.getContact().setPhone(phone.getText());
+		customer.getContact().setEmail(email.getText());
+		customer.getAddress().setCity(city.getText());
+		customer.getAddress().setState(state.getText());
+		customer.getAddress().setNumber(number.getText());
+		customer.getAddress().setStreet(street.getText());
+		customer.getAddress().setNeighborhood(neighborhood.getText());
+		customer.getAddress().setZipCode(!zipCode.getText().equals("") ? Integer.parseInt(zipCode.getText()) : null);
+		return customer;
+	}
     
     /*
      * 	##	STORE DIALOG

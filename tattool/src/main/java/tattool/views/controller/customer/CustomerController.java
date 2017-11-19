@@ -15,8 +15,6 @@ import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
 import de.jensd.fx.glyphs.octicons.OctIconView;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -36,12 +34,15 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
-//import tattool.domain.modelfx.UserFX;
+import tattool.domain.model.Customer;
+import tattool.domain.modelfx.CustomerFX;
+import tattool.rest.consume.CustomerRest;
+import tattool.util.ConvertModelToFX;
 
 public class CustomerController {
 
     @FXML
-    private JFXTreeTableView<Costumer> customerTable;
+    private JFXTreeTableView<CustomerFX> customerTable;
 
     @FXML
     private JFXTextField search;
@@ -50,6 +51,8 @@ public class CustomerController {
     
     @FXML
     private OctIconView closeButton;
+    
+    private CustomerRest rest = new CustomerRest();
     
     public void initialize()
     {
@@ -68,7 +71,7 @@ public class CustomerController {
     	try {
     		FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/customers/create-edit.fxml"));
     		BorderPane main       = (BorderPane) ((Node) event.getSource()).getScene().lookup("#main");
-    		
+    		viewLoader.setController(new CreateEditCustomerController(new Customer()));
     		viewLoader.setRoot(main);
     		main.getChildren().clear();
     		viewLoader.load();
@@ -87,9 +90,9 @@ public class CustomerController {
     {
     	
     	
-    	JFXTreeTableColumn<Costumer,String> cpf     = new JFXTreeTableColumn<>("CPF");
-    	JFXTreeTableColumn<Costumer,String> name    = new JFXTreeTableColumn<>("Nome");
-    	JFXTreeTableColumn<Costumer,String> contact = new JFXTreeTableColumn<>("Contato");
+    	JFXTreeTableColumn<CustomerFX,String> cpf     = new JFXTreeTableColumn<>("CPF");
+    	JFXTreeTableColumn<CustomerFX,String> name    = new JFXTreeTableColumn<>("Nome");
+    	JFXTreeTableColumn<CustomerFX,String> contact = new JFXTreeTableColumn<>("Contato");
     	
     	//Colunas com largura responsiva
     	
@@ -97,28 +100,28 @@ public class CustomerController {
     	name.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.3));
     	contact.prefWidthProperty().bind(customerTable.widthProperty().multiply(0.4));
     	
-    	cpf.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Costumer, String>, ObservableValue<String>>()
+    	cpf.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<CustomerFX, String>, ObservableValue<String>>()
     	{
 			@Override
-			public ObservableValue<String> call(CellDataFeatures<Costumer, String> param)
+			public ObservableValue<String> call(CellDataFeatures<CustomerFX, String> param)
 			{
 				return param.getValue().getValue().cpf;
 			}
     	});
-    	name.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Costumer, String>, ObservableValue<String>>()
+    	name.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<CustomerFX, String>, ObservableValue<String>>()
     	{
 			@Override
-			public ObservableValue<String> call(CellDataFeatures<Costumer, String> param)
+			public ObservableValue<String> call(CellDataFeatures<CustomerFX, String> param)
 			{
 				return param.getValue().getValue().name;
 			}
     	});
-    	contact.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Costumer, String>, ObservableValue<String>>()
+    	contact.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<CustomerFX, String>, ObservableValue<String>>()
     	{
 			@Override
-			public ObservableValue<String> call(CellDataFeatures<Costumer, String> param)
+			public ObservableValue<String> call(CellDataFeatures<CustomerFX, String> param)
 			{
-				return param.getValue().getValue().contact;
+				return param.getValue().getValue().contactSimple;
 			}
     	});
     	
@@ -126,7 +129,7 @@ public class CustomerController {
     	
     	//Popup click event
     	customerTable.setRowFactory(table -> {
-    		JFXTreeTableRow<Costumer> row = new JFXTreeTableRow<>();
+    		JFXTreeTableRow<CustomerFX> row = new JFXTreeTableRow<>();
     		
     		row.setOnMouseClicked(event -> {
     			if(event.getButton().equals(MouseButton.SECONDARY))
@@ -146,18 +149,14 @@ public class CustomerController {
     void populateTable()
     {
     	//Testando a populacao da table
+	
     	
-    	ObservableList<Costumer> costumers = FXCollections.observableArrayList();
     	
-    	costumers.add(new Costumer("123.456.789-10", "Ricardão", "(14) 99669 1426"));
-    	costumers.add(new Costumer("659.148.235-56", "Jean Carlos", "(99) 65984 1596"));
-    	costumers.add(new Costumer("648.215.623-84", "João Goulart", "joao@joao.com"));
-    	costumers.add(new Costumer("496.154.914-62", "Breno Pikachu", "breno@pokemon.com"));
-    	costumers.add(new Costumer("134.648.974-22", "Tudo Puta", "(99) 99999 9999"));
-    	costumers.add(new Costumer("123.659.487-65", "Que Loucura", "(22) 1432 6458"));
-    	costumers.add(new Costumer("148.517.321-54", "Catinguele", "(22) 1846-9844"));
+    	ObservableList<CustomerFX> costumers = FXCollections.observableArrayList();
     	
-    	final TreeItem<Costumer> root = new RecursiveTreeItem<Costumer>(costumers, RecursiveTreeObject::getChildren);
+    	costumers = FXCollections.observableArrayList(ConvertModelToFX.convertListCustomer(rest.findAll()));
+  
+    	final TreeItem<CustomerFX> root = new RecursiveTreeItem<CustomerFX>(costumers, RecursiveTreeObject::getChildren);
     	
     	customerTable.setRoot(root);
     	customerTable.setShowRoot(false);
@@ -175,16 +174,16 @@ public class CustomerController {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
 			{
-				customerTable.setPredicate(new Predicate<TreeItem<Costumer>>()
+				customerTable.setPredicate(new Predicate<TreeItem<CustomerFX>>()
 				{
 					@Override
-					public boolean test(TreeItem<Costumer> user)
+					public boolean test(TreeItem<CustomerFX> user)
 					{
 						//Compara o valor do TextInput com as colunas da table
 						
 						return user.getValue().cpf.getValue().toLowerCase().contains(newValue.toLowerCase())     ||
 							   user.getValue().name.getValue().toLowerCase().contains(newValue.toLowerCase())    ||
-							   user.getValue().contact.getValue().toLowerCase().contains(newValue.toLowerCase());
+							   user.getValue().contactSimple.getValue().toLowerCase().contains(newValue.toLowerCase());
 					}
 				});
 			}
@@ -235,6 +234,7 @@ public class CustomerController {
     void show(StackPane mainStack) {
 		try {
 			FXMLLoader customerLoader = new FXMLLoader(getClass().getResource("/views/customers/show-customer.fxml"));
+			customerLoader.setController(new ShowCustomerController(ConvertModelToFX.convertCustomerFXtoCustomer(customerTable.getSelectionModel().getSelectedItem().getValue())));
 			Region customerContent = customerLoader.load();
 			JFXDialog customerModal = new JFXDialog(mainStack, customerContent, JFXDialog.DialogTransition.CENTER, false);
 			OctIconView closeButton = (OctIconView) mainStack.getScene().lookup("#closeButton");
@@ -254,7 +254,9 @@ public class CustomerController {
     	try {
     		FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/customers/create-edit.fxml"));
     		BorderPane main       = (BorderPane) customerTable.getScene().lookup("#main");
-    		
+    		Customer customerCarregado = ConvertModelToFX.convertCustomerFXtoCustomer(customerTable.getSelectionModel().getSelectedItem().getValue());
+    		viewLoader.setController(new CreateEditCustomerController(customerCarregado));
+    		//control.customer =  ConvertModelToFX.convertCustomerFXtoCustomer(customerTable.getSelectionModel().getSelectedItem().getValue());
     		viewLoader.setRoot(main);
     		main.getChildren().clear();
     		viewLoader.load();
@@ -290,9 +292,7 @@ public class CustomerController {
 		yes.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				
-				//CLICOU EM SIM -> DELETA O CLIENTE DO SISTEMA
-				
+				rest.deleteCustomer(customerTable.getSelectionModel().getSelectedItem().getValue().getId());
 	    		dialog.close();
 	    		populateTable();
 			}
@@ -309,20 +309,6 @@ public class CustomerController {
 		dialog.show();
     }
     
-    /*
-     * 	##	CLASSE PRA TESTAR A TABLE
-     * 	##	RecursiveTreeObject -> clase do JFoenix pra popular a Table deles
-     */
+
     
-    class Costumer extends RecursiveTreeObject<Costumer> {
-    	StringProperty cpf;
-    	StringProperty name;
-    	StringProperty contact;
-    	
-    	public Costumer(String cpf, String name, String contact) {
-    		this.cpf     = new SimpleStringProperty(cpf);
-    		this.name    = new SimpleStringProperty(name);
-    		this.contact = new SimpleStringProperty(contact);
-    	}
-    }
 }

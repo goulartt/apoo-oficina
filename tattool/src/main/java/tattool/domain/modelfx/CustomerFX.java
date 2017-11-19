@@ -8,15 +8,27 @@ import javafx.beans.property.SimpleStringProperty;
 import tattool.domain.model.Address;
 import tattool.domain.model.Contact;
 
-public class CustomerFX extends RecursiveTreeObject<UserFX> {
+public class CustomerFX extends RecursiveTreeObject<CustomerFX> {
+	private Integer id;
 	public SimpleStringProperty cpf;
 	public SimpleStringProperty name;
-	public SimpleStringProperty contact;
-	public SimpleStringProperty email;
-	public Integer idContato;
+	public SimpleStringProperty contactSimple;
+	private SimpleStringProperty email;
+	
 	private Date birthDate;
+	
+	private Contact contact;
+	
 	private Address address;
-	private char archived;
+	
+	private Integer removed;
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public SimpleStringProperty getCpf() {
 		return cpf;
 	}
@@ -29,23 +41,17 @@ public class CustomerFX extends RecursiveTreeObject<UserFX> {
 	public void setName(SimpleStringProperty name) {
 		this.name = name;
 	}
-	public SimpleStringProperty getContact() {
-		return contact;
-	}
-	public void setContact(SimpleStringProperty contact) {
-		this.contact = contact;
-	}
 	public SimpleStringProperty getEmail() {
 		return email;
 	}
 	public void setEmail(SimpleStringProperty email) {
 		this.email = email;
 	}
-	public Integer getIdContato() {
-		return idContato;
+	public SimpleStringProperty getContactSimple() {
+		return contactSimple;
 	}
-	public void setIdContato(Integer idContato) {
-		this.idContato = idContato;
+	public void setContactSimple(SimpleStringProperty contactSimple) {
+		this.contactSimple = contactSimple;
 	}
 	public Date getBirthDate() {
 		return birthDate;
@@ -53,19 +59,27 @@ public class CustomerFX extends RecursiveTreeObject<UserFX> {
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
+	public Contact getContact() {
+		return contact;
+	}
+	public void setContact(Contact contact) {
+		this.contact = contact;
+	}
 	public Address getAddress() {
 		return address;
 	}
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	public char getArchived() {
-		return archived;
+	public Integer getRemoved() {
+		return removed;
 	}
-	public void setArchived(char archived) {
-		this.archived = archived;
+	public void setRemoved(Integer removed) {
+		this.removed = removed;
 	}
 	
 	
+	
+
 
 }

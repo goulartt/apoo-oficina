@@ -1,47 +1,23 @@
 package tattool.views.controller.art;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXDialog;
 
 import de.jensd.fx.glyphs.octicons.OctIconView;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import tattool.domain.model.Art;
-import tattool.domain.model.Tag;
-import tattool.rest.consume.ArtRest;
-import tattool.service.ArtService;
 
 public class GalleryController implements Initializable{
 	

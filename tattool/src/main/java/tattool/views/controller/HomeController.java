@@ -12,6 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import tattool.domain.model.Customer;
+import tattool.views.controller.customer.CreateEditCustomerController;
 
 public class HomeController  implements Initializable{
 	
@@ -27,7 +29,7 @@ public class HomeController  implements Initializable{
     	try {
 		    FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/customers/create-edit.fxml"));
 		    BorderPane main       = (BorderPane) ((Node) event.getSource()).getScene().lookup("#main");
-		    
+		    viewLoader.setController(new CreateEditCustomerController(new Customer()));
 		    viewLoader.setRoot(main);
 		    main.getChildren().clear();
 		    viewLoader.load();
