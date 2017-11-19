@@ -182,8 +182,7 @@ public class CustomerController {
 						//Compara o valor do TextInput com as colunas da table
 						
 						return user.getValue().cpf.getValue().toLowerCase().contains(newValue.toLowerCase())     ||
-							   user.getValue().name.getValue().toLowerCase().contains(newValue.toLowerCase())    ||
-							   user.getValue().contactSimple.getValue().toLowerCase().contains(newValue.toLowerCase());
+							   user.getValue().name.getValue().toLowerCase().contains(newValue.toLowerCase());
 					}
 				});
 			}
