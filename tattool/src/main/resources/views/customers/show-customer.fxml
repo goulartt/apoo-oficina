@@ -57,17 +57,17 @@
                         </StackPane>
                         <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                            <children>
-                              <Label prefHeight="20.0" prefWidth="312.0" text="Renan Batel Rodrigues" textFill="WHITE">
+                              <Label fx:id="name" prefHeight="20.0" prefWidth="312.0" text="Renan Batel Rodrigues" textFill="WHITE">
                                  <font>
                                     <Font name="Verdana" size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="10.0" layoutY="10.0" prefHeight="20.0" prefWidth="312.0" text="423.652.612-06" textFill="WHITE">
+                              <Label fx:id="cpf" layoutX="10.0" layoutY="10.0" prefHeight="20.0" prefWidth="312.0" text="423.652.612-06" textFill="WHITE">
                                  <font>
                                     <Font name="Verdana" size="16.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="10.0" layoutY="33.0" prefHeight="20.0" prefWidth="312.0" text="17/12/1997" textFill="WHITE">
+                              <Label fx:id="birthdate" layoutX="10.0" layoutY="33.0" prefHeight="20.0" prefWidth="312.0" text="17/12/1997" textFill="WHITE">
                                  <font>
                                     <Font name="Verdana" size="16.0" />
                                  </font>
@@ -107,7 +107,7 @@
                               <Font name="Verdana" size="16.0" />
                            </font>
                         </Label>
-                        <Label layoutX="10.0" layoutY="26.0" text="- renanbatel@gmail.com.">
+                        <Label fx:id="email" layoutX="10.0" layoutY="26.0" text="- renanbatel@gmail.com.">
                            <font>
                               <Font name="Verdana" size="14.0" />
                            </font>
@@ -115,7 +115,7 @@
                               <Insets left="46.0" top="6.0" />
                            </VBox.margin>
                         </Label>
-                        <Label layoutX="10.0" layoutY="26.0" text="- (14) 99769-0208.">
+                        <Label fx:id="phone" layoutX="10.0" layoutY="26.0" text="- (14) 99769-0208.">
                            <font>
                               <Font name="Verdana" size="14.0" />
                            </font>
@@ -131,7 +131,7 @@
                               <Insets top="16.0" />
                            </VBox.margin>
                         </Label>
-                        <Label text="- CEP: 265179-653">
+                        <Label fx:id="zipCode" text="- CEP: 265179-653">
                            <font>
                               <Font name="Verdana" size="14.0" />
                            </font>
@@ -139,7 +139,7 @@
                               <Insets left="46.0" top="6.0" />
                            </VBox.margin>
                         </Label>
-                        <Label layoutX="56.0" layoutY="136.0" text="- João Goulart, 46.">
+                        <Label fx:id="street" layoutX="56.0" layoutY="136.0" text="- João Goulart, 46.">
                            <font>
                               <Font name="Verdana" size="14.0" />
                            </font>
@@ -147,7 +147,7 @@
                               <Insets left="46.0" top="6.0" />
                            </VBox.margin>
                         </Label>
-                        <Label layoutX="56.0" layoutY="160.0" text="- Corńeio Procópio/PR.">
+                        <Label fx:id="city" layoutX="56.0" layoutY="160.0" text="- Corńeio Procópio/PR.">
                            <font>
                               <Font name="Verdana" size="14.0" />
                            </font>
@@ -155,7 +155,7 @@
                               <Insets left="46.0" top="6.0" />
                            </VBox.margin>
                         </Label>
-                        <Label layoutX="56.0" layoutY="184.0" text="- Jardim Vitória.">
+                        <Label fx:id="neighborhood" layoutX="56.0" layoutY="184.0" text="- Jardim Vitória.">
                            <font>
                               <Font name="Verdana" size="14.0" />
                            </font>
@@ -170,7 +170,7 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="245.0" prefWidth="252.0">
                      <children>
-                        <JFXButton graphicTextGap="10.0" style="-fx-background-color: #FFC107;" text="Histórico" textFill="WHITE">
+                        <JFXButton graphicTextGap="10.0" onAction="#historico" style="-fx-background-color: #FFC107;" text="Histórico" textFill="WHITE">
                            <font>
                               <Font name="Verdana" size="16.0" />
                            </font>

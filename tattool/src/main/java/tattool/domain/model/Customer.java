@@ -1,5 +1,6 @@
 package tattool.domain.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Customer {
@@ -17,8 +18,7 @@ public class Customer {
 	private Integer removed;
 	
 	public Customer() {
-		super();
-		this.id = 0;
+		this.id = null;
 		this.cpf = "";
 		this.name = "";
 		this.birthDate = null;
@@ -82,7 +82,6 @@ public class Customer {
 	public void setRemoved(Integer removed) {
 		this.removed = removed;
 	}
-
 	
 	
 	
