@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="500.0" prefWidth="640.0" stylesheets="@../../css/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="500.0" prefWidth="640.0" stylesheets="@../../css/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.art.ShowArtController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -47,7 +47,7 @@
                <tabs>
                   <Tab text="Imagem">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #212121;">
                            <children>
                               <StackPane fx:id="imageStack" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
@@ -80,7 +80,7 @@
                                           </Label>
                                           <BorderPane prefHeight="50.0" prefWidth="620.0">
                                              <center>
-                                                <JFXTextField focusColor="#00bcd4" labelFloat="true" promptText="Imagem" unFocusColor="#212121" BorderPane.alignment="CENTER">
+                                                <JFXTextField fx:id="fileName" editable="false" focusColor="#00bcd4" labelFloat="true" promptText="Imagem" unFocusColor="#212121" BorderPane.alignment="CENTER">
                                                    <font>
                                                       <Font name="Verdana" size="16.0" />
                                                    </font>
@@ -90,7 +90,7 @@
                                                 </JFXTextField>
                                              </center>
                                              <right>
-                                                <JFXButton graphicTextGap="6.0" prefHeight="38.0" prefWidth="131.0" style="-fx-background-color: #FFC107;" text="Imagem" textFill="WHITE" BorderPane.alignment="CENTER">
+                                                <JFXButton graphicTextGap="6.0" onAction="#fileChooser" prefHeight="38.0" prefWidth="131.0" style="-fx-background-color: #FFC107;" text="Imagem" textFill="WHITE" BorderPane.alignment="CENTER">
                                                    <font>
                                                       <Font name="Verdana" size="16.0" />
                                                    </font>
@@ -109,7 +109,7 @@
                                                 <Insets top="26.0" />
                                              </VBox.margin>
                                           </BorderPane>
-                                          <JFXTextField focusColor="#00bcd4" labelFloat="true" promptText="Tags" unFocusColor="#212121">
+                                          <JFXTextField fx:id="tagInput" focusColor="#00bcd4" labelFloat="true" onKeyPressed="#insertTag" promptText="Tag" unFocusColor="#212121">
                                              <font>
                                                 <Font name="Verdana" size="16.0" />
                                              </font>
@@ -117,6 +117,11 @@
                                                 <Insets top="22.0" />
                                              </VBox.margin>
                                           </JFXTextField>
+                                          <HBox fx:id="tags" prefHeight="100.0" prefWidth="200.0" spacing="8.0">
+                                             <VBox.margin>
+                                                <Insets top="26.0" />
+                                             </VBox.margin>
+                                          </HBox>
                                        </children>
                                        <BorderPane.margin>
                                           <Insets />
@@ -129,7 +134,7 @@
                                  <bottom>
                                     <HBox alignment="TOP_RIGHT">
                                        <children>
-                                          <JFXButton graphicTextGap="6.0" prefHeight="38.0" prefWidth="131.0" style="-fx-background-color: #e53935;" text="Apagar" textFill="WHITE">
+                                          <JFXButton graphicTextGap="6.0" onAction="#delete" prefHeight="38.0" prefWidth="131.0" style="-fx-background-color: #e53935;" text="Apagar" textFill="WHITE">
                                              <font>
                                                 <Font name="Verdana" size="16.0" />
                                              </font>
@@ -146,7 +151,7 @@
                                                 <Insets right="16.0" />
                                              </HBox.margin>
                                           </JFXButton>
-                                          <JFXButton graphicTextGap="6.0" prefHeight="38.0" prefWidth="131.0" style="-fx-background-color: #4CAF50;" text="Salvar" textFill="WHITE">
+                                          <JFXButton graphicTextGap="6.0" onAction="#update" prefHeight="38.0" prefWidth="131.0" style="-fx-background-color: #4CAF50;" text="Salvar" textFill="WHITE">
                                              <font>
                                                 <Font name="Verdana" size="16.0" />
                                              </font>

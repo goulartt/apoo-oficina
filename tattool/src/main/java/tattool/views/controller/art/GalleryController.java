@@ -11,13 +11,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import tattool.domain.model.Customer;
+import tattool.views.controller.customer.CreateEditCustomerController;
 
 public class GalleryController implements Initializable{
 	
@@ -129,7 +133,17 @@ public class GalleryController implements Initializable{
     
     @FXML
     void create(ActionEvent event) {
-    	//
+    	try {
+    		FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/gallery/create.fxml"));
+    		BorderPane main       = (BorderPane) ((Node) event.getSource()).getScene().lookup("#main");
+    		
+    		viewLoader.setRoot(main);
+    		main.getChildren().clear();
+    		viewLoader.load();
+    	}catch(Exception e)
+    	{
+    		e.printStackTrace();
+    	}
     }
     
     /*
