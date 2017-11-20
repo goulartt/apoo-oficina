@@ -167,7 +167,7 @@
                <right>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Label text="Admin" textFill="WHITE">
+                        <Label text="Admin" textFill="WHITE" fx:id="nome">
                            <font>
                               <Font name="Verdana" size="16.0" />
                            </font>

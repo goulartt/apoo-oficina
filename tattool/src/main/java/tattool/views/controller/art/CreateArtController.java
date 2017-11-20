@@ -139,6 +139,7 @@ public class CreateArtController {
     			art.getTags().add(t);
     		}
     		art.setImage(service.convertFileToByte(imageFile));
+    		art.setDescription(description.getText());
     		rest.saveArt(art);
     		loadDialog((StackPane) ((Node) event.getSource()).getScene().lookup("#mainStack"));
     	}
