@@ -289,12 +289,7 @@ public class UserController
     		update.setDisable(true);
     	}
     	
-    	//Essa verificação só funciona na primeira tentativa, depois mesmo nao alterando nada não recebe vazio userUpdate;
-    	
     	loadDialogUpdate((StackPane) ((Node) event.getSource()).getScene().lookup("#mainStack"), new Text("As alterações foram salvas!"));
-    	
-    
-    	//userUpdate = null;
     }
     
     /*

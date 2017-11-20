@@ -64,13 +64,17 @@ package tattool.views.controller.art;
 import java.io.File;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextField;
 
 import de.jensd.fx.glyphs.octicons.OctIcon;
 import de.jensd.fx.glyphs.octicons.OctIconView;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -79,7 +83,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import tattool.domain.modelfx.UserFX;
 
 public class ShowArtController {
 
@@ -88,6 +94,9 @@ public class ShowArtController {
 
     @FXML
     private ImageView image;
+    
+    @FXML
+    private JFXTextField description;
     
     @FXML
     private JFXTextField fileName;
@@ -112,6 +121,11 @@ public class ShowArtController {
     @FXML
     void update(ActionEvent event) {
     	
+    	//if(atualizou) {
+    	loadDialogUpdate((StackPane) ((Node) event.getSource()).getScene().lookup("#mainStack"), new Text("As alterações foram salvas!"));
+    	//} else {
+    		
+    		//DESATIVA O BOTÃO DE SALVAR LÁ QUE FICA DAHORA
     }
     
     /*
@@ -119,7 +133,7 @@ public class ShowArtController {
      */
     @FXML
     void delete(ActionEvent event) {
-    	
+    	loadDialogDelete((StackPane) ((Node) event.getSource()).getScene().lookup("#mainStack"));
     }
     
     /*
@@ -148,6 +162,72 @@ public class ShowArtController {
     		fileName.setText(imageFile.getName());
     	}
     }
+    
+    /*
+     * 	##	DELETE DIALOG
+     */
+    
+    void loadDialogDelete(StackPane mainStack) {
+    	
+    	JFXDialogLayout dialogContent = new JFXDialogLayout();
+    	JFXDialog dialog              = new JFXDialog(mainStack, dialogContent, JFXDialog.DialogTransition.CENTER);
+    	JFXButton yes                 = new JFXButton("Sim");
+    	JFXButton no                  = new JFXButton("Não");
+    	
+    	dialogContent.setHeading(new Text("Tem certeza que quer excluir esta arte?"));
+    	dialogContent.setBody(new Text("Todos os dados sobre esta arte serão perdidos."));
+    	
+    	yes.setCursor(Cursor.HAND);
+    	no.setCursor(Cursor.HAND);
+    	
+		yes.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				
+				//REST.DELETE
+				
+			}
+		});
+		no.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				dialog.close();
+			}
+		});
+		
+		dialogContent.setActions(no, yes);
+		dialog.setOverlayClose(false);
+		dialog.show();
+    }
+    
+    /*
+     * 	##	DIALOG UPDATE
+     */
+    
+    void loadDialogUpdate(StackPane mainStack, Text text) {
+    	
+    	JFXDialogLayout dialogContent = new JFXDialogLayout();
+    	JFXDialog dialog              = new JFXDialog(mainStack, dialogContent, JFXDialog.DialogTransition.CENTER);
+    	JFXButton ok                 = new JFXButton("Ok");
+    	
+    	dialogContent.setHeading(text);
+    	
+    	ok.setCursor(Cursor.HAND);
+    	
+		ok.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+	    		dialog.close();
+			}
+		});
+		
+		dialogContent.setActions(ok);
+		dialog.show();
+    }
+    
+    /*
+     * 	##	CLASSE DO CHIP DA TAG
+     */
     
     private class Chip extends Label {
     	

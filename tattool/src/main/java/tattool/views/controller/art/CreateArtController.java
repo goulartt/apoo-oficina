@@ -4,11 +4,16 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.events.JFXDialogEvent;
 
 import de.jensd.fx.glyphs.octicons.OctIcon;
 import de.jensd.fx.glyphs.octicons.OctIconView;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -19,7 +24,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import tattool.domain.model.Art;
 import tattool.domain.model.Tag;
@@ -27,6 +34,9 @@ import tattool.rest.consume.ArtRest;
 import tattool.service.ArtService;
 
 public class CreateArtController {
+	
+	@FXML
+	private JFXTextField description;
 
     @FXML
     private JFXTextField fileName;
@@ -42,13 +52,6 @@ public class CreateArtController {
     private ArtRest rest = new ArtRest();
     
     private ArtService service = new ArtService();
-    /*
-     * 	##	CADASTRA ARTE NOVA
-     */
-    
-    void store() {
-    	// REST.SAVE
-    }
     
     /*
      * 	##	VOLTA
@@ -95,6 +98,10 @@ public class CreateArtController {
     		tagInput.requestFocus();
     	}
     }
+    
+    /*
+     * 	##	CADASTRA NOVA ARTE
+     */
 
     @FXML
     void store(ActionEvent event) {
@@ -108,9 +115,43 @@ public class CreateArtController {
 		}
 		art.setImage(service.convertFileToByte(imageFile));
 		rest.saveArt(art);
-    	
-    	
+		loadDialog((StackPane) ((Node) event.getSource()).getScene().lookup("#mainStack"));
     }
+    
+    /*
+	 * 	##	DIALOG STORE
+	 */
+	
+	void loadDialog(StackPane mainStack)
+	{
+		JFXDialogLayout dialogContent = new JFXDialogLayout();
+		JFXDialog dialog              = new JFXDialog(mainStack, dialogContent, JFXDialog.DialogTransition.CENTER, false);
+		JFXButton ok                  = new JFXButton("Ok");
+		
+		dialogContent.setHeading(new Text("Arte cadastrado com sucesso!"));
+		
+		ok.setCursor(Cursor.HAND);
+		
+		ok.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				dialog.close();
+			}
+		});
+		
+		dialogContent.setActions(ok);
+		dialog.setOnDialogClosed(new EventHandler<JFXDialogEvent>() {
+			@Override
+			public void handle(JFXDialogEvent event) {
+				back((BorderPane) mainStack.lookup("#main"));
+			}
+		});
+		dialog.show();
+	}
+    
+    /*
+     * 	##	CLASSE DO CHIP DA TAG
+     */
     
     private class Chip extends Label {
     	Chip(String text) {
@@ -127,7 +168,5 @@ public class CreateArtController {
     		setGraphicTextGap(8);
     		getStyleClass().add("chip");
     	}
-
-    	
     }
 }

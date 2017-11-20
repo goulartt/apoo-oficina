@@ -44,6 +44,14 @@
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
+            <JFXTextField fx:id="description" focusColor="#00bcd4" labelFloat="true" onKeyPressed="#insertTag" promptText="Descrição" unFocusColor="#212121">
+               <font>
+                  <Font name="Verdana" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="22.0" />
+               </VBox.margin>
+            </JFXTextField>
             <BorderPane prefHeight="50.0" prefWidth="620.0">
                <center>
                   <JFXTextField fx:id="fileName" editable="false" focusColor="#00bcd4" labelFloat="true" promptText="Imagem" unFocusColor="#212121" BorderPane.alignment="CENTER">
@@ -72,7 +80,7 @@
                   </JFXButton>
                </right>
                <padding>
-                  <Insets top="22.0" />
+                  <Insets top="32.0" />
                </padding>
             </BorderPane>
             <JFXTextField fx:id="tagInput" focusColor="#00bcd4" labelFloat="true" onKeyPressed="#insertTag" promptText="Tag" unFocusColor="#212121">
