@@ -12,6 +12,7 @@ import com.jfoenix.controls.events.JFXDialogEvent;
 
 import de.jensd.fx.glyphs.octicons.OctIcon;
 import de.jensd.fx.glyphs.octicons.OctIconView;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -43,7 +44,16 @@ public class CreateArtController {
 
     @FXML
     private JFXTextField tagInput;
-
+    
+    @FXML
+    private Label errorDescription;
+    
+    @FXML
+    private Label errorImage;
+    
+    @FXML
+    private Label errorTags;
+    
     @FXML
     private HBox tags;
     
@@ -52,6 +62,20 @@ public class CreateArtController {
     private ArtRest rest = new ArtRest();
     
     private ArtService service = new ArtService();
+    
+    /*
+     * 	## INITIALIZE
+     */
+    
+    public void initialize() {
+    	loadValidationErrors();
+    	Platform.runLater(new Runnable() {
+	        @Override
+	        public void run() {
+	            description.requestFocus();
+	        }
+	    });
+    }
     
     /*
      * 	##	VOLTA
@@ -105,17 +129,19 @@ public class CreateArtController {
 
     @FXML
     void store(ActionEvent event) {
-    	List<Tag> tag = new ArrayList<>();
-    	tags.getChildren().forEach(t -> {
-    		tag.add(new Tag(((Label)t).getText()));
-    	});
-    	Art art = new Art();
-    	for(Tag t : tag) {
-			art.getTags().add(t);
-		}
-		art.setImage(service.convertFileToByte(imageFile));
-		rest.saveArt(art);
-		loadDialog((StackPane) ((Node) event.getSource()).getScene().lookup("#mainStack"));
+    	if(validate()) {
+    		List<Tag> tag = new ArrayList<>();
+        	tags.getChildren().forEach(t -> {
+        		tag.add(new Tag(((Label)t).getText()));
+        	});
+        	Art art = new Art();
+        	for(Tag t : tag) {
+    			art.getTags().add(t);
+    		}
+    		art.setImage(service.convertFileToByte(imageFile));
+    		rest.saveArt(art);
+    		loadDialog((StackPane) ((Node) event.getSource()).getScene().lookup("#mainStack"));
+    	}
     }
     
     /*
@@ -147,6 +173,58 @@ public class CreateArtController {
 			}
 		});
 		dialog.show();
+	}
+	
+	/*
+     * 	##	VALIDACAO FORM
+     */
+    
+    boolean validate()
+	{
+		boolean validate = true;
+		
+		resetValidation();
+		
+		if(description.getText().isEmpty())
+		{
+			errorDescription.setText("Insira uma descrição para a arte");
+			errorDescription.setVisible(true);
+			validate = false;
+		}
+		if(fileName.getText().isEmpty())
+		{
+			errorImage.setText("Insira uma imagem da arte");
+			errorImage.setVisible(true);
+			validate = false;
+		}
+		if(tags.getChildren().isEmpty())
+		{
+			errorTags.setText("A arte deve possuir pelo menos uma tag");
+			errorTags.setVisible(true);
+			validate = false;
+		}
+		
+		return validate;
+	}
+	
+	/*
+	 * 	##	VALIDATION ERRORS LABELS
+	 */
+	
+	void loadValidationErrors()
+	{
+		errorDescription.managedProperty().bind(errorDescription.visibleProperty());
+		errorImage.managedProperty().bind(errorImage.visibleProperty());
+		errorTags.managedProperty().bind(errorTags.visibleProperty());
+    	
+    	resetValidation();
+	}
+	
+	void resetValidation()
+	{
+		errorDescription.setVisible(false);
+		errorImage.setVisible(false);
+		errorTags.setVisible(false);
 	}
     
     /*

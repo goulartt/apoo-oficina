@@ -70,6 +70,7 @@ import com.jfoenix.controls.JFXTextField;
 
 import de.jensd.fx.glyphs.octicons.OctIcon;
 import de.jensd.fx.glyphs.octicons.OctIconView;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -108,6 +109,12 @@ public class ShowArtController {
     private JFXTextField tagInput;
     
     @FXML
+    private Label errorDescription;
+    
+    @FXML
+    private Label errorTags;
+    
+    @FXML
     private HBox tags;
 
     @FXML
@@ -116,17 +123,58 @@ public class ShowArtController {
     private File imageFile;
     
     /*
+     * 	## INITIALIZE
+     */
+    
+    public void initialize() {
+    	loadValidationErrors();
+    	Platform.runLater(new Runnable() {
+	        @Override
+	        public void run() {
+	            description.requestFocus();
+	        }
+	    });
+    }
+    
+    /*
      * 	##	ATUALIZA DADOS
      */
     @FXML
     void update(ActionEvent event) {
-    	
-    	//if(atualizou) {
-    	loadDialogUpdate((StackPane) ((Node) event.getSource()).getScene().lookup("#mainStack"), new Text("As alterações foram salvas!"));
-    	//} else {
-    		
-    		//DESATIVA O BOTÃO DE SALVAR LÁ QUE FICA DAHORA
+    	if(validate()) {
+    		//if(atualizou) {
+        	loadDialogUpdate((StackPane) ((Node) event.getSource()).getScene().lookup("#mainStack"), new Text("As alterações foram salvas!"));
+        	//} else {
+        		
+        		//DESATIVA O BOTÃO DE SALVAR LÁ QUE FICA DAHORA
+    	}
     }
+    
+    /*
+     * 	##	VALIDACAO FORM
+     */
+    
+    boolean validate()
+	{
+		boolean validate = true;
+		
+		resetValidation();
+		
+		if(description.getText().isEmpty())
+		{
+			errorDescription.setText("Insira uma descrição para a arte");
+			errorDescription.setVisible(true);
+			validate = false;
+		}
+		if(tags.getChildren().isEmpty())
+		{
+			errorTags.setText("A arte deve possuir pelo menos uma tag");
+			errorTags.setVisible(true);
+			validate = false;
+		}
+		
+		return validate;
+	}
     
     /*
      * 	##	DELETA ARTE
@@ -224,6 +272,24 @@ public class ShowArtController {
 		dialogContent.setActions(ok);
 		dialog.show();
     }
+    
+    /*
+	 * 	##	VALIDATION ERRORS LABELS
+	 */
+	
+	void loadValidationErrors()
+	{
+		errorDescription.managedProperty().bind(errorDescription.visibleProperty());
+		errorTags.managedProperty().bind(errorTags.visibleProperty());
+    	
+    	resetValidation();
+	}
+	
+	void resetValidation()
+	{
+		errorDescription.setVisible(false);
+		errorTags.setVisible(false);
+	}
     
     /*
      * 	##	CLASSE DO CHIP DA TAG

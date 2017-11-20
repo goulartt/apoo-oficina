@@ -86,6 +86,17 @@
                                                 <Insets top="26.0" />
                                              </VBox.margin>
                                           </JFXTextField>
+                                          <Label fx:id="errorDescription" graphicTextGap="10.0" textFill="#e53935">
+                                             <font>
+                                                <Font name="Verdana" size="14.0" />
+                                             </font>
+                                             <graphic>
+                                                <OctIconView fill="#e53935" glyphName="ISSUE_OPENED" size="18" />
+                                             </graphic>
+                                             <padding>
+                                                <Insets bottom="-10.0" top="16.0" />
+                                             </padding>
+                                          </Label>
                                           <BorderPane prefHeight="50.0" prefWidth="620.0">
                                              <center>
                                                 <JFXTextField fx:id="fileName" editable="false" focusColor="#00bcd4" labelFloat="true" promptText="Imagem" unFocusColor="#212121" BorderPane.alignment="CENTER">
@@ -114,7 +125,7 @@
                                                 </JFXButton>
                                              </right>
                                              <VBox.margin>
-                                                <Insets top="26.0" />
+                                                <Insets top="32.0" />
                                              </VBox.margin>
                                           </BorderPane>
                                           <JFXTextField fx:id="tagInput" focusColor="#00bcd4" labelFloat="true" onKeyPressed="#insertTag" promptText="Tag" unFocusColor="#212121">
@@ -125,6 +136,17 @@
                                                 <Insets top="22.0" />
                                              </VBox.margin>
                                           </JFXTextField>
+                                          <Label fx:id="errorTags" graphicTextGap="10.0" textFill="#e53935">
+                                             <font>
+                                                <Font name="Verdana" size="14.0" />
+                                             </font>
+                                             <graphic>
+                                                <OctIconView fill="#e53935" glyphName="ISSUE_OPENED" size="18" />
+                                             </graphic>
+                                             <padding>
+                                                <Insets bottom="-10.0" top="16.0" />
+                                             </padding>
+                                          </Label>
                                           <HBox fx:id="tags" prefHeight="100.0" prefWidth="200.0" spacing="8.0">
                                              <VBox.margin>
                                                 <Insets top="26.0" />
