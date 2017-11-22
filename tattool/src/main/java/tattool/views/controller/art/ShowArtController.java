@@ -143,7 +143,7 @@ public class ShowArtController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TOD loadValidationErrors();
+		loadValidationErrors();
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
