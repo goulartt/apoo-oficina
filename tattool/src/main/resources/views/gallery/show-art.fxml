@@ -97,17 +97,12 @@
                                                 <Insets bottom="-10.0" top="16.0" />
                                              </padding>
                                           </Label>
-                                          <BorderPane prefHeight="50.0" prefWidth="620.0">
-                                             <VBox.margin>
-                                                <Insets top="32.0" />
-                                             </VBox.margin>
-                                          </BorderPane>
                                           <JFXTextField fx:id="tagInput" focusColor="#00bcd4" labelFloat="true" onKeyPressed="#insertTag" promptText="Tag" unFocusColor="#212121">
                                              <font>
                                                 <Font name="Verdana" size="16.0" />
                                              </font>
                                              <VBox.margin>
-                                                <Insets top="22.0" />
+                                                <Insets top="36.0" />
                                              </VBox.margin>
                                           </JFXTextField>
                                           <Label fx:id="errorTags" graphicTextGap="10.0" textFill="#e53935">

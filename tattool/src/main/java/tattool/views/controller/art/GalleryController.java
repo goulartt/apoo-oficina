@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXTextField;
 
 import de.jensd.fx.glyphs.octicons.OctIconView;
 import javafx.embed.swing.SwingFXUtils;
@@ -27,12 +28,14 @@ import javafx.scene.layout.VBox;
 import tattool.domain.model.Art;
 import tattool.rest.consume.ArtRest;
 import tattool.service.ArtService;
-import tattool.views.controller.DashboardController;
 
 public class GalleryController implements Initializable{
 	
 	@FXML
 	private ScrollPane scrollPane;
+	
+	@FXML
+    private JFXTextField search;
     
     @FXML
     private VBox column1;

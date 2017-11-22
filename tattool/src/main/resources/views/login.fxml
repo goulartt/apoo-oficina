@@ -24,7 +24,7 @@
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <MediaView fx:id="media" fitHeight="200.0" fitWidth="200.0" />
-            <ImageView fx:id="background" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0;">
+            <ImageView fx:id="background" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.2;">
                <image>
                   <Image url="@../images/login/background.jpg" />
                </image>
@@ -40,15 +40,15 @@
                <center>
                   <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Label text="Tattool" textFill="#26c6da">
+                        <Label fx:id="tattool" text="Tattool" textFill="WHITE">
                            <font>
-                              <Font name="Harlow Solid Italic" size="120.0" />
+                              <Font name="Lao UI" size="120.0" />
                            </font>
                            <effect>
                               <DropShadow height="19.0" radius="8.25" spread="0.16" width="16.0" />
                            </effect>
                            <StackPane.margin>
-                              <Insets bottom="80.0" />
+                              <Insets />
                            </StackPane.margin>
                         </Label>
                      </children>

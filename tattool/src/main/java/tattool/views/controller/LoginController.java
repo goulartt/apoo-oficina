@@ -1,6 +1,8 @@
 package tattool.views.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -24,6 +26,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import tattool.domain.model.User;
 import tattool.rest.consume.UserRest;
@@ -44,6 +47,9 @@ public class LoginController implements Initializable {
 	
 	@FXML
 	private ImageView background;
+	
+	@FXML
+    private Label tattool;
 	
 	@FXML
 	private MediaView media;
@@ -68,15 +74,7 @@ public class LoginController implements Initializable {
 		
 		error.managedProperty().bind(error.visibleProperty());
 		error.setVisible(false);
-		String path = new File("src/main/resources/video/video.mp4").getAbsolutePath();
-		m = new Media(new File(path).toURI().toString());
-		mp = new MediaPlayer(m);
-		mp.setAutoPlay(true);
-		media.setMediaPlayer(mp);
-		media.fitWidthProperty().bind(Bindings.selectDouble(media.sceneProperty(), "width"));
-		media.fitHeightProperty().bind(Bindings.selectDouble(media.sceneProperty(), "height"));
-		background.fitWidthProperty().bind(Bindings.selectDouble(background.sceneProperty(), "width"));
-		background.fitHeightProperty().bind(Bindings.selectDouble(background.sceneProperty(), "height"));
+		loadBackground();
 	}
 
 	/*
@@ -168,7 +166,29 @@ public class LoginController implements Initializable {
 			txtUsuario.requestFocus();
 		}
 	}
+	
+	/*
+	 * 	##	CARREGA FUNDO DA VIEW
+	 */
 
+	void loadBackground() {
+		try {
+			final Font font = Font.loadFont(new FileInputStream(new File("src/main/resources/css/Angilla.ttf")), 140);
+			tattool.setFont(font);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		String path = new File("src/main/resources/video/video.mp4").getAbsolutePath();
+		m = new Media(new File(path).toURI().toString());
+		mp = new MediaPlayer(m);
+		mp.setAutoPlay(true);
+		media.setMediaPlayer(mp);
+		media.fitWidthProperty().bind(Bindings.selectDouble(media.sceneProperty(), "width"));
+		media.fitHeightProperty().bind(Bindings.selectDouble(media.sceneProperty(), "height"));
+		background.fitWidthProperty().bind(Bindings.selectDouble(background.sceneProperty(), "width"));
+		background.fitHeightProperty().bind(Bindings.selectDouble(background.sceneProperty(), "height"));
+	}
+	
 	void closeApp() {
 		Platform.exit();
 	}
