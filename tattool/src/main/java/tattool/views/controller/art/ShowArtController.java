@@ -78,6 +78,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
@@ -86,11 +87,13 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import tattool.domain.model.Art;
 import tattool.domain.model.Customer;
 import tattool.domain.model.Tag;
@@ -127,6 +130,9 @@ public class ShowArtController implements Initializable {
 
 	@FXML
 	private OctIconView closeButton;
+	
+	@FXML
+	public JFXDialog dialogShow = new JFXDialog();
 
 	private File imageFile;
 
@@ -261,6 +267,8 @@ public class ShowArtController implements Initializable {
 			public void handle(ActionEvent event) {
 				rest.deleteImage(art.getId());
 	    		dialog.close();
+	    		dialogShow.close();
+	    		back((BorderPane) ((Node) event.getSource()).getScene().lookup("#main"));
 			}
 		});
 		no.setOnAction(new EventHandler<ActionEvent>() {
@@ -308,7 +316,24 @@ public class ShowArtController implements Initializable {
 		dialogContent.setActions(ok);
 		dialog.show();
 	}
+	
+	  /*
+     * 	##	VOLTA
+     */
 
+    void back(BorderPane main) {
+    	try {
+    		FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/gallery/gallery.fxml"));
+    		
+    		viewLoader.setRoot(main);
+    		main.getChildren().clear();
+    		viewLoader.load();
+    	}catch(Exception e)
+    	{
+    		e.printStackTrace();
+    	}
+    }
+    
 	/*
 	 * ## VALIDATION ERRORS LABELS
 	 */
