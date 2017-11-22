@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class DateUtil {
@@ -16,7 +17,11 @@ public class DateUtil {
 	}
 
 	public static LocalDate asLocalDate(Date date) {
-		return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+	    LocalDate data = Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+	    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	    data.format(format);
+	    System.out.println(data);
+		return data;
 	}
 
 	public static LocalDateTime asLocalDateTime(Date date) {
