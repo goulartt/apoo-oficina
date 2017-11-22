@@ -27,6 +27,7 @@ import javafx.scene.layout.VBox;
 import tattool.domain.model.Art;
 import tattool.rest.consume.ArtRest;
 import tattool.service.ArtService;
+import tattool.views.controller.DashboardController;
 
 public class GalleryController implements Initializable{
 	
@@ -87,6 +88,8 @@ public class GalleryController implements Initializable{
 			artLoader.setController(new ShowArtController(a));
 			Region artContent       = artLoader.load();
 			JFXDialog customerModal = new JFXDialog(mainStack, artContent, JFXDialog.DialogTransition.CENTER, false);
+			ShowArtController control = (ShowArtController) artLoader.getController();
+			control.dialogShow = customerModal;
 			
 			ImageView image      = (ImageView) mainStack.getScene().lookup("#image");
 			StackPane imageStack = (StackPane) mainStack.getScene().lookup("#imageStack");

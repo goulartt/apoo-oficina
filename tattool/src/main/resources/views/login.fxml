@@ -11,11 +11,15 @@
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.LoginController">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.LoginController">
    <center>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #263238;" BorderPane.alignment="CENTER" />
+      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #263238;" BorderPane.alignment="CENTER">
+         <center>
+            <MediaView fitHeight="200.0" fitWidth="200.0" BorderPane.alignment="CENTER" fx:id="media"/>
+         </center></BorderPane>
    </center>
    <left>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="380.0" style="-fx-background-color: #26C6DA;" BorderPane.alignment="CENTER">

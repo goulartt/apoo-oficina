@@ -45,7 +45,8 @@ private String path; //Caminho base
 		try {
 			impressao = JasperFillManager.fillReport(JasperCompileManager.compileReport(this.getPathToReportPackage() + "usuarios.jrxml"), parametros, ds);
 			JasperViewer viewer = new JasperViewer(impressao, true);
-			viewer.setVisible(true);
+			viewer.viewReport(impressao, false);
+			//viewer.setVisible(true);
 		} catch (JRException e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
