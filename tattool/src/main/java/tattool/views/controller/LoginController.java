@@ -7,10 +7,10 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXDecorator;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.effects.JFXDepthManager;
 
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,12 +18,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import tattool.domain.model.User;
 import tattool.rest.consume.UserRest;
 
@@ -37,6 +38,12 @@ public class LoginController implements Initializable {
 
 	@FXML
 	private Label error;
+	
+    @FXML
+    private VBox loginPane;
+	
+	@FXML
+	private ImageView background;
 	
 	@FXML
 	private MediaView media;
@@ -56,19 +63,20 @@ public class LoginController implements Initializable {
 				txtUsuario.requestFocus();
 			}
 		});
+		
+		JFXDepthManager.setDepth(loginPane, 4);
+		
 		error.managedProperty().bind(error.visibleProperty());
 		error.setVisible(false);
 		String path = new File("src/main/resources/video/video.mp4").getAbsolutePath();
 		m = new Media(new File(path).toURI().toString());
 		mp = new MediaPlayer(m);
 		mp.setAutoPlay(true);
-		Duration duration = Duration.minutes(0.5);
-		mp.setStartTime(duration);
 		media.setMediaPlayer(mp);
-		DoubleProperty width = media.fitWidthProperty();
-		DoubleProperty height = media.fitHeightProperty();
-		width.bind(Bindings.selectDouble(media.sceneProperty(), "width"));
-		height.bind(Bindings.selectDouble(media.sceneProperty(), "height"));
+		media.fitWidthProperty().bind(Bindings.selectDouble(media.sceneProperty(), "width"));
+		media.fitHeightProperty().bind(Bindings.selectDouble(media.sceneProperty(), "height"));
+		background.fitWidthProperty().bind(Bindings.selectDouble(background.sceneProperty(), "width"));
+		background.fitHeightProperty().bind(Bindings.selectDouble(background.sceneProperty(), "height"));
 	}
 
 	/*
