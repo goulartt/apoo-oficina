@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
@@ -35,6 +36,12 @@
                </center>
             </BorderPane>
          </content>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets top="16.0" />
+         </padding>
       </ScrollPane>
    </center>
    <top>
@@ -82,6 +89,13 @@
                </children>
             </HBox>
          </right>
+         <bottom>
+            <JFXTextField fx:id="search" focusColor="#00bcd4" labelFloat="true" promptText="Pesquisar" style="-fx-font-size: 16px;" unFocusColor="#212121" BorderPane.alignment="CENTER">
+               <padding>
+                  <Insets top="32.0" />
+               </padding>
+            </JFXTextField>
+         </bottom>
       </BorderPane>
    </top>
 </fx:root>

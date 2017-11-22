@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="500.0" prefWidth="640.0" stylesheets="@../../css/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.art.ShowArtController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="500.0" prefWidth="640.0" stylesheets="@../../css/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -26,7 +26,7 @@
                <children>
                   <HBox prefHeight="65.0" prefWidth="688.0">
                      <children>
-                        <Label text="&lt;Descrição Da Arte&gt;" textFill="WHITE">
+                        <Label fx:id="fileName" text="&lt;Descrição Da Arte&gt;" textFill="WHITE">
                            <font>
                               <Font name="Verdana" size="22.0" />
                            </font>
@@ -97,43 +97,12 @@
                                                 <Insets bottom="-10.0" top="16.0" />
                                              </padding>
                                           </Label>
-                                          <BorderPane prefHeight="50.0" prefWidth="620.0">
-                                             <center>
-                                                <JFXTextField fx:id="fileName" editable="false" focusColor="#00bcd4" labelFloat="true" promptText="Imagem" unFocusColor="#212121" BorderPane.alignment="CENTER">
-                                                   <font>
-                                                      <Font name="Verdana" size="16.0" />
-                                                   </font>
-                                                   <BorderPane.margin>
-                                                      <Insets right="24.0" />
-                                                   </BorderPane.margin>
-                                                </JFXTextField>
-                                             </center>
-                                             <right>
-                                                <JFXButton graphicTextGap="6.0" onAction="#fileChooser" prefHeight="38.0" prefWidth="131.0" style="-fx-background-color: #FFC107;" text="Imagem" textFill="WHITE" BorderPane.alignment="CENTER">
-                                                   <font>
-                                                      <Font name="Verdana" size="16.0" />
-                                                   </font>
-                                                   <padding>
-                                                      <Insets bottom="8.0" left="16.0" right="16.0" top="8.0" />
-                                                   </padding>
-                                                   <graphic>
-                                                      <MaterialDesignIconView fill="WHITE" glyphName="FILE_IMAGE" size="22" />
-                                                   </graphic>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
-                                                </JFXButton>
-                                             </right>
-                                             <VBox.margin>
-                                                <Insets top="32.0" />
-                                             </VBox.margin>
-                                          </BorderPane>
                                           <JFXTextField fx:id="tagInput" focusColor="#00bcd4" labelFloat="true" onKeyPressed="#insertTag" promptText="Tag" unFocusColor="#212121">
                                              <font>
                                                 <Font name="Verdana" size="16.0" />
                                              </font>
                                              <VBox.margin>
-                                                <Insets top="22.0" />
+                                                <Insets top="36.0" />
                                              </VBox.margin>
                                           </JFXTextField>
                                           <Label fx:id="errorTags" graphicTextGap="10.0" textFill="#e53935">
