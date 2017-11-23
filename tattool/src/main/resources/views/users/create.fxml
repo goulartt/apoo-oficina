@@ -8,25 +8,26 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="526.0" prefWidth="804.0" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.user.CreateUserController">
+<fx:root prefHeight="526.0" prefWidth="804.0" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.user.CreateUserController">
    <padding>
       <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
    </padding>
    <top>
-      <BorderPane prefHeight="79.0" prefWidth="774.0" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="79.0" prefWidth="774.0" style="-fx-background-color: #2B2B2B;" BorderPane.alignment="CENTER">
          <left>
             <VBox alignment="CENTER_LEFT" prefHeight="79.0" prefWidth="636.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label prefHeight="40.0" prefWidth="387.0" text="Cadastrar novo usuário" textFill="#00bcd4">
+                  <Label prefHeight="40.0" prefWidth="387.0" text="Cadastrar novo usuário" textFill="#26a69a">
                      <font>
                         <Font name="Verdana" size="32.0" />
                      </font>
                   </Label>
-                  <Label text="Preencha os campos a baixo e pressione criar.">
+                  <Label text="Preencha os campos a baixo e pressione criar." textFill="WHITE">
                      <font>
                         <Font name="Verdana" size="16.0" />
                      </font>
@@ -48,17 +49,23 @@
                </children>
             </VBox>
          </left>
+         <padding>
+            <Insets bottom="14.0" left="14.0" right="14.0" top="14.0" />
+         </padding>
+         <effect>
+            <DropShadow color="#00000098" height="22.0" radius="9.0" width="16.0" />
+         </effect>
       </BorderPane>
    </top>
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXTextField fx:id="name" focusColor="#00bcd4" labelFloat="true" onKeyPressed="#keyPressed" promptText="Nome" unFocusColor="#212121">
+            <JFXTextField fx:id="name" focusColor="#009688" labelFloat="true" onKeyPressed="#keyPressed" promptText="Nome" unFocusColor="#212121">
                <font>
                   <Font name="Verdana" size="16.0" />
                </font>
                <VBox.margin>
-                  <Insets top="26.0" />
+                  <Insets top="32.0" />
                </VBox.margin>
             </JFXTextField>
             <Label fx:id="errorName" graphicTextGap="10.0" textFill="#e53935">
@@ -72,7 +79,7 @@
                   <Insets bottom="-10.0" top="16.0" />
                </VBox.margin>
             </Label>
-            <JFXTextField fx:id="username" focusColor="#00bcd4" labelFloat="true" onKeyPressed="#keyPressed" promptText="Login" unFocusColor="#212121">
+            <JFXTextField fx:id="username" focusColor="#009688" labelFloat="true" onKeyPressed="#keyPressed" promptText="Login" unFocusColor="#212121">
                <font>
                   <Font name="Verdana" size="16.0" />
                </font>
@@ -91,7 +98,7 @@
                   <Insets bottom="-10.0" top="16.0" />
                </VBox.margin>
             </Label>
-            <JFXPasswordField fx:id="password" focusColor="#00bcd4" labelFloat="true" onKeyPressed="#keyPressed" promptText="Senha" unFocusColor="#212121">
+            <JFXPasswordField fx:id="password" focusColor="#009688" labelFloat="true" onKeyPressed="#keyPressed" promptText="Senha" unFocusColor="#212121">
                <font>
                   <Font name="Verdana" size="16.0" />
                </font>
@@ -116,7 +123,7 @@
    <bottom>
       <BorderPane prefHeight="44.0" prefWidth="774.0" BorderPane.alignment="CENTER">
          <right>
-            <JFXButton contentDisplay="RIGHT" onAction="#store" style="-fx-background-color: #4CAF50;" text="Criar" textFill="WHITE" BorderPane.alignment="CENTER">
+            <JFXButton buttonType="RAISED" contentDisplay="RIGHT" onAction="#store" style="-fx-background-color: #009688; -fx-background-radius: 0;" text="Criar" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Verdana" size="16.0" />
                </font>
@@ -132,7 +139,7 @@
             </JFXButton>
          </right>
          <left>
-            <JFXButton onAction="#back" style="-fx-background-color: #78909C;" text="Voltar" textFill="WHITE" BorderPane.alignment="CENTER">
+            <JFXButton onAction="#back" style="-fx-background-color: #607D8B; -fx-background-radius: 0;" text="Voltar" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Verdana" size="16.0" />
                </font>

@@ -20,7 +20,7 @@
 
 <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" stylesheets="@../../css/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.DashboardController">
    <left>
-      <VBox fx:id="nav" prefHeight="200.0" prefWidth="220.0" style="-fx-background-color: #607D8B;" BorderPane.alignment="CENTER">
+      <VBox fx:id="nav" prefHeight="200.0" prefWidth="220.0" style="-fx-background-color: #2B2B2B;" BorderPane.alignment="CENTER">
          <children>
             <JFXButton alignment="TOP_LEFT" graphicTextGap="10.0" onAction="#home" prefHeight="25.0" prefWidth="227.0" styleClass="nav-button" text="Home" textFill="WHITE">
                <font>
@@ -153,7 +153,7 @@
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <center>
-            <StackPane fx:id="mainStack" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <StackPane fx:id="mainStack" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
                <children>
                   <BorderPane fx:id="main" prefHeight="200.0" prefWidth="200.0" />
                </children>
@@ -163,7 +163,7 @@
    <top>
       <AnchorPane prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <BorderPane fx:id="header" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #455A64;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <BorderPane fx:id="header" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #101010;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <right>
                   <HBox alignment="CENTER" prefHeight="50.0" prefWidth="280.0" spacing="15.0" BorderPane.alignment="CENTER">
                      <children>

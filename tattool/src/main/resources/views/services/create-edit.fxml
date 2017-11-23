@@ -11,6 +11,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -24,16 +25,16 @@
       <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
    </padding>
    <top>
-      <BorderPane prefHeight="79.0" prefWidth="774.0" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="79.0" prefWidth="774.0" style="-fx-background-color: #2B2B2B;" BorderPane.alignment="CENTER">
          <left>
             <VBox alignment="CENTER_LEFT" prefHeight="79.0" prefWidth="545.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label prefHeight="40.0" prefWidth="387.0" text="Novo serviço" textFill="#00bcd4">
+                  <Label prefHeight="40.0" prefWidth="387.0" text="Novo serviço" textFill="#26a69a">
                      <font>
                         <Font name="Verdana" size="32.0" />
                      </font>
                   </Label>
-                  <Label text="Preencha os campos abaixo e pressione salvar.">
+                  <Label text="Preencha os campos abaixo e pressione salvar." textFill="WHITE">
                      <font>
                         <Font name="Verdana" size="16.0" />
                      </font>
@@ -44,6 +45,12 @@
                </children>
             </VBox>
          </left>
+         <padding>
+            <Insets bottom="14.0" left="14.0" right="14.0" top="14.0" />
+         </padding>
+         <effect>
+            <DropShadow color="#0000009c" height="22.0" radius="9.0" width="16.0" />
+         </effect>
       </BorderPane>
    </top>
    <center>
@@ -55,7 +62,7 @@
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <JFXTextField fx:id="name" focusColor="#26c6da" labelFloat="true" onKeyPressed="#keyPressed" promptText="Nome/Descrição" unFocusColor="#212121">
+                              <JFXTextField fx:id="name" focusColor="#009688" labelFloat="true" onKeyPressed="#keyPressed" promptText="Nome/Descrição" unFocusColor="#212121">
                                  <font>
                                     <Font name="Verdana" size="16.0" />
                                  </font>
@@ -78,7 +85,7 @@
                                  <center>
                                     <VBox prefHeight="72.0" prefWidth="774.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <JFXTextField fx:id="customer" editable="false" focusColor="#26c6da" labelFloat="true" onKeyPressed="#keyPressed" promptText="Cliente" unFocusColor="#212121">
+                                          <JFXTextField fx:id="customer" editable="false" focusColor="#009688" labelFloat="true" onKeyPressed="#keyPressed" promptText="Cliente" unFocusColor="#212121">
                                              <font>
                                                 <Font name="Verdana" size="16.0" />
                                              </font>
@@ -104,7 +111,7 @@
                                     <Insets top="36.0" />
                                  </padding>
                                  <right>
-                                    <JFXButton graphicTextGap="6.0" onAction="#customerGrid" prefHeight="38.0" prefWidth="131.0" style="-fx-background-color: #FFC107;" text="Cliente" textFill="WHITE" BorderPane.alignment="TOP_LEFT">
+                                    <JFXButton buttonType="RAISED" graphicTextGap="6.0" onAction="#customerGrid" prefHeight="38.0" prefWidth="131.0" style="-fx-background-color: #009688; -fx-background-radius: 0;" text="Cliente" textFill="WHITE" BorderPane.alignment="TOP_LEFT">
                                        <font>
                                           <Font name="Verdana" size="16.0" />
                                        </font>
@@ -138,7 +145,7 @@
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <JFXTextField fx:id="numberSessions" focusColor="#26c6da" labelFloat="true" onKeyPressed="#keyPressed" promptText="Número de sessões" text="1" unFocusColor="#212121">
+                              <JFXTextField fx:id="numberSessions" focusColor="#009688" labelFloat="true" onKeyPressed="#keyPressed" promptText="Número de sessões" text="1" unFocusColor="#212121">
                                  <font>
                                     <Font name="Verdana" size="16.0" />
                                  </font>
@@ -157,7 +164,7 @@
                                     <Insets bottom="-10.0" top="16.0" />
                                  </padding>
                               </Label>
-                              <JFXTextField fx:id="price" focusColor="#26c6da" labelFloat="true" layoutX="10.0" layoutY="42.0" onKeyPressed="#keyPressed" promptText="Preço da sessão" unFocusColor="#212121">
+                              <JFXTextField fx:id="price" focusColor="#009688" labelFloat="true" layoutX="10.0" layoutY="42.0" onKeyPressed="#keyPressed" promptText="Preço da sessão" unFocusColor="#212121">
                                  <font>
                                     <Font name="Verdana" size="16.0" />
                                  </font>
@@ -176,7 +183,7 @@
                                     <Insets bottom="-10.0" top="16.0" />
                                  </padding>
                               </Label>
-                              <Label text="Primeira sessão:" textFill="#00bcd4">
+                              <Label text="Primeira sessão:" textFill="#26a69a">
                                  <font>
                                     <Font name="Verdana" size="16.0" />
                                  </font>
@@ -195,7 +202,7 @@
                                  <children>
                                     <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <JFXDatePicker fx:id="firstDate" defaultColor="#26c6da" editable="false" prefHeight="32.0" prefWidth="5000.0" promptText="Data" style="-fx-font-family: Verdana; -fx-font-size: 16px;" />
+                                          <JFXDatePicker fx:id="firstDate" editable="false" prefHeight="32.0" prefWidth="5000.0" promptText="Data" style="-fx-font-family: Verdana; -fx-font-size: 16px;" />
                                           <Label fx:id="errorFirstDate" graphicTextGap="10.0" textFill="#e53935">
                                              <font>
                                                 <Font name="Verdana" size="14.0" />
@@ -223,7 +230,7 @@
                                        <children>
                                           <VBox prefHeight="57.0" prefWidth="218.0">
                                              <children>
-                                                <JFXTimePicker fx:id="firstBegin" defaultColor="#26c6da" prefWidth="5000.0" promptText="Início" style="-fx-font-family: Verdana; -fx-font-size: 16px;">
+                                                <JFXTimePicker fx:id="firstBegin" prefWidth="5000.0" promptText="Início" style="-fx-font-family: Verdana; -fx-font-size: 16px;">
                                                    <VBox.margin>
                                                       <Insets top="1.0" />
                                                    </VBox.margin>
@@ -243,7 +250,7 @@
                                           </VBox>
                                           <VBox prefHeight="57.0" prefWidth="218.0" GridPane.columnIndex="1">
                                              <children>
-                                                <JFXTextField fx:id="firstTime" focusColor="#26c6da" labelFloat="true" onKeyPressed="#keyPressed" promptText="Duração" unFocusColor="#212121">
+                                                <JFXTextField fx:id="firstTime" focusColor="#009688" labelFloat="true" onKeyPressed="#keyPressed" promptText="Duração" unFocusColor="#212121">
                                                    <font>
                                                       <Font name="Verdana" size="16.0" />
                                                    </font>
@@ -285,14 +292,14 @@
             </Tab>
          </tabs>
          <BorderPane.margin>
-            <Insets top="8.0" />
+            <Insets />
          </BorderPane.margin>
       </JFXTabPane>
    </center>
    <bottom>
       <BorderPane prefHeight="44.0" prefWidth="774.0" BorderPane.alignment="CENTER">
          <right>
-            <JFXButton contentDisplay="RIGHT" onAction="#store" style="-fx-background-color: #4CAF50;" text="Salvar" textFill="WHITE" BorderPane.alignment="CENTER">
+            <JFXButton buttonType="RAISED" contentDisplay="RIGHT" onAction="#store" style="-fx-background-color: #009688; -fx-background-radius: 0;" text="Salvar" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Verdana" size="16.0" />
                </font>
@@ -308,7 +315,7 @@
             </JFXButton>
          </right>
          <left>
-            <JFXButton onAction="#back" style="-fx-background-color: #78909C;" text="Voltar" textFill="WHITE" BorderPane.alignment="CENTER">
+            <JFXButton onAction="#back" style="-fx-background-color: #607D8B; -fx-background-radius: 0;" text="Voltar" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Verdana" size="16.0" />
                </font>

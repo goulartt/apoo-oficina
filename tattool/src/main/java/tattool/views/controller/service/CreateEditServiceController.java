@@ -1,5 +1,7 @@
 package tattool.views.controller.service;
 
+import java.io.IOException;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDialog;
@@ -21,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -175,6 +178,25 @@ public class CreateEditServiceController {
 	}
     
     /*
+     * 	##	GRID SELECT CUSTOMER
+     */
+    
+    void customerGrid(StackPane mainStack) {
+    	try {
+			FXMLLoader customerLoader = new FXMLLoader(getClass().getResource("/views/services/customer-grid.fxml"));
+			CustomerGridController control = new CustomerGridController();
+			customerLoader.setController(control);
+			Region customerContent    = customerLoader.load();
+			JFXDialog customerModal   = new JFXDialog(mainStack, customerContent, JFXDialog.DialogTransition.CENTER, false);
+			control.dialog            = customerModal;
+			control.customer          = customer;
+			customerModal.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+    
+    /*
      * 	##	VOLTA
      */
     
@@ -206,7 +228,7 @@ public class CreateEditServiceController {
     
     @FXML
     void customerGrid(ActionEvent event) {
-    	customer.setText("Selecionou um cliente");
+    	customerGrid((StackPane) ((Node) event.getSource()).getScene().lookup("#mainStack"));
     }
 
     /*

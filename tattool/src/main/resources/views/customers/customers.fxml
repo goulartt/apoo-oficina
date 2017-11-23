@@ -9,6 +9,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -19,16 +20,16 @@
       <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
    </padding>
    <top>
-      <BorderPane prefHeight="79.0" prefWidth="774.0" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="79.0" prefWidth="774.0" style="-fx-background-color: #2B2B2B;" BorderPane.alignment="CENTER">
          <left>
             <VBox alignment="CENTER_LEFT" prefHeight="79.0" prefWidth="545.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label prefHeight="40.0" prefWidth="387.0" text="Clientes" textFill="#00bcd4">
+                  <Label prefHeight="40.0" prefWidth="387.0" text="Clientes" textFill="#26a69a">
                      <font>
                         <Font name="Verdana" size="32.0" />
                      </font>
                   </Label>
-                  <Label text="Adicione clientes ao sistema para ter controle sobre os serviços">
+                  <Label text="Adicione clientes ao sistema para ter controle sobre os serviços" textFill="WHITE">
                      <font>
                         <Font name="Verdana" size="16.0" />
                      </font>
@@ -42,7 +43,7 @@
          <right>
             <HBox alignment="CENTER_RIGHT" prefHeight="79.0" prefWidth="153.0" spacing="16.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton contentDisplay="TOP" onAction="#create" prefHeight="65.0" prefWidth="150.0" style="-fx-background-color: #4CAF50;" text="Novo Cliente" textFill="WHITE">
+                  <JFXButton buttonType="RAISED" contentDisplay="TOP" onAction="#create" prefHeight="65.0" prefWidth="150.0" style="-fx-background-color: #009688; -fx-background-radius: 0;" text="Novo Cliente" textFill="WHITE">
                      <font>
                         <Font name="Verdana" size="16.0" />
                      </font>
@@ -63,6 +64,29 @@
                </children>
             </HBox>
          </right>
+         <padding>
+            <Insets bottom="14.0" left="14.0" right="14.0" top="14.0" />
+         </padding>
+         <effect>
+            <DropShadow color="#000000ac" height="22.0" radius="8.5" width="14.0" />
+         </effect>
+         <bottom>
+            <VBox prefHeight="37.0" prefWidth="746.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXTextField fx:id="search" focusColor="#26a69a" labelFloat="true" promptText="Pesquisar" style="-fx-prompt-text-fill: #fff; -fx-text-fill: #fff;" unFocusColor="WHITE">
+                     <font>
+                        <Font name="Verdana" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="26.0" />
+                     </VBox.margin>
+                  </JFXTextField>
+               </children>
+            </VBox>
+         </bottom>
+         <BorderPane.margin>
+            <Insets bottom="16.0" />
+         </BorderPane.margin>
       </BorderPane>
    </top>
    <center>
@@ -77,20 +101,6 @@
                </columnResizePolicy>
             </JFXTreeTableView>
          </center>
-         <top>
-            <VBox prefHeight="75.0" prefWidth="774.0" BorderPane.alignment="CENTER">
-               <children>
-                  <JFXTextField fx:id="search" focusColor="#00bcd4" labelFloat="true" promptText="Pesquisar" style="-fx-text-fill: #212121;" unFocusColor="#212121">
-                     <font>
-                        <Font name="Verdana" size="16.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets top="18.0" />
-                     </VBox.margin>
-                  </JFXTextField>
-               </children>
-            </VBox>
-         </top>
       </BorderPane>
    </center>
 </fx:root>
