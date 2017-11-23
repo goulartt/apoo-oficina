@@ -55,7 +55,7 @@
                   </StackPane>
                </center>
             </BorderPane>
-            <VBox fx:id="loginPane" alignment="CENTER" prefHeight="200.0" prefWidth="380.0" style="-fx-background-color: #26C6DA;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <VBox fx:id="loginPane" alignment="CENTER" prefHeight="200.0" prefWidth="380.0" style="-fx-background-color: #101010;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Label prefHeight="33.0" prefWidth="546.0" text="Let's work!" textFill="WHITE">
                      <font>
@@ -68,7 +68,7 @@
                         <Insets top="18.0" />
                      </VBox.margin>
                   </Label>
-                  <JFXTextField fx:id="txtUsuario" focusColor="WHITE" labelFloat="true" onKeyPressed="#keyPressed" promptText="Usuário" styleClass="login-txt-field" unFocusColor="WHITE">
+                  <JFXTextField fx:id="txtUsuario" focusColor="#4db6ac" labelFloat="true" onKeyPressed="#keyPressed" promptText="Usuário" styleClass="login-txt-field" unFocusColor="WHITE">
                      <font>
                         <Font name="Verdana" size="16.0" />
                      </font>
@@ -76,7 +76,7 @@
                         <Insets top="32.0" />
                      </VBox.margin>
                   </JFXTextField>
-                  <JFXPasswordField fx:id="txtSenha" focusColor="WHITE" labelFloat="true" onKeyPressed="#keyPressed" promptText="Senha" styleClass="login-txt-field" unFocusColor="WHITE">
+                  <JFXPasswordField fx:id="txtSenha" focusColor="#4db6ac" labelFloat="true" onKeyPressed="#keyPressed" promptText="Senha" styleClass="login-txt-field" unFocusColor="WHITE">
                      <VBox.margin>
                         <Insets top="34.0" />
                      </VBox.margin>
@@ -84,18 +84,18 @@
                         <Font name="Verdana" size="16.0" />
                      </font>
                   </JFXPasswordField>
-                  <Label fx:id="error" graphicTextGap="10.0" prefHeight="17.0" prefWidth="512.0" textFill="#e53935">
+                  <Label fx:id="error" graphicTextGap="10.0" prefHeight="17.0" prefWidth="512.0" textFill="#f44336">
                      <font>
                         <Font name="Verdana" size="16.0" />
                      </font>
                      <graphic>
-                        <MaterialDesignIconView fill="#e53935" glyphName="ACCOUNT_ALERT" size="22" />
+                        <MaterialDesignIconView fill="#f44336" glyphName="ACCOUNT_ALERT" size="22" />
                      </graphic>
                      <VBox.margin>
                         <Insets bottom="-10.0" top="16.0" />
                      </VBox.margin>
                   </Label>
-                  <JFXCheckBox checkedColor="#263238" prefHeight="18.0" prefWidth="424.0" style="-jfx-checked-color: #26C6DA; -jfx-unchecked-color: #fff;" text="Lembrar-me" textFill="WHITE" unCheckedColor="WHITE">
+                  <JFXCheckBox checkedColor="#263238" prefHeight="18.0" prefWidth="424.0" style="-jfx-checked-color: #26A69A; -jfx-unchecked-color: #fff;" text="Lembrar-me" textFill="WHITE" unCheckedColor="WHITE">
                      <VBox.margin>
                         <Insets top="22.0" />
                      </VBox.margin>
@@ -106,7 +106,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXCheckBox>
-                  <JFXButton onAction="#login" prefHeight="25.0" prefWidth="487.0" style="-fx-background-color: #263238;" text="Entrar" textFill="WHITE">
+                  <JFXButton buttonType="RAISED" onAction="#login" prefHeight="25.0" prefWidth="487.0" style="-fx-background-color: #009688; -fx-background-radius: 0;" text="Entrar" textFill="WHITE">
                      <font>
                         <Font name="Verdana" size="18.0" />
                      </font>
@@ -120,7 +120,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <JFXButton onAction="#closeApp" prefHeight="25.0" prefWidth="487.0" style="-fx-background-color: #e53935;" text="Encerrar" textFill="WHITE">
+                  <JFXButton onAction="#closeApp" prefHeight="25.0" prefWidth="487.0" style="-fx-background-color: #f44336; -fx-background-radius: 0;" text="Encerrar" textFill="WHITE">
                      <font>
                         <Font name="Verdana" size="18.0" />
                      </font>

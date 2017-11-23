@@ -22,7 +22,7 @@
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <VBox prefHeight="60.0" prefWidth="720.0" style="-fx-background-color: #00BCD4;" BorderPane.alignment="CENTER">
+            <VBox prefHeight="60.0" prefWidth="720.0" style="-fx-background-color: #2B2B2B;" BorderPane.alignment="CENTER">
                <children>
                   <HBox prefHeight="65.0" prefWidth="688.0">
                      <children>
@@ -73,12 +73,12 @@
                                  <center>
                                     <VBox prefHeight="197.0" prefWidth="720.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <Label text="Informações:" textFill="#00bcd4">
+                                          <Label text="Informações:" textFill="#26a69a">
                                              <font>
                                                 <Font name="Verdana" size="16.0" />
                                              </font>
                                           </Label>
-                                          <JFXTextField fx:id="description" focusColor="#00bcd4" labelFloat="true" onKeyPressed="#insertTag" promptText="Descrição" unFocusColor="#212121">
+                                          <JFXTextField fx:id="description" focusColor="#009688" labelFloat="true" onKeyPressed="#insertTag" promptText="Descrição" unFocusColor="#212121">
                                              <font>
                                                 <Font name="Verdana" size="16.0" />
                                              </font>
@@ -97,7 +97,7 @@
                                                 <Insets bottom="-10.0" top="16.0" />
                                              </padding>
                                           </Label>
-                                          <JFXTextField fx:id="tagInput" focusColor="#00bcd4" labelFloat="true" onKeyPressed="#insertTag" promptText="Tag" unFocusColor="#212121">
+                                          <JFXTextField fx:id="tagInput" focusColor="#009688" labelFloat="true" onKeyPressed="#insertTag" promptText="Tag" unFocusColor="#212121">
                                              <font>
                                                 <Font name="Verdana" size="16.0" />
                                              </font>
@@ -133,7 +133,7 @@
                                  <bottom>
                                     <HBox alignment="TOP_RIGHT">
                                        <children>
-                                          <JFXButton graphicTextGap="6.0" onAction="#delete" prefHeight="38.0" prefWidth="131.0" style="-fx-background-color: #e53935;" text="Apagar" textFill="WHITE">
+                                          <JFXButton buttonType="RAISED" graphicTextGap="6.0" onAction="#delete" prefHeight="38.0" prefWidth="131.0" style="-fx-background-color: #f44336; -fx-background-radius: 0;" text="Apagar" textFill="WHITE">
                                              <font>
                                                 <Font name="Verdana" size="16.0" />
                                              </font>
@@ -150,7 +150,7 @@
                                                 <Insets right="16.0" />
                                              </HBox.margin>
                                           </JFXButton>
-                                          <JFXButton graphicTextGap="6.0" onAction="#update" prefHeight="38.0" prefWidth="131.0" style="-fx-background-color: #4CAF50;" text="Salvar" textFill="WHITE">
+                                          <JFXButton buttonType="RAISED" graphicTextGap="6.0" onAction="#update" prefHeight="38.0" prefWidth="131.0" style="-fx-background-color: #009688; -fx-background-radius: 0;" text="Salvar" textFill="WHITE">
                                              <font>
                                                 <Font name="Verdana" size="16.0" />
                                              </font>

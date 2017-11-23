@@ -7,6 +7,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -45,16 +46,16 @@
       </ScrollPane>
    </center>
    <top>
-      <BorderPane prefHeight="93.0" prefWidth="774.0" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="93.0" prefWidth="774.0" style="-fx-background-color: #2B2B2B;" BorderPane.alignment="CENTER">
          <left>
             <VBox alignment="CENTER_LEFT" prefHeight="79.0" prefWidth="545.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label prefHeight="40.0" prefWidth="387.0" text="Galeria de artes" textFill="#00bcd4">
+                  <Label prefHeight="40.0" prefWidth="387.0" text="Galeria de artes" textFill="#26a69a">
                      <font>
                         <Font name="Verdana" size="32.0" />
                      </font>
                   </Label>
-                  <Label text="Gerencie as artes de seu estúdio.">
+                  <Label text="Gerencie as artes de seu estúdio." textFill="WHITE">
                      <font>
                         <Font name="Verdana" size="16.0" />
                      </font>
@@ -68,7 +69,7 @@
          <right>
             <HBox alignment="CENTER_RIGHT" prefHeight="79.0" prefWidth="153.0" spacing="16.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton contentDisplay="TOP" onAction="#create" prefHeight="65.0" prefWidth="150.0" style="-fx-background-color: #4CAF50;" text="Cadastrar Arte" textFill="WHITE">
+                  <JFXButton buttonType="RAISED" contentDisplay="TOP" onAction="#create" prefHeight="65.0" prefWidth="150.0" style="-fx-background-color: #009688; -fx-background-radius: 0;" text="Cadastrar Arte" textFill="WHITE">
                      <font>
                         <Font name="Verdana" size="16.0" />
                      </font>
@@ -90,12 +91,18 @@
             </HBox>
          </right>
          <bottom>
-            <JFXTextField fx:id="search" focusColor="#00bcd4" labelFloat="true" promptText="Pesquisar" style="-fx-font-size: 16px;" unFocusColor="#212121" BorderPane.alignment="CENTER">
+            <JFXTextField fx:id="search" focusColor="#26a69a" labelFloat="true" promptText="Pesquisar" style="-fx-font-size: 16px; -fx-text-fill: #fff; -fx-prompt-text-fill: #fff;" unFocusColor="WHITE" BorderPane.alignment="CENTER">
                <padding>
                   <Insets top="32.0" />
                </padding>
             </JFXTextField>
          </bottom>
+         <padding>
+            <Insets bottom="14.0" left="14.0" right="14.0" top="14.0" />
+         </padding>
+         <effect>
+            <DropShadow color="#0000009b" height="22.0" radius="9.0" width="16.0" />
+         </effect>
       </BorderPane>
    </top>
 </fx:root>

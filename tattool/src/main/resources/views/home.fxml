@@ -6,31 +6,29 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <fx:root minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="804.0" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.HomeController">
-   <padding>
-      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-   </padding>
    <top>
-      <BorderPane prefHeight="79.0" prefWidth="774.0" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="79.0" prefWidth="774.0" style="-fx-background-color: #2B2B2B;" BorderPane.alignment="CENTER">
          <left>
             <VBox alignment="CENTER_LEFT" prefHeight="79.0" prefWidth="297.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Bem vindo!" textFill="#00bcd4">
+                  <Label text="Bem vindo!" textFill="#26a69a">
                      <font>
                         <Font name="Verdana" size="32.0" />
                      </font>
                   </Label>
-                  <Label text="Estúdio de Tatuagem Muito Fodão" textFill="#00bcd4">
+                  <Label text="Estúdio de Tatuagem Muito Fodão" textFill="#4db6ac">
                      <font>
                         <Font name="Verdana" size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblData" text="9 de Setembro, 2017.">
+                  <Label fx:id="lblData" text="9 de Setembro, 2017." textFill="WHITE">
                      <font>
                         <Font name="Verdana" size="12.0" />
                      </font>
@@ -44,7 +42,7 @@
          <right>
             <HBox alignment="CENTER_RIGHT" prefHeight="79.0" prefWidth="400.0" spacing="16.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton contentDisplay="TOP" graphicTextGap="2.0" onAction="#createService" prefHeight="65.0" prefWidth="150.0" style="-fx-background-color: #FFCA28;" text="Novo Serviço" textFill="WHITE">
+                  <JFXButton buttonType="RAISED" contentDisplay="TOP" graphicTextGap="2.0" onAction="#createService" prefHeight="65.0" prefWidth="150.0" style="-fx-background-color: #FF5722; -fx-background-radius: 0;" text="Novo Serviço" textFill="WHITE">
                      <font>
                         <Font name="Verdana" size="14.0" />
                      </font>
@@ -68,7 +66,7 @@
                         </Label>
                      </graphic>
                   </JFXButton>
-                  <JFXButton contentDisplay="TOP" graphicTextGap="2.0" onAction="#createCustomer" prefHeight="65.0" prefWidth="150.0" style="-fx-background-color: #4CAF50;" text="Novo Cliente" textFill="WHITE">
+                  <JFXButton buttonType="RAISED" contentDisplay="TOP" graphicTextGap="2.0" onAction="#createCustomer" prefHeight="65.0" prefWidth="150.0" style="-fx-background-color: #009688; -fx-background-radius: 0;" text="Novo Cliente" textFill="WHITE">
                      <font>
                         <Font name="Verdana" size="14.0" />
                      </font>
@@ -92,12 +90,18 @@
                </children>
             </HBox>
          </right>
+         <padding>
+            <Insets bottom="14.0" left="14.0" right="14.0" top="14.0" />
+         </padding>
+         <effect>
+            <DropShadow color="#000000aa" height="22.0" radius="8.0" width="12.0" />
+         </effect>
       </BorderPane>
    </top>
    <center>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #26C6DA;" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #131313;" BorderPane.alignment="CENTER">
          <center>
-            <Label text="Calendário bonito" textFill="WHITE" BorderPane.alignment="CENTER">
+            <Label text="Calendário bonito" textFill="#111111" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Verdana" size="26.0" />
                </font>
@@ -109,12 +113,12 @@
       </BorderPane>
    </center>
    <right>
-      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="240.0" style="-fx-background-color: #607D8B;" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="240.0" style="-fx-border-color: #181818;" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets left="12.0" top="12.0" />
          </BorderPane.margin>
          <children>
-            <Label text="Alguma Coisa" textFill="WHITE">
+            <Label text="Alguma Coisa" textFill="#181818">
                <font>
                   <Font name="Verdana" size="26.0" />
                </font>
@@ -122,4 +126,7 @@
          </children>
       </VBox>
    </right>
+   <padding>
+      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+   </padding>
 </fx:root>
