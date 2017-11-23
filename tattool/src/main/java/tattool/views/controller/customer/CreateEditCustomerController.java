@@ -128,8 +128,7 @@ public class CreateEditCustomerController {
         this.customer = customer;
     }
     
-    public void initialize()
-    {
+    public void initialize() {
     	carregaCampos();
     	loadValidationErrors();
     	loadTab();
@@ -174,8 +173,7 @@ public class CreateEditCustomerController {
      * 	##	REGISTRA O CLINTE
      */
     
-    void store(StackPane mainStack)
-    {
+    void store(StackPane mainStack) {
     	if(this.customer.getId() == null) {
     		if(validate())
         	{
@@ -211,15 +209,10 @@ public class CreateEditCustomerController {
 	}
     
     /*
-     * 	##	STORE DIALOG
-     */
-    
-    /*
 	 * 	##	DIALOG STORE
 	 */
 	
-	void loadDialog(StackPane mainStack)
-	{
+	void loadDialog(StackPane mainStack) {
 		JFXDialogLayout dialogContent = new JFXDialogLayout();
 		JFXDialog dialog              = new JFXDialog(mainStack, dialogContent, JFXDialog.DialogTransition.CENTER, false);
 		JFXButton ok                  = new JFXButton("Ok");
@@ -249,8 +242,7 @@ public class CreateEditCustomerController {
      * 	##	VALIDACAO FORM
      */
     
-    boolean validate()
-	{
+    boolean validate() {
 		boolean validate = true;
 		boolean customer = false, contact = false, address = false;
 		
@@ -320,8 +312,7 @@ public class CreateEditCustomerController {
 	 */
 	
 	@FXML
-	void keyPressed(KeyEvent event)
-	{
+	void keyPressed(KeyEvent event) {
 		switch(event.getCode())
 		{
 			case ENTER:
@@ -339,8 +330,7 @@ public class CreateEditCustomerController {
 	 * 	##	VALIDATION ERRORS LABELS
 	 */
 	
-	void loadValidationErrors()
-	{
+	void loadValidationErrors() {
 		errorName.managedProperty().bind(errorName.visibleProperty());
     	errorCpf.managedProperty().bind(errorCpf.visibleProperty());
     	errorBirthdate.managedProperty().bind(errorBirthdate.visibleProperty());
@@ -356,8 +346,7 @@ public class CreateEditCustomerController {
     	resetValidation();
 	}
 	
-	void resetValidation()
-	{
+	void resetValidation() {
 		errorName.setVisible(false);
     	errorCpf.setVisible(false);
     	errorBirthdate.setVisible(false);
@@ -378,8 +367,7 @@ public class CreateEditCustomerController {
 	 * 	##	TAB
 	 */
 	
-	void loadTab()
-	{
+	void loadTab() {
 		tabPane.setOnMouseClicked(event -> {
 			if(tabPane.getSelectionModel().getSelectedIndex() == 0)
 				name.requestFocus();
