@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -16,16 +19,16 @@
       <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
    </padding>
    <top>
-      <BorderPane prefHeight="93.0" prefWidth="774.0" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="93.0" prefWidth="774.0" style="-fx-background-color: #2B2B2B;" BorderPane.alignment="CENTER">
          <left>
             <VBox alignment="CENTER_LEFT" prefHeight="79.0" prefWidth="545.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label prefHeight="40.0" prefWidth="387.0" text="Serviços" textFill="#00bcd4">
+                  <Label prefHeight="40.0" prefWidth="387.0" text="Serviços" textFill="#26a69a">
                      <font>
                         <Font name="Verdana" size="32.0" />
                      </font>
                   </Label>
-                  <Label text="Gerencie os serviços de seu estúdio.">
+                  <Label text="Gerencie os serviços de seu estúdio." textFill="WHITE">
                      <font>
                         <Font name="Verdana" size="16.0" />
                      </font>
@@ -39,7 +42,7 @@
          <right>
             <HBox alignment="CENTER_RIGHT" prefHeight="79.0" prefWidth="153.0" spacing="16.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton contentDisplay="TOP" onAction="#create" prefHeight="65.0" prefWidth="150.0" style="-fx-background-color: #4CAF50;" text="Novo Serviço" textFill="WHITE">
+                  <JFXButton buttonType="RAISED" contentDisplay="TOP" onAction="#create" prefHeight="65.0" prefWidth="150.0" style="-fx-background-color: #009688; -fx-background-radius: 0;" text="Novo Serviço" textFill="WHITE">
                      <font>
                         <Font name="Verdana" size="16.0" />
                      </font>
@@ -60,9 +63,40 @@
                </children>
             </HBox>
          </right>
+         <padding>
+            <Insets bottom="14.0" left="14.0" right="14.0" top="14.0" />
+         </padding>
+         <bottom>
+            <VBox prefHeight="37.0" prefWidth="746.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXTextField fx:id="search" focusColor="#26a69a" labelFloat="true" promptText="Pesquisar" style="-fx-prompt-text-fill: #fff; -fx-text-fill: #fff;" unFocusColor="WHITE">
+                     <font>
+                        <Font name="Verdana" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="26.0" />
+                     </VBox.margin>
+                  </JFXTextField>
+               </children>
+            </VBox>
+         </bottom>
+         <BorderPane.margin>
+            <Insets bottom="16.0" />
+         </BorderPane.margin>
       </BorderPane>
    </top>
    <center>
-      <Label text="Provavelmente uma tabela igual a de clientes" BorderPane.alignment="CENTER" />
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <center>
+            <JFXTreeTableView fx:id="serviceTable" prefHeight="234.0" prefWidth="774.0" styleClass="costumer-table" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+               <columnResizePolicy>
+                  <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </JFXTreeTableView>
+         </center>
+      </BorderPane>
    </center>
 </fx:root>

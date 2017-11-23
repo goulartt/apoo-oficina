@@ -9,6 +9,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
@@ -20,16 +21,16 @@
       <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
    </padding>
    <top>
-      <BorderPane prefHeight="79.0" prefWidth="774.0" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="79.0" prefWidth="774.0" style="-fx-background-color: #2B2B2B;" BorderPane.alignment="CENTER">
          <left>
             <VBox alignment="CENTER_LEFT" prefHeight="79.0" prefWidth="386.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label prefHeight="40.0" prefWidth="387.0" text="Usuários" textFill="#00bcd4">
+                  <Label prefHeight="40.0" prefWidth="387.0" text="Usuários" textFill="#26a69a">
                      <font>
                         <Font name="Verdana" size="32.0" />
                      </font>
                   </Label>
-                  <Label text="Crie usuários para gerenciar o seu estúdio">
+                  <Label text="Crie usuários para gerenciar o seu estúdio" textFill="WHITE">
                      <font>
                         <Font name="Verdana" size="16.0" />
                      </font>
@@ -43,7 +44,7 @@
          <right>
             <HBox alignment="CENTER_RIGHT" prefHeight="79.0" prefWidth="343.0" spacing="16.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton contentDisplay="TOP" onAction="#create" prefHeight="65.0" prefWidth="150.0" style="-fx-background-color: #4CAF50;" text="Novo Usuário" textFill="WHITE">
+                  <JFXButton buttonType="RAISED" contentDisplay="TOP" onAction="#create" prefHeight="65.0" prefWidth="150.0" style="-fx-background-color: #009688; -fx-background-radius: 0;" text="Novo Usuário" textFill="WHITE">
                      <font>
                         <Font name="Verdana" size="16.0" />
                      </font>
@@ -57,29 +58,21 @@
                </children>
             </HBox>
          </right>
-      </BorderPane>
-   </top>
-   <center>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <center>
-            <JFXTreeTableView fx:id="userTable" prefHeight="234.0" prefWidth="774.0" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets />
-               </BorderPane.margin>
-               <columnResizePolicy>
-                  <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
-            </JFXTreeTableView>
-         </center>
-         <top>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="14.0" left="14.0" right="14.0" top="14.0" />
+         </padding>
+         <bottom>
             <VBox prefHeight="75.0" prefWidth="774.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXTextField fx:id="search" focusColor="#00bcd4" labelFloat="true" promptText="Pesquisar" style="-fx-text-fill: #212121;" unFocusColor="#212121">
+                  <JFXTextField fx:id="search" focusColor="#26a69a" labelFloat="true" promptText="Pesquisar" style="-fx-text-fill: #fff; -fx-prompt-text-fill: #fff;" unFocusColor="WHITE">
                      <font>
                         <Font name="Verdana" size="16.0" />
                      </font>
                      <VBox.margin>
-                        <Insets top="18.0" />
+                        <Insets top="26.0" />
                      </VBox.margin>
                   </JFXTextField>
                   <Label fx:id="error" graphicTextGap="10.0" textFill="#e53935">
@@ -95,7 +88,24 @@
                   </Label>
                </children>
             </VBox>
-         </top>
+         </bottom>
+         <effect>
+            <DropShadow color="#000000a0" height="22.0" radius="9.0" width="16.0" />
+         </effect>
+      </BorderPane>
+   </top>
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <center>
+            <JFXTreeTableView fx:id="userTable" prefHeight="234.0" prefWidth="774.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+               <columnResizePolicy>
+                  <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </JFXTreeTableView>
+         </center>
          <bottom>
             <BorderPane prefHeight="55.0" prefWidth="774.0" BorderPane.alignment="CENTER">
                <right>
@@ -103,7 +113,7 @@
                      <children>
                         <StackPane fx:id="dialogStack" alignment="BOTTOM_RIGHT" prefHeight="55.0" prefWidth="140.0">
                            <children>
-                              <JFXButton graphicTextGap="10.0" onAction="#delete" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #e53935;" text="Excluir " textFill="WHITE">
+                              <JFXButton buttonType="RAISED" graphicTextGap="10.0" onAction="#delete" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #f44336; -fx-background-radius: 0;" text="Excluir " textFill="WHITE">
                                  <font>
                                     <Font name="Verdana" size="16.0" />
                                  </font>
@@ -116,7 +126,7 @@
                               </JFXButton>
                            </children>
                         </StackPane>
-                        <JFXButton fx:id="update" graphicTextGap="10.0" onAction="#update" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #4CAF50;" text="Salvar" textFill="WHITE">
+                        <JFXButton fx:id="update" buttonType="RAISED" graphicTextGap="10.0" onAction="#update" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #009688; -fx-background-radius: 0;" text="Salvar" textFill="WHITE">
                            <font>
                               <Font name="Verdana" size="16.0" />
                            </font>
@@ -139,6 +149,9 @@
                </right>
             </BorderPane>
          </bottom>
+         <BorderPane.margin>
+            <Insets top="12.0" />
+         </BorderPane.margin>
       </BorderPane>
    </center>
 </fx:root>

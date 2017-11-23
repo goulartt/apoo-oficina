@@ -21,7 +21,7 @@
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <VBox prefHeight="155.0" prefWidth="800.0" style="-fx-background-color: #00BCD4;" BorderPane.alignment="CENTER">
+            <VBox prefHeight="155.0" prefWidth="800.0" style="-fx-background-color: #009688;" BorderPane.alignment="CENTER">
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -170,7 +170,7 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="245.0" prefWidth="252.0">
                      <children>
-                        <JFXButton graphicTextGap="10.0" onAction="#historico" style="-fx-background-color: #FFC107;" text="Histórico" textFill="WHITE">
+                        <JFXButton buttonType="RAISED" graphicTextGap="10.0" onAction="#historico" style="-fx-background-color: #FF5722; -fx-background-radius: 0;" text="Histórico" textFill="WHITE">
                            <font>
                               <Font name="Verdana" size="16.0" />
                            </font>

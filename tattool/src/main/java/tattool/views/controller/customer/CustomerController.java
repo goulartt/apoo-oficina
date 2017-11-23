@@ -148,10 +148,6 @@ public class CustomerController {
     
     void populateTable()
     {
-    	//Testando a populacao da table
-	
-    	
-    	
     	ObservableList<CustomerFX> costumers = FXCollections.observableArrayList();
     	
     	costumers = FXCollections.observableArrayList(ConvertModelToFX.convertListCustomer(rest.findAll()));

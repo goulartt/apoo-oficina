@@ -10,11 +10,20 @@
  * 	##	DASHBOARD
  */
 .menu:hover, .menu:showing{
-	-fx-background-color: #03A9F4;
+	-fx-background-color: #444444;
+}
+
+.menu .menu-item:hover, .menu .menu-item:focused{
+	-fx-background-color: #444444;
+	-fx-fill: #fff;
+}
+
+.menu .menu-item:hover .glyph-icon, .menu .menu-item:focused .glyph-icon{
+	-fx-fill: #fff;
 }
 
 .nav-button:hover{
-	-fx-background-color: #455A64;
+	-fx-background-color: #444444;
 }
 
 /*
@@ -55,7 +64,7 @@
  */
 
 .jfx-tab-pane .headers-region {
-    -fx-fill: #00BCD4;
+    -fx-fill:  #2B2B2B;
 }
 
 .jfx-tab-pane .headers-region .tab{
@@ -65,7 +74,7 @@
 }
 
 .jfx-tab-pane .tab-header-background {
-    -fx-background-color: #00BCD4;
+    -fx-background-color:  #2B2B2B;
 }
 .jfx-tab-pane .tab-selected-line {
     -fx-background-color: #fff;
@@ -87,15 +96,18 @@
 .jfx-popup{
 	-fx-font-family: Verdana;
 	-fx-font-size: 16px;
+	-fx-background-color: #fff;
 }
 
 .jfx-popup .jfx-button{
 	-fx-padding: 12 8 12 8;
 	-fx-border-radius: 0px;
+	-fx-background-radius: 0;
 }
 
 .jfx-popup .jfx-button:hover{
-	-fx-background-color: #26C6DA;
+	-fx-background-color: #009688;
+	-fx-text-fill: #fff;
 }
 
 /*
@@ -125,11 +137,9 @@
  */
  
  .tree-table-view{
-    -fx-tree-table-color: #00BCD4;
+    -fx-tree-table-color: #009688;
     -fx-tree-table-rippler-color : rgba(255, 0, 0, 0.9);
-    
-    -fx-font-family: Verdana;
-    
+    -fx-font-family: Verdana; 
 }
 
  .tree-table-view .scroll-bar:vertical{
@@ -137,7 +147,7 @@
 }
 
  .tree-table-view .scroll-bar:vertical .thumb{
-	-fx-background-color: #00BCD4;
+	-fx-background-color: #009688;
 	-fx-border-radius: 0em;
 }
 
@@ -147,8 +157,8 @@
 }
 
 .costumer-table .tree-table-row-cell:hover{
-	-fx-background-color: #4DD0E1 ;
-    -fx-table-cell-border-color: #4DD0E1;
+	-fx-background-color: #26A69A ;
+    -fx-table-cell-border-color: #26A69A;
 }
 
 .tree-table-view:focused .tree-table-row-cell:selected .tree-table-cell{
@@ -215,7 +225,7 @@
     -fx-shape: "M 0 -3.5 L 4 0 L 0 3.5 z";
 }
 .tree-table-row-cell .jfx-text-field{
-    -jfx-focus-color: #00bcd4;
+    -jfx-focus-color: #009688;
     -jfx-unfocus-color: #fff;
 }
 
@@ -224,7 +234,7 @@
  */
   
 .jfx-decorator {
-    -fx-decorator-color: #212121;
+    -fx-decorator-color: #101010;
 }
 
 .jfx-decorator .jfx-decorator-buttons-container {
