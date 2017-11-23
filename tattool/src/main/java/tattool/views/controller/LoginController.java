@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXDecorator;
@@ -172,21 +173,18 @@ public class LoginController implements Initializable {
 	 */
 
 	void loadBackground() {
-		try {
-			final Font font = Font.loadFont(new FileInputStream(new File("src/main/resources/css/Angilla.ttf")), 140);
-			tattool.setFont(font);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		String path = new File("src/main/resources/video/video.mp4").getAbsolutePath();
-		m = new Media(new File(path).toURI().toString());
+		
+		final Font font =Font.loadFont(getClass().getResource("/css/Angilla.ttf").toExternalForm(), 140);
+		tattool.setFont(font);
+		m = new Media(getClass().getClassLoader().getResource("video/video.mp4").toExternalForm());
 		mp = new MediaPlayer(m);
 		mp.setAutoPlay(true);
+		mp.setCycleCount(MediaPlayer.INDEFINITE);
 		media.setMediaPlayer(mp);
 		media.fitWidthProperty().bind(Bindings.selectDouble(media.sceneProperty(), "width"));
 		media.fitHeightProperty().bind(Bindings.selectDouble(media.sceneProperty(), "height"));
-		background.fitWidthProperty().bind(Bindings.selectDouble(background.sceneProperty(), "width"));
-		background.fitHeightProperty().bind(Bindings.selectDouble(background.sceneProperty(), "height"));
+		background.fitWidthProperty().bind(Bindings.selectDouble(background.parentProperty(), "width").divide(2));
+		background.fitHeightProperty().bind(Bindings.selectDouble(background.parentProperty(), "height").divide(2));
 	}
 	
 	void closeApp() {
