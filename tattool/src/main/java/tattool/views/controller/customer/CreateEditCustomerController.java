@@ -1,5 +1,8 @@
 package tattool.views.controller.customer;
 
+import java.time.LocalDate;
+import java.util.Calendar;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDialog;
@@ -29,6 +32,7 @@ import tattool.domain.model.Cep;
 import tattool.domain.model.Customer;
 import tattool.rest.consume.CustomerRest;
 import tattool.util.DateUtil;
+import tattool.util.MaskFieldUtil;
 
 /*
  * 	??	A IDEIA E USAR ESTE CONTROLLER PARA O CREATE E EDIT DO CLIENTE
@@ -152,6 +156,7 @@ public class CreateEditCustomerController {
 				}
 			}
 		});
+		MaskFieldUtil.cpfField(cpf);
     }
     
     private void carregaCampos() {
@@ -270,10 +275,29 @@ public class CreateEditCustomerController {
 			validate = false;
 			customer  = true;
 		}
+		
 		if(birthdate.getValue() == null)
 		{
 			errorBirthdate.setText("Insira uma data de nascimento para o cliente");
 			errorBirthdate.setVisible(true);
+			validate = false;
+			customer = true;
+		}
+		if(birthdate.getValue().getYear() > LocalDate.now().getYear())
+		{
+			errorBirthdate.setText("Insira uma data de nascimento menor que " + LocalDate.now().getYear());
+			errorBirthdate.setVisible(true);
+			validate = false;
+			customer = true;
+		}
+		
+		
+		if(email.getText() == null && phone.getText() == null);
+		{
+			errorEmail.setText("Por favor, insira ao menos uma forma de contato");
+			errorPhone.setText("Por favor, insira ao menos uma forma de contato");
+			errorPhone.setVisible(true);
+			errorEmail.setVisible(true);
 			validate = false;
 			customer = true;
 		}
