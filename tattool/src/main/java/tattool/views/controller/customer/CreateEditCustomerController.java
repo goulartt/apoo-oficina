@@ -142,6 +142,7 @@ public class CreateEditCustomerController {
 	            name.requestFocus();
 	        }
 	    });
+    	
     	zipCode.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -155,7 +156,7 @@ public class CreateEditCustomerController {
 				}
 			}
 		});
-		MaskFieldUtil.cpfField(cpf);
+	
     }
     
     private void carregaCampos() {

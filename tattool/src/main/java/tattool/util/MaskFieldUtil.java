@@ -13,6 +13,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -197,6 +198,8 @@ public abstract class MaskFieldUtil {
         }
         );
     }
+    
+
 
     public static void cnpjField(TextField textField) {
         MaskFieldUtil.maxField(textField, 18);

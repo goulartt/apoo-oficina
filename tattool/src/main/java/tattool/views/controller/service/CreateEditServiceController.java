@@ -51,8 +51,9 @@ public class CreateEditServiceController {
     @FXML
     private JFXTextField price;
 
+
     @FXML
-    private JFXDatePicker firstDate;
+    private JFXDatePicker firstsubDate;
 
     @FXML
     private JFXTimePicker firstBegin;
