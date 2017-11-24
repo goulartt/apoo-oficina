@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import tattool.domain.model.Customer;
 import tattool.report.jasper.UsuarioRel;
 import tattool.util.DateUtil;
+import tattool.util.MaskFieldUtil;
 
 public class ShowCustomerController implements Initializable{
 	
