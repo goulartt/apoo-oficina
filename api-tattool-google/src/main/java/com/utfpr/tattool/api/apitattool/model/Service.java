@@ -18,7 +18,11 @@ import javax.persistence.OneToOne;
 @Entity
 public class Service implements Serializable {
 
-	private static final long serialVersionUID = -5680202725613141522L;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5381743236953194235L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +30,9 @@ public class Service implements Serializable {
 	
 	@Column(name="name_service")
 	private String nameService;
+	
+	@Column(name="quant_sessions")
+	private Integer quantSessions;
 	
 	@ManyToMany
 	@JoinTable(name = "service_has_art", joinColumns = @JoinColumn(name = "service_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "art_id_art", referencedColumnName = "id_art"))
@@ -85,6 +92,14 @@ public class Service implements Serializable {
 
 	public void setRemoved(Integer removed) {
 		this.removed = removed;
+	}
+
+	public Integer getQuantSessions() {
+		return quantSessions;
+	}
+
+	public void setQuantSessions(Integer quantSessions) {
+		this.quantSessions = quantSessions;
 	}
 
 	

@@ -3,8 +3,10 @@ package tattool.views.controller.service;
 import java.util.function.Predicate;
 
 import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
+import com.jfoenix.controls.JFXTreeTableRow;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
@@ -20,8 +22,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
+import javafx.scene.input.MouseButton;
 import javafx.scene.control.TreeTablePosition;
 import javafx.util.Callback;
+import tattool.domain.model.Customer;
+import tattool.domain.modelfx.CustomerFX;
+import tattool.rest.consume.CustomerRest;
+import tattool.util.ConvertModelToFX;
+import tattool.views.controller.DashboardController;
 
 public class CustomerGridController {
 	
@@ -29,24 +37,22 @@ public class CustomerGridController {
     private JFXTextField search;
 	
 	@FXML
-    private JFXTreeTableView<Customer> customerGrid;
+    private JFXTreeTableView<CustomerFX> customerGrid;
 	
 	@FXML
     private OctIconView closeButton;
 	
-	JFXDialog dialog      = new JFXDialog();
-	JFXTextField customer = new JFXTextField();
+	@FXML
+	private CreateEditServiceController createEdit;
 	
+    private CustomerRest rest = new CustomerRest();
+	
+	public CustomerGridController(CreateEditServiceController createEdit){
+		this.createEdit = createEdit;
+	}
 	public void initialize() {
 		closeButton.setOnMouseClicked(event -> {
-			if(!customerGrid.getSelectionModel().getSelectedItems().isEmpty()) {
-				TreeTablePosition position = customerGrid.getSelectionModel().getSelectedCells().get(0);
-		        int row                    = position.getRow();
-		        TreeItem item              = customerGrid.getTreeItem(row);
-		        TreeTableColumn column     = position.getTableColumn();
-				customer.setText(column.getCellObservableValue(item).getValue().toString());
-			}
-			dialog.close();
+			createEdit.customerModal.close();
 		});
 		createTableColumns();
 		populateTable();
@@ -56,32 +62,47 @@ public class CustomerGridController {
 	@SuppressWarnings("unchecked")
 	void createTableColumns()
     {
-    	JFXTreeTableColumn<Customer,String> cpf  = new JFXTreeTableColumn<>("CPF");
-    	JFXTreeTableColumn<Customer,String> name = new JFXTreeTableColumn<>("Nome");
+    	JFXTreeTableColumn<CustomerFX,String> cpf  = new JFXTreeTableColumn<>("CPF");
+    	JFXTreeTableColumn<CustomerFX,String> name = new JFXTreeTableColumn<>("Nome");
     	
     	//Colunas com largura responsiva
     	
     	cpf.prefWidthProperty().bind(customerGrid.widthProperty().multiply(0.4));
     	name.prefWidthProperty().bind(customerGrid.widthProperty().multiply(0.6));
     	
-    	cpf.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Customer, String>, ObservableValue<String>>()
+    	cpf.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<CustomerFX, String>, ObservableValue<String>>()
     	{
 			@Override
-			public ObservableValue<String> call(CellDataFeatures<Customer, String> param)
+			public ObservableValue<String> call(CellDataFeatures<CustomerFX, String> param)
 			{
 				return param.getValue().getValue().cpf;
 			}
     	});
-    	name.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Customer, String>, ObservableValue<String>>()
+    	name.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<CustomerFX, String>, ObservableValue<String>>()
     	{
 			@Override
-			public ObservableValue<String> call(CellDataFeatures<Customer, String> param)
+			public ObservableValue<String> call(CellDataFeatures<CustomerFX, String> param)
 			{
 				return param.getValue().getValue().name;
 			}
     	});
     	
     	customerGrid.getColumns().setAll(cpf, name);
+    	customerGrid.setRowFactory(table -> {
+    		JFXTreeTableRow<CustomerFX> row = new JFXTreeTableRow<>();
+    		
+    		row.setOnMouseClicked(event -> {
+    			if(event.getButton().equals(MouseButton.PRIMARY))
+    			{
+    				Customer c =  ConvertModelToFX.convertCustomerFXtoCustomer(customerGrid.getSelectionModel().getSelectedItem().getValue());
+    				createEdit.customer.setText(c.getName());
+    				createEdit.cliente = c;
+    				createEdit.customerModal.close();
+    			}
+    		});
+    		
+    		return row;
+    	});
     }
     
     /*
@@ -90,17 +111,12 @@ public class CustomerGridController {
     
     void populateTable()
     {
-    	ObservableList<Customer> customers = FXCollections.observableArrayList();
+    	ObservableList<CustomerFX> customers = FXCollections.observableArrayList();
     	
-    	customers.add(new Customer("400.404.505-65", "Breno"));
-    	customers.add(new Customer("652.154.654-05", "Goulart"));
-    	customers.add(new Customer("123.656.845-22", "Jean"));
-    	customers.add(new Customer("654.123.454-12", "Renan"));
-    	customers.add(new Customer("615.541.236-32", "Gabriel"));
-    	customers.add(new Customer("142.324.895-45", "Mateus"));
-    	customers.add(new Customer("645.512.323-65", "Alfredo"));
+    	customers = FXCollections.observableArrayList(ConvertModelToFX.convertListCustomer(rest.findAll()));
+    	
   
-    	final TreeItem<Customer> root = new RecursiveTreeItem<Customer>(customers, RecursiveTreeObject::getChildren);
+    	final TreeItem<CustomerFX> root = new RecursiveTreeItem<CustomerFX>(customers, RecursiveTreeObject::getChildren);
     	
     	customerGrid.setRoot(root);
     	customerGrid.setShowRoot(false);
@@ -118,10 +134,10 @@ public class CustomerGridController {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
 			{
-				customerGrid.setPredicate(new Predicate<TreeItem<Customer>>()
+				customerGrid.setPredicate(new Predicate<TreeItem<CustomerFX>>()
 				{
 					@Override
-					public boolean test(TreeItem<Customer> user)
+					public boolean test(TreeItem<CustomerFX> user)
 					{
 						//Compara o valor do TextInput com as colunas da table
 						
@@ -133,21 +149,4 @@ public class CustomerGridController {
     	});
     }
     
-    /*
-     * 	##	CLASSE DE TESTE
-     */
-    
-    class Customer extends RecursiveTreeObject<Customer> {
-    	StringProperty cpf;
-    	StringProperty name;
-    	
-    	public Customer(String name, String cpf) {
-    		this.cpf  = new SimpleStringProperty(cpf);
-    		this.name = new SimpleStringProperty(name);
-    	}
-    	
-    	public String getName() {
-    		return name.toString();
-    	}
-    }
 }

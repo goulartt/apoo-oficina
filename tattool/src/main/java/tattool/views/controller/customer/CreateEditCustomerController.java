@@ -181,8 +181,7 @@ public class CreateEditCustomerController {
     
     void store(StackPane mainStack) {
     	if(this.customer.getId() == null) {
-    		if(validate())
-        	{
+    		if(validate()){
         		Customer customer = MontaCustomer();
             	
             	rest.save(customer);
@@ -275,17 +274,19 @@ public class CreateEditCustomerController {
 			errorBirthdate.setVisible(true);
 			validate = false;
 			customer = true;
+		}else {
+			if(birthdate.getValue().getYear() > LocalDate.now().getYear())
+			{
+				errorBirthdate.setText("Insira uma data de nascimento menor que " + LocalDate.now().getYear());
+				errorBirthdate.setVisible(true);
+				validate = false;
+				customer = true;
+			}
 		}
-		if(birthdate.getValue().getYear() > LocalDate.now().getYear())
-		{
-			errorBirthdate.setText("Insira uma data de nascimento menor que " + LocalDate.now().getYear());
-			errorBirthdate.setVisible(true);
-			validate = false;
-			customer = true;
-		}
+
 		
 		
-		if(email.getText() == null && phone.getText() == null);
+		if(email.getText().equals("") && phone.getText().equals(""));
 		{
 			errorEmail.setText("Por favor, insira ao menos uma forma de contato");
 			errorPhone.setText("Por favor, insira ao menos uma forma de contato");

@@ -131,6 +131,7 @@ CREATE TABLE IF NOT EXISTS `oficina`.`service` (
   `status` VARCHAR(20) NULL DEFAULT NULL,
   `art_id_art` INT(11) DEFAULT NULL,
   `customer_id` INT(11) NOT NULL,
+  `quant_sessions` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_service_art1_idx` (`art_id_art` ASC),
   INDEX `fk_service_customer1_idx` (`customer_id` ASC),
@@ -159,6 +160,7 @@ CREATE TABLE IF NOT EXISTS `oficina`.`session` (
   `status` VARCHAR(20) NULL DEFAULT NULL,
   `service_id` INT(11) NOT NULL,
   `removed` INT NULL,
+  `duration` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_session_service1_idx` (`service_id` ASC),
   CONSTRAINT `fk_session_service1`
@@ -206,5 +208,5 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+SET FOREIGN_KEY_CHECKS=1

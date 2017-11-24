@@ -1,6 +1,7 @@
 package tattool.views.controller.service;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
@@ -27,6 +28,12 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import tattool.domain.model.Customer;
+import tattool.domain.model.Service;
+import tattool.domain.model.Session;
+import tattool.rest.consume.ServiceRest;
+import tattool.rest.consume.SessionRest;
+import tattool.util.DateUtil;
 
 public class CreateEditServiceController {
 
@@ -43,7 +50,7 @@ public class CreateEditServiceController {
     private JFXTextField name;
 
     @FXML
-    private JFXTextField customer;
+    public JFXTextField customer;
 
     @FXML
     private JFXTextField numberSessions;
@@ -57,7 +64,10 @@ public class CreateEditServiceController {
 
     @FXML
     private JFXTimePicker firstBegin;
-
+    
+    @FXML
+    private JFXTextField firstTime;
+    
     @FXML
     private Label errorName;
 
@@ -78,6 +88,13 @@ public class CreateEditServiceController {
 
     @FXML
     private Label errorFirstTime;
+    
+    public JFXDialog customerModal;
+    
+    private ServiceRest rest = new ServiceRest();
+    private SessionRest sessionRest = new SessionRest();
+    
+    public Customer cliente = new Customer();
     
     /*
      * 	## INITIALIZE
@@ -102,6 +119,28 @@ public class CreateEditServiceController {
     	
     	if(validate()) {
     		loadDialog(mainStack);
+    		Service service = new Service();
+    		
+    		service.setCustomer(cliente);
+    		service.setNameService(name.getText());
+    		
+    		service.setQuantSessions(Integer.parseInt(numberSessions.getText()));
+    		Service serviceSalvo = rest.save(service);
+    		Session session = new Session();
+    		Integer cont = serviceSalvo.getQuantSessions();
+			session.setDateSession(DateUtil.asDate(firstBegin.getValue().atDate(firstDate.getValue())));
+			session.setPrice(new BigDecimal(price.getText()));
+			session.setService(serviceSalvo);
+			session.setDuration(Integer.parseInt(firstTime.getText()));
+			sessionRest.save(session);
+			cont--;
+    		for(int i = 0; i <= cont; i++) {
+    			Session sessionNew = new Session();
+    			sessionNew.setService(serviceSalvo);
+    			sessionRest.save(sessionNew);
+    		}
+    		
+    		
     	}
     }
     
@@ -185,12 +224,10 @@ public class CreateEditServiceController {
     void customerGrid(StackPane mainStack) {
     	try {
 			FXMLLoader customerLoader = new FXMLLoader(getClass().getResource("/views/services/customer-grid.fxml"));
-			CustomerGridController control = new CustomerGridController();
+			CustomerGridController control = new CustomerGridController(this);
 			customerLoader.setController(control);
 			Region customerContent    = customerLoader.load();
-			JFXDialog customerModal   = new JFXDialog(mainStack, customerContent, JFXDialog.DialogTransition.CENTER, false);
-			control.dialog            = customerModal;
-			control.customer          = customer;
+			customerModal   = new JFXDialog(mainStack, customerContent, JFXDialog.DialogTransition.CENTER, false);
 			customerModal.show();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -303,4 +340,5 @@ public class CreateEditServiceController {
 			setFill(Color.WHITE);
 		}
 	}
+
 }

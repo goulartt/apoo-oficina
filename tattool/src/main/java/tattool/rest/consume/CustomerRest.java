@@ -23,6 +23,14 @@ public class CustomerRest {
 		return rest.getForObject(url, Customer[].class);
 
 	}
+	
+	public Customer findById(Integer id) {
+		String url = Constantes.Api.URL_API + "/customers/{codigo}";
+		
+		Map<String, Integer> params = new HashMap<String, Integer>();
+	    params.put("codigo", id); 
+	    return rest.getForObject(url, Customer.class);
+	}
 
 	public Customer save(Customer customer) {
 		return rest.postForObject(Constantes.Api.URL_API + "/customers", customer, Customer.class);

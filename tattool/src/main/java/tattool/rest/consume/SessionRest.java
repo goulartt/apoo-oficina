@@ -1,8 +1,10 @@
 package tattool.rest.consume;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Arrays;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,12 +59,16 @@ public class SessionRest {
 		c.setObs("ELE É ALERGICO CARALGO");
 		c.setPrice(new BigDecimal(350.54));
 		c.setStatus("PENDENTE");
-		c.setDateSession(Calendar.getInstance());
+		Date in = new Date();
+		LocalDateTime ldt = LocalDateTime.ofInstant(in.toInstant(), ZoneId.systemDefault());
+		Date out = Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant());
+		c.setDateSession(out);
 		c.setService(customer.get(0));
+		c.setDuration(55);
 		Session customerSalvo = rest.save(c);
-		List<Session> clientes = Arrays.asList(rest.findAll());
+		/*List<Session> clientes = Arrays.asList(rest.findAll());
 		customerSalvo.setObs("era zuera");
-		rest.atualizaSession(customerSalvo.getId(), customerSalvo);
+		rest.atualizaSession(customerSalvo.getId(), customerSalvo);*/
 		//rest.deleteSession(customerSalvo.getId());
 
 	}
