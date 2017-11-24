@@ -2,8 +2,7 @@ package tattool.domain.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Calendar;
-import java.util.List;
+import java.util.Date;
 
 
 public class Session implements Serializable{
@@ -12,7 +11,7 @@ public class Session implements Serializable{
 
 	private Integer id;
 	
-	private Calendar dateSession;
+	private Date dateSession;
 	
 	private BigDecimal price;
 	
@@ -71,11 +70,11 @@ public class Session implements Serializable{
 		this.obs = obs;
 	}
 
-	public Calendar getDateSession() {
+	public Date getDateSession() {
 		return dateSession;
 	}
 
-	public void setDateSession(Calendar dateSession) {
+	public void setDateSession(Date dateSession) {
 		this.dateSession = dateSession;
 	}
 

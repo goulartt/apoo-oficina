@@ -2,8 +2,7 @@ package com.utfpr.tattool.api.apitattool.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Calendar;
-import java.util.List;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +14,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
+
 @Entity
+@EntityScan(basePackageClasses = { Session.class, Jsr310JpaConverters.class })
 public class Session implements Serializable{
 	
 	private static final long serialVersionUID = -8843063860683914321L;
@@ -24,9 +27,9 @@ public class Session implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="date_session")
-	private Calendar dateSession;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dateSession;
 	
 	private BigDecimal price;
 	
@@ -41,6 +44,7 @@ public class Session implements Serializable{
 	@Column(name="obs")
 	private String obs;
 	
+	private Integer removed;
 	
 	public Integer getId() {
 		return id;
@@ -75,11 +79,11 @@ public class Session implements Serializable{
 		this.obs = obs;
 	}
 
-	public Calendar getDateSession() {
+	public Date getDateSession() {
 		return dateSession;
 	}
 
-	public void setDateSession(Calendar dateSession) {
+	public void setDateSession(Date dateSession) {
 		this.dateSession = dateSession;
 	}
 
@@ -97,6 +101,14 @@ public class Session implements Serializable{
 
 	public void setDuration(Integer duration) {
 		this.duration = duration;
+	}
+
+	public Integer getRemoved() {
+		return removed;
+	}
+
+	public void setRemoved(Integer removed) {
+		this.removed = removed;
 	}
 
 	

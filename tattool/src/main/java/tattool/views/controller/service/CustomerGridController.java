@@ -29,6 +29,7 @@ import tattool.domain.model.Customer;
 import tattool.domain.modelfx.CustomerFX;
 import tattool.rest.consume.CustomerRest;
 import tattool.util.ConvertModelToFX;
+import tattool.views.controller.DashboardController;
 
 public class CustomerGridController {
 	
@@ -41,16 +42,17 @@ public class CustomerGridController {
 	@FXML
     private OctIconView closeButton;
 	
-	public Customer cliente = new Customer();
+	@FXML
+	private CreateEditServiceController createEdit;
 	
     private CustomerRest rest = new CustomerRest();
 	
-	JFXDialog dialog      = new JFXDialog();
-	JFXTextField customer = new JFXTextField();
-	
+	public CustomerGridController(CreateEditServiceController createEdit){
+		this.createEdit = createEdit;
+	}
 	public void initialize() {
 		closeButton.setOnMouseClicked(event -> {
-			dialog.close();
+			createEdit.customerModal.close();
 		});
 		createTableColumns();
 		populateTable();
@@ -92,9 +94,10 @@ public class CustomerGridController {
     		row.setOnMouseClicked(event -> {
     			if(event.getButton().equals(MouseButton.PRIMARY))
     			{
-    				cliente =  ConvertModelToFX.convertCustomerFXtoCustomer(customerGrid.getSelectionModel().getSelectedItem().getValue());
-    				customer.setText(cliente.getName());
-    				dialog.close();
+    				Customer c =  ConvertModelToFX.convertCustomerFXtoCustomer(customerGrid.getSelectionModel().getSelectedItem().getValue());
+    				createEdit.customer.setText(c.getName());
+    				createEdit.cliente = c;
+    				createEdit.customerModal.close();
     			}
     		});
     		
