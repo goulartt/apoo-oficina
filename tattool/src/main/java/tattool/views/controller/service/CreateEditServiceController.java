@@ -27,6 +27,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import tattool.domain.model.Customer;
 
 public class CreateEditServiceController {
 
@@ -77,6 +78,8 @@ public class CreateEditServiceController {
 
     @FXML
     private Label errorFirstTime;
+    
+    public Customer cliente = new Customer();
     
     /*
      * 	## INITIALIZE
@@ -190,6 +193,7 @@ public class CreateEditServiceController {
 			JFXDialog customerModal   = new JFXDialog(mainStack, customerContent, JFXDialog.DialogTransition.CENTER, false);
 			control.dialog            = customerModal;
 			control.customer          = customer;
+			control.cliente 		  = cliente;
 			customerModal.show();
 		} catch (IOException e) {
 			e.printStackTrace();

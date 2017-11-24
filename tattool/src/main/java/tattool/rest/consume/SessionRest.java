@@ -59,6 +59,7 @@ public class SessionRest {
 		c.setStatus("PENDENTE");
 		c.setDateSession(Calendar.getInstance());
 		c.setService(customer.get(0));
+		c.setDuration(55);
 		Session customerSalvo = rest.save(c);
 		List<Session> clientes = Arrays.asList(rest.findAll());
 		customerSalvo.setObs("era zuera");

@@ -3,15 +3,15 @@ package com.utfpr.tattool.api.apitattool.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -32,7 +32,9 @@ public class Session implements Serializable{
 	
 	private String status;
 	
-	@OneToOne
+	private Integer duration;
+	
+	@ManyToOne
 	@JoinColumn(name = "service_id", unique=true)
 	private Service service;
 	
@@ -87,6 +89,14 @@ public class Session implements Serializable{
 
 	public void setService(Service service) {
 		this.service = service;
+	}
+
+	public Integer getDuration() {
+		return duration;
+	}
+
+	public void setDuration(Integer duration) {
+		this.duration = duration;
 	}
 
 	

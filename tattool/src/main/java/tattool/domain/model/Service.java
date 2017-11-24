@@ -18,6 +18,19 @@ public class Service implements Serializable {
 	private String status;
 	
 	private Integer removed;
+	
+	private Integer quantSessions;
+	
+	
+	public Service() {
+		this.id = null;
+		this.nameService = "";
+		this.arts = null;
+		this.customer = new Customer();
+		this.status = "ATIVO";
+		this.removed = 0;
+		this.quantSessions = 0;
+	}
 
 	public Integer getId() {
 		return id;
@@ -65,6 +78,14 @@ public class Service implements Serializable {
 
 	public void setRemoved(Integer removed) {
 		this.removed = removed;
+	}
+
+	public Integer getQuantSessions() {
+		return quantSessions;
+	}
+
+	public void setQuantSessions(Integer quantSessions) {
+		this.quantSessions = quantSessions;
 	}
 
 	

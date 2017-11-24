@@ -55,6 +55,8 @@ public class ServiceRest {
 		c.setNameService("Serviço de qualidade");
 		c.setRemoved(0);
 		c.setStatus("ATIVO");
+		c.setQuantSessions(3);
+		
 		ServiceRest rest = new ServiceRest();
 		Service customerSalvo = rest.save(c);
 		List<Service> clientes = Arrays.asList(rest.findAll());
