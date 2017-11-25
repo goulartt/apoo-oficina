@@ -192,9 +192,11 @@ public abstract class MaskFieldUtil {
             value = value.replaceFirst("(\\d{3})(\\d)", "$1.$2");
             value = value.replaceFirst("(\\d{3})(\\d)", "$1-$2");
             try {
-            textField.setText(value);
-            MaskFieldUtil.positionCaret(textField);
-            }catch(Exception ex){}
+            	textField.setText(value);
+            	MaskFieldUtil.positionCaret(textField);
+            }catch(Exception ex){
+            	textField.clear();
+            }
         }
         );
     }
