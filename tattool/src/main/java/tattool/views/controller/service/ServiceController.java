@@ -1,6 +1,7 @@
 package tattool.views.controller.service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.function.Predicate;
 
 import com.jfoenix.controls.JFXButton;
@@ -34,14 +35,12 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
-import tattool.domain.model.Customer;
 import tattool.domain.model.Service;
-import tattool.domain.modelfx.CustomerFX;
+import tattool.domain.model.Session;
 import tattool.domain.modelfx.ServiceFX;
 import tattool.rest.consume.ServiceRest;
+import tattool.rest.consume.SessionRest;
 import tattool.util.ConvertModelToFX;
-import tattool.views.controller.customer.CreateEditCustomerController;
-import tattool.views.controller.customer.ShowCustomerController;
 
 public class ServiceController {
 	
@@ -233,7 +232,9 @@ public class ServiceController {
     void show(StackPane mainStack) {
     	try {
 			FXMLLoader serviceLoader = new FXMLLoader(getClass().getResource("/views/services/show-service.fxml"));
-			serviceLoader.setController(new ShowServiceController());
+			ServiceFX service = serviceTable.getSelectionModel().getSelectedItem().getValue();
+			List<Session> sessions = new SessionRest().findByService(service.getId());
+			serviceLoader.setController(new ShowServiceController(service, sessions));
 			Region serviceContent = serviceLoader.load();
 			JFXDialog customerModal = new JFXDialog(mainStack, serviceContent, JFXDialog.DialogTransition.CENTER, false);
 			OctIconView closeButton = (OctIconView) mainStack.getScene().lookup("#closeButton");

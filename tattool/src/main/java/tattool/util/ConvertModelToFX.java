@@ -6,12 +6,15 @@ import java.util.List;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.util.Callback;
 import net.sf.jasperreports.engine.util.SortedIntList;
 import tattool.domain.model.Customer;
 import tattool.domain.model.Service;
+import tattool.domain.model.Session;
 import tattool.domain.model.User;
 import tattool.domain.modelfx.CustomerFX;
 import tattool.domain.modelfx.ServiceFX;
+import tattool.domain.modelfx.SessionFX;
 import tattool.domain.modelfx.UserFX;
 
 public class ConvertModelToFX {
@@ -120,5 +123,30 @@ public class ConvertModelToFX {
 		s.setRemoved(value.getRemoved());
 		s.setStatus(value.getStatus().get());
 		return s;
+	}
+
+	public static List<SessionFX> convertListSessionToSessionFX(List<Session> findByService) {
+		List<Session> sessions = findByService;
+		List<SessionFX> sessionFX = new ArrayList<>();
+		sessions.forEach(s -> {
+			SessionFX sessao = new SessionFX();
+			sessao.setId(s.getId());
+			if(s.getDateSession() != null)
+				sessao.setDate(new SimpleStringProperty(DateUtil.DateToString(s.getDateSession())));
+			else
+				sessao.setDate(new SimpleStringProperty("Não agendado"));
+			sessao.setDuration(new SimpleStringProperty(s.getDuration().toString()));
+			if(!s.getObs().equals(""))
+				sessao.setObs(s.getDuration().toString());
+			if(s.getPrice() != null)
+				sessao.setPrice(new SimpleStringProperty(s.getPrice().toString()));
+			else
+				sessao.setPrice(new SimpleStringProperty("Não acertado"));
+			sessao.setRemoved(s.getRemoved());
+			sessao.setService(s.getService());
+			sessao.setStatus(new SimpleStringProperty(s.getStatus()));
+			sessionFX.add(sessao);
+		});
+		return sessionFX;
 	}
 }

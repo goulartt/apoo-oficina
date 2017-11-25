@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,7 +21,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.utfpr.tattool.api.apitattool.event.RecursoCriadoEvento;
+import com.utfpr.tattool.api.apitattool.model.Customer;
+import com.utfpr.tattool.api.apitattool.model.Service;
 import com.utfpr.tattool.api.apitattool.model.Session;
+import com.utfpr.tattool.api.apitattool.repository.ServiceRepository;
 import com.utfpr.tattool.api.apitattool.repository.SessionRepository;
 import com.utfpr.tattool.api.apitattool.service.SessionService;
 
@@ -41,7 +45,11 @@ public class SessionResource {
 	private SessionRepository sessionRepository;
 	
 	@Autowired
+	private ServiceRepository serviceRepository;
+	
+	@Autowired
 	private SessionService service;
+
 	
    @ApiOperation(value = "Ver todos os Sessões cadastrados no sistema",response = Session[].class)
    @ApiResponses(value = {
@@ -85,6 +93,17 @@ public class SessionResource {
 		Session SessionSalva = service.sessionAtualiza(codigo, Session);
 		return ResponseEntity.ok().body(SessionSalva);
 
+	}
+	
+	@GetMapping("/service/{codigo}")
+	@ApiOperation(value = "Busca as sessoes daquela serviço",response = Session[].class)
+	public ResponseEntity<?> relatorioHistorico(@PathVariable Integer codigo) {
+		Service servico = serviceRepository.findOne(codigo);
+		if(servico != null) {
+			List<Session> sessoes = sessionRepository.findByService(servico);
+			return sessoes != null ? ResponseEntity.ok(sessoes) : ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.notFound().build();
 	}
 
 }

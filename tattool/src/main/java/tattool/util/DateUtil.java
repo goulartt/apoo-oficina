@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.ibm.icu.text.DateFormat;
 import com.ibm.icu.text.SimpleDateFormat;
 
 public class DateUtil {
@@ -47,5 +48,10 @@ public class DateUtil {
 				return null;
 			}
 		   
+	}
+
+	public static String DateToString(Date dateSession) {
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		return df.format(dateSession);
 	}
 }

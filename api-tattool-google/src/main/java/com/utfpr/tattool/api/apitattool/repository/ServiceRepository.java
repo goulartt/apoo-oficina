@@ -6,9 +6,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.utfpr.tattool.api.apitattool.model.Customer;
 import com.utfpr.tattool.api.apitattool.model.Service;
+import com.utfpr.tattool.api.apitattool.model.Session;
 
 public interface ServiceRepository extends JpaRepository<Service, Integer> {
 
 	List<Service> findByCustomer(Customer cliente);
+
+
 
 }

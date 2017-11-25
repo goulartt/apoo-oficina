@@ -72,4 +72,12 @@ public class SessionRest {
 		//rest.deleteSession(customerSalvo.getId());
 
 	}
+
+	public List<Session> findByService(Integer id) {
+		String url = Constantes.Api.URL_API+"/sessions/service/{codigo}";
+		Map<String, Integer> params = new HashMap<String, Integer>();
+	    params.put("codigo", id);
+	    rest.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+		return Arrays.asList(rest.getForObject(url, Session[].class, params));
+	}
 }
