@@ -117,6 +117,8 @@ public class CreateEditServiceController {
 	            name.requestFocus();
 	        }
 	    });
+    	firstBegin.setDisable(true);
+    	firstTime.setDisable(true);
     }
     
     private void carregaCampos() {
@@ -142,10 +144,10 @@ public class CreateEditServiceController {
     		loadDialog(mainStack);
     		Service service = new Service();
     		
-    		service.setCustomer(cliente);
-    		service.setNameService(name.getText());
+    		service.setCustomer(cliente);  //verifica se tem cliente
+    		service.setNameService(name.getText()); //obrigatorio
     		
-    		service.setQuantSessions(Integer.parseInt(numberSessions.getText()));
+    		service.setQuantSessions(Integer.parseInt(numberSessions.getText())); //tenta entender minha logica ai embaixo e faz validação
     		Service serviceSalvo = rest.save(service);
     		Session session = new Session();
     		Integer cont = serviceSalvo.getQuantSessions();
@@ -228,6 +230,31 @@ public class CreateEditServiceController {
 			validate = false;
 			sessions = true;
 		}
+		else
+		{
+			if(price.getText().isEmpty())
+			{
+				errorPrice.setText("É necessário informar o valor de cada sessão");
+				errorPrice.setVisible(true);
+				validate = true;
+				service = false;
+			}
+			if(!firstBegin.getValue().equals(""))
+			{
+				errorFirstBegin.setText("É necessário informar a data da sessão inicial");
+				errorFirstBegin.setVisible(true);
+				validate = true;
+				service = false;
+			}
+			/*if(!firstTime.get().equals(""))
+			{
+				
+			}
+			*/
+			
+			
+		}
+		
 		
 		//Adicionar icone de erro nas Tabs
 		if(service)
