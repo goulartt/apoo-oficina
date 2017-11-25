@@ -137,6 +137,7 @@ public class CreateEditCustomerController {
     	carregaCampos();
     	loadValidationErrors();
     	loadTab();
+    
     	Platform.runLater(new Runnable() {
 	        @Override
 	        public void run() {
@@ -147,8 +148,10 @@ public class CreateEditCustomerController {
     	zipCode.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				if(newValue.length() == 8) {
-					Cep cep = rest.buscaCep(newValue);
+				if(newValue.length() == 9) {
+					String valor = newValue.replace("-", "");
+					System.out.println(valor);
+					Cep cep = rest.buscaCep(valor);
 					street.setText(cep.getLogradouro());
 					state.setText(cep.getUf());
 					city.setText(cep.getLocalidade());
@@ -214,7 +217,7 @@ public class CreateEditCustomerController {
 		customer.getAddress().setNumber(number.getText());
 		customer.getAddress().setStreet(street.getText());
 		customer.getAddress().setNeighborhood(neighborhood.getText());
-		customer.getAddress().setZipCode(!zipCode.getText().equals("") ? Integer.parseInt(zipCode.getText()) : null);
+		customer.getAddress().setZipCode(!zipCode.getText().equals("") ? Integer.parseInt(zipCode.getText().replaceAll("-", "")) : null);
 		return customer;
 	}
     
