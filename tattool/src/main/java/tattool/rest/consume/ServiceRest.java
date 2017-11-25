@@ -29,7 +29,7 @@ public class ServiceRest {
 	}
 	
 	public void deleteService(Integer id) {
-		String url = Constantes.Api.URL_DEV+"/services/{codigo}";
+		String url = Constantes.Api.URL_API+"/services/{codigo}";
 		
 		Map<String, Integer> params = new HashMap<String, Integer>();
 	    params.put("codigo", id);
@@ -64,5 +64,14 @@ public class ServiceRest {
 		rest.atualizaService(customerSalvo.getId(), customerSalvo);
 		//rest.deleteService(customerSalvo.getId());
 
+	}
+
+	public List<Service> geraRelatorio(Integer id) {
+		String url = Constantes.Api.URL_API+"/services/relatorio/{codigo}";
+		
+		Map<String, Integer> params = new HashMap<String, Integer>();
+	    params.put("codigo", id);
+	    rest.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+		return Arrays.asList(rest.getForObject(url, Service[].class, params));
 	}
 }

@@ -20,8 +20,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.utfpr.tattool.api.apitattool.event.RecursoCriadoEvento;
+import com.utfpr.tattool.api.apitattool.model.Customer;
 import com.utfpr.tattool.api.apitattool.model.Service;
+import com.utfpr.tattool.api.apitattool.model.Session;
+import com.utfpr.tattool.api.apitattool.repository.CustomerRepository;
 import com.utfpr.tattool.api.apitattool.repository.ServiceRepository;
+import com.utfpr.tattool.api.apitattool.repository.SessionRepository;
 import com.utfpr.tattool.api.apitattool.service.ServicesService;
 
 import io.swagger.annotations.Api;
@@ -40,6 +44,12 @@ public class ServiceResource {
 	
 	@Autowired
 	private ServiceRepository serviceRepository;
+	
+	@Autowired
+	private SessionRepository sessionRepository;
+	
+	@Autowired
+	private CustomerRepository customerRepository;
 	
 	@Autowired
 	private ServicesService service;
@@ -71,11 +81,27 @@ public class ServiceResource {
 		Service Service = serviceRepository.findOne(codigo);
 		return Service != null ? ResponseEntity.ok(Service) : ResponseEntity.notFound().build();
 	}
+	
+	@GetMapping("/relatorio/{codigo}")
+	@ApiOperation(value = "Gerar relatorio de serviços daquele cliente",response = Service.class)
+	public ResponseEntity<?> relatorioHistorico(@PathVariable Integer codigo) {
+		Customer cliente = customerRepository.findOne(codigo);
+		if(cliente != null) {
+			List<Service> serviços = serviceRepository.findByCustomer(cliente);
+			return serviços != null ? ResponseEntity.ok(serviços) : ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.notFound().build();
+	}
 
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	@ApiOperation(value = "Deletar o serviço na API pelo id dele")
 	public void deletarService(@PathVariable Integer codigo) {
+		
+		List<Session> sessoes = sessionRepository.findByService(serviceRepository.findOne(codigo));
+		sessoes.forEach(s ->{
+			sessionRepository.delete(s);
+		});
 		serviceRepository.delete(codigo);
 	}
 

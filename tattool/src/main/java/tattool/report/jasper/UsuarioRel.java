@@ -2,6 +2,7 @@ package tattool.report.jasper;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -9,6 +10,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
+import tattool.domain.model.Service;
 import tattool.domain.model.User;
 import tattool.rest.consume.UserRest;
 
@@ -35,7 +37,7 @@ private String path; //Caminho base
 		return this.path;
 	}
 	
-	public void geraRelatorio() throws Exception {
+	public void geraRelatorioTodosUsuarios() throws Exception {
 		UserRest ur = new UserRest();
 		User[]  users = ur.findAllUsers();
 		HashMap parametros = new HashMap();
@@ -46,13 +48,22 @@ private String path; //Caminho base
 			impressao = JasperFillManager.fillReport(JasperCompileManager.compileReport(this.getPathToReportPackage() + "usuarios.jrxml"), parametros, ds);
 			JasperViewer viewer = new JasperViewer(impressao, true);
 			viewer.viewReport(impressao, false);
-			//viewer.setVisible(true);
 		} catch (JRException e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 	}
-	public static void main(String[] args) throws Exception {
-		new UsuarioRel().geraRelatorio();
+	public void geraRelatorioHistorico(List<Service> services) {
+		HashMap parametros = new HashMap();
+		JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(services);
+		JasperPrint impressao = null;
+		try {
+			impressao = JasperFillManager.fillReport(JasperCompileManager.compileReport(this.getPathToReportPackage() + "historicoCliente.jrxml"), parametros, ds);
+			JasperViewer viewer = new JasperViewer(impressao, true);
+			viewer.viewReport(impressao, false);
+		} catch (JRException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 }
