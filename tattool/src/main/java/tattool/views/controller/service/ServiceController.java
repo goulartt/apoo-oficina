@@ -13,8 +13,6 @@ import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -33,6 +31,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
+import tattool.domain.model.Customer;
+import tattool.domain.model.Service;
+import tattool.domain.modelfx.CustomerFX;
+import tattool.domain.modelfx.ServiceFX;
+import tattool.rest.consume.ServiceRest;
+import tattool.util.ConvertModelToFX;
+import tattool.views.controller.customer.CreateEditCustomerController;
 
 public class ServiceController {
 	
@@ -42,7 +47,9 @@ public class ServiceController {
     private JFXTextField search;
 
     @FXML
-    private JFXTreeTableView<Service> serviceTable;
+    private JFXTreeTableView<ServiceFX> serviceTable;
+    
+    private ServiceRest rest = new ServiceRest();
 	
 	/*
 	 * 	##	INITIALIZE
@@ -65,6 +72,7 @@ public class ServiceController {
     	try {
     		FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/services/create-edit.fxml"));
     		BorderPane main       = (BorderPane) ((Node) event.getSource()).getScene().lookup("#main");
+    		viewLoader.setController(new CreateEditServiceController(new Service()));
     		viewLoader.setRoot(main);
     		main.getChildren().clear();
     		viewLoader.load();
@@ -80,9 +88,9 @@ public class ServiceController {
     @SuppressWarnings("unchecked")
 	void createTableColumns()
     {
-    	JFXTreeTableColumn<Service,String> name        = new JFXTreeTableColumn<>("Nome");
-    	JFXTreeTableColumn<Service,String> customer    = new JFXTreeTableColumn<>("Cliente");
-    	JFXTreeTableColumn<Service,String> status      = new JFXTreeTableColumn<>("Estado");
+    	JFXTreeTableColumn<ServiceFX,String> name        = new JFXTreeTableColumn<>("Nome");
+    	JFXTreeTableColumn<ServiceFX,String> customer    = new JFXTreeTableColumn<>("Cliente");
+    	JFXTreeTableColumn<ServiceFX,String> status      = new JFXTreeTableColumn<>("Status");
     	
     	//Colunas com largura responsiva
     	
@@ -90,26 +98,26 @@ public class ServiceController {
     	customer.prefWidthProperty().bind(serviceTable.widthProperty().multiply(0.3));
     	status.prefWidthProperty().bind(serviceTable.widthProperty().multiply(0.4));
     	
-    	name.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Service, String>, ObservableValue<String>>()
+    	name.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<ServiceFX, String>, ObservableValue<String>>()
     	{
 			@Override
-			public ObservableValue<String> call(CellDataFeatures<Service, String> param)
+			public ObservableValue<String> call(CellDataFeatures<ServiceFX, String> param)
 			{
 				return param.getValue().getValue().name;
 			}
     	});
-    	customer.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Service, String>, ObservableValue<String>>()
+    	customer.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<ServiceFX, String>, ObservableValue<String>>()
     	{
 			@Override
-			public ObservableValue<String> call(CellDataFeatures<Service, String> param)
+			public ObservableValue<String> call(CellDataFeatures<ServiceFX, String> param)
 			{
-				return param.getValue().getValue().customer;
+				return param.getValue().getValue().customeName;
 			}
     	});
-    	status.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Service, String>, ObservableValue<String>>()
+    	status.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<ServiceFX, String>, ObservableValue<String>>()
     	{
 			@Override
-			public ObservableValue<String> call(CellDataFeatures<Service, String> param)
+			public ObservableValue<String> call(CellDataFeatures<ServiceFX, String> param)
 			{
 				return param.getValue().getValue().status;
 			}
@@ -119,7 +127,7 @@ public class ServiceController {
     	
     	//Popup click event
     	serviceTable.setRowFactory(table -> {
-    		JFXTreeTableRow<Service> row = new JFXTreeTableRow<>();
+    		JFXTreeTableRow<ServiceFX> row = new JFXTreeTableRow<>();
     		
     		row.setOnMouseClicked(event -> {
     			if(event.getButton().equals(MouseButton.SECONDARY))
@@ -138,18 +146,12 @@ public class ServiceController {
     
     void populateTable()
     {
-    	ObservableList<Service> services = FXCollections.observableArrayList();
+    	ObservableList<ServiceFX> services = FXCollections.observableArrayList();
     	
-    	services.add(new Service("Tribal Africano", "Breno", "Ativo"));
-    	services.add(new Service("Jean na Testa", "Jean", "Ativo"));
-    	services.add(new Service("Goku Soltando Kamehamegaf", "Romerin", "Ativo"));
-    	services.add(new Service("Pikachu na bunda", "Breno", "Cancelado"));
-    	services.add(new Service("Ultra Fucking Speed Dog", "Renan", "Concluído"));
-    	services.add(new Service("Abacate", "Gilmar", "Ativo"));
-    	services.add(new Service("NINTENDO É UMA MERDA", "Breno", "Ativo"));
-    	services.add(new Service("PC MASTER RACE", "Giovanni", "Concluído"));
+    	
+    	services = FXCollections.observableArrayList(ConvertModelToFX.convertListServicesToFx(rest.findAll()));
   
-    	final TreeItem<Service> root = new RecursiveTreeItem<Service>(services, RecursiveTreeObject::getChildren);
+    	final TreeItem<ServiceFX> root = new RecursiveTreeItem<ServiceFX>(services, RecursiveTreeObject::getChildren);
     	
     	serviceTable.setRoot(root);
     	serviceTable.setShowRoot(false);
@@ -167,15 +169,15 @@ public class ServiceController {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
 			{
-				serviceTable.setPredicate(new Predicate<TreeItem<Service>>()
+				serviceTable.setPredicate(new Predicate<TreeItem<ServiceFX>>()
 				{
 					@Override
-					public boolean test(TreeItem<Service> service)
+					public boolean test(TreeItem<ServiceFX> service)
 					{
 						//Compara o valor do TextInput com as colunas da table
 						
 						return service.getValue().name.getValue().toLowerCase().contains(newValue.toLowerCase())     ||
-							   service.getValue().customer.getValue().toLowerCase().contains(newValue.toLowerCase()) ||
+							   service.getValue().customeName.getValue().toLowerCase().contains(newValue.toLowerCase()) ||
 							   service.getValue().status.getValue().toLowerCase().contains(newValue.toLowerCase());
 					}
 				});
@@ -237,7 +239,8 @@ public class ServiceController {
     	try {
     		FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/services/create-edit.fxml"));
     		BorderPane main       = (BorderPane) serviceTable.getScene().lookup("#main");
- 
+    		Service serviceCarregado = ConvertModelToFX.convertServiceFXtoService(serviceTable.getSelectionModel().getSelectedItem().getValue());
+    		viewLoader.setController(new CreateEditServiceController(serviceCarregado));
     		viewLoader.setRoot(main);
     		main.getChildren().clear();
     		viewLoader.load();
@@ -274,6 +277,7 @@ public class ServiceController {
 			@Override
 			public void handle(ActionEvent event) {
 				//REST.DELETE
+				rest.deleteService(serviceTable.getSelectionModel().getSelectedItem().getValue().getId());
 	    		dialog.close();
 	    		populateTable();
 			}
@@ -290,19 +294,4 @@ public class ServiceController {
 		dialog.show();
     }
     
-    /*
-     * 	##	CLASSE TESTE
-     */
-    
-    private class Service extends RecursiveTreeObject<Service> {
-    	StringProperty name;
-    	StringProperty customer;
-    	StringProperty status;
-    	
-    	public Service(String name, String customer, String status) {
-    		this.name     = new SimpleStringProperty(name);
-    		this.customer = new SimpleStringProperty(customer);
-    		this.status   = new SimpleStringProperty(status);
-    	}
-    }
 }

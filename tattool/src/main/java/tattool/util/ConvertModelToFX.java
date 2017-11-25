@@ -5,9 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import net.sf.jasperreports.engine.util.SortedIntList;
 import tattool.domain.model.Customer;
+import tattool.domain.model.Service;
 import tattool.domain.model.User;
 import tattool.domain.modelfx.CustomerFX;
+import tattool.domain.modelfx.ServiceFX;
 import tattool.domain.modelfx.UserFX;
 
 public class ConvertModelToFX {
@@ -86,5 +90,35 @@ public class ConvertModelToFX {
 		customer.setRemoved(value.getRemoved());
 		
 		return customer;
+	}
+
+	public static List<ServiceFX> convertListServicesToFx(Service[] findAll) {
+		List<Service> services = Arrays.asList(findAll);
+		List<ServiceFX> servicos = new ArrayList<>();
+		services.forEach(s -> {
+			ServiceFX service = new ServiceFX();
+			service.setId(s.getId());
+			service.setArts(s.getArts());
+			service.setName(new SimpleStringProperty(s.getNameService()));
+			service.setCustomeName(new SimpleStringProperty(s.getCustomer().getName()));
+			service.setCustomer(s.getCustomer());
+			service.setQuantSessions(s.getQuantSessions());
+			service.setStatus(new SimpleStringProperty(s.getStatus()));
+			service.setRemoved(s.getRemoved());
+			servicos.add(service);
+		});
+		return servicos;
+	}
+
+	public static Service convertServiceFXtoService(ServiceFX value) {
+		Service s = new Service();
+		s.setId(value.getId());
+		s.setCustomer(value.getCustomer());
+		s.setArts(value.getArts());
+		s.setNameService(value.getName().get());
+		s.setQuantSessions(value.getQuantSessions());
+		s.setRemoved(value.getRemoved());
+		s.setStatus(value.getStatus().get());
+		return s;
 	}
 }

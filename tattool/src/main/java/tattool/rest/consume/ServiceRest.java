@@ -29,7 +29,7 @@ public class ServiceRest {
 	}
 	
 	public void deleteService(Integer id) {
-		String url = Constantes.Api.URL_API+"/services/{codigo}";
+		String url = Constantes.Api.URL_DEV+"/services/{codigo}";
 		
 		Map<String, Integer> params = new HashMap<String, Integer>();
 	    params.put("codigo", id);

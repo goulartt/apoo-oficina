@@ -95,11 +95,18 @@ public class CreateEditServiceController {
     
     public Customer cliente = new Customer();
     
+    private Service serviceCarregado = new Service();
+    
     /*
      * 	## INITIALIZE
      */
     
-    public void initialize() {
+    public CreateEditServiceController(Service serviceCarregado) {
+    	this.serviceCarregado = serviceCarregado;
+    }
+
+	public void initialize() {
+		carregaCampos();
     	loadValidationErrors();
     	loadTab();
     	Platform.runLater(new Runnable() {
@@ -110,7 +117,20 @@ public class CreateEditServiceController {
 	    });
     }
     
-    /*
+    private void carregaCampos() {
+    	if(serviceCarregado.getId() != null) {
+    		name.setText(serviceCarregado.getNameService());
+        	customer.setText(serviceCarregado.getCustomer().getName());
+        	cliente = serviceCarregado.getCustomer();
+        	numberSessions.setText(serviceCarregado.getQuantSessions().toString());
+        	sessionsTab.setDisable(true);
+        	
+    	}
+    	
+		
+	}
+
+	/*
      * 	## CADASTRA NOVO SERVIÇO
      */
     
