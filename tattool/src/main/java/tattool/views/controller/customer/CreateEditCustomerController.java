@@ -33,6 +33,7 @@ import tattool.domain.model.Customer;
 import tattool.rest.consume.CustomerRest;
 import tattool.util.DateUtil;
 import tattool.util.MaskFieldUtil;
+import tattool.util.ValidaCPF;
 
 /*
  * 	??	A IDEIA E USAR ESTE CONTROLLER PARA O CREATE E EDIT DO CLIENTE
@@ -254,6 +255,7 @@ public class CreateEditCustomerController {
     boolean validate() {
 		boolean validate = true;
 		boolean customer = false, contact = false, address = false;
+		String cpfTeste;
 		
 		resetValidation();
 		
@@ -264,9 +266,10 @@ public class CreateEditCustomerController {
 			validate = false;
 			customer = true;
 		}
-		if(cpf.getText().equals(""))
+		cpfTeste = cpf.getText();
+		if(ValidaCPF.isCPF(cpfTeste) == false)
 		{
-			errorCpf.setText("Insira um CPF para o cliente");
+			errorCpf.setText("Insira um CPF válido");
 			errorCpf.setVisible(true);
 			validate = false;
 			customer  = true;
