@@ -255,7 +255,6 @@ public class CreateEditCustomerController {
     boolean validate() {
 		boolean validate = true;
 		boolean customer = false, contact = false, address = false;
-		String cpfTeste;
 		
 		resetValidation();
 		
@@ -266,8 +265,7 @@ public class CreateEditCustomerController {
 			validate = false;
 			customer = true;
 		}
-		cpfTeste = cpf.getText();
-		if(ValidaCPF.isCPF(cpfTeste) == false)
+		if(ValidaCPF.isCPF(MaskFieldUtil.onlyDigitsValue(cpf)) == false)
 		{
 			errorCpf.setText("Insira um CPF válido");
 			errorCpf.setVisible(true);

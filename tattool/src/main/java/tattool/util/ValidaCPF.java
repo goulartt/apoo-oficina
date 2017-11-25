@@ -2,6 +2,8 @@ package tattool.util;
 
 import java.util.InputMismatchException;
 
+import javafx.scene.control.TextField;
+
 public class ValidaCPF {
  
   public static boolean isCPF(String CPF) {
