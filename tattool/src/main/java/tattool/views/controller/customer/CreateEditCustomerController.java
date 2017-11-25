@@ -284,25 +284,23 @@ public class CreateEditCustomerController {
 			}
 		}
 
-		
-		
-		if(email.getText().equals("") && phone.getText().equals(""));
+		if(email.getText().isEmpty());
 		{
 			errorEmail.setText("Por favor, insira ao menos uma forma de contato");
 			errorPhone.setText("Por favor, insira ao menos uma forma de contato");
 			errorPhone.setVisible(true);
 			errorEmail.setVisible(true);
 			validate = false;
-			customer = true;
+			contact = true;
 		}
 		
 		//Adicionar icone de erro nas Tabs
 		if(customer)
 			customerTab.setGraphic(new ErrorIcon());
 		if(contact)
-			customerTab.setGraphic(new ErrorIcon());
+			contactTab.setGraphic(new ErrorIcon());
 		if(address)
-			customerTab.setGraphic(new ErrorIcon());
+			addressTab.setGraphic(new ErrorIcon());
 		
 		return validate;
 	}

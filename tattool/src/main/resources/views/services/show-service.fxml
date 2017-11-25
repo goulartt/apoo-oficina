@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import de.jensd.fx.glyphs.octicons.OctIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" stylesheets="@../../css/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <VBox prefHeight="35.0" prefWidth="700.0" style="-fx-background-color: #2B2B2B;" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox prefHeight="32.0" prefWidth="668.0">
+                     <children>
+                        <Label text="Informações do serviço:" textFill="WHITE">
+                           <font>
+                              <Font name="Verdana" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </top>
+         <center>
+            <JFXTabPane BorderPane.alignment="CENTER">
+               <tabs>
+                  <Tab text="Serviço">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox layoutX="77.0" layoutY="34.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Label fx:id="serviceName" text="&lt;Nome do servico&gt;" textFill="#212121">
+                                       <font>
+                                          <Font name="Verdana" size="20.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="12.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <BorderPane prefHeight="199.0" prefWidth="680.0">
+                                       <right>
+                                          <VBox alignment="TOP_RIGHT" prefHeight="88.0" prefWidth="333.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Label fx:id="customerName" text="&lt;Nome do Cliente&gt;" textFill="#494949">
+                                                   <font>
+                                                      <Font name="Verdana" size="16.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets top="26.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <Label fx:id="serviceStatus" layoutX="252.0" layoutY="64.0" text="&lt;Status&gt;" textFill="#494949">
+                                                   <font>
+                                                      <Font name="Verdana" size="16.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets top="8.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <Label fx:id="numberSessions" layoutX="183.0" layoutY="36.0" text="&lt;Sessões&gt;" textFill="#494949">
+                                                   <font>
+                                                      <Font name="Verdana" size="16.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets top="8.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <Label fx:id="paidSessions" layoutX="252.0" layoutY="64.0" text="&lt;Sessões pagas&gt;" textFill="#494949">
+                                                   <font>
+                                                      <Font name="Verdana" size="16.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets top="8.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                       </right>
+                                       <center>
+                                          <VBox prefHeight="88.0" prefWidth="338.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Label text="Cliente:" textFill="#212121">
+                                                   <font>
+                                                      <Font name="Verdana" size="16.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets top="26.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <Label layoutX="10.0" layoutY="36.0" text="Status" textFill="#212121">
+                                                   <font>
+                                                      <Font name="Verdana" size="16.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets top="8.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <Label layoutX="10.0" layoutY="36.0" text="Número de sessões:" textFill="#212121">
+                                                   <font>
+                                                      <Font name="Verdana" size="16.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets top="8.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <Label layoutX="10.0" layoutY="68.0" text="Número de sessões pagas:" textFill="#212121">
+                                                   <font>
+                                                      <Font name="Verdana" size="16.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets top="8.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                       </center>
+                                    </BorderPane>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab text="Sessões">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <JFXTreeTableView fx:id="sessionsTable" layoutX="234.0" layoutY="-40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <columnResizePolicy>
+                                    <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </JFXTreeTableView>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
+         </center>
+      </BorderPane>
+      <HBox alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="700.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <OctIconView fx:id="closeButton" fill="WHITE" glyphName="X" size="20" styleClass="close-button">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </OctIconView>
+         </children>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding>
+      </HBox>
+   </children>
+</AnchorPane>

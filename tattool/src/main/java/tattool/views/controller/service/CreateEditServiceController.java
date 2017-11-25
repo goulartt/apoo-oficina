@@ -110,6 +110,7 @@ public class CreateEditServiceController {
 		carregaCampos();
     	loadValidationErrors();
     	loadTab();
+    	firstBegin.setIs24HourView(true);
     	Platform.runLater(new Runnable() {
 	        @Override
 	        public void run() {

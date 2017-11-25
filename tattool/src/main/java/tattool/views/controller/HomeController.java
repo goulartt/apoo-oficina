@@ -13,7 +13,9 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import tattool.domain.model.Customer;
+import tattool.domain.model.Service;
 import tattool.views.controller.customer.CreateEditCustomerController;
+import tattool.views.controller.service.CreateEditServiceController;
 
 public class HomeController  implements Initializable{
 	
@@ -40,7 +42,16 @@ public class HomeController  implements Initializable{
     
     @FXML
     void createService(ActionEvent event) {
-    	//
+    	try {
+		    FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/services/create-edit.fxml"));
+		    BorderPane main       = (BorderPane) ((Node) event.getSource()).getScene().lookup("#main");
+		    viewLoader.setController(new CreateEditServiceController(new Service()));
+		    viewLoader.setRoot(main);
+		    main.getChildren().clear();
+		    viewLoader.load();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
     }
 	
 	private String pegaData() {

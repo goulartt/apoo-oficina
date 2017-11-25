@@ -1,5 +1,6 @@
 package tattool.views.controller.service;
 
+import java.io.IOException;
 import java.util.function.Predicate;
 
 import com.jfoenix.controls.JFXButton;
@@ -13,6 +14,7 @@ import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import de.jensd.fx.glyphs.octicons.OctIconView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -27,6 +29,7 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -38,6 +41,7 @@ import tattool.domain.modelfx.ServiceFX;
 import tattool.rest.consume.ServiceRest;
 import tattool.util.ConvertModelToFX;
 import tattool.views.controller.customer.CreateEditCustomerController;
+import tattool.views.controller.customer.ShowCustomerController;
 
 public class ServiceController {
 	
@@ -227,7 +231,17 @@ public class ServiceController {
      */
     
     void show(StackPane mainStack) {
-		//
+    	try {
+			FXMLLoader serviceLoader = new FXMLLoader(getClass().getResource("/views/services/show-service.fxml"));
+			serviceLoader.setController(new ShowServiceController());
+			Region serviceContent = serviceLoader.load();
+			JFXDialog customerModal = new JFXDialog(mainStack, serviceContent, JFXDialog.DialogTransition.CENTER, false);
+			OctIconView closeButton = (OctIconView) mainStack.getScene().lookup("#closeButton");
+    		closeButton.setOnMouseClicked(event -> customerModal.close());
+			customerModal.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
     
     /*
