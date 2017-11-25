@@ -52,6 +52,7 @@ public class ShowCustomerController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		carregaCampo();
+		
 	}
 	private void carregaCampo() {
 		name.setText(customer.getName());
