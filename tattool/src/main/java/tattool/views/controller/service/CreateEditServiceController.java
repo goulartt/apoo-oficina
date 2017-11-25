@@ -148,7 +148,7 @@ public class CreateEditServiceController {
     		Service serviceSalvo = rest.save(service);
     		Session session = new Session();
     		Integer cont = serviceSalvo.getQuantSessions();
-			session.setDateSession(DateUtil.asDate(firstBegin.getValue().atDate(firstDate.getValue())));
+			session.setDateSession(DateUtil.asDate(firstBegin.getValue().atDate(firstsubDate.getValue())));
 			session.setPrice(new BigDecimal(price.getText()));
 			session.setService(serviceSalvo);
 			session.setDuration(Integer.parseInt(firstTime.getText()));

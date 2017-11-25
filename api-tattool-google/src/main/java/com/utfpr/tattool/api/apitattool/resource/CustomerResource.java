@@ -83,6 +83,8 @@ public class CustomerResource {
 		Customer Customer = customerRepository.findOne(codigo);
 		return Customer != null ? ResponseEntity.ok(Customer) : ResponseEntity.notFound().build();
 	}
+	
+
 
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
