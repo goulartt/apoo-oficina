@@ -156,6 +156,10 @@ public class CreateEditCustomerController {
 				}
 			}
 		});
+    	
+    	MaskFieldUtil.cpfField(cpf);
+    	MaskFieldUtil.foneField(phone);
+    	MaskFieldUtil.cepField(zipCode);
 	
     }
     
@@ -253,14 +257,14 @@ public class CreateEditCustomerController {
 		
 		resetValidation();
 		
-		if(name.getText().isEmpty())
+		if(name.getText().equals(""))
 		{
 			errorName.setText("Insira um nome para o cliente");
 			errorName.setVisible(true);
 			validate = false;
 			customer = true;
 		}
-		if(cpf.getText().isEmpty())
+		if(cpf.getText().equals(""))
 		{
 			errorCpf.setText("Insira um CPF para o cliente");
 			errorCpf.setVisible(true);
@@ -268,7 +272,7 @@ public class CreateEditCustomerController {
 			customer  = true;
 		}
 		
-		if(birthdate.getValue() == null)
+		if(birthdate.getValue().equals(""))
 		{
 			errorBirthdate.setText("Insira uma data de nascimento para o cliente");
 			errorBirthdate.setVisible(true);
@@ -286,7 +290,7 @@ public class CreateEditCustomerController {
 
 		
 		
-		if(email.getText().equals("") && phone.getText().equals(""));
+		if(email.getText().equals("") && phone.getText().equals(""))
 		{
 			errorEmail.setText("Por favor, insira ao menos uma forma de contato");
 			errorPhone.setText("Por favor, insira ao menos uma forma de contato");
@@ -295,6 +299,8 @@ public class CreateEditCustomerController {
 			validate = false;
 			customer = true;
 		}
+
+	
 		
 		//Adicionar icone de erro nas Tabs
 		if(customer)
