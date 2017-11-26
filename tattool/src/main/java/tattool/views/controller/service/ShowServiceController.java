@@ -22,7 +22,6 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.util.Callback;
-import tattool.domain.model.Service;
 import tattool.domain.model.Session;
 import tattool.domain.modelfx.ServiceFX;
 import tattool.domain.modelfx.SessionFX;
@@ -91,6 +90,7 @@ public class ShowServiceController implements Initializable{
     	
     	price.prefWidthProperty().bind(sessionsTable.widthProperty().multiply(0.3));
     	date.prefWidthProperty().bind(sessionsTable.widthProperty().multiply(0.2));
+    	duration.prefWidthProperty().bind(sessionsTable.widthProperty().multiply(0.2));
     	status.prefWidthProperty().bind(sessionsTable.widthProperty().multiply(0.3));
     	
     	price.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<SessionFX, String>, ObservableValue<String>>()

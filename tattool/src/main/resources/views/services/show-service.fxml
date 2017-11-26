@@ -72,7 +72,7 @@
                                                       <Font name="Verdana" size="16.0" />
                                                    </font>
                                                    <VBox.margin>
-                                                      <Insets top="8.0" />
+                                                      <Insets top="14.0" />
                                                    </VBox.margin>
                                                 </Label>
                                                 <Label fx:id="numberSessions" layoutX="183.0" layoutY="36.0" text="&lt;Sessões&gt;" textFill="#494949">
@@ -80,7 +80,7 @@
                                                       <Font name="Verdana" size="16.0" />
                                                    </font>
                                                    <VBox.margin>
-                                                      <Insets top="8.0" />
+                                                      <Insets top="14.0" />
                                                    </VBox.margin>
                                                 </Label>
                                                 <Label fx:id="paidSessions" layoutX="252.0" layoutY="64.0" text="&lt;Sessões pagas&gt;" textFill="#494949">
@@ -88,7 +88,7 @@
                                                       <Font name="Verdana" size="16.0" />
                                                    </font>
                                                    <VBox.margin>
-                                                      <Insets top="8.0" />
+                                                      <Insets top="14.0" />
                                                    </VBox.margin>
                                                 </Label>
                                              </children>
@@ -110,7 +110,7 @@
                                                       <Font name="Verdana" size="16.0" />
                                                    </font>
                                                    <VBox.margin>
-                                                      <Insets top="8.0" />
+                                                      <Insets top="14.0" />
                                                    </VBox.margin>
                                                 </Label>
                                                 <Label layoutX="10.0" layoutY="36.0" text="Número de sessões:" textFill="#212121">
@@ -118,7 +118,7 @@
                                                       <Font name="Verdana" size="16.0" />
                                                    </font>
                                                    <VBox.margin>
-                                                      <Insets top="8.0" />
+                                                      <Insets top="14.0" />
                                                    </VBox.margin>
                                                 </Label>
                                                 <Label layoutX="10.0" layoutY="68.0" text="Número de sessões pagas:" textFill="#212121">
@@ -126,7 +126,7 @@
                                                       <Font name="Verdana" size="16.0" />
                                                    </font>
                                                    <VBox.margin>
-                                                      <Insets top="8.0" />
+                                                      <Insets top="14.0" />
                                                    </VBox.margin>
                                                 </Label>
                                              </children>

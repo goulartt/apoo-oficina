@@ -2,8 +2,6 @@ package tattool.views.controller.service;
 
 import java.util.function.Predicate;
 
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableRow;
@@ -12,8 +10,6 @@ import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
 import de.jensd.fx.glyphs.octicons.OctIconView;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -23,13 +19,11 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.input.MouseButton;
-import javafx.scene.control.TreeTablePosition;
 import javafx.util.Callback;
 import tattool.domain.model.Customer;
 import tattool.domain.modelfx.CustomerFX;
 import tattool.rest.consume.CustomerRest;
 import tattool.util.ConvertModelToFX;
-import tattool.views.controller.DashboardController;
 
 public class CustomerGridController {
 	
