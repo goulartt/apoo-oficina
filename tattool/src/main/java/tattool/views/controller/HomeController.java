@@ -2,6 +2,7 @@ package tattool.views.controller;
 
 import java.net.URL;
 import java.text.DateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -10,8 +11,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+import jfxtras.scene.control.agenda.Agenda;
 import tattool.domain.model.Customer;
 import tattool.domain.model.Service;
 import tattool.views.controller.customer.CreateEditCustomerController;
@@ -21,9 +25,20 @@ public class HomeController  implements Initializable{
 	
 	@FXML Label lblData = new Label();
 	
+	
+	@FXML Agenda agenda = new Agenda();
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		lblData.setText("Hoje é dia " + pegaData() + ".");
+
+	    agenda.appointments().addAll(
+	        new Agenda.AppointmentImplLocal()
+	            .withStartLocalDateTime(LocalDate.now().atTime(4, 00))
+	            .withEndLocalDateTime(LocalDate.now().atTime(15, 30))
+	            .withDescription("It's time")
+	            .withAppointmentGroup(new Agenda.AppointmentGroupImpl().withStyleClass("group1")) // you should use a map of AppointmentGroups
+	    );
 	}
 	
 	@FXML

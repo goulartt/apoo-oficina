@@ -1,5 +1,7 @@
 package tattool.views.controller;
 
+import java.time.LocalDate;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDecorator;
 import com.jfoenix.effects.JFXDepthManager;
@@ -12,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import jfxtras.scene.control.agenda.Agenda;
 
 public class DashboardController 
 {
@@ -41,7 +44,7 @@ public class DashboardController
     	try
     	{
 		    FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/home.fxml"));
-		    
+	
 		    viewLoader.setRoot(main);
 		    main.getChildren().clear();
 		    viewLoader.load();
