@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import de.jensd.fx.glyphs.octicons.OctIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <VBox prefHeight="65.0" prefWidth="700.0" style="-fx-background-color: #009688;" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Gerenciar sessões:" textFill="WHITE">
+                     <font>
+                        <Font name="Verdana" size="26.0" />
+                     </font>
+                  </Label>
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+               <padding>
+                  <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+               </padding>
+            </VBox>
+         </top>
+         <center>
+            <JFXTreeTableView fx:id="sessionGrid" BorderPane.alignment="CENTER">
+               <columnResizePolicy>
+                  <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy></JFXTreeTableView>
+         </center>
+         <bottom>
+            <BorderPane prefHeight="49.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+               <left>
+                  <HBox prefWidth="345.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <JFXButton buttonType="RAISED" graphicTextGap="6.0" onAction="#delete" prefHeight="38.0" prefWidth="131.0" style="-fx-background-color: #f44336; -fx-background-radius: 0;" text="Apagar" textFill="WHITE">
+                           <font>
+                              <Font name="Verdana" size="16.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="8.0" left="16.0" right="16.0" top="8.0" />
+                           </padding>
+                           <graphic>
+                              <MaterialDesignIconView fill="WHITE" glyphName="CALENDAR_REMOVE" size="22" />
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <HBox.margin>
+                              <Insets right="16.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" graphicTextGap="6.0" onAction="#create" prefHeight="38.0" prefWidth="165.0" style="-fx-background-color: #009688; -fx-background-radius: 0;" text="Nova Sessão" textFill="WHITE">
+                           <font>
+                              <Font name="Verdana" size="16.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="8.0" left="16.0" right="16.0" top="8.0" />
+                           </padding>
+                           <graphic>
+                              <MaterialDesignIconView fill="WHITE" glyphName="CALENDAR_PLUS" size="22" />
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </left>
+               <right>
+                  <HBox alignment="TOP_RIGHT" BorderPane.alignment="CENTER">
+                     <children>
+                        <JFXButton buttonType="RAISED" graphicTextGap="6.0" onAction="#update" prefHeight="38.0" prefWidth="131.0" style="-fx-background-color: #009688; -fx-background-radius: 0;" text="Salvar" textFill="WHITE">
+                           <font>
+                              <Font name="Verdana" size="16.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="8.0" left="16.0" right="16.0" top="8.0" />
+                           </padding>
+                           <graphic>
+                              <MaterialDesignIconView fill="WHITE" glyphName="CONTENT_SAVE" size="22" />
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </right>
+            </BorderPane>
+         </bottom>
+      </BorderPane>
+      <HBox alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="700.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <OctIconView fx:id="closeButton" fill="WHITE" glyphName="X" size="20" styleClass="close-button">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </OctIconView>
+         </children>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding>
+      </HBox>
+   </children>
+</AnchorPane>

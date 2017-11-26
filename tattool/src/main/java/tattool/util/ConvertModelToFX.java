@@ -1,5 +1,6 @@
 package tattool.util;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,19 +19,20 @@ import tattool.domain.modelfx.SessionFX;
 import tattool.domain.modelfx.UserFX;
 
 public class ConvertModelToFX {
-	
+
 	public static User convertUser(UserFX u) {
 		User user = new User();
-		if(u.getId() != null) user.setId(u.getId());
+		if (u.getId() != null)
+			user.setId(u.getId());
 		user.setNome(u.getNome().get());
 		String role = u.getRole().get();
 		user.setRole(Integer.parseInt(role));
 		user.setSenha(u.getSenha().get());
 		user.setUsuario(u.getUsuario().get());
 		return user;
-		
+
 	}
-	
+
 	public static UserFX convertUserFX(User u) {
 		UserFX user = new UserFX(u.getUsuario(), u.getSenha(), u.getNome(), u.getRole().toString());
 		user.setId(u.getId());
@@ -38,26 +40,26 @@ public class ConvertModelToFX {
 	}
 
 	public static List<UserFX> convertListUser(User[] findAllUsers) {
-	  	List<UserFX> userFX = new ArrayList<>();
-    	List<User> user = Arrays.asList(findAllUsers);
-    	for(User u : user) {
-    		userFX.add(ConvertModelToFX.convertUserFX(u));
-    	}
-    	return userFX;
+		List<UserFX> userFX = new ArrayList<>();
+		List<User> user = Arrays.asList(findAllUsers);
+		for (User u : user) {
+			userFX.add(ConvertModelToFX.convertUserFX(u));
+		}
+		return userFX;
 	}
-	
-	public static List<User> convertListUserFX(List<UserFX> user){
+
+	public static List<User> convertListUserFX(List<UserFX> user) {
 		List<User> userConvertido = new ArrayList<>();
-		for(UserFX u : user) {
+		for (UserFX u : user) {
 			userConvertido.add(ConvertModelToFX.convertUser(u));
-    	}
-    	return userConvertido;
+		}
+		return userConvertido;
 	}
 
 	public static List<CustomerFX> convertListCustomer(Customer[] findAll) {
 		List<Customer> customers = Arrays.asList(findAll);
 		List<CustomerFX> clientes = new ArrayList<>();
-		if(!customers.isEmpty()) {
+		if (!customers.isEmpty()) {
 			customers.forEach(c -> {
 				CustomerFX conversao = new CustomerFX();
 				conversao.setId(c.getId());
@@ -65,13 +67,13 @@ public class ConvertModelToFX {
 				conversao.setBirthDate(c.getBirthDate());
 				conversao.setAddress(c.getAddress());
 				conversao.setContact(c.getContact());
-				if(c.getContact().getEmail().equals("") && !c.getContact().getPhone().equals("")) {
+				if (c.getContact().getEmail().equals("") && !c.getContact().getPhone().equals("")) {
 					conversao.setContactSimple(new SimpleStringProperty(c.getContact().getPhone()));
 				}
-				if(!c.getContact().getEmail().equals("") && c.getContact().getPhone().equals("")) {
+				if (!c.getContact().getEmail().equals("") && c.getContact().getPhone().equals("")) {
 					conversao.setContactSimple(new SimpleStringProperty(c.getContact().getEmail()));
 				}
-				if(!c.getContact().getEmail().equals("") && !c.getContact().getPhone().equals("")) {
+				if (!c.getContact().getEmail().equals("") && !c.getContact().getPhone().equals("")) {
 					conversao.setContactSimple(new SimpleStringProperty(c.getContact().getPhone()));
 				}
 				conversao.setName(new SimpleStringProperty(c.getName()));
@@ -91,7 +93,7 @@ public class ConvertModelToFX {
 		customer.setCpf(value.getCpf().get());
 		customer.setBirthDate(value.getBirthDate());
 		customer.setRemoved(value.getRemoved());
-		
+
 		return customer;
 	}
 
@@ -131,14 +133,14 @@ public class ConvertModelToFX {
 		sessions.forEach(s -> {
 			SessionFX sessao = new SessionFX();
 			sessao.setId(s.getId());
-			if(s.getDateSession() != null)
+			if (s.getDateSession() != null)
 				sessao.setDate(new SimpleStringProperty(DateUtil.DateToString(s.getDateSession())));
 			else
 				sessao.setDate(new SimpleStringProperty("Não agendado"));
 			sessao.setDuration(new SimpleStringProperty(s.getDuration().toString()));
-			if(!s.getObs().equals(""))
+			if (!s.getObs().equals(""))
 				sessao.setObs(s.getDuration().toString());
-			if(s.getPrice() != null)
+			if (s.getPrice() != null)
 				sessao.setPrice(new SimpleStringProperty(s.getPrice().toString()));
 			else
 				sessao.setPrice(new SimpleStringProperty("Não acertado"));
@@ -149,4 +151,25 @@ public class ConvertModelToFX {
 		});
 		return sessionFX;
 	}
+
+	public static Session converSessionFXtoSession(SessionFX s) {
+		Session sessao = new Session();
+		sessao.setId(s.getId());
+		if(s.getDate().get().equals("Não agendado"))
+			sessao.setDateSession(null);
+		else
+		    sessao.setDateSession(DateUtil.StringToDate(s.getDate().get()));
+		sessao.setDuration(Integer.parseInt(s.getDuration().get()));
+		sessao.setObs(s.getDuration().get());
+		if(s.getPrice().get().equals("Não acertado"))
+			sessao.setPrice(null);
+		else
+			sessao.setPrice(new BigDecimal(s.getPrice().get()));
+		sessao.setRemoved(s.getRemoved());
+		sessao.setService(s.getService());
+		sessao.setStatus(s.getStatus().get());
+
+		return sessao;
+	}
+
 }

@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
@@ -45,6 +46,9 @@ public class CreateEditServiceController {
     @FXML
     private Tab serviceTab;
 
+    @FXML
+    private JFXCheckBox priceCheckbox;
+    
     @FXML
     private Tab sessionsTab;
 
@@ -164,14 +168,15 @@ public class CreateEditServiceController {
         			sessionNew.setService(serviceSalvo);
         			sessionRest.save(sessionNew);
         		}
-    		}
     		
     	}else {
-    		System.out.println("e"); 
-    		System.out.println(MaskFieldUtil.onlyDigitsValue(price));
-    	
+    		System.out.println("e");
+    	}
     	}
     }
+    	
+    	
+    
     
     /*
 	 * 	##	DIALOG STORE
