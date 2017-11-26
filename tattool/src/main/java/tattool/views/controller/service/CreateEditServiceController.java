@@ -2,6 +2,7 @@ package tattool.views.controller.service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
@@ -34,6 +35,7 @@ import tattool.domain.model.Session;
 import tattool.rest.consume.ServiceRest;
 import tattool.rest.consume.SessionRest;
 import tattool.util.DateUtil;
+import tattool.util.MaskFieldUtil;
 
 public class CreateEditServiceController {
 
@@ -116,6 +118,8 @@ public class CreateEditServiceController {
 	            name.requestFocus();
 	        }
 	    });
+    	MaskFieldUtil.monetaryField(price);
+    	
     }
     
     private void carregaCampos() {
@@ -144,21 +148,28 @@ public class CreateEditServiceController {
     		
     		service.setQuantSessions(Integer.parseInt(numberSessions.getText())); //tenta entender minha logica ai embaixo e faz validação
     		Service serviceSalvo = rest.save(service);
-    		Session session = new Session();
-    		Integer cont = serviceSalvo.getQuantSessions();
-			session.setDateSession(DateUtil.asDate(firstBegin.getValue().atDate(firstDate.getValue())));
-			session.setPrice(new BigDecimal(price.getText()));
-			session.setService(serviceSalvo);
-			session.setDuration(Integer.parseInt(firstTime.getText()));
-			sessionRest.save(session);
-			cont--;
-    		for(int i = 0; i <= cont; i++) {
-    			Session sessionNew = new Session();
-    			sessionNew.setService(serviceSalvo);
-    			sessionRest.save(sessionNew);
+    		if(!numberSessions.getText().equals("0"))
+    		{
+    			Session session = new Session();
+        		Integer cont = serviceSalvo.getQuantSessions();
+    			session.setDateSession(DateUtil.asDate(firstBegin.getValue().atDate(firstDate.getValue())));
+    			session.setPrice(new BigDecimal(price.getText()));
+    			session.setService(serviceSalvo);
+    			session.setDuration(Integer.parseInt(firstTime.getText()));
+    			sessionRest.save(session);
+    			System.out.println(session.getPrice());
+    			cont--;
+        		for(int i = 0; i <= cont; i++) {
+        			Session sessionNew = new Session();
+        			sessionNew.setService(serviceSalvo);
+        			sessionRest.save(sessionNew);
+        		}
     		}
+    		
     	}else {
-    		System.out.println("e");
+    		System.out.println("e"); 
+    		System.out.println(MaskFieldUtil.onlyDigitsValue(price));
+    	
     	}
     }
     
@@ -218,6 +229,7 @@ public class CreateEditServiceController {
 			validate = false;
 			service  = true;
 		}
+		
 		if(numberSessions.getText().isEmpty())
 		{
 			errorNumberSessions.setText("Por favor informe o número de sessões");
@@ -226,38 +238,106 @@ public class CreateEditServiceController {
 			service = true;
 		}
 		else if(numberSessions.getText().equals("0")) {
-			errorNumberSessions.setText("O serviço deve ter pelo menos uma sessão");
-			errorNumberSessions.setVisible(true);
-			validate = false;
-			service = true;
-		}
-		if(price.getText().isEmpty())
-		{
-			errorPrice.setText("É necessário informar o valor da sessão");
+			price.setDisable(true);
+			firstDate.setDisable(true);
+			firstTime.setDisable(true);
+			firstBegin.setDisable(true);
+			errorPrice.setText("Número de sessões cadastradas igual à zero. Não é possivel informar primeira sessão");
 			errorPrice.setVisible(true);
-			validate = false;
-			sessions = true;
-		}
-		if(firstDate.getValue() == null) {
-			errorFirstDate.setText("Informe a data da primeira sessão");
+			errorFirstDate.setText("Número de sessões cadastradas igual à zero. Não é possivel informar primeira sessão");
 			errorFirstDate.setVisible(true);
-			validate = false;
-			sessions = true;
-		}
-		if(firstBegin.getValue() == null)
-		{
-			errorFirstBegin.setText("Informe o horário da sessão");
+			errorFirstBegin.setText("Número de sessões cadastradas igual à zero. Não é possivel informar primeira sessão");
 			errorFirstBegin.setVisible(true);
-			validate = false;
-			sessions = true;
-		}
-		if(firstTime.getText().isEmpty())
-		{
-			errorFirstTime.setText("Informe a duração da sessão");
+			errorFirstTime.setText("Número de sessões cadastradas igual à zero. Não é possivel informar primeira sessão");
 			errorFirstTime.setVisible(true);
-			validate = false;
-			sessions = true;
+			
+			if(price.getText() != null)
+			{
+				price.clear();
+			}
+			if(firstDate.getValue() != null) {
+				firstDate.setValue(null);
+			}
+			if(firstBegin.getValue() != null)
+			{
+				firstBegin.setValue(null);
+			}
+			if(!firstTime.getText().isEmpty())
+			{
+				firstTime.clear();
+			}
+			
 		}
+		else
+		{
+			if(!numberSessions.getText().matches("['0-9']"))
+			{
+				errorNumberSessions.setText("Número de sessões pode conter apenas números");
+				errorNumberSessions.setVisible(true);
+				validate = false;
+				service = true;
+			}
+	    	firstDate.setEditable(false);
+	    	firstBegin.setEditable(false);
+			price.setDisable(false);
+			firstDate.setDisable(false);
+			firstTime.setDisable(false);
+			firstBegin.setDisable(false);
+			if(price.getText().isEmpty())
+			{
+				errorPrice.setText("É necessário informar o valor da sessão");
+				errorPrice.setVisible(true);
+				validate = false;
+				sessions = true;
+			}else
+			{
+				if(!price.getText().matches("['0-9']")  && !price.getText().contains("."))
+				{
+					errorPrice.setText("Preço inválido");
+					errorPrice.setVisible(true);
+					validate = false;
+					sessions = true;
+				}
+			}
+			
+			
+			if(firstDate.getValue() == null) {
+				errorFirstDate.setText("Informe a data da primeira sessão");
+				errorFirstDate.setVisible(true);
+				validate = false;
+				sessions = true;
+			}
+			/*
+			else
+			{
+				if(firstDate.getValue().isAfter(LocalDate.now()))
+				{
+					errorFirstDate.setText("A data não pode ser inferior à data atual");
+					errorFirstDate.setVisible(true);
+					validate = false;
+					sessions = true;
+				}
+			}
+			*/
+			if(firstBegin.getValue() == null)
+			{
+				errorFirstBegin.setText("Informe o horário da sessão");
+				errorFirstBegin.setVisible(true);
+				validate = false;
+				sessions = true;
+			}
+			if(firstTime.getText().isEmpty())
+			{
+				errorFirstTime.setText("Informe a duração da sessão");
+				errorFirstTime.setVisible(true);
+				validate = false;
+				sessions = true;
+			}
+		}
+		
+		
+		
+		
 		
 		//Adicionar icone de erro nas Tabs
 		if(service)

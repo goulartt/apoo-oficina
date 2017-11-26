@@ -2,6 +2,8 @@ package tattool.views.controller.customer;
 
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
@@ -164,6 +166,7 @@ public class CreateEditCustomerController {
     	MaskFieldUtil.cpfField(cpf);
     	MaskFieldUtil.foneField(phone);
     	MaskFieldUtil.cepField(zipCode);
+    	birthdate.setEditable(false);
 	
     }
     
@@ -276,14 +279,15 @@ public class CreateEditCustomerController {
 			customer  = true;
 		}
 		
-		if(birthdate.getValue().equals(""))
+		if(birthdate.getValue() == null)
 		{
 			errorBirthdate.setText("Insira uma data de nascimento para o cliente");
 			errorBirthdate.setVisible(true);
 			validate = false;
 			customer = true;
-		}else {
-			if(birthdate.getValue().getYear() > LocalDate.now().getYear())
+		}
+		/*else {
+			if(birthdate.getValue().isAfter(LocalDate.now()))
 			{
 				errorBirthdate.setText("Insira uma data de nascimento menor que " + LocalDate.now().getYear());
 				errorBirthdate.setVisible(true);
@@ -291,6 +295,7 @@ public class CreateEditCustomerController {
 				customer = true;
 			}
 		}
+		*/
 		
 		if(email.getText().equals("") && phone.getText().equals(""))
 		{
@@ -301,6 +306,23 @@ public class CreateEditCustomerController {
 			validate = false;
 			contact = true;
 		}
+		else
+		{
+			
+		}
+		String emailValidate = email.getText();
+		if (null != emailValidate) {
+            String regex = "^([_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{1,6}))?$";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(emailValidate);
+            if (!matcher.matches())
+            {
+    			errorEmail.setText("Email inválido");
+            	errorEmail.setVisible(true);
+    			validate = false;
+    			contact = true;
+            }
+        }
 
 	
 		

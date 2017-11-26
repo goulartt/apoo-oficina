@@ -1,6 +1,7 @@
 package tattool.util;
 
 import java.math.BigDecimal;
+import java.net.Inet4Address;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -90,7 +91,7 @@ public abstract class MaskFieldUtil {
             value = value.replaceAll("([0-9]{1})([0-9]{11})$", "$1.$2");
             value = value.replaceAll("([0-9]{1})([0-9]{8})$", "$1.$2");
             value = value.replaceAll("([0-9]{1})([0-9]{5})$", "$1.$2");
-            value = value.replaceAll("([0-9]{1})([0-9]{2})$", "$1,$2");
+            value = value.replaceAll("([0-9]{1})([0-9]{2})$", "$1.$2");
             textField.setText(value);
             MaskFieldUtil.positionCaret(textField);
             textField.textProperty().addListener((ChangeListener) new ChangeListener<String>() {
@@ -255,5 +256,6 @@ public abstract class MaskFieldUtil {
     static {
         Collections.addAll(ignoreKeyCodes, new KeyCode[]{KeyCode.F1, KeyCode.F2, KeyCode.F3, KeyCode.F4, KeyCode.F5, KeyCode.F6, KeyCode.F7, KeyCode.F8, KeyCode.F9, KeyCode.F10, KeyCode.F11, KeyCode.F12});
     }
-
+    
+   
 }
