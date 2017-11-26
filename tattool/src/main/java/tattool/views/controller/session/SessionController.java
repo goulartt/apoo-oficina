@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import tattool.domain.model.Service;
 
 public class SessionController implements Initializable{
 	
@@ -24,6 +25,8 @@ public class SessionController implements Initializable{
 	
 	@FXML
     JFXTextField service;
+	
+	Service serviceCarregado = new Service();
 	
 	@FXML
     JFXButton showSessionsButton;

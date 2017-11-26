@@ -15,6 +15,19 @@ public class SessionFX  extends RecursiveTreeObject<SessionFX> {
 	private Integer removed;
 	private String obs;
 	private Service service;
+	
+	
+	
+	public SessionFX() {
+		this.id = null;
+		this.date = new SimpleStringProperty("Não agendado");
+		this.price = new SimpleStringProperty("Não acertado");
+		this.status = new SimpleStringProperty("PENDENTE");
+		this.obs = "";
+		this.service = new Service();
+		this.duration = new SimpleStringProperty("0");
+		this.removed = 0;
+	}
 	public Integer getId() {
 		return id;
 	}
