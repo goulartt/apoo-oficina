@@ -25,7 +25,6 @@ public class Main extends Application
 			primaryStage.setTitle("TATTOOL - Software de Gerenciamento de Estúdios de Tatuagens");
 			scene.getStylesheets().add("/css/application.css");
 		    primaryStage.setScene(scene);
-		    
 		    primaryStage.setMinHeight(612);
 		    primaryStage.setMinWidth(1032);
 		    primaryStage.show();
