@@ -176,14 +176,19 @@ public class ShowArtController implements Initializable {
 	 */
 	@FXML
 	void update(ActionEvent event) {
-		if (validate()) {
-			// if(atualizou) {
+			List<Tag> tag = new ArrayList<>();
+        	tags.getChildren().forEach(t -> {
+        		tag.add(new Tag(((Label)t).getText()));
+        	});
+        	art.getTags().clear();
+        	for(Tag t : tag) {
+    			art.getTags().add(t);
+    		}
+    		rest.saveArt(art);
 			loadDialogUpdate((StackPane) ((Node) event.getSource()).getScene().lookup("#mainStack"),
 					new Text("As alterações foram salvas!"));
-			// } else {
 
-			// DESATIVA O BOTÃO DE SALVAR LÁ QUE FICA DAHORA
-		}
+		
 	}
 
 	/*
@@ -300,15 +305,7 @@ public class ShowArtController implements Initializable {
 		ok.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				List<Tag> tag = new ArrayList<>();
-	        	tags.getChildren().forEach(t -> {
-	        		tag.add(new Tag(((Label)t).getText()));
-	        	});
-	        	Art art = new Art();
-	        	for(Tag t : tag) {
-	    			art.getTags().add(t);
-	    		}
-	    		rest.saveArt(art);
+			
 				dialog.close();
 			}
 		});

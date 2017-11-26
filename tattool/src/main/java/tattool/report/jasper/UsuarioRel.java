@@ -1,5 +1,6 @@
 package tattool.report.jasper;
 
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -17,19 +18,17 @@ import tattool.rest.consume.UserRest;
 public class UsuarioRel {
 private String path; //Caminho base
 	
-	private String pathToReportPackage; // Caminho para o package onde estão armazenados os relatorios Jarper
+	private InputStream pathToReportPackage; // Caminho para o package onde estão armazenados os relatorios Jarper
 	
 	//Recupera os caminhos para que a classe possa encontrar os relatórios
-	public UsuarioRel() {
-		this.path = this.getClass().getClassLoader().getResource("").getPath();
-		this.pathToReportPackage = this.path + "tattool/report/jasper/";
-		System.out.println(path);
+	public UsuarioRel(String relatorio) {
+		this.pathToReportPackage = getClass().getResourceAsStream("/report/"+relatorio+".jrxml");
 	}
 	
 	
 	
 
-	public String getPathToReportPackage() {
+	public InputStream getPathToReportPackage() {
 		return this.pathToReportPackage;
 	}
 	
@@ -45,7 +44,7 @@ private String path; //Caminho base
 				Arrays.asList(users));
 		JasperPrint impressao = null;
 		try {
-			impressao = JasperFillManager.fillReport(JasperCompileManager.compileReport(this.getPathToReportPackage() + "usuarios.jrxml"), parametros, ds);
+			impressao = JasperFillManager.fillReport(JasperCompileManager.compileReport(this.getPathToReportPackage() + ""), parametros, ds);
 			JasperViewer viewer = new JasperViewer(impressao, true);
 			viewer.viewReport(impressao, false);
 		} catch (JRException e) {
@@ -58,7 +57,7 @@ private String path; //Caminho base
 		JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(services);
 		JasperPrint impressao = null;
 		try {
-			impressao = JasperFillManager.fillReport(JasperCompileManager.compileReport(this.getPathToReportPackage() + "historicoCliente.jrxml"), parametros, ds);
+			impressao = JasperFillManager.fillReport(JasperCompileManager.compileReport(this.getPathToReportPackage() ), parametros, ds);
 			JasperViewer viewer = new JasperViewer(impressao, true);
 			viewer.viewReport(impressao, false);
 		} catch (JRException e) {
