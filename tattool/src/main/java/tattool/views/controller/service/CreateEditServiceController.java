@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
@@ -43,6 +44,9 @@ public class CreateEditServiceController {
     @FXML
     private Tab serviceTab;
 
+    @FXML
+    private JFXCheckBox priceCheckbox;
+    
     @FXML
     private Tab sessionsTab;
 
@@ -152,9 +156,15 @@ public class CreateEditServiceController {
 			session.setDuration(Integer.parseInt(firstTime.getText()));
 			sessionRest.save(session);
 			cont--;
-    		for(int i = 0; i <= cont; i++) {
+			BigDecimal preco;
+			if(priceCheckbox.isSelected()) 
+				 preco = session.getPrice();
+			else
+				preco = null;
+    		for(int i = 0; i < cont; i++) {
     			Session sessionNew = new Session();
     			sessionNew.setService(serviceSalvo);
+    			sessionNew.setPrice(preco);
     			sessionRest.save(sessionNew);
     		}
     	}else {

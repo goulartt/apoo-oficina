@@ -1,9 +1,9 @@
 package tattool.views.controller.customer;
 
 import java.time.LocalDate;
-import java.util.Calendar;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
@@ -123,6 +123,7 @@ public class CreateEditCustomerController {
     
     @FXML
     private Tab addressTab;
+   
     
     private CustomerRest rest = new CustomerRest();
     
