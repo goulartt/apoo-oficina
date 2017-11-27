@@ -222,14 +222,14 @@ public class DashboardController
 			
 			Stage stage 			  = new Stage();	
 			FXMLLoader templateLoader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
-			Scene scene 			  = new Scene(new JFXDecorator(stage, templateLoader.load()), 1032, 612);
+			Scene scene 			  = new Scene(new JFXDecorator(stage, templateLoader.load()), 1280, 750);
 			
 			scene.getStylesheets().add("/css/application.css");
 		    
 		    stage.setScene(scene);
 		    primaryStage.hide();
-		    stage.setMinHeight(612);
-		    stage.setMinWidth(1032);
+		    stage.setMinHeight(750);
+		    stage.setMinWidth(1280);
 		    stage.show();
 		}
 		catch(Exception e)

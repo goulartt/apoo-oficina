@@ -174,9 +174,11 @@ public class CreateEditServiceController {
     			session.setPrice(new BigDecimal(price.getText()));
     			session.setService(serviceSalvo);
     			session.setDuration(Integer.parseInt(firstTime.getText()));
+    			session.setStatus("AGENDADO");
     			BigDecimal preco = null;
     			if(priceCheckbox.isSelected())
     				preco = new BigDecimal(price.getText());
+    			
     			sessionRest.save(session);
     			System.out.println(session.getPrice());
     			cont--;

@@ -1,15 +1,19 @@
-package tattool.domain.model;
+package tattool.domain.modelfx;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
-public class Session implements Serializable{
-	
-	private static final long serialVersionUID = -8843063860683914321L;
+import javafx.beans.property.SimpleStringProperty;
+import tattool.domain.model.Service;
 
+public class SessionCashierFX extends RecursiveTreeObject<SessionCashierFX> {
 	private Integer id;
+	public SimpleStringProperty date;
+	public SimpleStringProperty nomeServico;
+	public SimpleStringProperty preco;
+	public SimpleStringProperty pago;
 	
 	private Date dateSession;
 	
@@ -26,18 +30,6 @@ public class Session implements Serializable{
 	private Integer duration;
 	
 	private Integer removed;
-	
-	
-	public Session() {
-		this.id = null;
-		this.dateSession = null;
-		this.price = null;
-		this.status = "PENDENTE";
-		this.obs = "";
-		this.service = new Service();
-		this.duration = 0;
-		this.removed = 0;
-	}
 
 	public Integer getId() {
 		return id;
@@ -47,6 +39,45 @@ public class Session implements Serializable{
 		this.id = id;
 	}
 
+	public SimpleStringProperty getDate() {
+		return date;
+	}
+
+	public void setDate(SimpleStringProperty date) {
+		this.date = date;
+	}
+
+	public SimpleStringProperty getNomeServico() {
+		return nomeServico;
+	}
+
+	public void setNomeServico(SimpleStringProperty nomeServico) {
+		this.nomeServico = nomeServico;
+	}
+
+	public SimpleStringProperty getPreco() {
+		return preco;
+	}
+
+	public void setPreco(SimpleStringProperty preco) {
+		this.preco = preco;
+	}
+
+	public SimpleStringProperty getPago() {
+		return pago;
+	}
+
+	public void setPago(SimpleStringProperty pago) {
+		this.pago = pago;
+	}
+
+	public Date getDateSession() {
+		return dateSession;
+	}
+
+	public void setDateSession(Date dateSession) {
+		this.dateSession = dateSession;
+	}
 
 	public BigDecimal getPrice() {
 		return price;
@@ -70,14 +101,6 @@ public class Session implements Serializable{
 
 	public void setObs(String obs) {
 		this.obs = obs;
-	}
-
-	public Date getDateSession() {
-		return dateSession;
-	}
-
-	public void setDateSession(Date dateSession) {
-		this.dateSession = dateSession;
 	}
 
 	public Service getService() {
@@ -112,8 +135,6 @@ public class Session implements Serializable{
 		this.paid = paid;
 	}
 	
-	
-
 	
 	
 }

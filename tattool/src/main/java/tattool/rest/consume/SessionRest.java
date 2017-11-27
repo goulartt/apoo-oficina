@@ -27,6 +27,12 @@ public class SessionRest {
 		return rest.getForObject(url, Session[].class);
 
 	}
+	public Session[] findAllAgendados() {
+		String url = Constantes.Api.URL_API + "/sessions/agendado";
+		rest.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+		return rest.getForObject(url, Session[].class);
+
+	}
 
 	public Session save(Session customer) {
 		return rest.postForObject(Constantes.Api.URL_API + "/sessions", customer, Session.class);

@@ -62,6 +62,12 @@ public class SessionResource {
 		List<Session> services = sessionRepository.findAll();
 		return !services.isEmpty() ? ResponseEntity.ok(services) : ResponseEntity.noContent().build();
 	}
+   
+	@GetMapping("/agendado")
+	public ResponseEntity<?> findAgendados() {
+		List<Session> services = sessionRepository.findByStatus("AGENDADO");
+		return !services.isEmpty() ? ResponseEntity.ok(services) : ResponseEntity.noContent().build();
+	}
    		
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)

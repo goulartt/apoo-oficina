@@ -11,4 +11,6 @@ public interface SessionRepository extends JpaRepository<Session, Integer> {
 
 	List<Session> findByService(Service findOne);
 
+	List<Session> findByStatus(String string);
+
 }
