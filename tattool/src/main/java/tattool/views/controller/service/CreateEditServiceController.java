@@ -352,6 +352,15 @@ public class CreateEditServiceController {
 				errorFirstTime.setVisible(true);
 				validate = false;
 				sessions = true;
+			}else
+			{
+				if(!firstTime.getText().matches("\\d+"))
+				{
+					errorFirstTime.setText("Informe a duração em minutos");
+					errorFirstTime.setVisible(true);
+					validate = false;
+					sessions = true;
+				}
 			}
 		}
 		

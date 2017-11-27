@@ -183,8 +183,8 @@ public class LoginController implements Initializable {
 		media.setMediaPlayer(mp);
 		media.fitWidthProperty().bind(Bindings.selectDouble(media.sceneProperty(), "width"));
 		media.fitHeightProperty().bind(Bindings.selectDouble(media.sceneProperty(), "height"));
-		background.fitWidthProperty().bind(Bindings.selectDouble(background.parentProperty(), "width").divide(2));
-		background.fitHeightProperty().bind(Bindings.selectDouble(background.parentProperty(), "height").divide(2));
+		background.fitWidthProperty().bind(Bindings.selectDouble(background.sceneProperty(), "width"));
+		background.fitHeightProperty().bind(Bindings.selectDouble(background.sceneProperty(), "height"));
 	}
 	
 	void closeApp() {
