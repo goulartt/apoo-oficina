@@ -16,6 +16,8 @@ import com.jfoenix.controls.events.JFXDialogEvent;
 
 import de.jensd.fx.glyphs.octicons.OctIconView;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -24,6 +26,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
@@ -123,6 +126,18 @@ public class CreateEditServiceController {
 	        }
 	    });
     	MaskFieldUtil.monetaryField(price);
+    	numberSessions.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if(newValue.equals("0")) {
+					sessionsTab.setDisable(true);
+					sessionsTab.setTooltip(new Tooltip("Adicione um valor maior que zero para habilitar essa tab"));
+				}else {
+					sessionsTab.setDisable(false);
+					sessionsTab.setTooltip(new Tooltip("Cadastre rapidamente a primeira sessão"));
+				}
+			}
+    	});
     	
     }
     
@@ -143,7 +158,6 @@ public class CreateEditServiceController {
     void store(StackPane mainStack) {
     	
     	if(validate()) {
-    		System.out.println("aaa");
     		loadDialog(mainStack);
     		Service service = new Service();
     		
@@ -173,8 +187,6 @@ public class CreateEditServiceController {
         			sessionRest.save(sessionNew);
         		}
     		
-    	}else {
-    		System.out.println("e");
     	}
     	}
     }

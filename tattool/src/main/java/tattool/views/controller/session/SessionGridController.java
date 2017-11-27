@@ -33,7 +33,6 @@ import javafx.util.Callback;
 import tattool.domain.model.Session;
 import tattool.domain.model.User;
 import tattool.domain.modelfx.SessionFX;
-import tattool.domain.modelfx.SessionFX;
 import tattool.rest.consume.ServiceRest;
 import tattool.rest.consume.SessionRest;
 import tattool.util.ConvertModelToFX;

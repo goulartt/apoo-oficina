@@ -37,6 +37,7 @@ import tattool.domain.model.Customer;
 import tattool.rest.consume.CustomerRest;
 import tattool.util.DateUtil;
 import tattool.util.MaskFieldUtil;
+import tattool.util.MaskedTextField;
 import tattool.util.ValidaCPF;
 
 /*
@@ -50,7 +51,7 @@ public class CreateEditCustomerController {
     private JFXTextField name;
     
     @FXML
-    private JFXTextField cpf;
+    private MaskedTextField cpf;
     
     @FXML
     private JFXDatePicker birthdate;
@@ -153,22 +154,17 @@ public class CreateEditCustomerController {
     	zipCode.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				if(newValue.length() == 9) {
-					String valor = newValue.replace("-", "");
-					System.out.println(valor);
+				String valor = newValue.replace("-", "");
+				if(valor.matches("[0-9]*")) {
 					Cep cep = rest.buscaCep(valor);
 					street.setText(cep.getLogradouro());
 					state.setText(cep.getUf());
 					city.setText(cep.getLocalidade());
 					neighborhood.setText(cep.getBairro());
-					
 				}
 			}
 		});
     	
-    	MaskFieldUtil.cpfField(cpf);
-    	MaskFieldUtil.foneField(phone);
-    	MaskFieldUtil.cepField(zipCode);
     	birthdate.setEditable(false);
 	
     }
@@ -274,7 +270,8 @@ public class CreateEditCustomerController {
 			validate = false;
 			customer = true;
 		}
-		if(ValidaCPF.isCPF(MaskFieldUtil.onlyDigitsValue(cpf)) == false)
+		String cpfSemPonto = cpf.getText().replace(".", "");
+		if(ValidaCPF.isCPF(cpfSemPonto.replace("-", "")) == false)
 		{
 			errorCpf.setText("Insira um CPF válido");
 			errorCpf.setVisible(true);

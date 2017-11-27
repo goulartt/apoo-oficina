@@ -97,7 +97,7 @@ public class ShowCustomerController implements Initializable {
 
 	@FXML
 	void historico(ActionEvent event) {
-		UsuarioRel relatorio = new UsuarioRel();
+		UsuarioRel relatorio = new UsuarioRel("historicoCliente");
 		try {
 			List<Service> services = rest.geraRelatorio(customer.getId());
 			relatorio.geraRelatorioHistorico(services);
