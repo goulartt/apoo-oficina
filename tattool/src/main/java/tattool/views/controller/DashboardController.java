@@ -15,6 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import jfxtras.scene.control.agenda.Agenda;
+import tattool.views.controller.cashier.CashierController;
 
 public class DashboardController 
 {
@@ -129,7 +130,7 @@ public class DashboardController
     	try
     	{
 		    FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/cashier/cashier.fxml"));
-		    
+		    viewLoader.setController(new CashierController());
 		    viewLoader.setRoot(main);
 		    main.getChildren().clear();
 		    viewLoader.load();
