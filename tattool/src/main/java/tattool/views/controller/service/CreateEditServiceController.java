@@ -330,18 +330,15 @@ public class CreateEditServiceController {
 				validate = false;
 				sessions = true;
 			}
-			/*
-			else
-			{
-				if(firstDate.getValue().isAfter(LocalDate.now()))
-				{
-					errorFirstDate.setText("A data não pode ser inferior à data atual");
-					errorFirstDate.setVisible(true);
-					validate = false;
-					sessions = true;
-				}
+			
+			if(firstDate.getValue().isBefore(LocalDate.now())) {
+				errorFirstDate.setText("Informe uma data que não seja retroativa ");
+				errorFirstDate.setVisible(true);
+				validate = false;
+				sessions = true;
 			}
-			*/
+			
+	
 			if(firstBegin.getValue() == null)
 			{
 				errorFirstBegin.setText("Informe o horário da sessão");

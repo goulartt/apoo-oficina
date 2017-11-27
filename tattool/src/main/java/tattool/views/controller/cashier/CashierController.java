@@ -14,6 +14,7 @@ import com.jfoenix.controls.JFXTreeTableRow;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
@@ -25,11 +26,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Callback;
 import tattool.domain.model.Session;
 import tattool.domain.modelfx.SessionCashierFX;
@@ -200,7 +205,51 @@ public class CashierController implements Initializable {
 				return param.getValue().getValue().pago;
 			}
     	});
-    	
+	
+	    paid.setCellFactory(new Callback<TreeTableColumn<SessionCashierFX, String>, TreeTableCell<SessionCashierFX, String>>() {
+	       
+
+			@Override
+			public TreeTableCell<SessionCashierFX, String> call(TreeTableColumn<SessionCashierFX, String> param) {
+				return new TreeTableCell<SessionCashierFX, String>() {
+	                Rectangle deve = new Rectangle(10, 10, Color.RED);
+	                {
+	                    setGraphic(deve);
+	                };
+	                Rectangle pago = new Rectangle(10, 10, Color.GREEN);
+	                {
+	                    setGraphic(pago);
+	                };
+	                Rectangle pendente = new Rectangle(10, 10, Color.YELLOW);
+	                {
+	                    setGraphic(pendente);
+	                };
+
+	                @Override
+	                protected void updateItem(String item, boolean empty) {
+	                    super.updateItem(item, empty);
+	                    if (item == null || empty) {
+	                    	deve.setVisible(false);
+	                        setText(null);
+	                    } else {
+	                    	if(new BigDecimal(item).intValueExact() > 0){
+	                    		deve.setVisible(true);
+	  	                        setText(item);
+	  	                    }else {
+	  	                    	pendente.setVisible(true);
+		                        setText(item);
+	  	                    }
+	                    	
+	                    	
+	                    }
+	                  
+	                }
+	            };
+			}
+	    });
+
+
+				
 		cashierTable.getColumns().setAll(date, service, price, paid);
 		
 		cashierTable.setRowFactory(table -> {

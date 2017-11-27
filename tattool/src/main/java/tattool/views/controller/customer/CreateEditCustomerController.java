@@ -286,16 +286,14 @@ public class CreateEditCustomerController {
 			validate = false;
 			customer = true;
 		}
-		/*else {
-			if(birthdate.getValue().isAfter(LocalDate.now()))
-			{
-				errorBirthdate.setText("Insira uma data de nascimento menor que " + LocalDate.now().getYear());
-				errorBirthdate.setVisible(true);
-				validate = false;
-				customer = true;
-			}
+		
+		if(birthdate.getValue().getYear() > (LocalDate.now().getYear() - 16)) {
+			errorBirthdate.setText("Cadastro não permitido para menores de 16 anos");
+			errorBirthdate.setVisible(true);
+			validate = false;
+			customer = true;
 		}
-		*/
+	
 		
 		if(email.getText().equals("") && phone.getText().equals(""))
 		{
