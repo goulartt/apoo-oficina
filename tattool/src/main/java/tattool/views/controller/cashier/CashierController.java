@@ -206,47 +206,6 @@ public class CashierController implements Initializable {
 			}
     	});
 	
-	    paid.setCellFactory(new Callback<TreeTableColumn<SessionCashierFX, String>, TreeTableCell<SessionCashierFX, String>>() {
-	       
-
-			@Override
-			public TreeTableCell<SessionCashierFX, String> call(TreeTableColumn<SessionCashierFX, String> param) {
-				return new TreeTableCell<SessionCashierFX, String>() {
-	                Rectangle deve = new Rectangle(10, 10, Color.RED);
-	                {
-	                    setGraphic(deve);
-	                };
-	                Rectangle pago = new Rectangle(10, 10, Color.GREEN);
-	                {
-	                    setGraphic(pago);
-	                };
-	                Rectangle pendente = new Rectangle(10, 10, Color.YELLOW);
-	                {
-	                    setGraphic(pendente);
-	                };
-
-	                @Override
-	                protected void updateItem(String item, boolean empty) {
-	                    super.updateItem(item, empty);
-	                    if (item == null || empty) {
-	                    	deve.setVisible(false);
-	                        setText(null);
-	                    } else {
-	                    	if(new BigDecimal(item).intValueExact() > 0){
-	                    		deve.setVisible(true);
-	  	                        setText(item);
-	  	                    }else {
-	  	                    	pendente.setVisible(true);
-		                        setText(item);
-	  	                    }
-	                    	
-	                    	
-	                    }
-	                  
-	                }
-	            };
-			}
-	    });
 
 
 				
@@ -321,12 +280,11 @@ public class CashierController implements Initializable {
     	JFXButton setPaid  = new JFXButton("Pago");
     	JFXButton setCheck = new JFXButton("Acertado");
     	VBox vbox          = new VBox();
-    	
     	//Popup Menu Events
-    	
     	setPaid.setOnMouseClicked(event -> {
     		SessionCashierFX cashierSession =  cashierTable.getSelectionModel().getSelectedItem().getValue();
     		Session s = ConvertModelToFX.convertSessionCashierFXToSession(cashierSession);
+    		
     		if(s.getDateSession() != null) {
     			s.setStatus("PAGO");
         		s.setPaid(s.getPrice());
