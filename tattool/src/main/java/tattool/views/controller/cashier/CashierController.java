@@ -1,11 +1,13 @@
 package tattool.views.controller.cashier;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -16,6 +18,7 @@ import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.sun.javafx.scene.control.skin.VirtualFlow;
 
+import de.jensd.fx.glyphs.octicons.OctIconView;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -23,7 +26,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableCell;
@@ -31,6 +36,8 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -40,10 +47,23 @@ import tattool.domain.model.Session;
 import tattool.domain.modelfx.SessionCashierFX;
 import tattool.rest.consume.SessionRest;
 import tattool.util.ConvertModelToFX;
+import tattool.views.controller.service.CustomerGridController;
 
 public class CashierController implements Initializable {
 
-	JFXPopup popup = new JFXPopup();
+	JFXPopup popup       = new JFXPopup();
+	
+	JFXButton setPaid    = new JFXButton("Pago");
+	
+	JFXButton setValor   = new JFXButton("Informar valor pago");
+	
+	JFXButton setCheck   = new JFXButton("Acertado");
+	
+	JFXButton unsetPaid  = new JFXButton("Remover pagamento");
+	
+	JFXButton unsetCheck = new JFXButton("Remover acerto");
+	
+	VBox popupBox        = new VBox();
 	
 	@FXML
     private BorderPane cashierPanel;
@@ -247,6 +267,39 @@ public class CashierController implements Initializable {
     			}
     			if(event.getButton().equals(MouseButton.SECONDARY))
     			{
+    				SessionCashierFX cashierSession =  cashierTable.getSelectionModel().getSelectedItem().getValue();
+    				
+    				popupBox.getChildren().clear();
+    				
+    				//setPaid    => informa que foi pago o valor da sessão
+    				//setValor   => usuario insere o valor pago
+    				//setCheck   => informar acerto
+    				//unsetPaid  => remover pagamento
+    				//unsetCheck => remover acerto
+    				
+    				switch(cashierSession.getStatus()) {
+    					case "PENDENTE":
+    						popupBox.getChildren().addAll(setPaid, setValor, setCheck);
+    						break;
+    					case "MARCADO":
+    						popupBox.getChildren().addAll(setPaid, setValor, setCheck);
+    						break;
+    					case "PARCIALMENTE PAGO":
+    						popupBox.getChildren().addAll(setPaid, setValor, unsetPaid);
+    						break;
+    					case "PAGO":
+    						popupBox.getChildren().add(unsetPaid);
+    						break;
+    					case "ACERTADO":
+    						popupBox.getChildren().addAll(unsetCheck);
+    						break;
+    					case "CANCELADO":
+    						//
+    						break;
+    					default:
+    						break;
+    				}
+    				
     				popup.show(row, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.LEFT, event.getX(), event.getY());
     			}
     		});
@@ -277,10 +330,9 @@ public class CashierController implements Initializable {
     
     void popup()
     {
-    	JFXButton setPaid  = new JFXButton("Pago");
-    	JFXButton setCheck = new JFXButton("Acertado");
-    	VBox vbox          = new VBox();
+    	
     	//Popup Menu Events
+    	
     	setPaid.setOnMouseClicked(event -> {
     		SessionCashierFX cashierSession =  cashierTable.getSelectionModel().getSelectedItem().getValue();
     		Session s = ConvertModelToFX.convertSessionCashierFXToSession(cashierSession);
@@ -296,19 +348,67 @@ public class CashierController implements Initializable {
     		
     		popup.hide();
     	});
+    	
+    	setValor.setOnMouseClicked(event -> {
+    		popup.hide();
+    		
+    		loadValorDialog();
+    	});
+    	
     	setCheck.setOnMouseClicked(event -> {
     		popup.hide();
     		
     		//MARCA COMO ACERTADO, NAO SEI COMO SERA CALCULADO O BALANCO DISSO ENTAO SE VIRA
     	});
     	
+    	unsetPaid.setOnMouseClicked(event -> {
+    		popup.hide();
+    		
+    		//REMOVE PAGAMENTO
+    	});
+    	
+    	unsetCheck.setOnMouseClicked(event -> {
+    		popup.hide();
+    		
+    		//REMOVE ACERTO
+    	});
+    	
     	setPaid.setMaxWidth(Double.MAX_VALUE);
     	setCheck.setMaxWidth(Double.MAX_VALUE);
     	
-    	vbox.setFillWidth(true);
-    	vbox.getChildren().addAll(setPaid, setCheck);
+    	popupBox.setFillWidth(true);
     	
-    	popup.setPopupContent(vbox);
+    	popup.setPopupContent(popupBox);
+    }
+    
+    /*
+     * 	##	DIALOG INSERIR VALOR PAGO
+     */
+    
+    void loadValorDialog() {
+    	try {
+			FXMLLoader modalLoader = new FXMLLoader(getClass().getResource("/views/cashier/set-valor.fxml"));
+			Region modalContent    = modalLoader.load();
+			StackPane mainStack    = (StackPane) cashierTable.getScene().lookup("#mainStack");
+			JFXDialog modal        = new JFXDialog(mainStack, modalContent, JFXDialog.DialogTransition.CENTER, false);
+			
+			OctIconView closeButton   = (OctIconView) modalContent.getScene().lookup("#closeButton");
+			JFXButton   confirmButton = (JFXButton) modalContent.getScene().lookup("#confirmButton");
+			
+			closeButton.setOnMouseClicked(event -> modal.close());
+			confirmButton.setOnMouseClicked(event -> {
+				
+				//JFXTextField paidValor = (JFXTextField) modalContent.getScene().lookup("#paidValor");
+				
+				//FAZ TODA A PUTARIA DE PEGAR O VALOR DO TEXTFIELD
+				
+				modal.close();
+			});
+			
+			modal.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 	
     /*
