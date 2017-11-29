@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
@@ -11,10 +13,11 @@
 <?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="804.0" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="804.0" stylesheets="@../../css/application.css" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
    </padding>
@@ -42,14 +45,53 @@
                         <MaterialDesignIconView fill="#ffca28" glyphName="COMMENT_OUTLINE" size="18" />
                      </graphic>
                   </Label>
-                  <JFXTextField fx:id="search" focusColor="#009688" promptText="Pesquisar" style="-fx-text-fill: #fff; -fx-prompt-text-fill: #9E9E9E;" unFocusColor="WHITE">
-                     <font>
-                        <Font name="Verdana" size="16.0" />
-                     </font>
+                  <BorderPane prefHeight="28.0" prefWidth="746.0">
+                     <center>
+                        <JFXTextField fx:id="search" focusColor="#26a69a" prefHeight="32.0" prefWidth="392.0" promptText="Pesquisar" style="-fx-text-fill: #fff; -fx-prompt-text-fill: #9E9E9E;" unFocusColor="WHITE" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="Verdana" size="16.0" />
+                           </font>
+                           <BorderPane.margin>
+                              <Insets top="17.0" />
+                           </BorderPane.margin>
+                        </JFXTextField>
+                     </center>
                      <VBox.margin>
-                        <Insets top="10.0" />
+                        <Insets top="12.0" />
                      </VBox.margin>
-                  </JFXTextField>
+                     <right>
+                        <VBox prefHeight="50.0" prefWidth="472.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label text="Filtros:" textFill="WHITE">
+                                 <font>
+                                    <Font name="Verdana" size="14.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <JFXDatePicker fx:id="filterFrom" defaultColor="#26a69a" prefHeight="32.0" prefWidth="153.0" promptText="De" styleClass="date-filter">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </JFXDatePicker>
+                                    <JFXDatePicker fx:id="filterTo" defaultColor="#26a69a" prefHeight="32.0" prefWidth="153.0" promptText="Até" styleClass="date-filter" />
+                                    <JFXComboBox fx:id="filterStatus" focusColor="#26a69a" prefHeight="25.0" prefWidth="156.0" promptText="Status" styleClass="combobox-filter" unFocusColor="WHITE">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </JFXComboBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets left="12.0" />
+                           </padding>
+                        </VBox>
+                     </right>
+                  </BorderPane>
                </children>
             </VBox>
          </top>

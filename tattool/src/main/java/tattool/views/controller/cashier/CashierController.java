@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXTextArea;
@@ -73,6 +75,15 @@ public class CashierController implements Initializable {
 
     @FXML
     private JFXTextField search;
+    
+    @FXML
+    private JFXDatePicker filterFrom;
+
+    @FXML
+    private JFXDatePicker filterTo;
+    
+    @FXML
+    private JFXComboBox<?> filterStatus;
     
     @FXML
     private JFXButton createNoteButton;
@@ -279,9 +290,9 @@ public class CashierController implements Initializable {
     				
     				switch(cashierSession.getStatus()) {
     					case "PENDENTE":
-    						popupBox.getChildren().addAll(setPaid, setValor, setCheck);
+    						//
     						break;
-    					case "MARCADO":
+    					case "AGENDADO":
     						popupBox.getChildren().addAll(setPaid, setValor, setCheck);
     						break;
     					case "PARCIALMENTE PAGO":
@@ -430,9 +441,9 @@ public class CashierController implements Initializable {
 					{
 						//Compara o valor do TextInput com as colunas da table
 						
-						return cashierSession.getValue().date.getValue().toLowerCase().contains(newValue.toLowerCase())     ||
+						return cashierSession.getValue().date.getValue().toLowerCase().contains(newValue.toLowerCase())         ||
 							   cashierSession.getValue().nomeServico.getValue().toLowerCase().contains(newValue.toLowerCase())  || 
-							   cashierSession.getValue().preco.getValue().toLowerCase().contains(newValue.toLowerCase())    || 
+							   cashierSession.getValue().preco.getValue().toLowerCase().contains(newValue.toLowerCase())        || 
 							   cashierSession.getValue().pago.getValue().toLowerCase().contains(newValue.toLowerCase());
 					}
 				});
