@@ -281,7 +281,7 @@ public class CashierController implements Initializable {
     					case "PENDENTE":
     						popupBox.getChildren().addAll(setPaid, setValor, setCheck);
     						break;
-    					case "MARCADO":
+    					case "AGENDADO":
     						popupBox.getChildren().addAll(setPaid, setValor, setCheck);
     						break;
     					case "PARCIALMENTE PAGO":
@@ -398,7 +398,8 @@ public class CashierController implements Initializable {
 			closeButton.setOnMouseClicked(event -> modal.close());
 			confirmButton.setOnMouseClicked(event -> {
 				
-				//JFXTextField paidValor = (JFXTextField) modalContent.getScene().lookup("#paidValor");
+				JFXTextField paidValor = (JFXTextField) modalContent.getScene().lookup("#paidValor");
+				System.out.println(paidValor.getText());
 				
 				//FAZ TODA A PUTARIA DE PEGAR O VALOR DO TEXTFIELD
 				
