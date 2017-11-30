@@ -131,6 +131,7 @@ public class CashierController implements Initializable {
 		populateTable();
 		search();
 		popup();
+		
 		filterStatus.getItems().add(new Label("PENDENTE"));
 		filterStatus.getItems().add(new Label("AGENDADO"));
 		filterStatus.getItems().add(new Label("PAGO"));
@@ -138,7 +139,7 @@ public class CashierController implements Initializable {
 		filterStatus.getItems().add(new Label("ACERTADO"));
 		filterStatus.getItems().add(new Label("CANCELADO"));
 		 
-		filterStatus.setPromptText("Selecione um status");
+		filterStatus.setPromptText("Status");
 	}
 
 	public void escondeNota() {
@@ -519,5 +520,9 @@ public class CashierController implements Initializable {
 			}
 		});
 	}
-
+	
+	@FXML
+    void searchFilters(ActionEvent event) {
+		//BOTÃO DA LUPA
+    }
 }
