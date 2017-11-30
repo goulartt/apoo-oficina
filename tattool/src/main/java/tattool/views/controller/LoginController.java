@@ -135,7 +135,7 @@ public class LoginController implements Initializable {
 
 					Stage stage = new Stage();
 					FXMLLoader templateLoader = new FXMLLoader(getClass().getResource("/views/template/template.fxml"));
-					Scene scene = new Scene(new JFXDecorator(stage, templateLoader.load()), 1032, 612);
+					Scene scene = new Scene(new JFXDecorator(stage, templateLoader.load()), 1280, 750);
 					FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("/views/home.fxml"));
 					DashboardController control = (DashboardController) templateLoader.getController();
 					if (user.getRole() != 1)
@@ -148,8 +148,8 @@ public class LoginController implements Initializable {
 
 					stage.setScene(scene);
 					primaryStage.hide();
-					stage.setMinHeight(612);
-					stage.setMinWidth(1032);
+					stage.setMinHeight(750);
+					stage.setMinWidth(1280);
 					stage.show();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -183,8 +183,8 @@ public class LoginController implements Initializable {
 		media.setMediaPlayer(mp);
 		media.fitWidthProperty().bind(Bindings.selectDouble(media.sceneProperty(), "width"));
 		media.fitHeightProperty().bind(Bindings.selectDouble(media.sceneProperty(), "height"));
-		background.fitWidthProperty().bind(Bindings.selectDouble(background.parentProperty(), "width").divide(2));
-		background.fitHeightProperty().bind(Bindings.selectDouble(background.parentProperty(), "height").divide(2));
+		background.fitWidthProperty().bind(Bindings.selectDouble(background.sceneProperty(), "width"));
+		background.fitHeightProperty().bind(Bindings.selectDouble(background.sceneProperty(), "height"));
 	}
 	
 	void closeApp() {

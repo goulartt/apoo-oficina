@@ -1,28 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="804.0" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-   <padding>
-      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-   </padding>
-   <top>
-      <BorderPane prefHeight="79.0" prefWidth="774.0" BorderPane.alignment="CENTER">
-         <left>
-            <VBox alignment="CENTER_LEFT" prefHeight="79.0" prefWidth="297.0" BorderPane.alignment="CENTER">
+<fx:root prefHeight="526.0" prefWidth="804.0" stylesheets="@../css/application.css" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #2B2B2B;" AnchorPane.bottomAnchor="320.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <StackPane prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <padding>
+                  <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
+               </padding>
                <children>
-                  <Label text="Ajuda" textFill="#00bcd4">
-                     <font>
-                        <Font name="Verdana" size="32.0" />
-                     </font>
-                  </Label>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff;">
+                     <effect>
+                        <DropShadow color="#0000009b" height="22.0" radius="9.0" width="16.0" />
+                     </effect>
+                     <top>
+                        <VBox prefHeight="90.0" prefWidth="660.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label prefHeight="40.0" prefWidth="387.0" text="Precisa de ajuda?" textFill="#26a69a">
+                                 <font>
+                                    <Font name="Verdana" size="32.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Entre em contato com nossa equipe para podermos ajudá-lo." textFill="#212121">
+                                 <font>
+                                    <Font name="Verdana" size="16.0" />
+                                 </font>
+                                 <graphic>
+                                    <MaterialDesignIconView fill="#ffca28" glyphName="COMMENT_OUTLINE" size="18" />
+                                 </graphic>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </top>
+                     <padding>
+                        <Insets bottom="22.0" left="22.0" right="22.0" top="22.0" />
+                     </padding>
+                     <center>
+                        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label text="&lt;Não sei o que colocar aqui, pode ser formas de contato, seila&gt;">
+                                 <font>
+                                    <Font name="Verdana" size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </center>
+                  </BorderPane>
                </children>
-            </VBox>
-         </left>
-      </BorderPane>
-   </top>
+            </StackPane>
+         </children>
+      </AnchorPane>
+   </center>
 </fx:root>

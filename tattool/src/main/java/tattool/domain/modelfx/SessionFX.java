@@ -1,5 +1,7 @@
 package tattool.domain.modelfx;
 
+import java.math.BigDecimal;
+
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -15,7 +17,7 @@ public class SessionFX  extends RecursiveTreeObject<SessionFX> {
 	private Integer removed;
 	private String obs;
 	private Service service;
-	
+	private BigDecimal paid;
 	
 	
 	public SessionFX() {
@@ -75,6 +77,12 @@ public class SessionFX  extends RecursiveTreeObject<SessionFX> {
 	}
 	public void setService(Service service) {
 		this.service = service;
+	}
+	public BigDecimal getPaid() {
+		return paid;
+	}
+	public void setPaid(BigDecimal paid) {
+		this.paid = paid;
 	}
 	
 	

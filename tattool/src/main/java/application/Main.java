@@ -21,12 +21,12 @@ public class Main extends Application
 		{
 			Parent root = (Parent) FXMLLoader.load(getClass().getResource("/views/login.fxml"));
 	 
-			Scene scene = new Scene(new JFXDecorator(primaryStage, root), 1032, 612);
+			Scene scene = new Scene(new JFXDecorator(primaryStage, root), 1280, 750);
 			primaryStage.setTitle("TATTOOL - Software de Gerenciamento de Estúdios de Tatuagens");
 			scene.getStylesheets().add("/css/application.css");
 		    primaryStage.setScene(scene);
-		    primaryStage.setMinHeight(612);
-		    primaryStage.setMinWidth(1032);
+		    primaryStage.setMinHeight(750);
+		    primaryStage.setMinWidth(1280);
 		    primaryStage.show();
 		}
 		catch(Exception e)

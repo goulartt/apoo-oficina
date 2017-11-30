@@ -1,10 +1,15 @@
 package tattool.views.controller.cashier;
 
+import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -13,29 +18,54 @@ import com.jfoenix.controls.JFXTreeTableRow;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 
+import de.jensd.fx.glyphs.octicons.OctIconView;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Callback;
+import tattool.domain.model.Session;
+import tattool.domain.modelfx.SessionCashierFX;
+import tattool.rest.consume.SessionRest;
+import tattool.util.ConvertModelToFX;
+import tattool.views.controller.service.CustomerGridController;
 
 public class CashierController implements Initializable {
 
-	JFXPopup popup = new JFXPopup();
+	JFXPopup popup       = new JFXPopup();
+	
+	JFXButton setPaid    = new JFXButton("Pago");
+	
+	JFXButton setValor   = new JFXButton("Informar valor pago");
+	
+	JFXButton setCheck   = new JFXButton("Acertado");
+	
+	JFXButton unsetPaid  = new JFXButton("Remover pagamento");
+	
+	JFXButton unsetCheck = new JFXButton("Remover acerto");
+	
+	VBox popupBox        = new VBox();
 	
 	@FXML
     private BorderPane cashierPanel;
@@ -45,6 +75,15 @@ public class CashierController implements Initializable {
 
     @FXML
     private JFXTextField search;
+    
+    @FXML
+    private JFXDatePicker filterFrom;
+
+    @FXML
+    private JFXDatePicker filterTo;
+    
+    @FXML
+    private JFXComboBox<?> filterStatus;
     
     @FXML
     private JFXButton createNoteButton;
@@ -71,7 +110,9 @@ public class CashierController implements Initializable {
     private Label balance;
 
     @FXML
-    private JFXTreeTableView<CashierSession> cashierTable;
+    private JFXTreeTableView<SessionCashierFX> cashierTable;
+    
+    private SessionRest rest = new SessionRest();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -84,15 +125,19 @@ public class CashierController implements Initializable {
 		noteLabel.managedProperty().bind(noteLabel.visibleProperty());
 		obs.managedProperty().bind(obs.visibleProperty());
 		
-		createNoteButton.setVisible(false);
-		updateNoteButton.setVisible(false);
-		deleteNoteButton.setVisible(false);
-		obs.setVisible(false);
+		escondeNota();
 		
 		createTableColumns();
 		populateTable();
 		search();
 		popup();
+	}
+
+	public void escondeNota() {
+		createNoteButton.setVisible(false);
+		updateNoteButton.setVisible(false);
+		deleteNoteButton.setVisible(false);
+		obs.setVisible(false);
 	}
 	
 	/*
@@ -101,6 +146,13 @@ public class CashierController implements Initializable {
 	
 	@FXML
     void createNote(ActionEvent event) {
+		noteLabel.setVisible(false);
+		createNoteButton.setVisible(false);
+		obs.setText("");
+		obs.setVisible(true);
+		obs.requestFocus();
+		updateNoteButton.setVisible(true);
+		deleteNoteButton.setVisible(true);
 
     }
 	
@@ -110,7 +162,12 @@ public class CashierController implements Initializable {
 	
     @FXML
     void deleteNote(ActionEvent event) {
-
+    	SessionCashierFX cashierSession =  cashierTable.getSelectionModel().getSelectedItem().getValue();
+		Session s = ConvertModelToFX.convertSessionCashierFXToSession(cashierSession);
+		s.setObs("");
+		rest.save(s);
+		populateTable();
+		escondeNota();
     }
     
     /*
@@ -119,7 +176,12 @@ public class CashierController implements Initializable {
 
     @FXML
     void updateNote(ActionEvent event) {
-
+    	SessionCashierFX cashierSession =  cashierTable.getSelectionModel().getSelectedItem().getValue();
+		Session s = ConvertModelToFX.convertSessionCashierFXToSession(cashierSession);
+		s.setObs(obs.getText());
+		rest.save(s);
+		populateTable();
+		escondeNota();
     }
 	
 	/*
@@ -129,10 +191,10 @@ public class CashierController implements Initializable {
 	@SuppressWarnings("unchecked")
 	void createTableColumns()
     {
-		JFXTreeTableColumn<CashierSession,String> date    = new JFXTreeTableColumn<>("Data");
-		JFXTreeTableColumn<CashierSession,String> service = new JFXTreeTableColumn<>("Serviço");
-		JFXTreeTableColumn<CashierSession,String> price   = new JFXTreeTableColumn<>("Preço");
-		JFXTreeTableColumn<CashierSession,String> paid    = new JFXTreeTableColumn<>("Pago");
+		JFXTreeTableColumn<SessionCashierFX,String> date    = new JFXTreeTableColumn<>("Data");
+		JFXTreeTableColumn<SessionCashierFX,String> service = new JFXTreeTableColumn<>("Serviço");
+		JFXTreeTableColumn<SessionCashierFX,String> price   = new JFXTreeTableColumn<>("Preço");
+		JFXTreeTableColumn<SessionCashierFX,String> paid    = new JFXTreeTableColumn<>("Pago");
 		
     	
     	//Colunas com largura responsiva
@@ -142,68 +204,113 @@ public class CashierController implements Initializable {
 		price.prefWidthProperty().bind(cashierTable.widthProperty().multiply(0.2));
 		paid.prefWidthProperty().bind(cashierTable.widthProperty().multiply(0.2));
     	
-		date.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<CashierSession, String>, ObservableValue<String>>()
+		date.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<SessionCashierFX, String>, ObservableValue<String>>()
     	{
 			@Override
-			public ObservableValue<String> call(CellDataFeatures<CashierSession, String> param)
+			public ObservableValue<String> call(CellDataFeatures<SessionCashierFX, String> param)
 			{
 				return param.getValue().getValue().date;
 			}
     	});
-		service.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<CashierSession, String>, ObservableValue<String>>()
+		service.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<SessionCashierFX, String>, ObservableValue<String>>()
     	{
 			@Override
-			public ObservableValue<String> call(CellDataFeatures<CashierSession, String> param)
+			public ObservableValue<String> call(CellDataFeatures<SessionCashierFX, String> param)
 			{
-				return param.getValue().getValue().service;
+				return param.getValue().getValue().nomeServico;
 			}
     	});
-		price.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<CashierSession, String>, ObservableValue<String>>()
+		price.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<SessionCashierFX, String>, ObservableValue<String>>()
     	{
 			@Override
-			public ObservableValue<String> call(CellDataFeatures<CashierSession, String> param)
+			public ObservableValue<String> call(CellDataFeatures<SessionCashierFX, String> param)
 			{
-				return param.getValue().getValue().price;
+				return param.getValue().getValue().preco;
 			}
     	});
-		paid.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<CashierSession, String>, ObservableValue<String>>()
+		paid.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<SessionCashierFX, String>, ObservableValue<String>>()
     	{
 			@Override
-			public ObservableValue<String> call(CellDataFeatures<CashierSession, String> param)
+			public ObservableValue<String> call(CellDataFeatures<SessionCashierFX, String> param)
 			{
-				return param.getValue().getValue().paid;
+				return param.getValue().getValue().pago;
 			}
     	});
-    	
+	
+
+
+				
 		cashierTable.getColumns().setAll(date, service, price, paid);
 		
 		cashierTable.setRowFactory(table -> {
-    		JFXTreeTableRow<CashierSession> row = new JFXTreeTableRow<>();
+    		JFXTreeTableRow<SessionCashierFX> row = new JFXTreeTableRow<>();
     		
     		row.setOnMouseClicked(event -> {
     			if(event.getButton().equals(MouseButton.PRIMARY))
     			{
-    				CashierSession cashierSession =  cashierTable.getSelectionModel().getSelectedItem().getValue();
+    				SessionCashierFX cashierSession =  cashierTable.getSelectionModel().getSelectedItem().getValue();
     				
-    				if(cashierSession.obs.getValue() == null) {
+    				if(cashierSession.getObs().equals("")) {
     					noteLabel.setVisible(false);
     					createNoteButton.setVisible(true);
-    					obs.setText(cashierSession.obs.getValue());
+    					obs.setText(cashierSession.getObs());
     					obs.setVisible(false);
     					updateNoteButton.setVisible(false);
     					deleteNoteButton.setVisible(false);
     				} else {
     					noteLabel.setVisible(false);
     					createNoteButton.setVisible(false);
-    					obs.setText(cashierSession.obs.getValue());
+    					obs.setText(cashierSession.getObs());
     					obs.setVisible(true);
     					obs.requestFocus();
     					updateNoteButton.setVisible(true);
     					deleteNoteButton.setVisible(true);
     				}
+    				sessions.setText(cashierSession.getService().getQuantSessions().toString());
+    				if(cashierSession.getPaid() == null) {
+    					cashierSession.setPaid(new BigDecimal(0));
+    				}
+    				this.paid.setText("R$ "+cashierSession.getPaid().toString());
+    				total.setText("R$ "+cashierSession.getPrice().toString());
+    				BigDecimal balanco = cashierSession.getPrice().subtract(cashierSession.getPaid());
+    				balance.setText("R$ "+balanco.toString());
+    				
     			}
     			if(event.getButton().equals(MouseButton.SECONDARY))
     			{
+    				SessionCashierFX cashierSession =  cashierTable.getSelectionModel().getSelectedItem().getValue();
+    				
+    				popupBox.getChildren().clear();
+    				
+    				//setPaid    => informa que foi pago o valor da sessão
+    				//setValor   => usuario insere o valor pago
+    				//setCheck   => informar acerto
+    				//unsetPaid  => remover pagamento
+    				//unsetCheck => remover acerto
+    				
+    				switch(cashierSession.getStatus()) {
+    					case "PENDENTE":
+    						//
+    						break;
+    					case "AGENDADO":
+    						popupBox.getChildren().addAll(setPaid, setValor, setCheck);
+    						break;
+    					case "PARCIALMENTE PAGO":
+    						popupBox.getChildren().addAll(setPaid, setValor, unsetPaid);
+    						break;
+    					case "PAGO":
+    						popupBox.getChildren().add(unsetPaid);
+    						break;
+    					case "ACERTADO":
+    						popupBox.getChildren().addAll(unsetCheck);
+    						break;
+    					case "CANCELADO":
+    						//
+    						break;
+    					default:
+    						break;
+    				}
+    				
     				popup.show(row, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.LEFT, event.getX(), event.getY());
     			}
     		});
@@ -218,17 +325,11 @@ public class CashierController implements Initializable {
     
     void populateTable()
     {
-    	ObservableList<CashierSession> cashierSessions = FXCollections.observableArrayList();
-    	
-    	cashierSessions.add(new CashierSession("17/12/2017", "Serviço loco", "R$200.00", "R$000.00", "Cliente filha da puta não pagou esta merda mas me deu um cachorro em troca."));
-    	cashierSessions.add(new CashierSession("15/12/2017", "Serviço loco", "R$200.00", "R$000.00", null));
-    	cashierSessions.add(new CashierSession("14/12/2017", "Serviço merda", "R$200.00", "R$000.00", null));
-    	cashierSessions.add(new CashierSession("14/12/2017", "Serviço loco", "R$200.00", "R$000.00", "Cliente filha da puta não pagou esta merda mas me deu um cachorro em troca."));
-    	cashierSessions.add(new CashierSession("13/12/2017", "Serviço merda", "R$400.00", "R$400.00", "Cliente filha da puta não pagou esta merda mas me deu um cachorro em troca."));
-    	cashierSessions.add(new CashierSession("11/12/2017", "Serviço loco", "R$300.00", "R$200.00", null));
-    	cashierSessions.add(new CashierSession("10/12/2017", "Serviço loco", "R$200.00", "R$200.00", null));
+    	ObservableList<SessionCashierFX> cashierSessions = FXCollections.observableArrayList();
+    	cashierSessions =  FXCollections.observableArrayList(ConvertModelToFX.convertSessinToSessionCashierFX(rest.findAll()));
+
   
-    	final TreeItem<CashierSession> root = new RecursiveTreeItem<CashierSession>(cashierSessions, RecursiveTreeObject::getChildren);
+    	final TreeItem<SessionCashierFX> root = new RecursiveTreeItem<SessionCashierFX>(cashierSessions, RecursiveTreeObject::getChildren);
     	
     	cashierTable.setRoot(root);
     	cashierTable.setShowRoot(false);
@@ -240,30 +341,85 @@ public class CashierController implements Initializable {
     
     void popup()
     {
-    	JFXButton setPaid  = new JFXButton("Pago");
-    	JFXButton setCheck = new JFXButton("Acertado");
-    	VBox vbox          = new VBox();
     	
     	//Popup Menu Events
     	
     	setPaid.setOnMouseClicked(event -> {
+    		SessionCashierFX cashierSession =  cashierTable.getSelectionModel().getSelectedItem().getValue();
+    		Session s = ConvertModelToFX.convertSessionCashierFXToSession(cashierSession);
+    		
+    		if(s.getDateSession() != null) {
+    			s.setStatus("PAGO");
+        		s.setPaid(s.getPrice());
+        		rest.save(s);
+        		populateTable();
+    		}else {
+    			
+    		}
+    		
+    		popup.hide();
+    	});
+    	
+    	setValor.setOnMouseClicked(event -> {
     		popup.hide();
     		
-    		//COLOCA O PRECO DA SESSAO EM PAGO, PRO USUARIO NAO PRECISAR PREENCHER MANUALMENTE O VALOR
+    		loadValorDialog();
     	});
+    	
     	setCheck.setOnMouseClicked(event -> {
     		popup.hide();
     		
     		//MARCA COMO ACERTADO, NAO SEI COMO SERA CALCULADO O BALANCO DISSO ENTAO SE VIRA
     	});
     	
+    	unsetPaid.setOnMouseClicked(event -> {
+    		popup.hide();
+    		
+    		//REMOVE PAGAMENTO
+    	});
+    	
+    	unsetCheck.setOnMouseClicked(event -> {
+    		popup.hide();
+    		
+    		//REMOVE ACERTO
+    	});
+    	
     	setPaid.setMaxWidth(Double.MAX_VALUE);
     	setCheck.setMaxWidth(Double.MAX_VALUE);
     	
-    	vbox.setFillWidth(true);
-    	vbox.getChildren().addAll(setPaid, setCheck);
+    	popupBox.setFillWidth(true);
     	
-    	popup.setPopupContent(vbox);
+    	popup.setPopupContent(popupBox);
+    }
+    
+    /*
+     * 	##	DIALOG INSERIR VALOR PAGO
+     */
+    
+    void loadValorDialog() {
+    	try {
+			FXMLLoader modalLoader = new FXMLLoader(getClass().getResource("/views/cashier/set-valor.fxml"));
+			Region modalContent    = modalLoader.load();
+			StackPane mainStack    = (StackPane) cashierTable.getScene().lookup("#mainStack");
+			JFXDialog modal        = new JFXDialog(mainStack, modalContent, JFXDialog.DialogTransition.CENTER, false);
+			
+			OctIconView closeButton   = (OctIconView) modalContent.getScene().lookup("#closeButton");
+			JFXButton   confirmButton = (JFXButton) modalContent.getScene().lookup("#confirmButton");
+			
+			closeButton.setOnMouseClicked(event -> modal.close());
+			confirmButton.setOnMouseClicked(event -> {
+				
+				//JFXTextField paidValor = (JFXTextField) modalContent.getScene().lookup("#paidValor");
+				
+				//FAZ TODA A PUTARIA DE PEGAR O VALOR DO TEXTFIELD
+				
+				modal.close();
+			});
+			
+			modal.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 	
     /*
@@ -278,40 +434,22 @@ public class CashierController implements Initializable {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
 			{
-				cashierTable.setPredicate(new Predicate<TreeItem<CashierSession>>()
+				cashierTable.setPredicate(new Predicate<TreeItem<SessionCashierFX>>()
 				{
 					@Override
-					public boolean test(TreeItem<CashierSession> cashierSession)
+					public boolean test(TreeItem<SessionCashierFX> cashierSession)
 					{
 						//Compara o valor do TextInput com as colunas da table
 						
-						return cashierSession.getValue().date.getValue().toLowerCase().contains(newValue.toLowerCase())     ||
-							   cashierSession.getValue().service.getValue().toLowerCase().contains(newValue.toLowerCase())  || 
-							   cashierSession.getValue().price.getValue().toLowerCase().contains(newValue.toLowerCase())    || 
-							   cashierSession.getValue().paid.getValue().toLowerCase().contains(newValue.toLowerCase());
+						return cashierSession.getValue().date.getValue().toLowerCase().contains(newValue.toLowerCase())         ||
+							   cashierSession.getValue().nomeServico.getValue().toLowerCase().contains(newValue.toLowerCase())  || 
+							   cashierSession.getValue().preco.getValue().toLowerCase().contains(newValue.toLowerCase())        || 
+							   cashierSession.getValue().pago.getValue().toLowerCase().contains(newValue.toLowerCase());
 					}
 				});
 			}
     	});
     }
 	
-	/*
-	 * 	##	CLASSE TESTE
-	 */
-	
-	class CashierSession extends RecursiveTreeObject<CashierSession> {
-		StringProperty date;
-		StringProperty service;
-		StringProperty price;
-		StringProperty paid;
-		StringProperty obs;
-		
-		CashierSession(String date, String service, String price, String paid, String obs) {
-			this.date    = new SimpleStringProperty(date);
-			this.service = new SimpleStringProperty(service);
-			this.price   = new SimpleStringProperty(price);
-			this.paid    = new SimpleStringProperty(paid);
-			this.obs    = new SimpleStringProperty(obs);
-		}
-	}
+
 }

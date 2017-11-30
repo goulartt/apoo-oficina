@@ -66,8 +66,11 @@ public class GalleryController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		array = rest.findAll();
-		artes.addAll(Arrays.asList(array));
-		todasArts.addAll(artes);
+		if(array != null) {
+			artes.addAll(Arrays.asList(array));
+			todasArts.addAll(artes);
+		}
+		
 		loadGallery();
 		PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
 		search.textProperty().addListener(new ChangeListener<String>() {

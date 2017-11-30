@@ -33,6 +33,8 @@ public class Session implements Serializable{
 	
 	private BigDecimal price;
 	
+	private BigDecimal paid;
+	
 	private String status;
 	
 	private Integer duration;
@@ -110,6 +112,16 @@ public class Session implements Serializable{
 	public void setRemoved(Integer removed) {
 		this.removed = removed;
 	}
+
+	public BigDecimal getPaid() {
+		return paid;
+	}
+
+	public void setPaid(BigDecimal paid) {
+		this.paid = paid;
+	}
+
+
 
 	
 	

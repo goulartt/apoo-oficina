@@ -27,6 +27,30 @@
 }
 
 /*
+ * 	##	AAAAAAAAAAAAAAAAAAAAA
+ */
+ 
+ .date-filter {
+ 	-fx-font-family: Verdana;
+ 	-fx-font-size: 16px;
+ }
+ 
+ .date-filter .jfx-text-field {
+ 	-fx-text-fill: #fff;
+ 	-fx-prompt-text-fill: #9E9E9E;
+ 	-jfx-unfocus-color: #fff;
+ }
+ 
+ .combobox-filter {
+ 	-fx-font-family: Verdana;
+ 	-fx-font-size: 16px;
+ 	-jfx-unfocus-color: #fff;
+ 	-jfx-focus-color: #26a69a;
+ 	-fx-text-fill: #fff;
+ 	-fx-prompt-text-fill: #9E9E9E;
+ }
+
+/*
  * 	##	GALLERY
  */
  

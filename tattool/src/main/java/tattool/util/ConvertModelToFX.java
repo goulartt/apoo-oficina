@@ -7,6 +7,7 @@ import java.util.List;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableList;
 import javafx.util.Callback;
 import net.sf.jasperreports.engine.util.SortedIntList;
 import tattool.domain.model.Customer;
@@ -15,6 +16,7 @@ import tattool.domain.model.Session;
 import tattool.domain.model.User;
 import tattool.domain.modelfx.CustomerFX;
 import tattool.domain.modelfx.ServiceFX;
+import tattool.domain.modelfx.SessionCashierFX;
 import tattool.domain.modelfx.SessionFX;
 import tattool.domain.modelfx.UserFX;
 
@@ -130,46 +132,111 @@ public class ConvertModelToFX {
 	public static List<SessionFX> convertListSessionToSessionFX(List<Session> findByService) {
 		List<Session> sessions = findByService;
 		List<SessionFX> sessionFX = new ArrayList<>();
-		sessions.forEach(s -> {
-			SessionFX sessao = new SessionFX();
-			sessao.setId(s.getId());
-			if (s.getDateSession() != null)
-				sessao.setDate(new SimpleStringProperty(DateUtil.DateToString(s.getDateSession())));
-			else
-				sessao.setDate(new SimpleStringProperty("Não agendado"));
-			sessao.setDuration(new SimpleStringProperty(s.getDuration().toString()));
-			if (!s.getObs().equals(""))
-				sessao.setObs(s.getDuration().toString());
-			if (s.getPrice() != null)
-				sessao.setPrice(new SimpleStringProperty(s.getPrice().toString()));
-			else
-				sessao.setPrice(new SimpleStringProperty("Não acertado"));
-			sessao.setRemoved(s.getRemoved());
-			sessao.setService(s.getService());
-			sessao.setStatus(new SimpleStringProperty(s.getStatus()));
-			sessionFX.add(sessao);
-		});
+		if(!findByService.isEmpty()){
+			sessions.forEach(s -> {
+				SessionFX sessao = new SessionFX();
+				sessao.setId(s.getId());
+				if (s.getDateSession() != null)
+					sessao.setDate(new SimpleStringProperty(DateUtil.DateToString(s.getDateSession())));
+				else
+					sessao.setDate(new SimpleStringProperty("Não agendado"));
+				
+				sessao.setDuration(new SimpleStringProperty(s.getDuration().toString()));
+				sessao.setObs(s.getObs().toString());
+				
+				if (s.getPrice() != null)
+					sessao.setPrice(new SimpleStringProperty(s.getPrice().toString()));
+				else
+					sessao.setPrice(new SimpleStringProperty("Não acertado"));
+				sessao.setRemoved(s.getRemoved());
+				sessao.setService(s.getService());
+				sessao.setStatus(new SimpleStringProperty(s.getStatus()));
+			
+				sessionFX.add(sessao);
+			});
+		}
+		
 		return sessionFX;
 	}
 
 	public static Session converSessionFXtoSession(SessionFX s) {
 		Session sessao = new Session();
-		sessao.setId(s.getId());
-		if(s.getDate().get().equals("Não agendado"))
-			sessao.setDateSession(null);
-		else
-		    sessao.setDateSession(DateUtil.StringToDate(s.getDate().get()));
-		sessao.setDuration(Integer.parseInt(s.getDuration().get()));
-		sessao.setObs(s.getDuration().get());
-		if(s.getPrice().get().equals("Não acertado"))
-			sessao.setPrice(null);
-		else
-			sessao.setPrice(new BigDecimal(s.getPrice().get()));
-		sessao.setRemoved(s.getRemoved());
-		sessao.setService(s.getService());
-		sessao.setStatus(s.getStatus().get());
+		if(s != null) {
+			sessao.setId(s.getId());
+			if(s.getDate().get().equals("Não agendado"))
+				sessao.setDateSession(null);
+			else
+			    sessao.setDateSession(DateUtil.StringToDate(s.getDate().get()));
+			sessao.setDuration(Integer.parseInt(s.getDuration().get()));
+			sessao.setObs(s.getObs());
+			if(s.getPrice().get().equals("Não acertado"))
+				sessao.setPrice(null);
+			else
+				sessao.setPrice(new BigDecimal(s.getPrice().get()));
+			sessao.setRemoved(s.getRemoved());
+			sessao.setService(s.getService());
+			sessao.setStatus(s.getStatus().get());
+		}
+
 
 		return sessao;
+	}
+
+	public static List<SessionCashierFX> convertSessinToSessionCashierFX(Session[] findAll) {
+		List<Session> se = new ArrayList<>();
+		List<SessionCashierFX> cashier = new ArrayList<>();
+		if(findAll != null) {
+			se = Arrays.asList(findAll);
+			se.forEach(s -> {
+				SessionCashierFX cash = new SessionCashierFX();
+				
+				if (s.getDateSession() != null)
+					cash.setDate(new SimpleStringProperty(DateUtil.DateToString(s.getDateSession())));
+				else
+					cash.setDate(new SimpleStringProperty("Não agendado"));
+				
+				cash.setNomeServico(new SimpleStringProperty(s.getService().getNameService()));
+				cash.setDuration(s.getDuration());
+				
+				if (!s.getObs().equals(""))
+					cash.setObs(s.getObs().toString());
+				else
+					cash.setObs("");
+				
+				if (s.getPrice() != null)
+					cash.setPreco(new SimpleStringProperty(s.getPrice().toString()));
+				else
+					cash.setPreco(new SimpleStringProperty("Não acertado"));
+				if (s.getPaid() != null)
+					cash.setPago(new SimpleStringProperty(s.getPaid().toString()));
+				else
+					cash.setPago(new SimpleStringProperty("Não pago"));
+				cash.setRemoved(s.getRemoved());
+				cash.setService(s.getService());
+				cash.setStatus(s.getStatus());
+				cash.setPaid(s.getPaid());
+				cash.setPrice(s.getPrice());
+				cash.setId(s.getId());
+				cash.setDateSession(s.getDateSession());
+				cashier.add(cash);
+			});
+		}
+		
+		return cashier;
+	}
+
+	public static Session convertSessionCashierFXToSession(SessionCashierFX cashierSession) {
+		Session session = new Session();
+		session.setId(cashierSession.getId());
+		session.setDateSession(cashierSession.getDateSession());
+		session.setDuration(cashierSession.getDuration());
+		session.setObs(cashierSession.getObs());
+		session.setPaid(cashierSession.getPaid());
+		session.setPrice(cashierSession.getPrice());
+		session.setRemoved(cashierSession.getRemoved());
+		session.setService(cashierSession.getService());
+		session.setStatus(cashierSession.getStatus());
+		return session;
 	}
 
 }

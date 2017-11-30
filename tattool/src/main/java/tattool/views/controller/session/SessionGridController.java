@@ -98,6 +98,8 @@ public class SessionGridController {
     void update(ActionEvent event) {
     	for(SessionFX s : sessoesNovas) {
 			Session sessao = ConvertModelToFX.converSessionFXtoSession(s);
+			if(sessao.getDateSession() != null && sessao.getPrice() != null)
+				sessao.setStatus("AGENDADO");
     		rest.save(sessao);
     	}
 		new ServiceRest().save(sessionController.serviceCarregado);
@@ -205,7 +207,6 @@ public class SessionGridController {
     
     void populateTable()
     {
-    	sessions = FXCollections.observableArrayList();
     	
     	sessions = FXCollections.observableArrayList(ConvertModelToFX.convertListSessionToSessionFX(rest.findByService(sessionController.serviceCarregado.getId())));
     	

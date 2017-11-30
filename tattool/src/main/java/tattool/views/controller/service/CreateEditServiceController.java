@@ -174,9 +174,11 @@ public class CreateEditServiceController {
     			session.setPrice(new BigDecimal(price.getText()));
     			session.setService(serviceSalvo);
     			session.setDuration(Integer.parseInt(firstTime.getText()));
+    			session.setStatus("AGENDADO");
     			BigDecimal preco = null;
     			if(priceCheckbox.isSelected())
     				preco = new BigDecimal(price.getText());
+    			
     			sessionRest.save(session);
     			System.out.println(session.getPrice());
     			cont--;
@@ -302,18 +304,15 @@ public class CreateEditServiceController {
 				validate = false;
 				sessions = true;
 			}
-			/*
-			elseadmi
-			{
-				if(firstDate.getValue().isAfter(LocalDate.now()))
-				{
-					errorFirstDate.setText("A data não pode ser inferior à data atual");
-					errorFirstDate.setVisible(true);
-					validate = false;
-					sessions = true;
-				}
+			
+			if(firstDate.getValue().isBefore(LocalDate.now())) {
+				errorFirstDate.setText("Informe uma data que não seja retroativa ");
+				errorFirstDate.setVisible(true);
+				validate = false;
+				sessions = true;
 			}
-			*/
+			
+	
 			if(firstBegin.getValue() == null)
 			{
 				errorFirstBegin.setText("Informe o horário da sessão");
