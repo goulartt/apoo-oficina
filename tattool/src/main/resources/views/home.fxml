@@ -24,7 +24,7 @@
                         <Font name="Verdana" size="32.0" />
                      </font>
                   </Label>
-                  <Label text="Estúdio de Tatuagem Muito Fodão" textFill="#4db6ac">
+                  <Label text="&lt;Estúdio de Tatuagem&gt;" textFill="#4db6ac">
                      <font>
                         <Font name="Verdana" size="16.0" />
                      </font>
@@ -101,24 +101,20 @@
    </top>
    <center>
       <HBox xmlns:fx="http://javafx.com/fxml">
-         	<Agenda id="agenda"/>
          <BorderPane.margin>
             <Insets right="12.0" top="12.0" />
          </BorderPane.margin>
+         <Agenda id="agenda"/>
       </HBox>
    </center>
    <right>
-      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="240.0" style="-fx-border-color: #181818;" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="240.0" style="-fx-background-color: #2B2B2B;" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets left="12.0" top="12.0" />
          </BorderPane.margin>
-         <children>
-            <Label text="Alguma Coisa" textFill="#181818">
-               <font>
-                  <Font name="Verdana" size="26.0" />
-               </font>
-            </Label>
-         </children>
+         <effect>
+            <DropShadow height="18.5" radius="8.125" width="16.0" />
+         </effect>
       </VBox>
    </right>
    <padding>

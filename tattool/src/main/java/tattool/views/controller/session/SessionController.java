@@ -2,6 +2,7 @@ package tattool.views.controller.session;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -15,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import jfxtras.scene.control.agenda.Agenda;
 import tattool.domain.model.Service;
 
 public class SessionController implements Initializable{
@@ -30,10 +32,19 @@ public class SessionController implements Initializable{
 	
 	@FXML
     JFXButton showSessionsButton;
+	
+	@FXML 
+	Agenda agenda = new Agenda();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		agenda.appointments().addAll(
+		        new Agenda.AppointmentImplLocal()
+		            .withStartLocalDateTime(LocalDate.now().atTime(4, 00))
+		            .withEndLocalDateTime(LocalDate.now().atTime(15, 30))
+		            .withDescription("It's time")
+		            .withAppointmentGroup(new Agenda.AppointmentGroupImpl().withStyleClass("group1")) // you should use a map of AppointmentGroups
+		    );
 	}
 	
 	/*

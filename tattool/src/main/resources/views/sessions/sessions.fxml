@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import jfxtras.scene.control.agenda.*?>
 
 <fx:root minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="804.0" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tattool.views.controller.session.SessionController">
    <padding>
@@ -105,4 +106,10 @@
          </center>
       </BorderPane>
    </top>
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+                <Agenda id="agenda"/>
+         </children></HBox>
+   </center>
 </fx:root>

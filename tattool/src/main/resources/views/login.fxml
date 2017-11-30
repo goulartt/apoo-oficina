@@ -40,26 +40,32 @@
                <center>
                   <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Label fx:id="tattool" text="Tattool" textFill="WHITE">
-                           <font>
-                              <Font name="Lao UI" size="120.0" />
-                           </font>
-                           <effect>
-                              <DropShadow height="19.0" radius="8.25" spread="0.16" width="16.0" />
-                           </effect>
-                           <StackPane.margin>
-                              <Insets />
-                           </StackPane.margin>
-                        </Label>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label fx:id="tattool" text="Tattool" textFill="WHITE">
+                                 <font>
+                                    <Font name="Lao UI" size="120.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow height="19.0" radius="8.25" spread="0.16" width="16.0" />
+                                 </effect>
+                              </Label>
+                           </children>
+                        </VBox>
                      </children>
                   </StackPane>
                </center>
             </BorderPane>
             <VBox fx:id="loginPane" alignment="CENTER" prefHeight="200.0" prefWidth="380.0" style="-fx-background-color: #101010;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label prefHeight="33.0" prefWidth="546.0" text="Let's work!" textFill="WHITE">
+                  <ImageView fitHeight="113.0" fitWidth="134.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/login/tattoolLogo.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="33.0" prefWidth="546.0" text="Vamos trabalhar!" textFill="WHITE">
                      <font>
-                        <Font name="Verdana" size="30.0" />
+                        <Font name="Verdana" size="24.0" />
                      </font>
                      <effect>
                         <InnerShadow color="#00000073" height="4.0" radius="1.5" width="4.0" />

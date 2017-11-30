@@ -19,7 +19,6 @@ import com.jfoenix.controls.JFXTreeTableRow;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 
 import de.jensd.fx.glyphs.octicons.OctIconView;
 import javafx.beans.binding.Bindings;
@@ -33,10 +32,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.input.MouseButton;
@@ -44,9 +41,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 import tattool.domain.model.Session;
@@ -54,7 +48,6 @@ import tattool.domain.modelfx.SessionCashierFX;
 import tattool.rest.consume.SessionRest;
 import tattool.util.ConvertModelToFX;
 import tattool.util.MaskFieldUtil;
-import tattool.views.controller.service.CustomerGridController;
 
 public class CashierController implements Initializable {
 
