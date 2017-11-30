@@ -1,6 +1,8 @@
 package tattool.util;
 
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -9,8 +11,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.ibm.icu.text.DateFormat;
-import com.ibm.icu.text.SimpleDateFormat;
 
 public class DateUtil {
 	public static Date asDate(LocalDate localDate) {
@@ -59,8 +59,8 @@ public class DateUtil {
 	public static Date StringToDate(String dataStr) {
 
 		try {
-			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-			java.sql.Date data = new java.sql.Date(format.parse(dataStr).getTime());
+			SimpleDateFormat  format = new SimpleDateFormat ("dd/MM/yyyy HH:mm");
+			java.util.Date data = format.parse(dataStr);
 			return data;
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block

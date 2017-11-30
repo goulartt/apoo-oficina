@@ -130,12 +130,12 @@ public class ConvertModelToFX {
 	}
 
 	public static List<SessionFX> convertListSessionToSessionFX(List<Session> findByService) {
-		List<Session> sessions = findByService;
 		List<SessionFX> sessionFX = new ArrayList<>();
 		if(!findByService.isEmpty()){
-			sessions.forEach(s -> {
+			findByService.forEach(s -> {
 				SessionFX sessao = new SessionFX();
 				sessao.setId(s.getId());
+				
 				if (s.getDateSession() != null)
 					sessao.setDate(new SimpleStringProperty(DateUtil.DateToString(s.getDateSession())));
 				else
