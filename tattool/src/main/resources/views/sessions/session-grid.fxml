@@ -85,7 +85,7 @@
                <right>
                   <HBox alignment="TOP_RIGHT" BorderPane.alignment="CENTER">
                      <children>
-                        <JFXButton buttonType="RAISED" graphicTextGap="6.0" onAction="#update" prefHeight="38.0" prefWidth="131.0" style="-fx-background-color: #009688; -fx-background-radius: 0;" text="Salvar" textFill="WHITE">
+                        <JFXButton buttonType="RAISED" fx:id="salvar" graphicTextGap="6.0" onAction="#update" prefHeight="38.0" prefWidth="131.0" style="-fx-background-color: #009688; -fx-background-radius: 0;" text="Salvar" textFill="WHITE">
                            <font>
                               <Font name="Verdana" size="16.0" />
                            </font>

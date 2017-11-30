@@ -1,6 +1,8 @@
 package tattool.views.controller.session;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import com.jfoenix.controls.JFXButton;
@@ -46,6 +48,9 @@ public class SessionGridController {
     private OctIconView closeButton;
     
     @FXML
+    private JFXButton salvar;
+    
+    @FXML
     SessionController sessionController;
     
     private List<SessionFX> sessoesNovas = new ArrayList<>();
@@ -62,6 +67,8 @@ public class SessionGridController {
 		});
 		createTableColumns();
 		populateTable();
+		salvar.setDisable(true);
+		
 	}
 	
 	/*
@@ -73,8 +80,8 @@ public class SessionGridController {
     	
     	SessionFX session = new SessionFX();
     	session.setService(sessionController.serviceCarregado);
-    	sessoesNovas.add(session);
-    	sessions.add(session);
+    	Session sessionSalva = rest.save(ConvertModelToFX.converSessionFXtoSession(session));
+    	sessions.add(ConvertModelToFX.convertListSessionToSessionFX(Collections.singletonList(sessionSalva)).get(0));
     	sessionController.serviceCarregado.setQuantSessions(sessionController.serviceCarregado.getQuantSessions() + 1);
     	
     }
@@ -168,6 +175,7 @@ public class SessionGridController {
                 String newer = event.getNewValue();
                 sessionOld.setPrice(new SimpleStringProperty(newer));
                 sessoesNovas.add(sessionOld);
+                salvar.setDisable(false);
 			}
         });
         
@@ -181,6 +189,7 @@ public class SessionGridController {
                 String newer = event.getNewValue();
                 sessionOld.setDate(new SimpleStringProperty(newer));
                 sessoesNovas.add(sessionOld);
+                salvar.setDisable(false);
 			}
         });
     	
@@ -194,6 +203,7 @@ public class SessionGridController {
                 String newer = event.getNewValue();
                 sessionOld.setDuration(new SimpleStringProperty(newer));
                 sessoesNovas.add(sessionOld);
+                salvar.setDisable(false);
 				
 			}
         });

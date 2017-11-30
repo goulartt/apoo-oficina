@@ -126,6 +126,7 @@ public class CreateEditServiceController {
 	        }
 	    });
     	MaskFieldUtil.monetaryField(price);
+    	MaskFieldUtil.numericField(numberSessions);
     	numberSessions.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -293,7 +294,7 @@ public class CreateEditServiceController {
 		}
 		else
 		{
-			if(!numberSessions.getText().matches("['0-9']"))
+			if(!numberSessions.getText().matches("['0-9']") && price.getText().matches("[a-Z]"))
 			{
 				errorNumberSessions.setText("Número de sessões pode conter apenas números");
 				errorNumberSessions.setVisible(true);

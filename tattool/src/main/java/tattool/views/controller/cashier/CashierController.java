@@ -7,8 +7,6 @@ import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXTextArea;
@@ -75,15 +73,6 @@ public class CashierController implements Initializable {
 
     @FXML
     private JFXTextField search;
-    
-    @FXML
-    private JFXDatePicker filterFrom;
-
-    @FXML
-    private JFXDatePicker filterTo;
-    
-    @FXML
-    private JFXComboBox<?> filterStatus;
     
     @FXML
     private JFXButton createNoteButton;
@@ -290,7 +279,7 @@ public class CashierController implements Initializable {
     				
     				switch(cashierSession.getStatus()) {
     					case "PENDENTE":
-    						//
+    						popupBox.getChildren().addAll(setPaid, setValor, setCheck);
     						break;
     					case "AGENDADO":
     						popupBox.getChildren().addAll(setPaid, setValor, setCheck);
@@ -410,10 +399,29 @@ public class CashierController implements Initializable {
 			confirmButton.setOnMouseClicked(event -> {
 				
 				JFXTextField paidValor = (JFXTextField) modalContent.getScene().lookup("#paidValor");
-				System.out.println(paidValor.getText());
+			 	SessionCashierFX cashierSession =  cashierTable.getSelectionModel().getSelectedItem().getValue();
+				Session s = ConvertModelToFX.convertSessionCashierFXToSession(cashierSession);
+				BigDecimal valorInformado = new BigDecimal(paidValor.getText());
 				
-				//FAZ TODA A PUTARIA DE PEGAR O VALOR DO TEXTFIELD
-				
+				BigDecimal valorDevendo = new BigDecimal(0);
+				if(s.getPaid() != null)
+					valorDevendo = s.getPrice().subtract(s.getPaid());
+				else
+					valorDevendo = s.getPrice();
+				if(valorInformado.compareTo(valorDevendo) == 0) {
+					s.setPaid(s.getPrice());
+					s.setStatus("PAGO");
+				}else if(valorInformado.compareTo(valorDevendo) == -1) {
+					s.setPaid(valorInformado);
+					s.setStatus("PARCIALMENTE PAGO");
+				}
+				if(valorInformado.compareTo(valorDevendo) == 1) {
+					//validacao de que o valor é maior
+					System.out.println("Valor maior que o necessario");
+				}else {
+					rest.save(s);
+				}
+				populateTable();
 				modal.close();
 			});
 			
@@ -442,9 +450,9 @@ public class CashierController implements Initializable {
 					{
 						//Compara o valor do TextInput com as colunas da table
 						
-						return cashierSession.getValue().date.getValue().toLowerCase().contains(newValue.toLowerCase())         ||
+						return cashierSession.getValue().date.getValue().toLowerCase().contains(newValue.toLowerCase())     ||
 							   cashierSession.getValue().nomeServico.getValue().toLowerCase().contains(newValue.toLowerCase())  || 
-							   cashierSession.getValue().preco.getValue().toLowerCase().contains(newValue.toLowerCase())        || 
+							   cashierSession.getValue().preco.getValue().toLowerCase().contains(newValue.toLowerCase())    || 
 							   cashierSession.getValue().pago.getValue().toLowerCase().contains(newValue.toLowerCase());
 					}
 				});
