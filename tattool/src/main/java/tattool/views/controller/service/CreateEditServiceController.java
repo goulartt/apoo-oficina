@@ -259,34 +259,8 @@ public class CreateEditServiceController {
 			service = true;
 		}
 		else if(numberSessions.getText().equals("0")) {
-			price.setDisable(true);
-			firstDate.setDisable(true);
-			firstTime.setDisable(true);
-			firstBegin.setDisable(true);
-			errorPrice.setText("Número de sessões cadastradas igual à zero. Não é possivel informar primeira sessão");
-			errorPrice.setVisible(true);
-			errorFirstDate.setText("Número de sessões cadastradas igual à zero. Não é possivel informar primeira sessão");
-			errorFirstDate.setVisible(true);
-			errorFirstBegin.setText("Número de sessões cadastradas igual à zero. Não é possivel informar primeira sessão");
-			errorFirstBegin.setVisible(true);
-			errorFirstTime.setText("Número de sessões cadastradas igual à zero. Não é possivel informar primeira sessão");
-			errorFirstTime.setVisible(true);
 			
-			if(price.getText() != null)
-			{
-				price.clear();
-			}
-			if(firstDate.getValue() != null) {
-				firstDate.setValue(null);
-			}
-			if(firstBegin.getValue() != null)
-			{
-				firstBegin.setValue(null);
-			}
-			if(!firstTime.getText().isEmpty())
-			{
-				firstTime.clear();
-			}
+			
 			
 		}
 		else
@@ -446,6 +420,15 @@ public class CreateEditServiceController {
     		default:
     			break;
     	}
+    	if(event.getSource().equals(numberSessions)){
+    		if(numberSessions.getText().equals("0"))
+    		{
+    			price.clear();
+    			firstDate.setValue(null);
+    			firstBegin.setValue(null);
+    			firstTime.clear();
+    		}
+		}
     }
     
     /*
