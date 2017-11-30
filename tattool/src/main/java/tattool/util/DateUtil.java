@@ -61,7 +61,6 @@ public class DateUtil {
 		try {
 			SimpleDateFormat  format = new SimpleDateFormat ("dd/MM/yyyy HH:mm");
 			java.util.Date data = format.parse(dataStr);
-			System.out.println(data);
 			return data;
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
