@@ -6,11 +6,14 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import de.jensd.fx.glyphs.octicons.OctIconView;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -47,6 +50,9 @@ public class ShowServiceController implements Initializable{
 
     @FXML
     private JFXTreeTableView<SessionFX> sessionsTable;
+    
+    @FXML
+    private JFXListView<ArtListItem> artsList;
 
     @FXML
     private OctIconView closeButton;
@@ -61,10 +67,12 @@ public class ShowServiceController implements Initializable{
     	this.service = service2;
     	this.sessions  = sessions;
     }
+    
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		createTableColumns();
     	populateTable();
+    	populateArtsList();
     	carregaCampo();
 	}
 	
@@ -146,5 +154,30 @@ public class ShowServiceController implements Initializable{
     	sessionsTable.setShowRoot(false);
     }
     
-
+    /*
+     * 	##	POUPLA A LISTA DE ARTES
+     */
+    
+    void populateArtsList() {
+    	for(int i = 0; i < 5; i++) {
+    		artsList.getItems().add(new ArtListItem("Nome da arte " + (i + 1)));
+    	}
+    }
+    
+    /*
+     * 	##	CLASSE DO ITEM DA LISTA DE ARTES
+     */
+    
+    private class ArtListItem extends Label {
+    	
+    	ArtListItem(String text) {
+    		setText(text);
+    		MaterialDesignIconView icon = new MaterialDesignIconView(MaterialDesignIcon.IMAGE);
+    		icon.setGlyphSize(22);
+    		setGraphic(icon);
+    		setGraphicTextGap(10);
+    		
+    		getStyleClass().add("art-list-item");
+    	}
+    }
 }

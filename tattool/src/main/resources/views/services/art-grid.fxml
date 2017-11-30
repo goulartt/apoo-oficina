@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXTextField?>
-<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import de.jensd.fx.glyphs.octicons.OctIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
             <VBox prefHeight="127.0" prefWidth="700.0" style="-fx-background-color: #009688;" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Selecione um serviço:" textFill="WHITE">
+                  <Label text="Selecione uma arte:" textFill="WHITE">
                      <font>
                         <Font name="Verdana" size="26.0" />
                      </font>
@@ -42,10 +41,29 @@
             </VBox>
          </top>
          <center>
-            <JFXTreeTableView fx:id="serviceGrid" BorderPane.alignment="CENTER">
-               <columnResizePolicy>
-                  <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy></JFXTreeTableView>
+            <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: none;" styleClass="gallery-scroll-pane" stylesheets="@../../css/application.css" BorderPane.alignment="CENTER">
+               <content>
+                  <BorderPane prefHeight="415.0" prefWidth="774.0">
+                     <center>
+                        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <VBox fx:id="column1" prefHeight="200.0" prefWidth="193.5">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox fx:id="column2" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="193.5" />
+                              <VBox fx:id="column3" layoutX="110.0" layoutY="10.0" prefHeight="200.0" prefWidth="193.5" />
+                              <VBox fx:id="column4" layoutX="210.0" layoutY="10.0" prefHeight="415.0" prefWidth="191.0" />
+                           </children>
+                        </HBox>
+                     </center>
+                  </BorderPane>
+               </content>
+               <padding>
+                  <Insets top="16.0" />
+               </padding>
+            </ScrollPane>
          </center>
       </BorderPane>
       <HBox alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="700.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

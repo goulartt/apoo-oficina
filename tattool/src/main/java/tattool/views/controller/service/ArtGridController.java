@@ -1,32 +1,23 @@
-package tattool.views.controller.art;
+package tattool.views.controller.service;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
-
 import de.jensd.fx.glyphs.octicons.OctIconView;
 import javafx.animation.PauseTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import tattool.domain.model.Art;
@@ -34,36 +25,48 @@ import tattool.domain.model.Tag;
 import tattool.rest.consume.ArtRest;
 import tattool.service.ArtService;
 
-public class GalleryController implements Initializable {
+public class ArtGridController implements Initializable{
 
-	@FXML
-	private ScrollPane scrollPane;
+    @FXML
+    private JFXTextField search;
 
-	@FXML
-	private JFXTextField search;
+    @FXML
+    private OctIconView closeButton;
+    
+    @FXML
+    private ScrollPane scrollPane;
 
-	@FXML
-	private VBox column1;
+    @FXML
+    private VBox column1;
 
-	@FXML
-	private VBox column2;
+    @FXML
+    private VBox column2;
 
-	@FXML
-	private VBox column3;
+    @FXML
+    private VBox column3;
 
-	@FXML
-	private VBox column4;
-
-	private ArtRest rest = new ArtRest();
+    @FXML
+    private VBox column4;
+    
+    private ArtRest rest = new ArtRest();
 	private ArtService service = new ArtService();
 	private Art[] array;
 	private List<Art> artes = new ArrayList<>();
 	private List<Art> todasArts = new ArrayList<>();
 	private List<Art> artesExcluidas = new ArrayList<>();
+    
+	private CreateEditServiceController createEdit;
+	
+	public ArtGridController(CreateEditServiceController createEdit){
+		this.createEdit = createEdit;
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		closeButton.setOnMouseClicked(event -> {
+			createEdit.artModal.close();
+		});
+		
 		array = rest.findAll();
 		if(array != null) {
 			artes.addAll(Arrays.asList(array));
@@ -109,68 +112,22 @@ public class GalleryController implements Initializable {
 			}
 		});
 	}
-
+	
 	/*
-	 * ## CRIAR ARTE
+	 * 	##	ADICIONA IMAGEM A LISTA DE ARTES DO SERVICO AO CLICAR NA IMAGEM
 	 */
-
+	
+	void addArtToService(String text) {
+		createEdit.artsList.getItems().add(createEdit.addArtItem(text));
+	}
+	
 	private void resetColumns() {
 		column1.getChildren().clear();
 		column2.getChildren().clear();
 		column3.getChildren().clear();
 		column4.getChildren().clear();
 	}
-
-	@FXML
-	void create(ActionEvent event) {
-		try {
-			FXMLLoader viewLoader = new FXMLLoader(getClass().getResource("/views/gallery/create.fxml"));
-			BorderPane main = (BorderPane) ((Node) event.getSource()).getScene().lookup("#main");
-
-			viewLoader.setRoot(main);
-			main.getChildren().clear();
-			viewLoader.load();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/*
-	 * ## VISUALIZAR ARTE
-	 */
-
-	void show(Art a, Image img, StackPane mainStack) {
-		try {
-			FXMLLoader artLoader = new FXMLLoader(getClass().getResource("/views/gallery/show-art.fxml"));
-			artLoader.setController(new ShowArtController(a));
-			Region artContent = artLoader.load();
-			JFXDialog customerModal = new JFXDialog(mainStack, artContent, JFXDialog.DialogTransition.CENTER, false);
-			ShowArtController control = (ShowArtController) artLoader.getController();
-			control.dialogShow = customerModal;
-
-			ImageView image = (ImageView) mainStack.getScene().lookup("#image");
-			StackPane imageStack = (StackPane) mainStack.getScene().lookup("#imageStack");
-			image.setImage(img);
-			image.setPreserveRatio(true);
-
-			OctIconView closeButton = (OctIconView) mainStack.getScene().lookup("#closeButton");
-			closeButton.setOnMouseClicked(event -> customerModal.close());
-
-			artContent.prefHeightProperty().bind(mainStack.heightProperty().subtract(60));
-			artContent.prefWidthProperty().bind(mainStack.widthProperty().subtract(80));
-			image.fitHeightProperty().bind(imageStack.heightProperty().subtract(50));
-			image.fitWidthProperty().bind(imageStack.widthProperty());
-
-			customerModal.show();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/*
-	 * ## GALERIA !! RESPEITA AS GAMBIARRA (JAVA) !!
-	 */
-
+	
 	void loadGallery() {
 
 		// Colunas responsivas
@@ -237,7 +194,8 @@ public class GalleryController implements Initializable {
 			});
 
 			setOnMouseClicked(event -> {
-				show(a, img, (StackPane) scrollPane.getScene().lookup("#mainStack"));
+				addArtToService(a.getDescription());
+				createEdit.artModal.close();
 			});
 		}
 	}

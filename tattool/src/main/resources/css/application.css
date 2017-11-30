@@ -49,6 +49,17 @@
  	-fx-text-fill: #fff;
  	-fx-prompt-text-fill: #9E9E9E;
  }
+ 
+ .art-list-item {
+ 	-fx-font-family: Verdana;
+ 	-fx-font-size: 16px;
+ 	-fx-padding: 8px 16px 8px 16px;
+ 	-fx-text-fill: #424242;
+ }
+ 
+ .art-list-item .glyph-icon {
+ 	-fx-fill: #424242;
+ }
 
 /*
  * 	##	GALLERY
@@ -81,6 +92,31 @@
 	-fx-font-size: 14px;
 	-fx-fill: #212121;
 	-fx-padding: 6px 14px 6px 14px;
+}
+
+/*
+ * 	##	JFXListView
+ */
+ 
+.jfx-list-cell:selected {
+	-fx-background-color: #009688;
+	-fx-text-fill: #fff;
+}
+
+.jfx-list-cell:selected .glyph-icon{
+	-fx-fill: #fff;
+}
+
+.jfx-list-cell:hover {
+	-fx-background-color: #26A69A;
+}
+
+.jfx-list-cell .jfx-rippler{
+	-jfx-rippler-fill: #fff;
+}
+
+.jfx-list-view {
+	-fx-background-color: none;
 }
  
 /*

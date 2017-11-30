@@ -9,11 +9,16 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
+import com.jfoenix.controls.JFXListCell;
+import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
 import com.jfoenix.controls.events.JFXDialogEvent;
 
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import de.jensd.fx.glyphs.octicons.OctIconView;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -28,9 +33,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import tattool.domain.model.Customer;
@@ -42,6 +49,8 @@ import tattool.util.DateUtil;
 import tattool.util.MaskFieldUtil;
 
 public class CreateEditServiceController {
+	
+	private JFXPopup popup = new JFXPopup();
 
     @FXML
     private JFXTabPane tabPane;
@@ -97,7 +106,12 @@ public class CreateEditServiceController {
     @FXML
     private Label errorFirstTime;
     
+    @FXML
+    JFXListView<ArtListItem> artsList;
+    
     public JFXDialog customerModal;
+    
+    public JFXDialog artModal;
     
     private ServiceRest rest = new ServiceRest();
     private SessionRest sessionRest = new SessionRest();
@@ -118,6 +132,20 @@ public class CreateEditServiceController {
 		carregaCampos();
     	loadValidationErrors();
     	loadTab();
+    	popup();
+    	
+    	artsList.setCellFactory(value -> {
+    		JFXListCell<ArtListItem> cell = new JFXListCell<>();
+    		
+    		cell.setOnMouseClicked(event -> {
+    			if(event.getButton().equals(MouseButton.SECONDARY)) {
+    				popup.show(cell, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.LEFT, event.getX(), event.getY());
+    			}
+    		});
+    		
+    		return cell;
+    	});
+    	
     	firstBegin.setIs24HourView(true);
     	Platform.runLater(new Runnable() {
 	        @Override
@@ -139,7 +167,6 @@ public class CreateEditServiceController {
 				}
 			}
     	});
-    	
     }
     
     private void carregaCampos() {
@@ -189,13 +216,9 @@ public class CreateEditServiceController {
         			sessionNew.setPrice(preco);
         			sessionRest.save(sessionNew);
         		}
-    		
-    	}
+    		}
     	}
     }
-    	
-    	
-    
     
     /*
 	 * 	##	DIALOG STORE
@@ -339,10 +362,6 @@ public class CreateEditServiceController {
 			}
 		}
 		
-		
-		
-		
-		
 		//Adicionar icone de erro nas Tabs
 		if(service)
 			serviceTab.setGraphic(new ErrorIcon());
@@ -367,6 +386,70 @@ public class CreateEditServiceController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+    }
+    
+    /*
+     * 	##	GRID SELECT ARTS
+     */
+    
+    void artGrid(StackPane mainStack) {
+    	try {
+			FXMLLoader artLoader = new FXMLLoader(getClass().getResource("/views/services/art-grid.fxml"));
+			ArtGridController control = new ArtGridController(this);
+			artLoader.setController(control);
+			Region artContent    = artLoader.load();
+			artModal   = new JFXDialog(mainStack, artContent, JFXDialog.DialogTransition.CENTER, false);
+			artModal.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+    
+    /*
+     * 	POPUP-ART-LIST
+     */
+    
+    void popup()
+    {
+    	JFXButton remove   = new JFXButton("Remover");
+    	
+    	VBox vbox        = new VBox();
+    	
+    	//Popup Menu Events
+    	
+    	remove.setOnMouseClicked(event -> {
+    		popup.hide();
+    		
+    		//REMOVE A ARTE DA LISTA
+    	});
+    	
+    	remove.setMaxWidth(Double.MAX_VALUE);
+    	
+    	vbox.setFillWidth(true);
+    	vbox.getChildren().addAll(remove);
+    	
+    	popup.setPopupContent(vbox);
+    }
+    
+    /*
+     * 	##	CLASSE DA LISTA DE ARTES
+     */
+    
+    public ArtListItem addArtItem(String text) {
+    	return new ArtListItem(text);
+    }
+    
+    private class ArtListItem extends Label {
+    	
+    	ArtListItem(String text) {
+    		setText(text);
+    		MaterialDesignIconView icon = new MaterialDesignIconView(MaterialDesignIcon.IMAGE);
+    		icon.setGlyphSize(22);
+    		setGraphic(icon);
+    		setGraphicTextGap(10);
+    		
+    		getStyleClass().add("art-list-item");
+    	}
     }
     
     /*
@@ -402,6 +485,15 @@ public class CreateEditServiceController {
     @FXML
     void customerGrid(ActionEvent event) {
     	customerGrid((StackPane) ((Node) event.getSource()).getScene().lookup("#mainStack"));
+    }
+    
+    /*
+     * 	## GRID PARA SELECIONAR A ARTE    
+     */
+    
+    @FXML
+    void artGrid(ActionEvent event) {
+    	artGrid((StackPane) ((Node) event.getSource()).getScene().lookup("#mainStack"));
     }
 
     /*
@@ -484,5 +576,4 @@ public class CreateEditServiceController {
 			setFill(Color.WHITE);
 		}
 	}
-
 }

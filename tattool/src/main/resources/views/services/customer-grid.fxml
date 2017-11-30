@@ -24,7 +24,7 @@
                         <Font name="Verdana" size="26.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="search" focusColor="WHITE" labelFloat="true" promptText="Pesquisar" style="-fx-prompt-text-fill: #fff;" unFocusColor="WHITE">
+                  <JFXTextField fx:id="search" focusColor="WHITE" labelFloat="true" promptText="Pesquisar" style="-fx-prompt-text-fill: #fff; -fx-text-fill: #fff;" unFocusColor="WHITE">
                      <font>
                         <Font name="Verdana" size="16.0" />
                      </font>
