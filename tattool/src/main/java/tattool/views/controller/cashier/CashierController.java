@@ -407,6 +407,7 @@ public class CashierController implements Initializable {
 			JFXButton   confirmButton = (JFXButton) modalContent.getScene().lookup("#confirmButton");
 			
 			closeButton.setOnMouseClicked(event -> modal.close());
+			
 			confirmButton.setOnMouseClicked(event -> {
 				
 				//JFXTextField paidValor = (JFXTextField) modalContent.getScene().lookup("#paidValor");
