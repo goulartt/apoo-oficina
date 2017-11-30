@@ -1,20 +1,21 @@
 package tattool.rest.consume;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Date;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import tattool.domain.model.Service;
 import tattool.domain.model.Session;
 import tattool.util.Constantes;
 
@@ -31,6 +32,23 @@ public class SessionRest {
 		String url = Constantes.Api.URL_API + "/sessions/agendado";
 		rest.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 		return rest.getForObject(url, Session[].class);
+
+	}
+	
+	public Session[] filtro(String status, LocalDate inicio, LocalDate fim) {
+		String url = Constantes.Api.URL_DEV + "/sessions/filtro";
+	
+	    UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url)
+	            .queryParam("status", status)
+	            .queryParam("inicio", inicio)
+			    .queryParam("fim", fim);
+	    HttpHeaders header = new HttpHeaders();
+	    header.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+	    rest.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+	    HttpEntity<String> entity = new HttpEntity<String>(header);
+	    return rest.exchange(builder.build().encode().toUriString() , HttpMethod.GET,
+	            entity, Session[].class).getBody();
+		
 
 	}
 
@@ -58,7 +76,7 @@ public class SessionRest {
 	}
 	
 	public static void main(String[] args) {
-		Session c = new Session();
+		/*Session c = new Session();
 		ServiceRest restC = new ServiceRest();
 		SessionRest rest = new SessionRest();
 		List<Service> customer = Arrays.asList(restC.findAll());
@@ -71,7 +89,8 @@ public class SessionRest {
 		c.setDateSession(out);
 		c.setService(customer.get(0));
 		c.setDuration(55);
-		Session customerSalvo = rest.save(c);
+		Session customerSalvo = rest.save(c);*/
+		new SessionRest().filtro("PENDENTE", LocalDate.now(), LocalDate.now());
 		/*List<Session> clientes = Arrays.asList(rest.findAll());
 		customerSalvo.setObs("era zuera");
 		rest.atualizaSession(customerSalvo.getId(), customerSalvo);*/

@@ -1,5 +1,6 @@
 package com.utfpr.tattool.api.apitattool.resource;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -7,7 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,11 +18,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.utfpr.tattool.api.apitattool.event.RecursoCriadoEvento;
-import com.utfpr.tattool.api.apitattool.model.Customer;
 import com.utfpr.tattool.api.apitattool.model.Service;
 import com.utfpr.tattool.api.apitattool.model.Session;
 import com.utfpr.tattool.api.apitattool.repository.ServiceRepository;
@@ -60,6 +61,7 @@ public class SessionResource {
 	@GetMapping
 	public ResponseEntity<?> findAll() {
 		List<Session> services = sessionRepository.findAll();
+		
 		return !services.isEmpty() ? ResponseEntity.ok(services) : ResponseEntity.noContent().build();
 	}
    
@@ -110,6 +112,13 @@ public class SessionResource {
 			return sessoes != null ? ResponseEntity.ok(sessoes) : ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.notFound().build();
+	}
+	
+	@GetMapping("/filtro")
+	public ResponseEntity<?> consultarArquivosErrosPorFiltro(@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate inicio,
+	  @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fim, @RequestParam(required = false) String status) {
+		List<Session> services = sessionRepository.filtroSession(status, inicio, fim);
+		return !services.isEmpty() ? ResponseEntity.ok(services) : ResponseEntity.noContent().build();
 	}
 
 }
